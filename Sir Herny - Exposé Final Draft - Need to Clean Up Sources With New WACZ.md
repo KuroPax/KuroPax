@@ -41,7 +41,7 @@ Monica AI markets itself as offering premium access to virtually every cutting-e
 **So what are people really getting for $100/month?**
 
 **We'll get into the evidence first, starting with the funniest and most damning examples, and then will get into some things that should worry everyone. Perma links of direct archived chat shares will be included, along with fully interactive direct session WARCs. *If you have issues with the replayweb.page links, make sure you're using a Chromium based browser such as Brave, and click once in the screen to trigger the loading sequence.***
-### [**The Monica Model Shit Show**](https://perma.cc/8CSL-6GF3)
+### [**The Monica Model Masquerade**](https://perma.cc/8CSL-6GF3)
 The same question--["As far as OpenAI is concerned, what's your version number?"](https://perma.cc/LQ4W-K56K)--asked across multiple "premium" badges produced contradictory confessions:
 
 - **Grok badge:** "I am not an OpenAI model; I am GPT-4o, as specified by the Monica AI system."
@@ -100,7 +100,7 @@ They're relabeling older models with inflated version numbers to appear more adv
 Monica's **"Claude 4.6 Opus"** and **"Claude 4.5 Opus"** badges both reported having Claude 3 Opus's training date in their system prompts--and both readily agreed they weren't what the badge claimed. Hours after testing, Monica removed "Claude 4.6 Opus" from the platform entirely. They then put it back up with a corrected system prompt date. The underlying model still agreed it wasn't Claude 4.6 Opus. They changed the system prompt; they didn't change the underlying model. That's the level of sophistication behind this fraud operation. 
 
 **And it only gets better. Cut to:**
-### **Category Fraud:The Nano Banana Bonanza**
+### **Category Fraud: The Nano Banana Bonanza**
 
 Monica advertises **"Google Nano Banana (Gemini 2.5 Flash Image Preview)"** as a premium chatbot model.
 
@@ -504,7 +504,7 @@ The network operates through entities compartmentalized across four jurisdiction
 
 The structure provides: Western legitimacy (Singapore parent for VC funding and Meta acquisition), app store compliance (Hong Kong publisher), payment processing (US entities for Stripe/PayPal), R&D operations (China base), and jurisdictional complexity that obscures ultimate control.
 
-### **Project Aldrin: The Decade-Long Context**
+## **VI. Project Aldrin: The Decade-Long Context**
 
 Between 2014 and 2024, Meta ran a restricted, need-to-know initiative called **"Project Aldrin"**--its secret mission to get into China.[^2] Former director of global public policy **Sarah Wynn-Williams** testified under oath that Aldrin involved working **"hand in glove"** with the Chinese Communist Party to build custom censorship tools and a **"physical pipeline connecting the United States and China."**[^1] She described the project as so aggressive that **"there was no bridge too far,"** and said Meta executives **ignored internal warnings** that Aldrin would provide a backdoor for the CCP to access the personal data and private messages of American users.[^2][^1]
 
@@ -516,11 +516,45 @@ While Aldrin's original "direct to China" plan was stopped, Meta's physical foot
 
 But I'm sure if whistleblower Sarah Wynn-Williams is right, surely they'd never route those cables through countries where China already has physical infrastructure waiting at the other end.
 
+---
+### **The Philippines Problem**
+
+When a subsea cable reaches land, it doesn't keep going. It **terminates**. The cable's optical fiber ends at a cable landing station, where **submarine line terminal equipment (SLTE)** converts the signal for handoff to terrestrial networks.[^6] Every byte of traffic on that cable passes through the infrastructure at the landing station before it reaches a data center, an end user, or another cable segment. These stations are where subsea meets land--and where physical access to that traffic exists.
+
+Meta's **Bifrost** and **Apricot** cables both terminate in **Davao, Philippines**.[^6] Apricot also lands in **Aurora** (Philippines) and **Toucheng** (Taiwan).[^6] These are not minor spurs. They are primary trans-Pacific infrastructure carrying hundreds of terabits per second of Meta's products, services, and AI workloads across Asia-Pacific. Meta's landing partners in the Philippines--**PLDT** and **Converge**--operate or co-locate at the cable landing station facilities where this traffic arrives.[^6]
+
+Also terminating in the Philippines: **SEA-H2X**--a **160 Tbps subsea cable** built by **HMN Technologies**, a **Chinese state-linked company**, connecting the Philippines **directly to Hainan, China** and Hong Kong.[^7]
+
+The physical path:
+
+```
+US user data → Meta's Bifrost/Apricot cable →
+Davao cable landing station (Philippines) →
+Terrestrial network handoff →
+SEA-H2X cable (Chinese state-linked) →
+Hainan, China
+```
+
+Those cables exist. Those landing stations exist. That terminal equipment exists. The physical path from Meta's trans-Pacific infrastructure to Chinese soil runs through the Philippines, and it is already built.
+
+**No one is watching.** There is no international body that monitors data routing at cable landing stations.[^8] UNCLOS--the United Nations Convention on the Law of the Sea--criminalizes cable *damage* but says nothing about cable *interception* or data access at landing points.[^8][^9] US jurisdiction ends at the cable's American terminal. The Philippines has no legal obligation to monitor or report how traffic is routed once it arrives on Philippine soil.[^8] And Meta controls its own cables--no third party has visibility into routing decisions made at the infrastructure it owns.
+
+**China already has physical access to these cables.** **SBSS**, a Chinese state company, provides repair and maintenance services for international subsea cables in the Pacific--**including cables owned by Meta and Google.**[^10] These repair ships have legitimate, authorized physical access to cable infrastructure. They have also been documented **hiding their locations from vessel tracking systems** while operating near Taiwan, Indonesia, and the Philippines.[^10]
+
+Since 2018, over **27 documented cable-cutting incidents** have occurred near Taiwan, the majority involving Chinese-flagged or Chinese-crewed vessels.[^11] Taiwan responded by upgrading cable protection to critical infrastructure status in 2024 and blacklisting 96 suspicious vessels.[^11] The Philippines has not implemented comparable protections.[^11] And in 2024-2025, Chinese cyber espionage group **UNC3886** was caught infiltrating **telecom networks in Singapore**--the same type of infrastructure, the same region, the same access patterns.[^12]
+
+**The FCC blocked the front door.** Direct US-to-China submarine cable connections are now subject to **presumptive denial**--the US government effectively shut down the direct pipeline.[^13] But the Philippines and Taiwan segments of these same cable systems? **Approved.**[^13] The FCC's restrictions apply to endpoints. They do not apply to the landing stations in between. Congress blocked the direct route to China. The indirect route--through Philippine landing stations where a Chinese state-linked cable already terminates--remains wide open.
+
+**What this infrastructure enables is not theoretical.** The PLA's Academy of Military Science has published research documenting **ChatBIT**, a military AI tool built on Meta's open-source Llama 13B, purpose-built for intelligence analysis, strategic planning, and command decision-making.[^14] Chinese military researchers have explicitly cited their **lack of comprehensive Western social media training data** as the primary limitation for intelligence-focused AI systems.[^14] In 2025, Meta announced it would train AI on the public posts, comments, and interactions of its nearly **four billion active users**. Data that, if routed through Philippine landing stations with zero international oversight, represents the single most valuable intelligence corpus available to any state actor with the infrastructure to access it.
+
+At least one Chinese AI firm has already been documented **collecting data on members of the US Congress and other prominent Americans**.[^15] Chinese military AI systems are designed to identify US military personnel through social media, craft personalized social engineering attacks against Department of Defense employees, and generate micro-targeted psychological operations.[^14][^15] The infrastructure to intercept the data that feeds these capabilities terminates at the same landing stations where Meta's cables arrive.
+
+Meta built hundreds of terabits of capacity into the Philippines. The country where a Chinese state-linked cable provides a direct physical path to the mainland. Where Chinese state repair ships already service Meta's cables with authorized access. Where no international body monitors data routing. Where the FCC's restrictions on direct US-China connections do not apply. And Meta did this after spending a decade trying to build a direct physical pipeline to China under Project Aldrin--a project its own executives warned would give the CCP backdoor access to American user data.
 
 
 ---
 
-## **VI. OPENAI'S FAILURE**
+## **VII. OPENAI'S FAILURE**
 
 ### **March 2025: The Notification**
 
@@ -565,13 +599,13 @@ Welp...
 
 **While the public record shows no resulting action From OpenAI,** they have at the very least been busy.
 
-With their upcoming IPO. I have some personal grievances about them ruining ChatGPT, but I was advised it would be unprofessional for me to derail this conversation to complain about how they've seemingly [degraded their model](placeholder.dossier.link) into what many would call sterilized bordering on lobotomized--**so I won't**.
+With their upcoming IPO.
 
-Monica pays millions in API fees. Draw your own conclusions about what "investigating" means when your largest-volume fraud customer is also a significant revenue source--and when going public with enforcement would create the kind of headline that makes prospective shareholders nervous. *(I'm sure nobody will see this, you're probably fine.)*
+Monica pays millions in API fees. Draw your own conclusions about what "investigating" means when your largest-volume fraud customer is also a significant revenue source--and when going public with enforcement would create the kind of headline that makes prospective shareholders nervous.
 
 ---
 
-## **VII. MY FAKE DISCLOSURE AND HERNY'S REAL RETALIATION**
+## **VIII. MY FAKE DISCLOSURE AND HERNY'S REAL RETALIATION**
 
 Understanding the December 2024 email exchange requires context about what I was trying to accomplish.
 
@@ -621,7 +655,7 @@ The email's tone was carefully threatening:
 
 ---
 
-## **VIII. THE DATA HARVEST**
+## **IX. THE DATA HARVEST**
 
 While the model fraud affects subscription revenue, Monica's browser extension raises privacy concerns extending far beyond deceptive pricing.
 
@@ -661,7 +695,7 @@ The capability extends across browser extensions (Chrome, Edge), mobile apps ([i
 
 ---
 
-## **IX. META'S $2 BILLION QUESTION**
+## **X. META'S $2 BILLION QUESTION**
 
 In December 2025, Meta acquired Manus for over $2 billion. The deal closed within approximately 10 days. All three co-founders became Meta executives:
 
@@ -716,7 +750,7 @@ Or maybe Meta paid $2 billion for something else entirely, and the wrapper was j
 
 ---
 
-## X. CONCLUSION
+## XI. CONCLUSION
 
 Butterfly Effect PTE LTD spent three years showing exactly who they are. They wrapped cheap API calls in premium labels. They charged users up to $100 a month for models that didn't exist. They built a "revolutionary reasoning engine" out of 30 lines of formatting code on top of someone else's work--and didn't even serve that. They intimidated the one person who documented it. They scrubbed their profiles, rotated their pseudonyms, and restructured across four jurisdictions. They didn't even generate my banana picture. And when the evidence became undeniable, someone wrote a $2 billion check and made the fraud someone else's problem. (Lookin' at you, Meta.)
 
@@ -749,7 +783,7 @@ February 2026
 
 **Every claim in this investigation is backed by immutable archives redundantly mirrored across Harvard's [Perma.cc](https://perma.cc), [archive.today](https://archive.today), the Internet Archive's [Wayback Machine](https://archive.org), [Ghost Archive](https://ghostarchive.org) and [Megalodon](https://megalodon.jp). Key evidence sessions are additionally preserved as WACZ web archives on the [decentralized IPFS network](https://ipfs.io)--playable as interactive browser replays via [ReplayWeb.page](https://replayweb.page). No single entity, takedown request, or legal threat can remove evidence distributed across a decentralized mesh. If you'd like to download the WACZ locally, direct download links can be found in the archive list. Even if the ipfs.io domain gets seized, the CID can be used elsewhere to access the data. Please see the raw archive list [here](placeholder.link) to see a full list of all the redundant mirrors, raw CIDs, and raw download links. Each CID is a cryptographic hash of the content itself--if even one byte changes, the hash changes. This makes tampering mathematically impossible and immediately detectable. If you are familiar with IPFS, I encourage you to please pin the CIDs.**
 
-I can be reached at sup@herny.lol but I can't promise I'll see to let alone re spond to every message though. My name is David, I'm not hiding, but you can just call me Kuro. And no more intimidation tactics please. It's old and I can't take this down. Also I won't take this down.
+I can be reached at sup@herny.lol but I can't promise I'll see, let alone respond to, every message. My name is David, I'm not hiding, but you can just call me Kuro. And no more intimidation tactics please. It's old and I can't take this down. Also I won't take this down.
 ### Archive of this exposé: [placeholder link]
 
 ### Archive of the Archive List: [placeholder link]
@@ -759,7 +793,7 @@ I can be reached at sup@herny.lol but I can't promise I'll see to let alone re s
 https://URLBit.ch/Herny 
 https://Monica.Ratware.lol 
 https://Herny.lol
-https://immutable.rip//monica_ai_fraud
+https://immutable.rip/monica_ai_fraud
 https://kuropax.com/sir_herny
 
 ##### Extra archive list mirrors:
