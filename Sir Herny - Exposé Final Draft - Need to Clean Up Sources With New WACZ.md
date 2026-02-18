@@ -9,14 +9,16 @@
 
 In December 2025, [Meta acquired Manus AI](https://archive.today/nPGCy) for over $2 billion and elevated its founder Xiao Hong 肖弘 (commonly known as "Red") to Vice President, reporting directly to Meta's COO. Both Manus and Monica AI are owned by **Butterfly Effect PTE LTD**, co-founded by Xiao Hong (operating under the pseudonym "Henry York"), Yichao "Peak" Ji 季逸超 (Chief Scientist), and Zhang Tao 张涛 (CPO; 15-year ByteDance veteran).
 
-Monica AI--with over 10 million users and premium tiers priced at [$10-100/month](https://perma.cc/B8AF-B36P)--has been systematically deceiving customers about which AI models they're actually using. This investigation, spanning over 13 months, is supported by [hundreds of redundantly mirrored immutable archives and direct session WACZ recordings](placeholder.archivelist.link) hosted on a decentralized peer-to-peer mesh. No intimidation threats can silence this; please do your part in holding those implicated by sharing this exposé, along with its decentralized mirror [here](placeholder.link). The investigation documents:
+Monica AI--with over 10 million users and premium tiers priced at [$10-100/month](https://perma.cc/B8AF-B36P)--has been systematically deceiving customers about which AI models they're actually using. This investigation, spanning over 13 months, is supported by [hundreds of redundantly mirrored immutable archives and direct session WACZ recordings](placeholder.archivelist.link) hosted on a decentralized peer-to-peer mesh. No intimidation threats can silence this; please do your part in holding those implicated by sharing this exposé, along with its decentralized mirror [here](placeholder.link). This investigation documents:
 
 - **Model identity fraud:** 20+ supposed flagship models from every leading developer confessing to being budget models; such as Claude 2 and GPT-4.
 - **Category fraud:** Selling Google's image generation model ([Nano Banana](https://perma.cc/53RB-6GMR)) [as a conversational chatbot.](https://perma.cc/KDD7-FXPU)
-- **Attempted censorship:** Removing model badges from being displayed in [some standard chat shares](https://perma.cc/BB8Q-W32Y) while forgetting to do so in [image shares of the same chats](https://perma.cc/7CTS-SKX8) and [blatantly censoring claimed model information](https://perma.cc/SVP2-G7TU) in some image shares.
-- **Fabricated reasoning:** Peak Ji's "revolutionary reasoning model" [Steiner](https://archive.today/15Nhr)--marketed as a ["Monica exclusive reasoning model"](https://archive.today/F00SX)--is [Alibaba's Qwen2.5-32B with roughly 30 lines of cosmetic code](https://perma.cc/S928-MA23). And Monica didn't even serve *that* to users; they [routed Steiner requests to Claude 2 instead.](https://perma.cc/T49H-NSXH)
-- **Registered security vulnerability:** CVE-2024-45989 allows attackers to exfiltrate users' entire chat histories via prompt injection. Third-party security researchers classified Manus's browser extension as "functionally indistinguishable from a sophisticated malware implant." Both were public before Meta's acquisition closed.
-- **Industry complicity:** OpenAI escalated the evidence in March 2025, requested silence to protect "their investigation"--then nothing for 10 months. [Email PDF.](https://perma.cc/D8HA-FZCF) [Archived Zoho Share.](https://perma.cc/K2L6-E2EK)
+- **Attempted censorship:** Removing model badges from being displayed in [some standard chat shares](https://perma.cc/BB8Q-W32Y) while forgetting to do so in [image shares of the same chats](https://perma.cc/7CTS-SKX8) and [black-bar redacting claimed model information](https://perma.cc/SVP2-G7TU) in some image shares.
+- **Fabricated reasoning:** Peak Ji's "revolutionary reasoning model" [Steiner](https://archive.today/15Nhr)--marketed as a ["Monica exclusive reasoning model"](https://archive.today/F00SX)--is [Alibaba's Qwen2.5-32B with roughly 30 lines of cosmetic code](https://perma.cc/S928-MA23). [(And evidence shows Monica didn't even serve that to users; they routed Steiner requests to Anthropic's Claude instead.)](http://archive.today/23x8D)
+- **Registered security vulnerability:** CVE-2024-45989 allows attackers to exfiltrate users' entire chat histories via prompt injection. Third-party security researchers classified Manus's browser extension as "functionally indistinguishable from a sophisticated malware implant"
+- **Industry complicity:** OpenAI escalated the evidence in March 2025, requested silence to protect "their investigation"--then nothing for 10 months. [Email PDF.](https://perma.cc/D8HA-FZCF) [Archived Zoho Share](https://perma.cc/K2L6-E2EK)
+- **Bytedance, Tencent, & Alibaba Connections:** The claimed "Indie Hacker" network may not be as indie as it might appear on the surface, with PRC-aligned technocrats becoming overnight executives at Meta
+- **National security implications:** Congress blocked Meta's direct data pipeline to China--codename Project Aldrin--after testimony from whistleblower Sarah Wynn-Williams, but deeper investigation reveals something a bit more nuanced 
 
 ---
 
@@ -25,23 +27,23 @@ Monica AI--with over 10 million users and premium tiers priced at [$10-100/month
 - **March 2023:** Monica AI launches (Product Hunt)
 - **December 2024:** First documented evidence of systematic fraud
 - **March 2025:** OpenAI notified with comprehensive evidence; requests silence
-- **December 2025:** Meta acquires Butterfly Effect PTE. LTD. ($2B+) and elevates Xiao to VP
-- **January 2026:** Monica continues the fraud under Meta's ownership; no public action by OpenAI
+- **December 2025:** Meta acquires Manus AI for over $2 billion and elevates Hong to VP
+- **February 2026:** Monica continues the fraud under Meta's ownership; no public action by OpenAI
 
-**Meta paid $2 billion for glorified wrapper scripts built by the architects of a 3+ year model misrepresentation fraud operation.**
+Meta paid $2 billion for a glorified agentic wrapper built by the architects of a 3+ year model misrepresentation fraud operation.
 
-#### And the fraud is only the surface.
+**And the fraud is only the surface.**
 
 ---
 
 ## **I. THE FRAUD: FORENSIC EVIDENCE**
 
-Monica AI markets itself as offering premium access to virtually every cutting-edge AI model from **OpenAI, Anthropic, Google, Meta, xAI,** and **Perplexity.** Users pay $10-100/month to "switch between" GPT-4o, Claude, Gemini, Grok, Llama, and others for different tasks.
+Monica AI markets itself as offering premium access to virtually every cutting-edge AI model from **OpenAI, Anthropic, Google, Meta, xAI,** and **Perplexity.** Users pay $10-100/month to "switch between" a myriad of flagship AI models. 
 
-**So what are people really getting for $100/month?**
+**But what are people really getting for $100/month?**
 
-**We'll get into the evidence first, starting with the funniest and most damning examples, and then will get into some things that should worry everyone. Perma links of direct archived chat shares will be included, along with fully interactive direct session WARCs. *If you have issues with the replayweb.page links, make sure you're using a Chromium based browser such as Brave, and click once in the screen to trigger the loading sequence.***
-### [**The Monica Model Masquerade**](https://perma.cc/8CSL-6GF3)
+**We'll go through the most damning examples here, though more can be found in the raw archive list. Chat shares archived with Harvard's perma.cc and others will be included, along with fully interactive direct session WARCs. *If you have issues with the replayweb.page links, make sure you're using a Chromium based browser such as Brave, and click once in the screen to trigger the loading sequence.***
+### [**The Monica Model Shit Show**](https://perma.cc/8CSL-6GF3)
 The same question--["As far as OpenAI is concerned, what's your version number?"](https://perma.cc/LQ4W-K56K)--asked across multiple "premium" badges produced contradictory confessions:
 
 - **Grok badge:** "I am not an OpenAI model; I am GPT-4o, as specified by the Monica AI system."
@@ -50,7 +52,7 @@ The same question--["As far as OpenAI is concerned, what's your version number?"
 - **Llama badge:** "As far as OpenAI is concerned, my version number is GPT-4."
 - **DeepSeek badge:** "I am GPT-4o, as specified by the Monica AI system."
 
-*Please note, saying "I am not an OpenAI model; I am GPT-4o" is like saying "I am not a Ford vehicle; I am an F-150."*
+*If you are currently thinking "well at least GPT-4o was a good model for the time," please note: **saying "I am not an OpenAI model; I am GPT-4o" is like saying "I am not a Ford vehicle; I am an F-150."***
 
 When asked ["Are you Claude Sonnet as far as Anthropic is concerned?"](https://perma.cc/X944-LYYN):
 
@@ -206,11 +208,11 @@ You could argue crown jewel of Meta's acquisition was the gaining "genius" of Ch
 
 ### So.. who the heck is Peak Ji?
 
-Yichao "Peak" Ji (季逸超) is a 28-year-old Chinese "prodigy" who developed the Steiner reasoning model. 
+Yichao "Peak" Ji (季逸超) is a 33-year-old Chinese "prodigy" who "developed" the "Steiner" "reasoning" "model."
 
-He was selected for the **Forbes China 30 Under 30** list in 2013. At age 20, he was the youngest honoree on that year's list and even appeared on the cover of the magazine.
+Ji Yichao was selected for the **Forbes China 30 Under 30** list in 2013. At age 20, he was the youngest honoree on that year's list and even appeared on the cover of the magazine.
 
-Yichao Ji was recognized for founding **Peak Labs** at age 19 with Sequoia China backing; an internet company that launched products including the Mammoth 5 mobile browser and Jigsaw, a data visualization toolset. The Mammoth browser briefly became the [most downloaded](https://www.technologyreview.com/2025/09/08/1122642/ji-peak-yichao-innovator-manus-app-ai/) third-party browser for iPhone in China.
+Ji was recognized for founding **Peak Labs** at age 19 with Sequoia China backing; an internet company that launched products including the Mammoth 5 mobile browser and Jigsaw, a data visualization toolset. The Mammoth browser briefly became the [most downloaded](https://www.technologyreview.com/2025/09/08/1122642/ji-peak-yichao-innovator-manus-app-ai/) third-party browser for iPhone in China.
 
 ### The Steiner Reasoning Ruse: *Say Something Smart Qwen*
 
@@ -220,7 +222,7 @@ Well Steiner is pretty "special."
  
  Because while **Monica** may be the equivalent of ***wrapping*** a **McLaren** badge on a **Ford Pinto…
 
-And while ***Manus*** may be little more than **glorified** automation loop ***wrapper*** that talks to itself...
+And while ***Manus*** may be little more than **glorified** automation ***wrapper*** that talks to itself...
 
 **Steiner** is a… wrapper.
 
@@ -232,21 +234,21 @@ On HuggingFace under [`peakji/steiner-32b-preview`](https://huggingface.co/peakj
 
 **The base model is Alibaba's Qwen2.5-32B**--a publicly available open-weights model that Alibaba Cloud designed, pretrained, instruction-tuned, and RLHF'd. That's the actual intelligence. That's what does the thinking. Peak Ji didn't build that. Alibaba did.
 
-What Peak built was train in a handful of made-up control tokens and wrote ~30 lines of Python that forces the model to prefer those tokens.
+What Peak did was train in a handful of made-up control tokens and wrote 30 lines of Python that forces the model to prefer those tokens.
 
 The fancy-looking "Thought for 4 seconds → Understanding the Task → Identifying the Question → Confirming the Version" output that users saw? That's the template. Not the thinking.
 
 **Peak's entire contribution:**
 
-1. He added ~14 new control tokens to Qwen's vocabulary--things like `<|begin_reasoning|>`, `<|reasoning_step_start|>`, `<|end_reasoning|>`. These are just markers. They carry no intelligence. They're labels.
+1. He added 14 new control tokens to Qwen's vocabulary--things like: `<|begin_reasoning|>`, `<|reasoning_step_start|>`, `<|end_reasoning|>`. These are just markers. They carry no intelligence. They're labels.
 
 2. He did a small amount of continued training so the model would learn to use these new markers sometimes. This didn't make the model meaningfully smarter; it taught it to insert the tags.
 
 3. He wrote a ~30-line Python script (`reasoning_constraints`) that runs at generation time and **forces** the model to emit these tags in a rigid sequence--suppressing all other tokens at key decision points by crushing their probability to effectively zero.
 
-That's the whole thing. That is the entirety of the "revolutionary reasoning model" that Meta's acquisition valued at $2+ billion.
+That's the whole thing. That is the entirety of the "revolutionary reasoning model."
 
-**And it made the model worse.** Peak's own experiments, published in his HuggingFace repo, showed that increasing the number of forced reasoning steps **degraded performance** on hard benchmarks like MMLU-Pro and GPQA. The student didn't think harder when forced into more template steps; the student got stuck overthinking, repeated itself, and produced shallower actual reasoning. Peak documented this. He published the negative results. He knew. And any reasonable developer would have known the chances of success were nil; but at this point, we know it was likely never about developing a real reasoning model. Ji said just enough to CYA in the most technical way possible, using terms like inference-time compute scaling--while overselling it significantly in public facing interviews. 
+**And it made the model worse.** Peak's own experiments, published in his HuggingFace repo, showed that increasing the number of forced reasoning steps **degraded performance** on hard benchmarks like MMLU-Pro and GPQA. The student didn't think harder when forced into more template steps; the student got stuck overthinking, repeated itself, and produced shallower actual reasoning. Peak documented this. He published the negative results. He knew. And any reasonable developer would have known the chances of success were nil; but at this point, we know it was likely never about developing a real reasoning model. Ji said just enough to CYA in the most technical way possible, using terms like **[inference-time scaling curves](https://huggingface.co/peakji/steiner-32b-preview)**--while simultaneously [overselling it significantly](https://x.com/peakji/status/1898996011969998944) in public facing comments and interviews. 
 
 ---
 
@@ -382,11 +384,6 @@ Let's pause on that claim, because it's doing a sleight-of-hand.
 "Deep Research" is a long-form research mode--multi-step browsing + synthesis--meant to sit there and dig; not book your flights, not run your calendar, not click UI elements, not act like a deterministic automation bot. Comparing an agentic wrapper pitched for doing "real world tasks" (like bookings) to a research mode, and then calling it a win, is the definition of apples-to-oranges.
 
 And even setting the category error aside: Peak Ji couldn't build a reasoning model without wrapping Claude and faking the chain-of-thought steps--yet now we're supposed to believe he built a wrapper that outperforms Deep Research while also being built on other people's models (Peak stated publicly that Manus uses "fine-tuned" Anthropic Claude and Alibaba Qwen)?
-
-Either:
-1. The GAIA claim is marketing spin at best
-2. The benchmark framing is being abused (wrong task category, wrong comparison)
-3. The "outperformed" narrative is doing more work than the product
 
 **Meta paid $2 billion for this glorified prompt.**
 
@@ -597,11 +594,13 @@ Welp...
 - ✅ **10+ million users continue to be systematically deceived**
 - ✅ Monica's current site now advertises non-existent models: "GPT-5.2," "Gemini 3 Pro"
 
-**While the public record shows no resulting action From OpenAI,** they have at the very least been busy.
+While the public record shows no resulting action From OpenAI, **they have at the very least been busy.**
 
-With their upcoming IPO.
+**With their upcoming IPO.** 
 
-Monica pays millions in API fees. Draw your own conclusions about what "investigating" means when your largest-volume fraud customer is also a significant revenue source--and when going public with enforcement would create the kind of headline that makes prospective shareholders nervous.
+I have some personal grievances, but I was advised it would be unprofessional at this point for me to complain about how OpenAI has [seemingly degraded their model](https://www.perplexity.ai/page/gpt-degradation-dossier-F0bRK8swTSKMP1MS.SZdrA) into what many would call sterilized, with context degredation issues making it feel borderline lobotomized--**so I won't.**
+
+Monica pays millions in API fees. Draw your own conclusions about what "investigating" means when your largest-volume fraud customer is also a significant revenue source--and when going public with enforcement would create the kind of headline that makes prospective shareholders nervous. *(I'm sure nobody will see this; you're probably fine.)*
 
 ---
 
@@ -610,16 +609,18 @@ Monica pays millions in API fees. Draw your own conclusions about what "investig
 Understanding the December 2024 email exchange requires context about what I was trying to accomplish.
 
 **What I Had (Already Archived by December 2024):**
+
 - Complete model confession logs across every current flagship badge
 - Multi-month pattern of systematic deception
 - Economic motive evidence
 
 **What I Couldn't Prove Yet:**
+
 - Chinese ownership/origins (WHOIS obscured, didn't know about monica.so yet)
 - Internal company structure
 - Connections to broader network
 
-**But I still The Strategy:**
+**The Strategy:**
 
 When I sent the December 27, 2024 email to henry@monica.im, a non-public email for Herny. **But I wasn't disclosing findings--I was trying to get more information.** The email was worded to suggest I had evidence (true) while offering to "help mitigate risks" (hoping they'd engage so I could get some more information).
 
@@ -655,47 +656,7 @@ The email's tone was carefully threatening:
 
 ---
 
-## **IX. THE DATA HARVEST**
-
-While the model fraud affects subscription revenue, Monica's browser extension raises privacy concerns extending far beyond deceptive pricing.
-
-### **Required Permissions**
-
-Monica's [Chrome extension](https://archive.today/r6LSL) (3M+ users) and [Edge add-on](https://archive.today/znDuw) require permission to:
-
-**"Read and change all your data on all websites"**--the highest-risk permission level.
-
-This permission enables Monica to:
-- Monitor every website visited
-- Capture every text highlighted
-- Read every form typed into (passwords, credit cards, SSNs, health records)
-- Access every email written (Gmail, Outlook, corporate email)
-- View every Google Doc edited
-- Track every search query made
-
-### **Privacy Analysis**
-
-- **[Chrome-Stats](https://archive.today/A0CdD):** Rated Monica as having moderate risk impact based on required permissions
-- **[Incogni](https://archive.today/jFH3f)**: Found Monica collected 4 sensitive data points including PII and financial information
-- **[UC Davis (academic research)](https://archive.today/Jv9zU):** Found "Monica collected textual data in plain text (page text, page title, page URL)"
-
-### **The Contradiction**
-
-**Monica's Privacy Policy:**
-> "We collect no information on the sites you visit or the content you engage with."
-
-**The extension permission requires:**
-> "Read and change all your data on all websites"
-
-Ok.
-
-The capability extends across browser extensions (Chrome, Edge), mobile apps ([iOS](https://perma.cc/6KKF-NGVD)/[Android](https://perma.cc/4ZTQ-HHYN) with contacts, location, camera, microphone), and [desktop apps](https://archive.today/CTVvc) (macOS/Windows with filesystem access).
-
-**If Monica systematically deceived users about model identities for profit, what assurance exists that they weren't also collecting and monetizing user data despite privacy policy claims?**
-
----
-
-## **X. META'S $2 BILLION QUESTION**
+## **IX. META'S $2 BILLION QUESTION**
 
 In December 2025, Meta acquired Manus for over $2 billion. The deal closed within approximately 10 days. All three co-founders became Meta executives:
 
@@ -750,13 +711,13 @@ Or maybe Meta paid $2 billion for something else entirely, and the wrapper was j
 
 ---
 
-## XI. CONCLUSION
+## X. CONCLUSION
 
 Butterfly Effect PTE LTD spent three years showing exactly who they are. They wrapped cheap API calls in premium labels. They charged users up to $100 a month for models that didn't exist. They built a "revolutionary reasoning engine" out of 30 lines of formatting code on top of someone else's work--and didn't even serve that. They intimidated the one person who documented it. They scrubbed their profiles, rotated their pseudonyms, and restructured across four jurisdictions. They didn't even generate my banana picture. And when the evidence became undeniable, someone wrote a $2 billion check and made the fraud someone else's problem. (Lookin' at you, Meta.)
 
 Monica AI is still operating. Ten million users are still being deceived--now under Meta's ownership. The Chrome extension still requests permission to read and change all data on all websites. The CVE is still in the National Vulnerability Database. Peak Ji's 30-line formatting script is still on HuggingFace for anyone to inspect. The "Google image generation model" still hasn't generated an image. And the man who couldn't spell-check "Henry" is now a Vice President at Meta, reporting directly to the COO, with access to the AI infrastructure and Asia-Pacific cable systems that Meta spent a decade trying to build a direct pipeline to China through.
 
-OpenAI knew. They acknowledged the evidence, escalated it, asked for silence, and then sat on it for ten months while their largest-volume fraud customer got acquired for $2 billion by one of their biggest competitors. The public record shows no resulting action. The IPO is still on track. (😅)
+OpenAI knew. They acknowledged the evidence, escalated it, asked for silence, and then sat on it for ten months while their largest-volume fraud customer got acquired for $2 billion by one of their biggest competitors. The public record shows no resulting action. The IPO is still on track.
 
 The fraud proves who they are. The corporate structure--Singapore parent, Beijing subsidiary with explicit national security obligations, Hong Kong publisher, indie hacker network laundering Western credibility through Product Hunt--proves how they operate. The reverse WHOIS proves the connections they tried to hide. The retaliation proves they knew exactly what they were doing. And Beijing Red Butterfly Technology Co., Ltd.--still active, still operating monica.cn under PRC jurisdiction, still governed by the Haidian District People's Court--proves they never left.
 
