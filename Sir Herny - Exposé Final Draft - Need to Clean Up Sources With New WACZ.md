@@ -1,4 +1,5 @@
-# **Project Aldrin: How "Sir Herny" Sold the World's Largest AI Fraud to Meta**
+## **Project Aldrin Never Died: "Sir Herny's" $2 Billion AI Fraud Operation**
+### *How Meta Acquired a Counterfeit AI Empire and Embedded a PRC-Aligned Technocrat as VP*
 
 **By:** Kuro Pax  
 **Date:** February 2026
