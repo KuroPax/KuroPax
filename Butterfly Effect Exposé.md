@@ -1,10 +1,12 @@
 ## **Project Aldrin Never Died: "Sir Herny's" $2 Billion AI Fraud Operation**
-### *How Meta Acquired a Counterfeit AI Empire and Embedded a PRC-Aligned Technocrat as VP*
+### *How Meta Acquired a Counterfeit AI Empire and Appointed a PRC-Aligned Technocrat as VP*
 
 **By:** Kuro Pax  
 **Date:** February 2026
 
 ---
+
+> ***This draft is a work in progress and is not finished. Sections will be revamped and all sources will be updated with inline footer style citations, adding in decentralized WACZ for all primary sources and adding additional currently uncited sources. Draft is nearly publication ready as-is.***
 
 ## **EXECUTIVE SUMMARY**
 
@@ -599,9 +601,9 @@ While the public record shows no resulting action From OpenAI, **they have at th
 
 **With their upcoming IPO.** 
 
-I have some personal grievances, but I was advised it would be unprofessional at this point for me to complain about how OpenAI has [seemingly degraded their model](https://www.perplexity.ai/page/gpt-degradation-dossier-F0bRK8swTSKMP1MS.SZdrA) into what many would call sterilized, with context degredation issues making it feel borderline lobotomized--**so I won't.**
+I have some personal grievances, but I was advised it would be unprofessional at this point for me to complain about how OpenAI has [seemingly degraded their model](https://www.perplexity.ai/page/gpt-degradation-dossier-F0bRK8swTSKMP1MS.SZdrA) into what many would call sterilized, mixed with context degredation issues making it feel borderline lobotomized--**so I won't.**
 
-Monica pays millions in API fees. Draw your own conclusions about what "investigating" means when your largest-volume fraud customer is also a significant revenue source--and when going public with enforcement would create the kind of headline that makes prospective shareholders nervous. *(I'm sure nobody will see this; you're probably fine.)*
+Monica potentially pays millions in API fees. Draw your own conclusions about what "investigating" means when your largest-volume fraud customer is also a significant revenue source--and when going public with enforcement would create the kind of headline that makes prospective shareholders nervous. *(I'm sure nobody will see this; you're probably fine.)*
 
 ---
 
