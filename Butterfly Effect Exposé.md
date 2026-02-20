@@ -7,6 +7,7 @@
 ---
 
 > ***This draft is a work in progress and is not finished. Sections will be revamped and all sources will be updated with inline footer style citations, adding in decentralized WACZ for all primary sources and adding additional currently uncited sources. Draft is nearly publication ready as-is.***
+> ***Archive list (rough draft--work in progress):*** https://github.com/KuroPax/KuroPax/blob/main/archive-list.md
 
 ## **EXECUTIVE SUMMARY**
 
