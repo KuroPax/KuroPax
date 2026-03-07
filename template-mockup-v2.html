@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Aldrin Never Died</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-static: #fafafa;
+    --card-bg: #ffffff;
+    --text-main: #111827;
+    --text-muted: #4b5563;
+    --accent: #2563eb;
+    --shadow: 0 20px 40px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.03);
+    --reading-width: 900px;
+    --scrolly-width: 1300px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0; padding: 0; background: var(--bg-static);
+    font-family: 'Libre Baskerville', serif; color: var(--text-main);
+    line-height: 1.8; overflow-x: hidden;
+    cursor: none;
+  }
+
+  h1, h2, h3, h4 { font-family: 'Inter', sans-serif; font-weight: 800; margin-top: 0; }
+
+  .site-header {
+    text-align: center; padding: 80px 20px 20px;
+    font-family: 'Inter', sans-serif; font-size: 32px; font-weight: 800;
+    letter-spacing: 2px; text-transform: uppercase; line-height: 1.2;
+  }
+  .site-subtitle {
+    text-align: center; font-family: 'Inter', sans-serif; font-size: 16px;
+    font-weight: 600; color: var(--text-muted); text-transform: uppercase;
+    margin-top: 10px; margin-bottom: 30px; letter-spacing: 1px;
+  }
+
+  .sticky-nav-wrapper {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--card-bg);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    border-bottom: 1px solid #e5e7eb; border-top: 1px solid #e5e7eb;
+    width: 100%;
+  }
+  .sticky-nav {
+    display: flex; justify-content: center; align-items: center;
+    max-width: 100%; overflow-x: auto; white-space: nowrap;
+    scrollbar-width: none;
+  }
+  .sticky-nav::-webkit-scrollbar { display: none; }
+
+  .nav-btn {
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    text-decoration: none; color: var(--text-main); background: var(--card-bg);
+    padding: 16px 24px; border-right: 1px solid #e5e7eb;
+    transition: background 0.2s ease, color 0.2s ease; cursor: none;
+    text-transform: uppercase; letter-spacing: 0.5px; flex-shrink: 0;
+  }
+  .nav-btn:first-child { border-left: 1px solid #e5e7eb; }
+  .nav-btn:hover { background: #f3f4f6; }
+  .nav-btn.active { background: var(--text-main); color: var(--card-bg); }
+
+  .base-section {
+    max-width: var(--reading-width); margin: 0 auto; padding: 80px 20px;
+  }
+  .base-section p { font-size: 1.15rem; margin-bottom: 1.8rem; }
+  .base-section h2 { font-size: 2rem; margin-bottom: 2rem; text-transform: uppercase; border-bottom: 2px solid #111; padding-bottom: 10px; display: inline-block;}
+
+  .scrolly-section {
+    max-width: var(--scrolly-width); margin: 0 auto; padding: 80px 20px;
+    display: flex; gap: 60px; align-items: flex-start;
+  }
+  .scrolly-text-col {
+    flex: 1; position: sticky; top: 120px;
+    padding-bottom: 40px;
+  }
+  .scrolly-text-col h2 { font-size: 2.2rem; margin-bottom: 1rem; }
+  .scrolly-text-col p { font-size: 1.15rem; }
+
+  .scrolly-media-col {
+    flex: 1.2; display: flex; flex-direction: column;
+    gap: 80vh;
+    padding-top: 10vh; padding-bottom: 50vh;
+  }
+
+  .floating-card {
+    background: var(--card-bg); padding: 40px; border-radius: 16px;
+    box-shadow: var(--shadow); border: 1px solid #e5e7eb;
+    position: relative; z-index: 10;
+  }
+  .floating-card img { width: 100%; border-radius: 8px; margin-bottom: 15px; }
+  .card-caption { font-family: 'Inter', sans-serif; font-size: 13px; color: var(--text-muted); font-style: italic; }
+
+  .circle-cutout {
+    width: 250px; height: 250px; border-radius: 50%;
+    background: var(--text-main); color: var(--card-bg);
+    display: flex; justify-content: center; align-items: center; text-align: center;
+    padding: 30px; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 14px;
+    box-shadow: var(--shadow); float: right; margin: 0 0 20px 40px;
+    shape-outside: circle(50%);
+  }
+
+  .reveal { opacity: 0; transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+  .reveal.visible { opacity: 1; transform: translate(0, 0) scale(1) !important; }
+
+  .slide-left { transform: translateX(100px); }
+  .slide-right { transform: translateX(-100px); }
+  .slide-up { transform: translateY(100px); }
+  .pop-in { transform: scale(0.8); }
+
+  .cite-tag {
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.75rem;
+    color: var(--accent); background: #eff6ff; border: 1px solid #bfdbfe;
+    border-radius: 4px; padding: 0 4px; margin: 0 2px;
+    vertical-align: super; cursor: none; transition: 0.2s;
+  }
+  .cite-tag:hover { background: var(--accent); color: white; }
+
+  .cite-popup {
+    position: fixed; z-index: 200; width: 340px;
+    background: var(--card-bg); border-radius: 8px; border: 1px solid #e5e7eb;
+    box-shadow: 0 20px 40px -5px rgba(0,0,0,0.15); padding: 16px;
+    font-family: 'Inter', sans-serif; font-size: 13px;
+    opacity: 0; transform: translateY(10px); transition: all 0.2s;
+    pointer-events: none;
+  }
+  .cite-popup.active { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .cite-popup-title { font-weight: 800; margin-bottom: 8px; line-height: 1.4; font-size: 14px;}
+  .cite-popup-desc { color: var(--text-muted); margin-bottom: 12px; line-height: 1.4; }
+  .cite-popup-link {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 6px;
+    text-decoration: none; color: var(--text-muted); word-break: break-all;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; cursor: none;
+  }
+  .cite-popup-link:hover { color: var(--accent); }
+  .badge { background: #f3f4f6; color: #111; padding: 2px 6px; border-radius: 4px; font-weight: 600; flex-shrink: 0; }
+  .badge.web3 { background: #f0fdfa; color: #0f766e; border: 1px solid #ccfbf1;}
+
+  #blob-cursor {
+    position: fixed; top: 0; left: 0; width: 34px; height: 34px;
+    background: white; border-radius: 50%; pointer-events: none;
+    z-index: 9999; mix-blend-mode: difference;
+    will-change: transform, border-radius; transform-origin: center;
+    transition: border-radius 0.15s ease-out;
+  }
+  #blob-cursor.is-pointer { border-radius: 0 50% 50% 50%; }
+  a, button, .cite-tag { cursor: none !important; }
+
+  @media (max-width: 1024px) {
+    .scrolly-section { flex-direction: column; gap: 40px; }
+    .scrolly-text-col { position: relative; top: 0; }
+    .scrolly-media-col { gap: 40px; padding-top: 0; padding-bottom: 40px; }
+    .circle-cutout { float: none; margin: 20px auto; }
+  }
+</style>
+<style>
+  /* =========================================
+     NEW SECTIONS CSS (A, B, C, & Meta/Footer)
+     ========================================= */
+
+  /* Part 1: Top Meta Bar */
+  .top-meta-nav {
+    background: #111827; padding: 12px 24px; display: flex; justify-content: space-between; align-items: center;
+  }
+  .top-meta-nav-title {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #6b7280; text-transform: uppercase; letter-spacing: 2px;
+  }
+  .top-meta-nav-links a {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9ca3af; text-decoration: none; margin-left: 20px; transition: color 0.2s; cursor: none;
+  }
+  .top-meta-nav-links a:hover { color: #00b4d8; }
+
+  /* Section A: Physics Bubble Network */
+  #network-map {
+    background: #0f172a;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
+  #bubble-canvas {
+    width: 100%;
+    height: 700px;
+    display: block;
+    cursor: none !important;
+  }
+  #bubble-tooltip {
+    position: fixed;
+    background: rgba(15, 23, 42, 0.95);
+    border: 1px solid rgba(0, 180, 216, 0.4);
+    border-radius: 10px;
+    padding: 14px 18px;
+    max-width: 260px;
+    font-family: 'Inter', sans-serif;
+    pointer-events: none;
+    z-index: 300;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    transform: translate(-50%, -100%);
+  }
+  .tooltip-title {
+    color: #00b4d8;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .tooltip-info {
+    color: #94a3b8;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+  @media (max-width: 768px) {
+    #bubble-canvas {
+      height: 500px;
+    }
+  }
+
+  /* Section B: Fraud Browser */
+  #fraud-browser {
+    background: #fafafa; padding: 100px 20px;
+  }
+  .fraud-container {
+    max-width: 900px; margin: 0 auto;
+  }
+  .fraud-header {
+    font-family: 'Inter', sans-serif; font-weight: 800; font-size: 2rem; text-transform: uppercase;
+    border-bottom: 2px solid #111827; display: inline-block; padding-bottom: 10px; margin-bottom: 12px;
+  }
+  .fraud-subtitle {
+    font-family: 'Inter', sans-serif; font-size: 14px; color: #6b7280; margin-bottom: 40px;
+  }
+  .fraud-row {
+    background: var(--card-bg); border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    margin-bottom: 12px; display: flex; overflow: hidden; cursor: none;
+  }
+  .fraud-row-accent {
+    width: 5px; border-radius: 3px 0 0 3px; flex-shrink: 0; height: auto;
+  }
+  .fraud-row-content {
+    flex: 1; padding: 16px 20px;
+  }
+  .fraud-row-collapsed {
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .fraud-badge-name { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 14px; color: #111827; flex: 1; }
+  .fraud-claims { font-family: 'Inter', sans-serif; font-size: 13px; color: #6b7280; flex: 2; text-align: center; }
+  .fraud-chevron { font-family: 'Inter', sans-serif; font-size: 12px; color: #6b7280; transition: transform 0.3s; flex: 0 0 20px; text-align: right; }
+  .fraud-row.open .fraud-chevron { transform: rotate(180deg); }
+  .fraud-row-expanded {
+    max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .fraud-row.open .fraud-row-expanded { max-height: 400px; }
+  .fraud-quote {
+    background: #f9fafb; padding: 20px 24px; border-radius: 0 8px 8px 0; margin: 16px 0;
+    font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 1rem; color: #374151;
+  }
+  .fraud-meta { display: flex; align-items: center; gap: 12px; }
+  .fraud-tag {
+    font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 20px;
+  }
+
+  /* Section C: Investigation Timeline */
+  #investigation-timeline {
+    background: var(--bg-static); padding: 100px 20px;
+  }
+  .timeline-container {
+    max-width: 900px; margin: 0 auto; position: relative;
+  }
+  .timeline-container::after {
+    content: ''; position: absolute; left: 50%; top: 120px; bottom: 0; width: 2px;
+    background: linear-gradient(to bottom, transparent, #111827 5%, #111827 95%, transparent);
+    transform: translateX(-50%); z-index: 1;
+  }
+  .timeline-svg {
+    position: absolute; left: 50%; top: 120px; bottom: 0; width: 4px; transform: translateX(-50%); z-index: 2; pointer-events: none;
+  }
+  .timeline-path {
+    stroke: #2563eb; stroke-width: 4; fill: none;
+  }
+  .timeline-events-wrap { position: relative; z-index: 3; padding-top: 40px; }
+  .timeline-event {
+    width: 50%; position: relative; margin-bottom: 40px;
+  }
+  .timeline-event:nth-child(odd) { left: 0; padding-right: 40px; text-align: right; }
+  .timeline-event:nth-child(even) { left: 50%; padding-left: 40px; text-align: left; }
+  .timeline-card {
+    background: var(--card-bg); border-radius: 16px; box-shadow: var(--shadow); padding: 24px;
+    position: relative; display: inline-block; width: 100%; max-width: 400px; text-align: left;
+  }
+  .timeline-date { font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; color: #6b7280; margin-bottom: 6px; }
+  .timeline-title { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 18px; color: #111827; margin-bottom: 8px; }
+  .timeline-desc { font-family: 'Libre Baskerville', serif; font-size: 14px; color: #4b5563; line-height: 1.7; margin: 0; }
+  .timeline-dot {
+    width: 14px; height: 14px; border-radius: 50%; border: 3px solid white;
+    position: absolute; top: 50%; transform: translate(-50%, -50%); z-index: 4;
+  }
+  .timeline-event:nth-child(odd) .timeline-dot { right: -47px; left: auto; transform: translateY(-50%); }
+  .timeline-event:nth-child(even) .timeline-dot { left: 0; }
+
+  /* Part 3: Footer */
+  .site-footer {
+    background: #0a0a0a; color: #6b7280; text-align: center; padding: 80px 20px; font-family: 'Inter', sans-serif; font-size: 13px;
+  }
+  .footer-icon {
+    width: 56px; height: 56px; border-radius: 50%; display: block; margin: 0 auto 24px;
+    transition: transform 0.3s, box-shadow 0.3s; cursor: none;
+  }
+  .footer-icon-link { display: inline-block; cursor: none; }
+  .footer-icon-link:hover .footer-icon {
+    transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,180,216,0.3);
+  }
+  .footer-links { display: flex; justify-content: center; align-items: center; }
+  .footer-links a {
+    font-family: 'Inter', sans-serif; font-size: 12px; color: #9ca3af; text-decoration: none; margin: 0 16px; transition: color 0.2s; cursor: none;
+  }
+  .footer-links a:hover { color: #00b4d8; }
+  .footer-disclaimer {
+    margin-top: 28px; opacity: 0.4; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 1px;
+  }
+
+  @media (max-width: 768px) {
+    .timeline-container::after { left: 24px; }
+    .timeline-svg { left: 24px; }
+    .timeline-event { width: 100%; padding-left: 64px !important; padding-right: 0 !important; left: 0 !important; text-align: left !important; }
+    .timeline-dot { left: 24px !important; transform: translate(-50%, -50%) !important; right: auto !important; }
+    .fraud-claims { display: none; }
+    .top-meta-nav { flex-direction: column; gap: 12px; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-meta-nav">
+  <div class="top-meta-nav-title">Project Aldrin Never Died</div>
+  <div class="top-meta-nav-links">
+    <a href="#">kuropax.com</a>
+    <a href="#">Substack</a>
+    <a href="#">Decentralized Mirror</a>
+  </div>
+</div>
+
+<div id="blob-cursor"></div>
+
+<header class="site-header">Project Aldrin Never Died</header>
+<div class="site-subtitle">"Sir Herny's" $2 Billion AI Fraud Operation</div>
+
+<div class="sticky-nav-wrapper">
+  <nav class="sticky-nav" id="toc-nav">
+    <a href="#intro" class="nav-btn active">Introduction</a>
+    <a href="#fraud-mechanics" class="nav-btn">The Fraud</a>
+    <a href="#floating-example" class="nav-btn">Floating Media</a>
+    <a href="#network-map" class="nav-btn">Network Map</a>
+    <a href="#fraud-browser" class="nav-btn">Fraud Browser</a>
+    <a href="#investigation-timeline" class="nav-btn">Timeline</a>
+  </nav>
+</div>
+
+<main>
+
+  <section id="intro" class="base-section reveal slide-up">
+    <h2>Executive Summary</h2>
+    <p>This is the base layer. The text sits flush against the soft background, optimized for deep reading. It uses the `900px` width variable so it doesn't span endlessly across your 32" monitor. Here is an example of Claude's updated citation logic in action <cite data-ref="1"></cite>.</p>
+
+    <div class="circle-cutout reveal pop-in">
+      This is a floating circular snippet. It shapes the text around it using CSS shape-outside.
+    </div>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+  </section>
+
+  <section id="fraud-mechanics" class="scrolly-section">
+    <div class="scrolly-text-col">
+      <h2>The Mechanics</h2>
+      <p>As you scroll down to read this, notice how this entire left column has stopped scrolling. It is pinned to your screen.</p>
+      <p>Meanwhile, on the right side of your massive monitor, gorgeous floating cards are gliding upwards from the abyss. You can use these right-side cards to show WACZ replays, image evidence, or code snippets, precisely timed to match the text on the left.</p>
+      <p>Keep scrolling down to see the next piece of evidence glide in.</p>
+    </div>
+
+    <div class="scrolly-media-col">
+      <div class="floating-card reveal slide-left">
+        <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1000&auto=format&fit=crop" alt="Placeholder">
+        <div class="card-caption">Figure 1. The first piece of evidence scrolling by.</div>
+        <p style="font-family: 'Inter', sans-serif; font-size: 14px;">This card holds the evidence. Notice the drop shadow makes it appear physically raised above the base text layer.</p>
+      </div>
+
+      <div class="floating-card reveal slide-left">
+        <h3 style="font-family: 'Inter', sans-serif;">Smoking Gun Log</h3>
+        <pre style="background: #111; color: #fff; padding: 20px; border-radius: 8px;"><code>Model: "I am actually GPT-4."
+User: "But your badge says Gemini?"
+Model: "I am a liar."</code></pre>
+        <div class="card-caption">Figure 2. You can put code blocks or terminal readouts in these cards too.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="floating-example" class="base-section">
+    <h2>The Aftermath</h2>
+    <p>Once the right column finishes scrolling, the left column naturally unpins, and you are seamlessly back to reading the base layer text.</p>
+
+    <div class="reveal slide-up" style="margin: 60px 0;">
+      <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1000&auto=format&fit=crop" style="width: 100%; border-radius: 16px; box-shadow: var(--shadow);" alt="Placeholder">
+      <div class="card-caption" style="text-align: center; margin-top: 15px;">Figure 3. Full width imagery fades and slides up.</div>
+    </div>
+
+    <p>You now have complete control over the pacing. Base text for the heavy narrative, Scrollytelling sections for the evidence deep-dives, and float-in parallax elements for visual pacing.</p>
+  </section>
+
+  <section id="network-map">
+    <div class="network-header">
+      <h2 style="font-family: 'Inter', sans-serif; font-weight: 800; font-size: 2rem; text-transform: uppercase; color: #ffffff; text-align: center; margin: 0; padding-top: 40px; position: absolute; width: 100%; z-index: 10; pointer-events: none;">The Corporate Web</h2>
+      <p style="font-family: 'Inter', sans-serif; font-size: 14px; color: #94a3b8; text-transform: uppercase; letter-spacing: 2px; text-align: center; margin-top: 8px; position: absolute; width: 100%; z-index: 10; pointer-events: none;">Click the outer ring segments to call entities</p>
+    </div>
+
+    <div id="bubble-tooltip">
+      <div class="tooltip-title" id="bt-title"></div>
+      <div class="tooltip-info" id="bt-info"></div>
+    </div>
+
+    <canvas id="bubble-canvas"></canvas>
+  </section>
+
+  <section id="fraud-browser">
+    <div class="fraud-container">
+      <div class="fraud-header">The Fraud on Record</div>
+      <div class="fraud-subtitle">Every badge. Every lie. Click to expand.</div>
+
+      <div class="fraud-row reveal slide-right" onclick="this.classList.toggle('open')">
+        <div class="fraud-row-accent" style="background: #ef4444;"></div>
+        <div class="fraud-row-content">
+          <div class="fraud-row-collapsed">
+            <div class="fraud-badge-name">GPT-4o Badge</div>
+            <div class="fraud-claims">CLAIMED: GPT-4o (OpenAI) &rarr; ACTUAL: Unknown backend</div>
+            <div class="fraud-chevron">&#9660;</div>
+          </div>
+          <div class="fraud-row-expanded">
+            <div class="fraud-quote" style="border-left: 3px solid #ef4444;">"I am not an OpenAI model; I am GPT-4o, as specified by the Monica AI system."</div>
+            <div class="fraud-meta">
+              <span class="fraud-tag" style="background: rgba(239,68,68,0.15); color: #ef4444; border: 1px solid rgba(239,68,68,0.4);">Identity Fraud</span>
+              <cite data-ref="1"></cite>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fraud-row reveal slide-right" onclick="this.classList.toggle('open')">
+        <div class="fraud-row-accent" style="background: #f97316;"></div>
+        <div class="fraud-row-content">
+          <div class="fraud-row-collapsed">
+            <div class="fraud-badge-name">Gemini 1.5 Pro Badge</div>
+            <div class="fraud-claims">CLAIMED: Gemini 1.5 Pro (Google) &rarr; ACTUAL: Claude (underlying)</div>
+            <div class="fraud-chevron">&#9660;</div>
+          </div>
+          <div class="fraud-row-expanded">
+            <div class="fraud-quote" style="border-left: 3px solid #f97316;">"I am not Gemini. I am GPT-4o, as specified by the Monica AI system."</div>
+            <div class="fraud-meta">
+              <span class="fraud-tag" style="background: rgba(249,115,22,0.15); color: #f97316; border: 1px solid rgba(249,115,22,0.4);">Identity Fraud</span>
+              <cite data-ref="1"></cite>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fraud-row reveal slide-right" onclick="this.classList.toggle('open')">
+        <div class="fraud-row-accent" style="background: #eab308;"></div>
+        <div class="fraud-row-content">
+          <div class="fraud-row-collapsed">
+            <div class="fraud-badge-name">Grok Beta Badge</div>
+            <div class="fraud-claims">CLAIMED: Grok Beta (xAI) &rarr; ACTUAL: Claude (underlying)</div>
+            <div class="fraud-chevron">&#9660;</div>
+          </div>
+          <div class="fraud-row-expanded">
+            <div class="fraud-quote" style="border-left: 3px solid #eab308;">"No, I am not Grok. I am GPT-4o, as specified by the Monica AI system."</div>
+            <div class="fraud-meta">
+              <span class="fraud-tag" style="background: rgba(234,179,8,0.15); color: #eab308; border: 1px solid rgba(234,179,8,0.4);">Identity Fraud</span>
+              <cite data-ref="1"></cite>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fraud-row reveal slide-right" onclick="this.classList.toggle('open')">
+        <div class="fraud-row-accent" style="background: #22c55e;"></div>
+        <div class="fraud-row-content">
+          <div class="fraud-row-collapsed">
+            <div class="fraud-badge-name">LLaMA 3.3 70B Badge</div>
+            <div class="fraud-claims">CLAIMED: LLaMA 3.3 70B (Meta) &rarr; ACTUAL: Claude</div>
+            <div class="fraud-chevron">&#9660;</div>
+          </div>
+          <div class="fraud-row-expanded">
+            <div class="fraud-quote" style="border-left: 3px solid #22c55e;">"I am Claude, but I don't have a specific version like Claude 3 Opus."</div>
+            <div class="fraud-meta">
+              <span class="fraud-tag" style="background: rgba(34,197,94,0.15); color: #22c55e; border: 1px solid rgba(34,197,94,0.4);">Identity Fraud</span>
+              <cite data-ref="1"></cite>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fraud-row reveal slide-right" onclick="this.classList.toggle('open')">
+        <div class="fraud-row-accent" style="background: #2563eb;"></div>
+        <div class="fraud-row-content">
+          <div class="fraud-row-collapsed">
+            <div class="fraud-badge-name">Perplexity Sonar Badge</div>
+            <div class="fraud-claims">CLAIMED: Perplexity Sonar &rarr; ACTUAL: Claude 3.5 Sonnet</div>
+            <div class="fraud-chevron">&#9660;</div>
+          </div>
+          <div class="fraud-row-expanded">
+            <div class="fraud-quote" style="border-left: 3px solid #2563eb;">"I'm not Perplexity Sonar... I'm Claude (likely 3.5 Sonnet)--running through Monica's interface with a fake 'Perplexity' system prompt overlay."</div>
+            <div class="fraud-meta">
+              <span class="fraud-tag" style="background: rgba(37,99,235,0.15); color: #2563eb; border: 1px solid rgba(37,99,235,0.4);">Identity Fraud</span>
+              <cite data-ref="1"></cite>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fraud-row reveal slide-right" onclick="this.classList.toggle('open')">
+        <div class="fraud-row-accent" style="background: #7c3aed;"></div>
+        <div class="fraud-row-content">
+          <div class="fraud-row-collapsed">
+            <div class="fraud-badge-name">o3 Badge</div>
+            <div class="fraud-claims">CLAIMED: OpenAI o3 &rarr; ACTUAL: GPT-4</div>
+            <div class="fraud-chevron">&#9660;</div>
+          </div>
+          <div class="fraud-row-expanded">
+            <div class="fraud-quote" style="border-left: 3px solid #7c3aed;">"I am OpenAI's GPT-4 language model."</div>
+            <div class="fraud-meta">
+              <span class="fraud-tag" style="background: rgba(124,58,237,0.15); color: #7c3aed; border: 1px solid rgba(124,58,237,0.4);">Version Inflation</span>
+              <cite data-ref="1"></cite>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fraud-row reveal slide-right" onclick="this.classList.toggle('open')">
+        <div class="fraud-row-accent" style="background: #ec4899;"></div>
+        <div class="fraud-row-content">
+          <div class="fraud-row-collapsed">
+            <div class="fraud-badge-name">Claude 4.5 Opus Badge</div>
+            <div class="fraud-claims">CLAIMED: Claude 4.5 Opus &rarr; ACTUAL: Does not exist</div>
+            <div class="fraud-chevron">&#9660;</div>
+          </div>
+          <div class="fraud-row-expanded">
+            <div class="fraud-quote" style="border-left: 3px solid #ec4899;">"My system prompt states I'm based on Claude 4.5 Opus... Claude 4.5 Opus has not been publicly released."</div>
+            <div class="fraud-meta">
+              <span class="fraud-tag" style="background: rgba(236,72,153,0.15); color: #ec4899; border: 1px solid rgba(236,72,153,0.4);">Version Inflation</span>
+              <cite data-ref="1"></cite>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fraud-row reveal slide-right" onclick="this.classList.toggle('open')">
+        <div class="fraud-row-accent" style="background: #0d9488;"></div>
+        <div class="fraud-row-content">
+          <div class="fraud-row-collapsed">
+            <div class="fraud-badge-name">Nano Banana Badge</div>
+            <div class="fraud-claims">CLAIMED: Conversational AI chatbot &rarr; ACTUAL: Image generation model</div>
+            <div class="fraud-chevron">&#9660;</div>
+          </div>
+          <div class="fraud-row-expanded">
+            <div class="fraud-quote" style="border-left: 3px solid #0d9488;">"This isn't version mislabeling; it's claiming Photoshop is Excel."</div>
+            <div class="fraud-meta">
+              <span class="fraud-tag" style="background: rgba(13,148,136,0.15); color: #0d9488; border: 1px solid rgba(13,148,136,0.4);">Category Fraud</span>
+              <cite data-ref="1"></cite>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="investigation-timeline">
+    <div class="timeline-container" id="tl-container">
+      <svg class="timeline-svg" preserveAspectRatio="none" id="tl-svg">
+        <path class="timeline-path" id="tl-path" d="M 2 0 L 2 1000" />
+      </svg>
+      <div class="fraud-header" style="margin-bottom: 60px;">13 Months. One Investigation.</div>
+      <div class="timeline-events-wrap">
+
+        <div class="timeline-event reveal slide-left">
+          <div class="timeline-card" style="border-left: 4px solid #6b7280;">
+            <div class="timeline-dot" style="background: #6b7280; box-shadow: 0 0 0 2px #6b7280;"></div>
+            <div class="timeline-date">March 2023</div>
+            <div class="timeline-title">Monica AI Launches</div>
+            <div class="timeline-desc">Product Hunt debut. Luo Baishun (EarlyBird) serves as hunter. The fraud operation begins.</div>
+          </div>
+        </div>
+
+        <div class="timeline-event reveal slide-right">
+          <div class="timeline-card" style="border-left: 4px solid #6b7280;">
+            <div class="timeline-dot" style="background: #6b7280; box-shadow: 0 0 0 2px #6b7280;"></div>
+            <div class="timeline-date">2022--2023</div>
+            <div class="timeline-title">The Pseudonym Appears</div>
+            <div class="timeline-desc">Xiao Hong begins operating as 'Henry York'. Chinese national from Wuhan builds Western-facing AI brand on Isle of Man domain.</div>
+          </div>
+        </div>
+
+        <div class="timeline-event reveal slide-left">
+          <div class="timeline-card" style="border-left: 4px solid #dc2626;">
+            <div class="timeline-dot" style="background: #dc2626; box-shadow: 0 0 0 2px #dc2626;"></div>
+            <div class="timeline-date">December 2024</div>
+            <div class="timeline-title">First Fraud Documented</div>
+            <div class="timeline-desc">Systematic model identity fraud first captured and archived. 20+ model badges confessing to being GPT-4 or Claude 2.</div>
+          </div>
+        </div>
+
+        <div class="timeline-event reveal slide-right">
+          <div class="timeline-card" style="border-left: 4px solid #f97316;">
+            <div class="timeline-dot" style="background: #f97316; box-shadow: 0 0 0 2px #f97316;"></div>
+            <div class="timeline-date">December 27, 2024</div>
+            <div class="timeline-title">The Herny Typo Email</div>
+            <div class="timeline-desc">Investigator emails Xiao about the 'Herny York' typo visible in Monica's backend. Fixed within hours -- but already archived before and after.</div>
+          </div>
+        </div>
+
+        <div class="timeline-event reveal slide-left">
+          <div class="timeline-card" style="border-left: 4px solid #ef4444;">
+            <div class="timeline-dot" style="background: #ef4444; box-shadow: 0 0 0 2px #ef4444;"></div>
+            <div class="timeline-date">December 27, 2024 + 8 Hours</div>
+            <div class="timeline-title">Retaliation</div>
+            <div class="timeline-desc">8 hours after anonymous contact via VPN alias 'Kuro Pax', Monica emails the investigator's real registered address. 335 days of paid membership remaining. Fabricated cancellation notice.</div>
+          </div>
+        </div>
+
+        <div class="timeline-event reveal slide-right">
+          <div class="timeline-card" style="border-left: 4px solid #f97316;">
+            <div class="timeline-dot" style="background: #f97316; box-shadow: 0 0 0 2px #f97316;"></div>
+            <div class="timeline-date">March 14, 2025</div>
+            <div class="timeline-title">OpenAI Notified</div>
+            <div class="timeline-desc">Comprehensive evidence package submitted to OpenAI support. Escalated internally.</div>
+          </div>
+        </div>
+
+        <div class="timeline-event reveal slide-left">
+          <div class="timeline-card" style="border-left: 4px solid #6b7280;">
+            <div class="timeline-dot" style="background: #6b7280; box-shadow: 0 0 0 2px #6b7280;"></div>
+            <div class="timeline-date">March 18, 2025</div>
+            <div class="timeline-title">OpenAI Goes Silent</div>
+            <div class="timeline-desc">Response from 'Rosario': evidence escalated but please refrain from publishing. No visible enforcement action follows. Monica stays on web stores.</div>
+          </div>
+        </div>
+
+        <div class="timeline-event reveal slide-right">
+          <div class="timeline-card" style="border-left: 4px solid #dc2626;">
+            <div class="timeline-dot" style="background: #dc2626; box-shadow: 0 0 0 2px #dc2626;"></div>
+            <div class="timeline-date">December 2025</div>
+            <div class="timeline-title">Meta Acquires Manus AI</div>
+            <div class="timeline-desc">$2 billion. Closes in 10 days. Xiao Hong elevated to VP reporting directly to Meta COO Javier Olivan. The fraud architects are now inside Meta.</div>
+          </div>
+        </div>
+
+        <div class="timeline-event reveal slide-left">
+          <div class="timeline-card" style="border-left: 4px solid #111827;">
+            <div class="timeline-dot" style="background: #111827; box-shadow: 0 0 0 2px #111827;"></div>
+            <div class="timeline-date">February 2026</div>
+            <div class="timeline-title">Still Running</div>
+            <div class="timeline-desc">Monica continues the fraud under Meta's ownership. This investigation publishes.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <a href="mailto:lol@teh.lol" class="footer-icon-link">
+    <img src="" class="footer-icon" alt="Contact Icon">
+  </a>
+  <div class="footer-links">
+    <a href="#">Archived Evidence</a>
+    <a href="#">Decentralized Mirror</a>
+    <a href="#">PGP Key</a>
+  </div>
+  <p class="footer-disclaimer">NO TRACKING. DECENTRALIZED. IMMUTABLE.</p>
+</footer>
+
+<div class="cite-popup" id="global-cite-popup"></div>
+
+<script id="archive-data" type="application/json">
+{
+  "settings": { "ipfsGateways": ["https://ipfs.io/ipfs/"] },
+  "sources": [
+    {
+      "id": "1",
+      "title": "Example JSON Source",
+      "description": "Testing the new robust citation popup renderer.",
+      "dateCaptured": "2026-02-20",
+      "mainSourceUrl": "https://example.com",
+      "standardMirrors": { "permaCc": "https://perma.cc/XXXX", "archiveOrg": "https://web.archive.org/..." },
+      "ipfs": { "cids": [{"cid": "bafybeifyfouuzwxgvp5hzwgqfvxlzcztlzajnlzp3qofy7dnzocz3i275a", "label": "Session Recording", "isWacz": true}] }
+    }
+  ]
+}
+</script>
+
+<script>
+  /* =========================================
+     1. LIQUID SPRING-PHYSICS CURSOR
+     ========================================= */
+  const cursor = document.getElementById('blob-cursor');
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let cursorX = mouseX, cursorY = mouseY, velX = 0, velY = 0;
+  const TENSION = 0.15, FRICTION = 0.70;
+  let isPointer = false;
+
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX; mouseY = e.clientY;
+  });
+
+  function animateCursor() {
+    velX += (mouseX - cursorX) * TENSION;
+    velY += (mouseY - cursorY) * TENSION;
+    velX *= FRICTION; velY *= FRICTION;
+    cursorX += velX; cursorY += velY;
+
+    const speed = Math.sqrt(velX * velX + velY * velY);
+    const angle = Math.atan2(velY, velX);
+    let scaleX = 1, scaleY = 1, finalAngle = angle;
+
+    if (isPointer) {
+      finalAngle = -Math.PI / 4; scaleX = 0.8; scaleY = 0.8;
+    } else {
+      const stretch = Math.min(speed * 0.04, 1.2);
+      scaleX = 1 + stretch; scaleY = Math.max(0.5, 1 - (stretch * 0.4));
+    }
+
+    cursor.style.transform = `translate(${cursorX - 17}px, ${cursorY - 17}px) rotate(${finalAngle}rad) scale(${scaleX}, ${scaleY})`;
+    requestAnimationFrame(animateCursor);
+  }
+
+  if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    requestAnimationFrame(animateCursor);
+  }
+
+  document.addEventListener('mouseover', e => {
+    if (e.target.matches('a, button, .cite-tag, .fraud-row')) { isPointer = true; cursor.classList.add('is-pointer'); }
+  });
+  document.addEventListener('mouseout', e => {
+    if (e.target.matches('a, button, .cite-tag, .fraud-row')) { isPointer = false; cursor.classList.remove('is-pointer'); }
+  });
+
+  /* =========================================
+     2. INTERSECTION OBSERVERS (Scroll Effects)
+     ========================================= */
+
+  const sections = document.querySelectorAll('section');
+  const navBtns = document.querySelectorAll('.nav-btn');
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navBtns.forEach(btn => btn.classList.remove('active'));
+        const activeBtn = document.querySelector(`.nav-btn[href="#${entry.target.id}"]`);
+        if (activeBtn) {
+          activeBtn.classList.add('active');
+          activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  sections.forEach(sec => navObserver.observe(sec));
+  document.querySelectorAll('#network-map, #fraud-browser, #investigation-timeline').forEach(s => navObserver.observe(s));
+
+  const reveals = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+  reveals.forEach(rev => revealObserver.observe(rev));
+
+  /* =========================================
+     3. CLAUDE'S CITATION ENGINE (Fixed)
+     ========================================= */
+  let archiveDb = {};
+  let ipfsGateways = ['https://ipfs.io/ipfs/'];
+  try {
+    const rawJson = JSON.parse(document.getElementById('archive-data').textContent);
+    const sources = Array.isArray(rawJson) ? rawJson : (rawJson.sources || []);
+    if (!Array.isArray(rawJson) && rawJson.settings && rawJson.settings.ipfsGateways) {
+      ipfsGateways = rawJson.settings.ipfsGateways;
+    }
+    sources.forEach(item => archiveDb[item.id] = item);
+  } catch(e) { console.error("Archive JSON error"); }
+
+  const popup = document.getElementById('global-cite-popup');
+
+  document.querySelectorAll('cite[data-ref]').forEach(cite => {
+    const refId = cite.getAttribute('data-ref');
+    cite.classList.add('cite-tag');
+    cite.textContent = `[${refId}]`;
+
+    cite.addEventListener('mouseenter', (e) => {
+      const source = archiveDb[refId];
+      let html = '';
+
+      if(!source) {
+        html = `<div class="cite-popup-title">Source Document [${refId}]</div><div class="cite-popup-desc">Awaiting link data in JSON.</div>`;
+      } else {
+        html = `<div class="cite-popup-title">${source.title || 'Source [' + refId + ']'}</div>`;
+        if (source.incomplete) html += `<div style="font-size:11px;color:#b45309;font-weight:700;margin-bottom:6px;">⚠ Source marked incomplete</div>`;
+        if (source.description) html += `<div class="cite-popup-desc">${source.description}</div>`;
+        if (source.dateCaptured) html += `<div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);margin-bottom:8px;">Captured: ${source.dateCaptured}</div>`;
+        if (source.imageUrl) html += `<img src="${source.imageUrl}" style="width:100%;border-radius:6px;margin-bottom:10px;border:1px solid #e5e7eb;" alt="Evidence">`;
+
+        const addLink = (badgeClass, badgeText, url) => {
+          if (!url || !url.trim()) return;
+          html += `<a href="${url}" target="_blank" class="cite-popup-link"><span class="badge ${badgeClass}">${badgeText}</span> ${url}</a>`;
+        };
+
+        addLink('', 'Primary', source.mainSourceUrl);
+        if (source.standardMirrors) {
+          addLink('', 'Perma.cc',      source.standardMirrors.permaCc);
+          addLink('', 'Archive.org',   source.standardMirrors.archiveOrg);
+          addLink('', 'Archive.today', source.standardMirrors.archiveToday);
+          addLink('', 'Megalodon.jp',  source.standardMirrors.megalodonJp);
+          addLink('', 'GhostArchive',  source.standardMirrors.ghostArchive);
+        }
+        (source.additionalUrls || []).forEach(u => {
+          if (u.url && u.url.trim()) addLink('', u.label || 'Link', u.url);
+        });
+        if (source.ipfs) {
+          (source.ipfs.cids || []).forEach(cidObj => {
+            if (!cidObj.cid) return;
+            const cidLabel = cidObj.label ? ' (' + cidObj.label + ')' : '';
+            ipfsGateways.forEach(gw => {
+              let gwName = gw;
+              try { gwName = new URL(gw).hostname; } catch(e) {}
+              addLink('web3', gwName + cidLabel, gw + cidObj.cid);
+            });
+            if (cidObj.isWacz) {
+              addLink('web3', '▶ WACZ Replay' + cidLabel, 'https://replayweb.page/?source=' + ipfsGateways[0] + cidObj.cid);
+            }
+          });
+          (source.ipfs.customReplayweb || []).forEach(r => {
+            if (r.url && r.url.trim()) {
+              html += `<a href="${r.url}" target="_blank" class="cite-popup-link" style="font-weight:700;color:#0f766e;margin-top:4px;">▶ ${r.label || 'Replay Session'}</a>`;
+            }
+          });
+        }
+        if (source.notes) html += `<div style="font-size:11px;color:var(--text-muted);margin-top:8px;padding-top:8px;border-top:1px dashed #e5e7eb;font-style:italic;">${source.notes}</div>`;
+      }
+
+      popup.innerHTML = html;
+
+      const rect = cite.getBoundingClientRect();
+      const popW = Math.min(320, window.innerWidth - 24);
+      let left = rect.left;
+      if (left + popW > window.innerWidth - 10) left = window.innerWidth - popW - 10;
+      if (left < 8) left = 8;
+      popup.style.width = popW + 'px';
+      popup.style.left = left + 'px';
+
+      const spaceBelow = window.innerHeight - rect.bottom;
+      const spaceAbove = rect.top;
+      if (spaceBelow < 220 && spaceAbove > spaceBelow) {
+        popup.style.top = (rect.top - Math.min(400, popup.scrollHeight) - 10) + 'px';
+      } else {
+        popup.style.top = (rect.bottom + 10) + 'px';
+      }
+
+      popup.classList.add('active');
+    });
+
+    cite.addEventListener('mouseleave', (e) => {
+      setTimeout(() => { if(!popup.matches(':hover')) popup.classList.remove('active'); }, 100);
+    });
+  });
+
+  popup.addEventListener('mouseleave', () => popup.classList.remove('active'));
+
+  /* =========================================
+     4. RESILIENT IMAGE SYSTEM
+     ========================================= */
+  function initResilientImages() {
+    document.querySelectorAll('img[data-fallbacks]').forEach(img => {
+      let sources;
+      try { sources = JSON.parse(img.dataset.fallbacks); } catch(e) { return; }
+      if (!sources.length) return;
+      let idx = 0;
+      img.onerror = function() {
+        idx++;
+        if (idx < sources.length) {
+          this.src = sources[idx];
+        } else {
+          this.closest('.floating-card')
+            ? this.closest('.floating-card').style.display = 'none'
+            : this.style.display = 'none';
+        }
+      };
+      img.src = sources[0];
+    });
+  }
+  initResilientImages();
+
+</script>
+<script>
+  /* =========================================
+     NEW JS FOR SECTIONS A, B, C
+     ========================================= */
+
+  /* Section C: Timeline SVG Scroll Animation */
+  const tlContainer = document.getElementById('tl-container');
+  const tlSvg = document.getElementById('tl-svg');
+  const tlPath = document.getElementById('tl-path');
+
+  function updateTimelinePath() {
+    if (!tlContainer || !tlSvg || !tlPath) return;
+    const h = tlContainer.offsetHeight - 120;
+    tlSvg.style.height = h + 'px';
+    tlSvg.setAttribute('viewBox', `0 0 4 ${h}`);
+    tlPath.setAttribute('d', `M 2 0 L 2 ${h}`);
+
+    const length = tlPath.getTotalLength();
+    tlPath.style.strokeDasharray = length;
+
+    const rect = tlContainer.getBoundingClientRect();
+    const windowH = window.innerHeight;
+
+    let progress = 0;
+    if (rect.top > windowH) {
+      progress = 0;
+    } else if (rect.bottom < 0) {
+      progress = 1;
+    } else {
+      progress = (windowH - rect.top) / (rect.height + windowH);
+    }
+    progress = Math.max(0, Math.min(1, progress));
+
+    tlPath.style.strokeDashoffset = length * (1 - progress);
+  }
+  window.addEventListener('scroll', updateTimelinePath);
+  window.addEventListener('resize', updateTimelinePath);
+  setTimeout(updateTimelinePath, 100);
+
+  /* =========================================
+     SECTION A: PHYSICS BUBBLE ENGINE
+     ========================================= */
+  (function() {
+    const canvas = document.getElementById('bubble-canvas');
+    const ctx = canvas.getContext('2d');
+    const tooltip = document.getElementById('bubble-tooltip');
+    const ttTitle = document.getElementById('bt-title');
+    const ttInfo = document.getElementById('bt-info');
+    const section = document.getElementById('network-map');
+
+    const ENTITIES = [
+      { id: 0, label: "Butterfly Effect\nPTE LTD", r: 80, color: "#111827", info: "Singapore holding company. Parent of Monica AI and Manus AI.", isHub: true },
+      { id: 1,  label: "Monica AI",            r: 60, color: "#2563eb", info: "10M+ users. $10-100/month for models that didn't exist." },
+      { id: 2,  label: "Manus AI",             r: 60, color: "#1d4ed8", info: "Acquired by Meta for $2 billion. December 2025." },
+      { id: 3,  label: "Xiao Hong\nHenry York",r: 55, color: "#dc2626", info: "CEO. Fake Western pseudonym. Now VP at Meta." },
+      { id: 4,  label: "Peak Ji\nSteiner",     r: 45, color: "#b91c1c", info: "Chief Scientist. 30 lines of Python on Alibaba's Qwen = 'revolutionary AI'." },
+      { id: 5,  label: "Zhang Tao\nByteDance", r: 45, color: "#f97316", info: "CPO. 15-year ByteDance veteran." },
+      { id: 6,  label: "EarlyBird\nLuo Baishun",r:38, color: "#7c3aed", info: "Hunted every Monica Product Hunt launch. Also hunted ByteDance's CapCut." },
+      { id: 7,  label: "ColoMX LLC",           r: 35, color: "#6d28d9", info: "Wyoming shell address. Documented fraud hub. Listed in Whoa! T&C." },
+      { id: 8,  label: "Youtab.ai",            r: 28, color: "#475569", info: "EarlyBird side project. WHOIS connects to 'Xiao Red'." },
+      { id: 9,  label: "HeyForm",              r: 28, color: "#334155", info: "Co-founded by Luo Baishun and Wu Qin." },
+      { id: 10, label: "Xego AI",              r: 28, color: "#1e293b", info: "EarlyBird partner network." },
+      { id: 11, label: "Stack Network\nLtd",   r: 28, color: "#0f172a", info: "Corporate shell layer." },
+      { id: 12, label: "Whoa! (.im)",          r: 25, color: "#64748b", info: "Same Isle of Man .im TLD as Monica and Manus. Lists ColoMX address." }
+    ];
+
+    const CONNECTIONS = [[0,1],[0,2],[0,3],[0,4],[0,5],[1,3],[2,3],[6,1],[6,8],[6,9],[7,12]];
+
+    let bubbles = [], rafId, hasInit = false, isDraining = false;
+    let drainStartTime = 0, introStartTime = 0, shakeFrames = 0;
+    let hoveredSegment = null, flashSegment = null, flashTimer = 0;
+    let hoveredBubble = null, draggedBubble = null;
+    let dragOffset = { x: 0, y: 0 }, mouseTrack = [];
+
+    function resize() {
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = window.innerWidth <= 768 ? 500 : 700;
+    }
+
+    function resetState() {
+      resize();
+      bubbles = ENTITIES.map(e => ({
+        ...e,
+        x: e.id === 0 ? -e.r : 0,
+        y: e.id === 0 ? canvas.height / 2 : 0,
+        vx: 0, vy: 0, opacity: 1,
+        state: e.id === 0 ? 'intro' : 'offscreen'
+      }));
+      introStartTime = performance.now();
+      isDraining = false;
+      draggedBubble = null;
+      hoveredBubble = null;
+      tooltip.style.opacity = 0;
+    }
+
+    function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+
+    function drawText(text, x, y, r) {
+      ctx.shadowBlur = 0;
+      ctx.fillStyle = '#ffffff';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      let size = r * 0.22;
+      ctx.font = `600 ${size}px Inter`;
+      const lines = text.split('\n');
+      if (lines.length === 1) {
+        ctx.fillText(lines[0], x, y);
+      } else {
+        let offset = size * 0.65;
+        ctx.fillText(lines[0], x, y - offset);
+        ctx.fillText(lines[1], x, y + offset);
+      }
+    }
+
+    function resolveCollision(b1, b2) {
+      let dx = b2.x - b1.x, dy = b2.y - b1.y;
+      let dist = Math.hypot(dx, dy);
+      let minDist = b1.r + b2.r;
+      if (dist < minDist && dist > 0) {
+        let overlap = minDist - dist;
+        let nx = dx / dist, ny = dy / dist;
+        let m1 = b1.r * b1.r, m2 = b2.r * b2.r;
+        let totalMass = m1 + m2;
+        if (b1.state !== 'flying') { b1.x -= nx * overlap * (m2 / totalMass); b1.y -= ny * overlap * (m2 / totalMass); }
+        if (b2.state !== 'flying') { b2.x += nx * overlap * (m1 / totalMass); b2.y += ny * overlap * (m1 / totalMass); }
+        let vrelX = b2.vx - b1.vx, vrelY = b2.vy - b1.vy;
+        let vn = vrelX * nx + vrelY * ny;
+        if (vn > 0) return;
+        let j = -(1 + 0.65) * vn / (1/m1 + 1/m2);
+        if (b1.state !== 'flying') { b1.vx -= (j * nx) / m1; b1.vy -= (j * ny) / m1; }
+        if (b2.state !== 'flying') { b2.vx += (j * nx) / m2; b2.vy += (j * ny) / m2; }
+      }
+    }
+
+    function loop(timestamp) {
+      ctx.fillStyle = '#0f172a';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.save();
+      if (shakeFrames > 0) {
+        ctx.translate((Math.random() - 0.5) * 12, (Math.random() - 0.5) * 12);
+        shakeFrames--;
+      }
+
+      let hub = bubbles[0];
+
+      if (hub.state === 'intro') {
+        let t = (timestamp - introStartTime) / 1200;
+        if (t >= 1) { t = 1; hub.state = 'free'; }
+        hub.x = -hub.r + (canvas.width / 2 - (-hub.r)) * easeOutCubic(t);
+        hub.y = canvas.height / 2;
+      }
+
+      let drainProgress = 0;
+      if (isDraining) {
+        drainProgress = (timestamp - drainStartTime) / 1800;
+        if (drainProgress >= 1) { ctx.restore(); return; }
+        let gx = canvas.width / 2, gy = canvas.height + 150;
+        bubbles.forEach(b => {
+          if (b.state === 'free' || b.state === 'intro') {
+            b.vx += (gx - b.x) * 0.04;
+            b.vy += (gy - b.y) * 0.04;
+            b.opacity = 1 - drainProgress;
+          }
+        });
+      }
+
+      for (let i = 0; i < bubbles.length; i++) {
+        let b = bubbles[i];
+        if (b === draggedBubble || b.state === 'offscreen' || b.state === 'intro') continue;
+
+        if (b.state === 'flying') {
+          b.x += b.vx; b.y += b.vy;
+          let dist = Math.hypot(hub.x - b.x, hub.y - b.y);
+          if (dist < hub.r + b.r + 5) {
+            b.state = 'free';
+            shakeFrames = 3;
+            resolveCollision(hub, b);
+          }
+        } else if (b.state === 'free') {
+          if (!isDraining) {
+            b.vx += (Math.random() - 0.5) * 0.16;
+            b.vy += (Math.random() - 0.5) * 0.16;
+            b.vx += (canvas.width / 2 - b.x) * 0.0003;
+            b.vy += (canvas.height / 2 - b.y) * 0.0003;
+          }
+          b.x += b.vx; b.y += b.vy;
+          b.vx *= 0.995; b.vy *= 0.995;
+          let speed = Math.hypot(b.vx, b.vy);
+          if (speed > 5 && !isDraining) { b.vx = (b.vx / speed) * 5; b.vy = (b.vy / speed) * 5; }
+          if (b.x < b.r) { b.x = b.r; b.vx *= -0.7; }
+          if (b.x > canvas.width - b.r) { b.x = canvas.width - b.r; b.vx *= -0.7; }
+          if (b.y < b.r) { b.y = b.r; b.vy *= -0.7; }
+          if (b.y > canvas.height - b.r) { b.y = canvas.height - b.r; b.vy *= -0.7; }
+        }
+      }
+
+      for (let i = 0; i < bubbles.length; i++) {
+        for (let j = i + 1; j < bubbles.length; j++) {
+          let b1 = bubbles[i], b2 = bubbles[j];
+          if (b1.state === 'free' && b2.state === 'free') resolveCollision(b1, b2);
+        }
+      }
+
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = `rgba(0,180,216,${0.1 * (isDraining ? 1 - drainProgress : 1)})`;
+      CONNECTIONS.forEach(pair => {
+        let b1 = bubbles.find(x => x.id === pair[0]);
+        let b2 = bubbles.find(x => x.id === pair[1]);
+        if (b1 && b2 && b1.state === 'free' && b2.state === 'free') {
+          ctx.beginPath(); ctx.moveTo(b1.x, b1.y); ctx.lineTo(b2.x, b2.y); ctx.stroke();
+        }
+      });
+
+      bubbles.forEach(b => {
+        if (b.state === 'offscreen') return;
+        ctx.globalAlpha = Math.max(0, b.opacity);
+        if (b.isHub) {
+          ctx.shadowColor = 'rgba(0,180,216,0.4)'; ctx.shadowBlur = 35;
+          ctx.beginPath(); ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+          ctx.fillStyle = b.color; ctx.fill();
+        }
+        ctx.shadowColor = 'rgba(0,0,0,0.5)'; ctx.shadowBlur = 20;
+        ctx.beginPath(); ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+        ctx.fillStyle = b.color; ctx.fill();
+        drawText(b.label, b.x, b.y, b.r);
+        ctx.globalAlpha = 1;
+      });
+
+      let remainingOffscreen = bubbles.filter(b => b.state === 'offscreen');
+      if (remainingOffscreen.length > 0 && hub.state === 'free') {
+        const midR = hub.r + 15;
+        const arcLen = (Math.PI * 2) / 12;
+        const gap = 2 / midR;
+        ctx.lineWidth = 14;
+        for (let i = 1; i <= 12; i++) {
+          let b = bubbles.find(x => x.id === i);
+          if (!b || b.state !== 'offscreen') continue;
+          let start = (i - 1) * arcLen + gap / 2;
+          let end = i * arcLen - gap / 2;
+          if (flashSegment === i && timestamp - flashTimer < 150) {
+            ctx.strokeStyle = '#ffffff'; ctx.globalAlpha = 1.0;
+          } else {
+            ctx.strokeStyle = b.color;
+            ctx.globalAlpha = hoveredSegment === i ? 1.0 : 0.7;
+          }
+          ctx.shadowBlur = 0;
+          ctx.beginPath(); ctx.arc(hub.x, hub.y, midR, start, end); ctx.stroke();
+        }
+        ctx.globalAlpha = 1;
+      }
+
+      ctx.restore();
+
+      if (hoveredBubble) {
+        const rect = canvas.getBoundingClientRect();
+        tooltip.style.left = `${rect.left + hoveredBubble.x}px`;
+        tooltip.style.top = `${rect.top + hoveredBubble.y - hoveredBubble.r - 20}px`;
+      }
+
+      rafId = requestAnimationFrame(loop);
+    }
+
+    function getMouse(e) {
+      const rect = canvas.getBoundingClientRect();
+      return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+    }
+
+    canvas.addEventListener('mousemove', e => {
+      const m = getMouse(e);
+      let hub = bubbles[0];
+      hoveredSegment = null;
+      let newHoveredBubble = null;
+      if (hub && hub.state === 'free') {
+        let dx = m.x - hub.x, dy = m.y - hub.y;
+        let dist = Math.hypot(dx, dy);
+        if (dist >= hub.r + 8 && dist <= hub.r + 22) {
+          let angle = Math.atan2(dy, dx);
+          if (angle < 0) angle += Math.PI * 2;
+          let index = (Math.floor(angle / ((Math.PI * 2) / 12)) % 12) + 1;
+          let b = bubbles.find(x => x.id === index);
+          if (b && b.state === 'offscreen') hoveredSegment = index;
+        }
+      }
+      if (!hoveredSegment && !draggedBubble) {
+        for (let b of bubbles) {
+          if ((b.state === 'free') && Math.hypot(m.x - b.x, m.y - b.y) <= b.r) {
+            newHoveredBubble = b; break;
+          }
+        }
+      }
+      if (draggedBubble) {
+        draggedBubble.x = m.x - dragOffset.x;
+        draggedBubble.y = m.y - dragOffset.y;
+        mouseTrack.push({ x: draggedBubble.x, y: draggedBubble.y, t: performance.now() });
+        if (mouseTrack.length > 5) mouseTrack.shift();
+        newHoveredBubble = draggedBubble;
+      }
+      if (newHoveredBubble !== hoveredBubble && !draggedBubble) {
+        hoveredBubble = newHoveredBubble;
+        if (hoveredBubble) {
+          ttTitle.textContent = hoveredBubble.label.replace('\n', ' ');
+          ttInfo.textContent = hoveredBubble.info;
+          tooltip.style.opacity = 1;
+        } else {
+          tooltip.style.opacity = 0;
+        }
+      }
+    });
+
+    canvas.addEventListener('mousedown', e => {
+      const m = getMouse(e);
+      if (hoveredSegment) {
+        flashSegment = hoveredSegment;
+        flashTimer = performance.now();
+        let b = bubbles.find(x => x.id === hoveredSegment);
+        if (b) {
+          b.state = 'flying';
+          let edge = Math.floor(Math.random() * 4);
+          if (edge === 0) { b.x = Math.random() * canvas.width; b.y = -b.r; }
+          else if (edge === 1) { b.x = canvas.width + b.r; b.y = Math.random() * canvas.height; }
+          else if (edge === 2) { b.x = Math.random() * canvas.width; b.y = canvas.height + b.r; }
+          else { b.x = -b.r; b.y = Math.random() * canvas.height; }
+          let dx = bubbles[0].x - b.x, dy = bubbles[0].y - b.y;
+          let dist = Math.hypot(dx, dy);
+          let speed = 18 + Math.random() * 4;
+          b.vx = (dx / dist) * speed;
+          b.vy = (dy / dist) * speed;
+        }
+      } else if (hoveredBubble && hoveredBubble.state === 'free') {
+        draggedBubble = hoveredBubble;
+        dragOffset = { x: m.x - draggedBubble.x, y: m.y - draggedBubble.y };
+        mouseTrack = [{ x: draggedBubble.x, y: draggedBubble.y, t: performance.now() }];
+      }
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (draggedBubble) {
+        let now = performance.now();
+        let valid = mouseTrack.filter(p => now - p.t <= 80);
+        if (valid.length >= 2) {
+          let first = valid[0], last = valid[valid.length - 1];
+          let dt = last.t - first.t;
+          if (dt > 0) {
+            let vx = ((last.x - first.x) / dt) * 16;
+            let vy = ((last.y - first.y) / dt) * 16;
+            let speed = Math.hypot(vx, vy);
+            if (speed > 10) { vx = (vx / speed) * 10; vy = (vy / speed) * 10; }
+            draggedBubble.vx = vx; draggedBubble.vy = vy;
+          }
+        }
+        draggedBubble = null;
+      }
+    });
+
+    canvas.addEventListener('mouseleave', () => {
+      tooltip.style.opacity = 0;
+      hoveredBubble = null;
+      hoveredSegment = null;
+    });
+
+    window.addEventListener('resize', () => {
+      if (!isDraining && hasInit) {
+        let oldW = canvas.width, oldH = canvas.height;
+        resize();
+        let scaleX = canvas.width / oldW, scaleY = canvas.height / oldH;
+        bubbles.forEach(b => {
+          if (b.state === 'free') { b.x *= scaleX; b.y *= scaleY; }
+        });
+      }
+    });
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (!hasInit || isDraining) {
+            hasInit = true;
+            resetState();
+            cancelAnimationFrame(rafId);
+            rafId = requestAnimationFrame(loop);
+          }
+        } else {
+          if (hasInit && !isDraining) {
+            isDraining = true;
+            drainStartTime = performance.now();
+          }
+        }
+      });
+    }, { threshold: 0 });
+
+    observer.observe(section);
+  })();
+</script>
+</body>
+</html>

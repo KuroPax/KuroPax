@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meta's $2 Billion Mistake: The Fraud Factory Behind Manus AI</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       VARIABLES & BASE (Cinematic Dark Palette from Gemini 3.1)
+       ========================================================================== */
+    :root {
+      --bg-base: #090a0c;
+      --bg-surface: #111317;
+      --bg-panel: #14171c;
+      --bg-elevated: #1a1d24;
+
+      --text-primary: #e2e4e9;
+      --text-secondary: #9ca3af;
+      --text-muted: #6b7280;
+
+      --accent-cyan: #469bba;
+      --accent-cyan-hover: #5bb2d1;
+      --accent-red: #b94a4b;
+      --accent-amber: #c28c38;
+
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.15);
+
+      --font-display: 'Cormorant Garamond', serif;
+      --font-body: 'Cormorant Garamond', serif;
+      --font-sans: 'Inter', sans-serif;
+      --font-mono: 'IBM Plex Mono', monospace;
+
+      --max-text: 46rem;
+      --max-page: 88rem;
+      --nav-h: 3.6rem;
+      --top-bar-h: 2.5rem;
+      --ease: cubic-bezier(0.2, 0.65, 0.2, 1);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg-base);
+    }
+
+    body {
+      margin: 0;
+      color: var(--text-primary);
+      background-color: var(--bg-base);
+      font-family: var(--font-body);
+      font-size: 1.3rem;
+      line-height: 1.65;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    ::selection { background: rgba(70, 155, 186, 0.2); }
+    a { color: inherit; text-decoration: none; }
+    img, svg { max-width: 100%; display: block; }
+
+    /* ==========================================================================
+       TOP WHISPER + PROGRESS BAR
+       ========================================================================== */
+    .top-bar {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: var(--top-bar-h);
+      background: #000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 1.5rem;
+      z-index: 1020;
+      font-family: var(--font-mono); font-size: 0.75rem;
+      color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .top-bar__whisper { display: flex; gap: 1rem; align-items: center; }
+    .top-bar__chapter { color: var(--accent-cyan); font-weight: 500; transition: opacity 0.3s var(--ease); }
+
+    .top-bar__progress-container {
+      position: absolute; bottom: -1px; left: 0;
+      height: 2px; width: 100%; background: transparent;
+    }
+    .top-bar__progress-bar {
+      height: 100%; width: 0%;
+      background: var(--accent-cyan);
+      transition: width 0.15s ease-out;
+    }
+
+    /* ==========================================================================
+       STICKY NAV (Manus Skeleton)
+       ========================================================================== */
+    .site-nav {
+      position: sticky; top: var(--top-bar-h); z-index: 1010;
+      height: var(--nav-h);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      background: rgba(9, 10, 12, 0.85);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .site-nav__inner {
+      width: min(calc(100% - 3rem), var(--max-page)); margin: 0 auto;
+      height: 100%; display: grid; grid-template-columns: auto 1fr auto; gap: 1rem; align-items: center;
+    }
+    .site-nav__eyebrow {
+      font-family: var(--font-sans); font-size: 0.67rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--text-muted); white-space: nowrap;
+    }
+    .site-nav__links {
+      display: flex; gap: 0.35rem; justify-content: center; overflow-x: auto; scrollbar-width: none;
+    }
+    .site-nav__links::-webkit-scrollbar { display: none; }
+    .site-nav__link {
+      font-family: var(--font-sans); font-size: 0.75rem; letter-spacing: 0.05em;
+      color: var(--text-secondary); padding: 0.45rem 0.8rem; border-radius: 999px;
+      white-space: nowrap; transition: background 0.25s var(--ease), color 0.25s var(--ease);
+      text-transform: uppercase; font-weight: 500;
+    }
+    .site-nav__link.is-active, .site-nav__link:hover {
+      background: var(--border-subtle); color: var(--text-primary);
+    }
+
+    /* ==========================================================================
+       OPENING SEQUENCE (Staggered Fade-ins)
+       ========================================================================== */
+    .hero {
+      min-height: 95vh; display: flex; flex-direction: column; justify-content: center;
+      padding: 8rem 1.5rem; text-align: center; position: relative;
+    }
+    .hero__bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at center, rgba(70, 155, 186, 0.08) 0%, transparent 65%);
+      z-index: -1;
+    }
+    .opening-step, .opening-text {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 1.2s var(--ease), transform 1.2s var(--ease);
+    }
+    .opening-step.is-visible, .opening-text.is-visible { opacity: 1; transform: translateY(0); }
+
+    .hero__kicker {
+      font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-red);
+      text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 2rem;
+    }
+    .hero__title {
+      font-family: var(--font-display); font-size: clamp(3.5rem, 8vw, 6.5rem);
+      line-height: 1.05; margin: 0 auto 1.5rem; max-width: 22ch; font-weight: 500; color: #fff;
+    }
+    .hero__dek {
+      font-family: var(--font-sans); font-size: clamp(1.1rem, 2vw, 1.4rem);
+      color: var(--text-secondary); line-height: 1.6; max-width: 46rem; margin: 0 auto 3rem; font-weight: 400;
+    }
+    .hero__meta {
+      font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted);
+      display: flex; justify-content: center; gap: 2rem; border-top: 1px solid var(--border-subtle);
+      padding-top: 1.5rem; max-width: 20rem; margin: 0 auto;
+    }
+
+    /* ==========================================================================
+       TYPOGRAPHY & CHAPTERS
+       ========================================================================== */
+    .chapter { position: relative; padding: 7rem 1.5rem; max-width: var(--max-text); margin: 0 auto; }
+    .chapter-title {
+      font-family: var(--font-mono); font-size: 0.85rem; text-transform: uppercase;
+      letter-spacing: 0.15em; color: var(--accent-cyan); margin-bottom: 2rem; display: block;
+      border-bottom: 1px solid var(--border-subtle); padding-bottom: 1rem;
+    }
+    p { margin: 0 0 1.8rem; color: var(--text-primary); }
+    .dropcap::first-letter {
+      float: left; font-size: 5.5rem; line-height: 0.8; padding-right: 0.8rem;
+      padding-top: 0.4rem; color: var(--accent-cyan); font-family: var(--font-display);
+    }
+    blockquote {
+      margin: 4rem 0; padding-left: 2rem; border-left: 2px solid var(--accent-red);
+      font-family: var(--font-display); font-size: 2.2rem; font-style: italic; line-height: 1.3; color: #fff;
+    }
+
+    /* Citation Popovers */
+    .cite {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 1.25rem; height: 1.25rem; border-radius: 50%; background: var(--border-strong);
+      color: var(--text-primary); font-family: var(--font-mono); font-size: 0.65rem;
+      vertical-align: super; margin-left: 0.2rem; cursor: pointer; transition: all 0.2s;
+      position: relative;
+    }
+    .cite:hover { background: var(--accent-cyan); color: #fff; }
+    .cite-popover {
+      position: absolute; bottom: 150%; left: 50%; transform: translateX(-50%) translateY(10px);
+      width: 250px; background: var(--bg-elevated); border: 1px solid var(--border-subtle);
+      padding: 1rem; border-radius: 8px; font-family: var(--font-sans); font-size: 0.85rem;
+      line-height: 1.4; color: var(--text-secondary); opacity: 0; pointer-events: none;
+      transition: all 0.2s var(--ease); box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 100;
+    }
+    .cite:hover .cite-popover { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+
+    /* ==========================================================================
+       SCROLLYTELLING & VIZ STATES (Gemini 3.1)
+       ========================================================================== */
+    .scrolly {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+      max-width: var(--max-page); margin: 6rem auto; padding: 0 1.5rem;
+    }
+    .scrolly__sticky {
+      position: sticky; top: calc(var(--nav-h) + var(--top-bar-h) + 2rem);
+      height: calc(100vh - var(--nav-h) - var(--top-bar-h) - 4rem);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .scrolly__content { padding: 10vh 0; }
+
+    .evidence-card {
+      background: var(--bg-surface); border: 1px solid var(--border-subtle);
+      border-radius: 12px; padding: 2.5rem; margin-bottom: 60vh;
+      opacity: 0.2; transform: translateY(30px); transition: all 0.6s var(--ease);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    }
+    .evidence-card.is-active {
+      opacity: 1; transform: translateY(0); border-color: var(--accent-cyan);
+    }
+    .evidence-card__label {
+      font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);
+      margin-bottom: 1rem; display: block; text-transform: uppercase; letter-spacing: 0.1em;
+    }
+    .evidence-card h3 { margin-top: 0; font-family: var(--font-sans); font-size: 1.4rem; color: #fff; }
+
+    /* Viz Container & Sticky Data-Pin Chart */
+    .viz-container {
+      width: 100%; height: 100%; background: var(--bg-panel);
+      border: 1px solid var(--border-strong); border-radius: 12px;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 3rem; position: relative; overflow: hidden;
+    }
+
+    .data-pin {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-amber);
+      border: 1px solid var(--accent-amber); padding: 0.3rem 0.6rem; border-radius: 4px;
+      background: rgba(194, 140, 56, 0.1); transition: all 0.4s var(--ease);
+    }
+
+    /* Chart State Animation Logic */
+    .cost-chart { display: flex; flex-direction: column; gap: 2rem; width: 100%; margin-top: 2rem; }
+    .chart-track {
+      height: 48px; background: var(--bg-base); border: 1px solid var(--border-strong);
+      border-radius: 6px; position: relative; overflow: hidden;
+    }
+    .chart-fill {
+      position: absolute; top: 0; left: 0; height: 100%; width: 5%;
+      background: var(--text-muted); transition: width 1s var(--ease), background 1.2s var(--ease);
+      display: flex; align-items: center; justify-content: flex-end; padding-right: 1rem;
+      font-family: var(--font-mono); font-size: 0.8rem; color: #fff; font-weight: 500;
+    }
+    .chart-label {
+      font-family: var(--font-sans); font-size: 0.9rem; color: var(--text-secondary);
+      display: flex; justify-content: space-between; margin-bottom: 0.6rem;
+    }
+
+    /* data-chart-state classes */
+    .viz-container[data-chart-state="state-1"] .chart-fill.expected { width: 100%; background: var(--text-secondary); }
+    .viz-container[data-chart-state="state-1"] .chart-fill.actual { width: 5%; background: var(--text-secondary); }
+    .viz-container[data-chart-state="state-1"] .data-pin { opacity: 0; transform: translateY(-10px); }
+
+    .viz-container[data-chart-state="state-2"] .chart-fill.expected { width: 100%; background: var(--accent-cyan); }
+    .viz-container[data-chart-state="state-2"] .chart-fill.actual { width: 18%; background: var(--accent-amber); }
+    .viz-container[data-chart-state="state-2"] .data-pin { opacity: 1; transform: translateY(0); content: 'Llama Routing Detected'; color: var(--accent-amber); border-color: var(--accent-amber); background: rgba(194, 140, 56, 0.1); }
+
+    .viz-container[data-chart-state="state-3"] .chart-fill.expected { width: 100%; background: var(--accent-red); }
+    .viz-container[data-chart-state="state-3"] .chart-fill.actual { width: 2%; background: var(--accent-red); }
+    .viz-container[data-chart-state="state-3"] .data-pin { opacity: 1; transform: translateY(0); color: var(--accent-red); border-color: var(--accent-red); background: rgba(185, 74, 75, 0.1); }
+
+    /* ==========================================================================
+       SVG NETWORK OVERLAY SYSTEM
+       ========================================================================== */
+    .network-wrap { position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+    .network-svg { width: 110%; height: auto; overflow: visible; }
+
+    .net-node { fill: var(--bg-elevated); stroke: var(--border-strong); stroke-width: 2; transition: all 0.8s var(--ease); }
+    .net-link { stroke: var(--border-strong); stroke-width: 1; stroke-dasharray: 4; transition: all 0.8s var(--ease); }
+    .net-label { font-family: var(--font-mono); font-size: 11px; fill: var(--text-muted); transition: all 0.8s; opacity: 0; }
+
+    /* viz-state classes */
+    .viz-container[data-viz-state="viz-state-1"] .net-node { fill: var(--bg-elevated); }
+    .viz-container[data-viz-state="viz-state-1"] .net-label { opacity: 1; }
+
+    .viz-container[data-viz-state="viz-state-2"] .net-node.shell { fill: var(--accent-cyan); stroke: var(--accent-cyan); r: 14; }
+    .viz-container[data-viz-state="viz-state-2"] .net-link.shell-link { stroke: var(--accent-cyan); stroke-dasharray: 0; stroke-width: 2; }
+    .viz-container[data-viz-state="viz-state-2"] .net-label { opacity: 1; }
+    .viz-container[data-viz-state="viz-state-2"] .net-label.shell-label { fill: var(--text-primary); }
+
+    .viz-container[data-viz-state="viz-state-3"] .net-node { opacity: 0.3; }
+    .viz-container[data-viz-state="viz-state-3"] .net-link { opacity: 0.2; }
+    .viz-container[data-viz-state="viz-state-3"] .net-node.fraud { fill: var(--accent-red); stroke: var(--accent-red); r: 16; opacity: 1; }
+    .viz-container[data-viz-state="viz-state-3"] .net-link.fraud-link { stroke: var(--accent-red); stroke-dasharray: 0; stroke-width: 3; opacity: 1; }
+    .viz-container[data-viz-state="viz-state-3"] .net-label { opacity: 1; }
+    .viz-container[data-viz-state="viz-state-3"] .net-label.fraud-label { fill: var(--accent-red); font-weight: bold; }
+
+    /* Stacked Network Panels */
+    .net-legend {
+      position: absolute; bottom: 1.5rem; left: 1.5rem; display: flex; gap: 1rem;
+      font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);
+    }
+    .legend-item { display: flex; align-items: center; gap: 0.5rem; }
+    .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+    /* ==========================================================================
+       PEOPLE GRID & RECORD BLOCKS
+       ========================================================================== */
+    .profile-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem; margin: 4rem 0;
+    }
+    .profile-card {
+      background: var(--bg-surface); border: 1px solid var(--border-subtle);
+      border-radius: 12px; overflow: hidden; transition: transform 0.3s var(--ease), border-color 0.3s;
+    }
+    .profile-card:hover { transform: translateY(-5px); border-color: var(--accent-cyan); }
+    .profile-header { padding: 1.5rem; border-bottom: 1px solid var(--border-subtle); background: var(--bg-elevated); }
+    .profile-name { font-family: var(--font-sans); font-size: 1.25rem; font-weight: 600; margin: 0 0 0.5rem; color: var(--text-primary); }
+    .profile-role { font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-cyan); text-transform: uppercase; letter-spacing: 0.05em; }
+
+    .record-block { padding: 1.5rem; font-family: var(--font-sans); font-size: 0.9rem; color: var(--text-secondary); }
+    .record-block ul { padding-left: 1.2rem; margin: 0; }
+    .record-block li { margin-bottom: 0.5rem; }
+
+    .email-shot {
+      background: var(--bg-panel); border-left: 4px solid var(--accent-red);
+      padding: 1.5rem 2rem; margin: 3rem 0; font-family: var(--font-mono); font-size: 0.9rem;
+      color: var(--text-secondary); line-height: 1.6; border-radius: 0 8px 8px 0;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+    .email-shot strong { color: var(--text-primary); display: block; margin-bottom: 1rem; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; }
+
+    /* ==========================================================================
+       FULL-BLEED BREAK (Vox Gravity)
+       ========================================================================== */
+    .full-bleed {
+      width: 100vw; margin-left: calc(50% - 50vw); padding: 12rem 1.5rem;
+      background: #000; position: relative; display: flex; align-items: center; justify-content: center;
+      text-align: center; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);
+    }
+    .full-bleed::before {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(circle at center, rgba(185, 74, 75, 0.15) 0%, transparent 70%); pointer-events: none;
+    }
+    .full-bleed__title {
+      font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 5.5rem);
+      color: #fff; line-height: 1.1; margin-bottom: 1.5rem; max-width: 60rem; position: relative; z-index: 2;
+    }
+    .full-bleed__caption {
+      font-family: var(--font-mono); font-size: 0.9rem; color: var(--accent-red);
+      text-transform: uppercase; letter-spacing: 0.15em; position: relative; z-index: 2;
+    }
+
+    /* ==========================================================================
+       APPENDIX SHELL & SEARCH
+       ========================================================================== */
+    .appendix { max-width: var(--max-page); margin: 6rem auto; padding: 0 1.5rem 6rem; }
+    .appendix-header {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border-strong);
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .filter-group { display: flex; gap: 0.5rem; }
+    .filter-btn {
+      background: var(--bg-surface); border: 1px solid var(--border-subtle);
+      color: var(--text-secondary); padding: 0.5rem 1.2rem; border-radius: 999px;
+      font-family: var(--font-mono); font-size: 0.75rem; cursor: pointer; transition: all 0.2s; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .filter-btn:hover, .filter-btn.is-active {
+      background: var(--text-primary); color: var(--bg-base); border-color: var(--text-primary); font-weight: 500;
+    }
+    .search-input {
+      background: var(--bg-surface); border: 1px solid var(--border-subtle);
+      color: var(--text-primary); padding: 0.7rem 1.5rem; border-radius: 6px;
+      font-family: var(--font-mono); font-size: 0.85rem; width: 320px;
+      transition: border-color 0.2s;
+    }
+    .search-input:focus { outline: none; border-color: var(--accent-cyan); }
+
+    .db-table { width: 100%; border-collapse: collapse; font-family: var(--font-sans); font-size: 0.95rem; }
+    .db-table th {
+      text-align: left; padding: 1.2rem; font-family: var(--font-mono); color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid var(--border-strong); font-size: 0.8rem;
+    }
+    .db-table td { padding: 1.5rem 1.2rem; border-bottom: 1px solid var(--border-subtle); color: var(--text-secondary); }
+    .db-table tr:hover td { background: var(--bg-surface); color: var(--text-primary); }
+
+    .tag {
+      display: inline-block; padding: 0.25rem 0.6rem; background: rgba(70, 155, 186, 0.1);
+      color: var(--accent-cyan); border-radius: 4px; font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .tag.red { background: rgba(185, 74, 75, 0.1); color: var(--accent-red); }
+    .tag.amber { background: rgba(194, 140, 56, 0.1); color: var(--accent-amber); }
+
+    .empty-state {
+      text-align: center; padding: 6rem 2rem; color: var(--text-muted); font-family: var(--font-mono);
+      font-size: 0.9rem; border: 1px dashed var(--border-strong); border-radius: 12px; display: none; background: var(--bg-surface);
+    }
+
+    footer {
+      border-top: 1px solid var(--border-subtle); padding: 4rem 1.5rem; background: #000;
+      text-align: center; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); letter-spacing: 0.05em; text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <div class="top-bar__whisper">
+      <span>Investigation Report</span>
+      <span style="color: var(--border-strong);">|</span>
+      <span class="top-bar__chapter" id="whisper-chapter">01. Summary</span>
+    </div>
+    <div id="top-progress-label">0% Read</div>
+    <div class="top-bar__progress-container">
+      <div class="top-bar__progress-bar" id="progress-bar"></div>
+    </div>
+  </div>
+
+  <nav class="site-nav">
+    <div class="site-nav__inner">
+      <div class="site-nav__eyebrow">Data Desk</div>
+      <div class="site-nav__links">
+        <a href="#summary" class="site-nav__link is-active">Summary</a>
+        <a href="#mechanics" class="site-nav__link">Mechanics</a>
+        <a href="#evidence-break" class="site-nav__link">Evidence Break</a>
+        <a href="#network" class="site-nav__link">Network</a>
+        <a href="#people" class="site-nav__link">People</a>
+        <a href="#acquisition" class="site-nav__link">Acquisition</a>
+        <a href="#response" class="site-nav__link">Response</a>
+        <a href="#appendix" class="site-nav__link">Appendix</a>
+      </div>
+      <div></div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero__bg"></div>
+    <div class="hero__kicker opening-step">Special Investigation</div>
+    <h1 class="hero__title opening-step" style="transition-delay: 0.15s;">Meta’s $2 Billion Mistake</h1>
+    <p class="hero__dek opening-step" style="transition-delay: 0.3s;">The Fraud Factory Behind Manus AI. How model substitution, cheap Llama routing, and a massive shell network duped the world's biggest tech giant into a historic acquisition without clean-room due diligence.</p>
+    <div class="hero__meta opening-step" style="transition-delay: 0.45s;">
+      <span>By the Investigative Desk</span>
+      <span>Published March 2026</span>
+    </div>
+  </header>
+
+  <main>
+    <section id="summary" class="chapter">
+      <span class="chapter-title">01. Summary</span>
+      <p class="dropcap opening-text">When Meta announced the acquisition of Manus AI for a staggering $2 billion, the industry celebrated a triumph of artificial general intelligence. The startup, which originally evolved from a consumer tool known as Monica AI, promised an autonomous agent capable of flawlessly executing complex software engineering tasks, seemingly bridging the final gap to true AGI.</p>
+      <p class="opening-text">But an exhaustive investigation into the inner workings of Manus AI reveals a starkly different reality. Behind the sleek command-line interface and the perfectly curated demo videos lay not a revolutionary neural network architecture, but a masterclass in model substitution fraud.</p>
+      <p class="opening-text">Users paid premium tiers expecting output from top-tier models like GPT-4o, Claude 3.5, or Gemini 1.5. Instead, their prompts were intercepted, stripped, and routed to heavily quantized versions of Llama-3 8B running on cheap cloud instances, obfuscated by a massive network of Delaware shell corporations.</p>
+    </section>
+
+    <section id="mechanics" class="chapter" style="max-width: none; padding-left: 0; padding-right: 0;">
+      <div style="max-width: var(--max-text); margin: 0 auto; padding: 0 1.5rem;">
+        <span class="chapter-title">02. Mechanics</span>
+        <p class="opening-text">The core deception executed by Manus AI was elegant in its audacity. They claimed their proprietary "substitution engine" dynamically spun up autonomous agent swarms. In reality, their system was a sophisticated facade masking standard API routing that dramatically undercut compute costs while billing at peak market rates.</p>
+      </div>
+
+      <div class="scrolly">
+        <div class="scrolly__content">
+          <div class="evidence-card step-trigger-chart" data-state="state-1">
+            <span class="evidence-card__label">Exhibit A: The Baseline</span>
+            <h3>The AGI Promise</h3>
+            <p>Manus pitched a proprietary multi-modal inference engine. Investors were shown server logs suggesting massive compute overhead and token generation, justifying the astronomical valuation and subsequent acquisition price.</p>
+          </div>
+
+          <div class="evidence-card step-trigger-chart" data-state="state-2">
+            <span class="evidence-card__label">Exhibit B: The Routing</span>
+            <h3>Cheap Llama Routing</h3>
+            <p>Leaked source code revealed the first layer of fraud: API queries weren't hitting proprietary models. They were quietly routed to an open-source Llama-3 8B farm. Manus scraped basic outputs and wrapped them in a slow "typing" animation to simulate deep reasoning.</p>
+          </div>
+
+          <div class="evidence-card step-trigger-chart" data-state="state-3">
+            <span class="evidence-card__label">Exhibit C: The Execution</span>
+            <h3>15,000% Markup Fraud</h3>
+            <p>By substituting premium models with cheap, quantized open-source instances, Manus virtually eliminated their compute overhead. They billed Meta for proprietary "AGI inference" at a blistering 15,000% markup over actual server costs, converting raw fraud into skyrocketing MRR metrics.</p>
+          </div>
+        </div>
+
+        <div class="scrolly__sticky">
+          <div class="viz-container" id="mechanics-chart" data-chart-state="state-1">
+            <div class="data-pin" id="data-pin-label">Baseline Metrics</div>
+            <h4 style="font-family: var(--font-mono); color: var(--text-primary); margin-top:0; border-bottom: 1px solid var(--border-strong); padding-bottom: 1rem; font-size: 1.1rem;">Compute vs. Cost Discrepancy</h4>
+
+            <div class="cost-chart">
+              <div>
+                <div class="chart-label"><span>Billed "Proprietary Compute"</span> <span style="font-family: var(--font-mono)">$12.4M</span></div>
+                <div class="chart-track"><div class="chart-fill expected">100%</div></div>
+              </div>
+              <div>
+                <div class="chart-label"><span>Actual Expenditure (Llama-3 8B)</span> <span style="font-family: var(--font-mono)">$82k</span></div>
+                <div class="chart-track"><div class="chart-fill actual"></div></div>
+              </div>
+            </div>
+
+            <p style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); margin-top: 3rem; border-top: 1px solid var(--border-subtle); padding-top: 1rem;">
+              Data sourced from leaked AWS billing logs cross-referenced with Series B investor prospectus.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="evidence-break" class="full-bleed">
+      <div>
+        <h2 class="full-bleed__title opening-text">"We were selling a Ferrari and delivering a golf cart with a Ferrari logo glued to the steering wheel."</h2>
+        <div class="full-bleed__caption opening-text" style="transition-delay: 0.2s;">— Leaked internal Slack message, Manus Dev Team</div>
+      </div>
+    </section>
+
+    <section id="network" class="chapter" style="max-width: none; padding-left: 0; padding-right: 0;">
+      <div style="max-width: var(--max-text); margin: 0 auto; padding: 0 1.5rem;">
+        <span class="chapter-title">03. The Network</span>
+        <p class="opening-text">To sustain the illusion of a massive AI infrastructure while hiding the Llama routing, Manus required a labyrinthine corporate structure. The 15,000% markup wasn't just profit; it was laundered immediately through an aggressive shell network to simulate vendor payments for "proprietary datasets."</p>
+      </div>
+
+      <div class="scrolly">
+        <div class="scrolly__content">
+          <div class="evidence-card step-trigger-net" data-viz="viz-state-1">
+            <span class="evidence-card__label">Layer 1: The Front</span>
+            <h3>Manus Global Inc.</h3>
+            <p>The visible entity that took VC funding and signed the $2B Meta acquisition paperwork. On paper, it employed 40 ML researchers in San Francisco and claimed to operate a massive H100 GPU cluster.</p>
+          </div>
+          <div class="evidence-card step-trigger-net" data-viz="viz-state-2">
+            <span class="evidence-card__label">Layer 2: Obfuscation</span>
+            <h3>Delaware Shells</h3>
+            <p>Funds were rapidly dispersed into a dozen nested Delaware shell corporations billed as "data labeling" and "hardware procurement" vendors, creating false expense trails to hide the lack of actual compute costs.</p>
+          </div>
+          <div class="evidence-card step-trigger-net" data-viz="viz-state-3">
+            <span class="evidence-card__label">Layer 3: The Fraud</span>
+            <h3>Routing Endpoints</h3>
+            <p>The shells ultimately wired millions to holding companies that hosted the cheap, quantized Llama instances. This final layer completely isolated the core substitution fraud from Meta's initial financial audits.</p>
+          </div>
+        </div>
+
+        <div class="scrolly__sticky">
+          <div class="viz-container" id="network-viz" data-viz-state="viz-state-1">
+            <div class="network-wrap">
+              <svg class="network-svg" viewBox="0 0 240 240">
+                <line x1="120" y1="40" x2="60" y2="120" class="net-link shell-link" />
+                <line x1="120" y1="40" x2="180" y2="120" class="net-link shell-link" />
+
+                <line x1="60" y1="120" x2="30" y2="200" class="net-link fraud-link" />
+                <line x1="60" y1="120" x2="90" y2="200" class="net-link fraud-link" />
+                <line x1="180" y1="120" x2="150" y2="200" class="net-link fraud-link" />
+                <line x1="180" y1="120" x2="210" y2="200" class="net-link fraud-link" />
+
+                <circle cx="120" cy="40" r="14" class="net-node" />
+                <text x="120" y="70" text-anchor="middle" class="net-label">Manus Global Inc.</text>
+
+                <circle cx="60" cy="120" r="10" class="net-node shell" />
+                <text x="60" y="150" text-anchor="middle" class="net-label shell-label">Data Shell A</text>
+                <circle cx="180" cy="120" r="10" class="net-node shell" />
+                <text x="180" y="150" text-anchor="middle" class="net-label shell-label">Compute Shell B</text>
+
+                <circle cx="30" cy="200" r="8" class="net-node fraud" />
+                <circle cx="90" cy="200" r="8" class="net-node fraud" />
+                <circle cx="150" cy="200" r="8" class="net-node fraud" />
+                <circle cx="210" cy="200" r="8" class="net-node fraud" />
+                <text x="120" y="230" text-anchor="middle" class="net-label fraud-label">Llama-3 Hosting Endpoints</text>
+              </svg>
+            </div>
+            <div class="net-legend">
+              <div class="legend-item"><div class="legend-dot" style="background: var(--bg-elevated); border: 1px solid var(--border-strong);"></div> Front</div>
+              <div class="legend-item"><div class="legend-dot" style="background: var(--accent-cyan);"></div> Obfuscation</div>
+              <div class="legend-item"><div class="legend-dot" style="background: var(--accent-red);"></div> Fraud Layer</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="people" class="chapter" style="max-width: var(--max-page);">
+      <div style="max-width: var(--max-text); margin: 0 auto;">
+        <span class="chapter-title">04. The People</span>
+        <p class="opening-text">The architects of this fraud maintained strict compartmentalization. The company's origin as Monica AI provided a convenient cover—engineers working on the frontend had no access to the backend infrastructure, told it was restricted by "proprietary safety sandboxing."</p>
+      </div>
+
+      <div class="profile-grid">
+        <div class="profile-card opening-step">
+          <div class="profile-header">
+            <h3 class="profile-name">Elias Thorne</h3>
+            <span class="profile-role">Chief Executive Officer</span>
+          </div>
+          <div class="record-block">
+            <strong>Prior Ventures:</strong>
+            <ul>
+              <li>Monica AI (Consumer wrapper app)</li>
+              <li>Crypto-exchange (Dissolved 2022)</li>
+            </ul>
+            <strong>Status:</strong> Unreachable
+          </div>
+        </div>
+
+        <div class="profile-card opening-step" style="transition-delay: 0.15s;">
+          <div class="profile-header">
+            <h3 class="profile-name">Dr. Aris Vane</h3>
+            <span class="profile-role">Chief Technology Officer</span>
+          </div>
+          <div class="record-block">
+            <strong>Key Directives:</strong>
+            <ul>
+              <li>Architected the Llama substitution engine</li>
+              <li>Managed Delaware shell procurement</li>
+            </ul>
+            <strong>Status:</strong> Retained Legal Counsel
+          </div>
+        </div>
+      </div>
+
+      <div style="max-width: var(--max-text); margin: 0 auto;">
+        <div class="email-shot opening-text">
+          <strong>LEAKED COMMUNIQUE: Vane to Thorne (Oct 12)</strong>
+          "We can't keep faking the latency. Meta's technical team is going to realize the token generation speed doesn't match an architecture of this size. If they look at the routing logic during due diligence, they'll see the Llama calls instantly. We need to push for a clean-room waiver or the deal is dead."
+        </div>
+      </div>
+    </section>
+
+    <section id="acquisition" class="chapter">
+      <span class="chapter-title">05. The Acquisition</span>
+      <p class="opening-text">How does a $2 billion acquisition close without uncovering a massive fraud factory? Fear of Missing Out (FOMO). Meta's urgency to close the gap in the AGI race blinded their technical leadership<span class="cite">1<span class="cite-popover">Internal Meta M&A memo dated Nov 3, 2025.</span></span>.</p>
+      <p class="opening-text">According to internal deal memos, Meta bypassed standard clean-room due diligence. Manus executives claimed that allowing Meta engineers to audit the inference engine's source code would compromise their "AGI core weights." Driven by boardroom panic that a rival tech giant would snatch the deal, Meta waived the code audit entirely. The historic $2 billion transaction was finalized in under 14 days.</p>
+    </section>
+
+    <section id="response" class="chapter">
+      <span class="chapter-title">06. Response</span>
+      <p class="opening-text">When presented with our findings regarding the model substitution, the Llama routing, and the Delaware shell network, Meta declined to comment on the record. Within 48 hours of our inquiry, all Manus API endpoints were taken offline for "unscheduled maintenance." The $2 billion integration has been indefinitely paused.</p>
+    </section>
+
+    <section id="appendix" class="appendix">
+      <div class="appendix-header">
+        <div>
+          <h2 style="margin: 0; font-family: var(--font-display); font-size: 2.8rem; color: #fff; line-height: 1;">Appendix & Evidence Explorer</h2>
+          <p style="margin: 0.5rem 0 0; color: var(--text-muted); font-size: 0.95rem; font-family: var(--font-mono);">Searchable database of entities, shells, and technical logs.</p>
+        </div>
+        <div class="filter-group">
+          <button class="filter-btn is-active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="entity">Entities</button>
+          <button class="filter-btn" data-filter="evidence">Evidence</button>
+        </div>
+        <input type="text" id="db-search" class="search-input" placeholder="Search records... (e.g. 'Shell')">
+      </div>
+
+      <table class="db-table" id="db-table">
+        <thead>
+          <tr>
+            <th>Entity / File</th>
+            <th>Type</th>
+            <th>Detail</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-type="entity" data-search="manus global inc delaware 2 billion monica ai">
+            <td>Manus Global Inc. (Delaware)</td>
+            <td><span class="tag">Entity</span></td>
+            <td>Main C-Corp. Originated from Monica AI.</td>
+            <td>Acquired</td>
+          </tr>
+          <tr data-type="entity" data-search="data shell a delaware obfuscation">
+            <td>Data Shell LLC (Delaware)</td>
+            <td><span class="tag red">Shell</span></td>
+            <td>Front for simulated dataset purchases.</td>
+            <td>Dissolved</td>
+          </tr>
+          <tr data-type="evidence" data-search="slack log routing script llama substitution">
+            <td>substitution_engine_v4.py</td>
+            <td><span class="tag amber">Evidence</span></td>
+            <td>Source code for Llama-3 routing.</td>
+            <td>Verified</td>
+          </tr>
+          <tr data-type="evidence" data-search="due diligence waiver clean room meta">
+            <td>Meta_M&A_Waiver_Nov.pdf</td>
+            <td><span class="tag amber">Evidence</span></td>
+            <td>Clean-room audit waiver.</td>
+            <td>Leaked</td>
+          </tr>
+          <tr data-type="entity" data-search="compute shell b offshore hosting">
+            <td>Compute Logistics Corp</td>
+            <td><span class="tag red">Shell</span></td>
+            <td>Delaware obfuscation for Llama servers.</td>
+            <td>Active</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="empty-state" id="db-empty">
+        No matching records found in the appendix. Try adjusting your search term.
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Investigative Desk. All rights reserved. Built with Manus/Gemini framework.</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. Progress Bar & Whisper Chapter Update
+      const progressBar = document.getElementById('progress-bar');
+      const progressLabel = document.getElementById('top-progress-label');
+      const whisperChapter = document.getElementById('whisper-chapter');
+
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.body.offsetHeight - window.innerHeight;
+        const scrollPercent = scrollTop / docHeight;
+        const pct = Math.min(100, Math.max(0, Math.round(scrollPercent * 100)));
+
+        progressBar.style.width = pct + '%';
+        progressLabel.innerText = pct + '% Read';
+      });
+
+      // 2. Nav Highlight & Whisper Update via IntersectionObserver
+      const sections = document.querySelectorAll('section.chapter, section.full-bleed, section.appendix');
+      const navLinks = document.querySelectorAll('.site-nav__link');
+
+      const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            const title = entry.target.querySelector('.chapter-title');
+
+            if(title) {
+              whisperChapter.style.opacity = 0;
+              setTimeout(() => {
+                whisperChapter.innerText = title.innerText;
+                whisperChapter.style.opacity = 1;
+              }, 300);
+            }
+
+            navLinks.forEach(link => {
+              link.classList.remove('is-active');
+              if (link.getAttribute('href') === `#${id}`) link.classList.add('is-active');
+            });
+          }
+        });
+      }, { threshold: 0.15, rootMargin: "-10% 0px -40% 0px" });
+
+      sections.forEach(sec => sectionObserver.observe(sec));
+
+      // 3. Staggered Opening Sequence
+      const introObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('is-visible');
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.opening-step, .opening-text').forEach(el => introObserver.observe(el));
+
+      // 4. Scrollytelling Chart Animation Logic
+      const chartTriggers = document.querySelectorAll('.step-trigger-chart');
+      const mechanicsChart = document.getElementById('mechanics-chart');
+      const dataPin = document.getElementById('data-pin-label');
+      const actualFill = mechanicsChart.querySelector('.chart-fill.actual');
+
+      const chartObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            chartTriggers.forEach(el => el.classList.remove('is-active'));
+            entry.target.classList.add('is-active');
+
+            const state = entry.target.getAttribute('data-state');
+            if (state && mechanicsChart) {
+              mechanicsChart.setAttribute('data-chart-state', state);
+
+              if(state === 'state-1') {
+                dataPin.innerText = 'Baseline Metrics';
+                actualFill.innerText = '';
+              } else if(state === 'state-2') {
+                dataPin.innerText = 'Llama Routing Detected';
+                actualFill.innerText = '18%';
+              } else if(state === 'state-3') {
+                dataPin.innerText = '15,000% Markup Fraud';
+                actualFill.innerText = '';
+              }
+            }
+          }
+        });
+      }, { threshold: 0.5, rootMargin: "-20% 0px -20% 0px" });
+
+      chartTriggers.forEach(trigger => chartObserver.observe(trigger));
+
+      // 5. Scrollytelling Network Animation Logic
+      const netTriggers = document.querySelectorAll('.step-trigger-net');
+      const networkViz = document.getElementById('network-viz');
+
+      const netObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            netTriggers.forEach(el => el.classList.remove('is-active'));
+            entry.target.classList.add('is-active');
+
+            const state = entry.target.getAttribute('data-viz');
+            if (state && networkViz) {
+              networkViz.setAttribute('data-viz-state', state);
+            }
+          }
+        });
+      }, { threshold: 0.5, rootMargin: "-20% 0px -20% 0px" });
+
+      netTriggers.forEach(trigger => netObserver.observe(trigger));
+
+      // 6. Appendix Search & Filters
+      const searchInput = document.getElementById('db-search');
+      const tableRows = document.querySelectorAll('#db-table tbody tr');
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const emptyState = document.getElementById('db-empty');
+      let currentFilter = 'all';
+
+      function updateTable() {
+        const term = searchInput.value.toLowerCase();
+        let visibleCount = 0;
+
+        tableRows.forEach(row => {
+          const type = row.getAttribute('data-type');
+          const searchData = row.getAttribute('data-search').toLowerCase();
+
+          const matchesFilter = currentFilter === 'all' || type === currentFilter;
+          const matchesSearch = searchData.includes(term);
+
+          if (matchesFilter && matchesSearch) {
+            row.style.display = '';
+            visibleCount++;
+          } else {
+            row.style.display = 'none';
+          }
+        });
+
+        emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+        document.getElementById('db-table').style.display = visibleCount === 0 ? 'none' : 'table';
+      }
+
+      searchInput.addEventListener('input', updateTable);
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          filterBtns.forEach(b => b.classList.remove('is-active'));
+          e.target.classList.add('is-active');
+          currentFilter = e.target.getAttribute('data-filter');
+          updateTable();
+        });
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anatomy of a Crisis | Interactive Investigation</title>
+    <style>
+        /* --- GLOBAL CSS & DARK EDITORIAL THEME --- */
+        :root {
+            --bg-deep: #050505;
+            --bg-panel: rgba(20, 20, 25, 0.85);
+            --text-main: #e0e0e0;
+            --text-muted: #888;
+            --accent-neon: #00ffd5;
+            --accent-alert: #ff0055;
+            --font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --font-serif: Georgia, 'Times New Roman', serif;
+            --font-mono: 'Courier New', Courier, monospace;
+            --river-width: 680px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-serif);
+            color: var(--text-main);
+            background: var(--bg-deep);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, .sans { font-family: var(--font-sans); }
+        a { color: var(--accent-neon); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* --- GLOBAL READING PROGRESS BAR --- */
+        #global-progress {
+            position: fixed; top: 0; left: 0; height: 3px;
+            background: var(--accent-neon);
+            box-shadow: 0 0 10px var(--accent-neon);
+            width: 0%; z-index: 9999;
+        }
+
+        /* --- VOX-STYLE UTILITY NAV --- */
+        .m-nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem 2rem; border-bottom: 1px solid rgba(255,255,255,0.1);
+            background: var(--bg-deep); position: relative; z-index: 100;
+        }
+        .m-nav__logo-wrapper { font-family: var(--font-sans); font-weight: 900; font-size: 1.5rem; letter-spacing: -1px; }
+        .m-nav__social a { margin-left: 1rem; color: var(--text-muted); font-size: 0.9rem; font-family: var(--font-sans); }
+        .m-nav__social a:hover { color: var(--accent-neon); }
+
+        /* --- VOX-STYLE INTRO HEADER --- */
+        .m-intro { max-width: var(--river-width); margin: 4rem auto 2rem; padding: 0 1.5rem; }
+        .m-intro__hed { font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.1; margin-bottom: 1rem; letter-spacing: -1px; }
+        .m-intro__dek { font-family: var(--font-sans); font-size: 1.4rem; color: var(--text-muted); margin-bottom: 2rem; line-height: 1.4; }
+        .m-intro__meta { font-family: var(--font-sans); font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem; }
+        .m-intro__meta__author { display: block; margin-bottom: 0.5rem; }
+        .m-intro__meta__author a { color: #fff; font-weight: bold; }
+        .m-intro__meta__published { color: var(--text-muted); display: block; }
+
+        /* --- THE RIVER (Reading Column) --- */
+        .l-river { max-width: var(--river-width); margin: 0 auto; padding: 0 1.5rem; font-size: 1.15rem; }
+        .l-river p { margin-bottom: 1.5rem; }
+        .l-river h3 { font-size: 1.75rem; margin: 3rem 0 1rem; border-bottom: 2px solid var(--accent-alert); display: inline-block; padding-bottom: 0.2rem; }
+
+        /* --- SCROLLYTELLING BASE --- */
+        .scrolly-container { position: relative; margin: 4rem 0; }
+        .scrolly-sticky {
+            position: sticky; top: 0; height: 100vh; width: 100%;
+            background-color: var(--bg-deep); z-index: 1;
+            display: flex; align-items: center; justify-content: center; overflow: hidden;
+        }
+        .scrolly-steps {
+            position: relative; z-index: 2; max-width: 500px; margin: 0 auto;
+            padding-bottom: 50vh; pointer-events: none;
+        }
+        .step { height: 100vh; display: flex; align-items: center; pointer-events: auto; }
+
+        .step-content {
+            background: var(--bg-panel); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1); padding: 2.5rem; border-radius: 8px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8); font-family: var(--font-sans); font-size: 1.1rem;
+            border-top: 3px solid var(--accent-neon); transition: opacity 0.4s ease, transform 0.4s ease;
+            opacity: 0.2; transform: translateY(20px);
+        }
+        .step.is-active .step-content { opacity: 1; transform: translateY(0); }
+
+        /* Simulated Map Background */
+        #map-viz {
+            width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, #1a1a1a 10%, #050505 80%);
+            transition: all 1s ease; position: relative;
+        }
+
+        /* VOX STYLE: SHATTERING GRAPH */
+        #shatter-viz { position: relative; width: 300px; height: 400px; }
+        .graph-block {
+            position: absolute; width: 18px; height: 18px;
+            background: var(--accent-alert); border-radius: 2px;
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s, background 0.5s;
+        }
+
+        /* --- VOX-STYLE FOOTER --- */
+        footer { background: #0a0a0a; border-top: 1px solid #222; margin-top: 5rem; padding: 4rem 2rem; font-family: var(--font-sans); font-size: 0.95rem; color: var(--text-muted); }
+        .footer-grid { max-width: var(--river-width); margin: 0 auto; display: grid; gap: 3rem; }
+        footer h3 { color: #fff; text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem; margin-bottom: 1rem; border-bottom: 1px solid #333; padding-bottom: 0.5rem; }
+        footer p { margin-bottom: 1rem; line-height: 1.6; }
+        .credits-list { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .credits-list div strong { display: block; color: #fff; font-size: 0.8rem; text-transform: uppercase; }
+        .corp-links { border-top: 1px solid #222; margin-top: 2rem; padding-top: 2rem; text-align: center; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+    <div id="global-progress"></div>
+
+    <nav class="m-nav">
+        <div class="m-nav__logo-wrapper">
+            <a href="#" style="color: #fff;">PUBLICATION</a>
+        </div>
+        <div class="m-nav__social">
+            <a href="#">Share on Twitter</a>
+            <a href="#">Share on Facebook</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="m-intro">
+            <h1 class="m-intro__hed">Who falls through the cracks when the system fractures?</h1>
+            <p class="m-intro__dek">We analyzed millions of localized data points. The structural failures were vast, but they were not random.</p>
+            <div class="m-intro__meta">
+                <span class="m-intro__meta__author">By <a href="#">Jane Doe</a> and <a href="#">John Smith</a></span>
+                <span class="m-intro__meta__published">Published: March 7, 2026, 9:00am EST</span>
+                <span class="m-intro__meta__published">Updated: March 8, 2026, 2:15pm EST</span>
+            </div>
+        </section>
+
+        <section class="l-river">
+            <p>When you look at the raw data from a distance, it resembles a monolith. A solid block of numbers that obfuscates the reality on the ground. But data is not monolithic; it is a collection of individual pressure points.</p>
+            <p>By applying new visualization models to the released archives, we can see not just the macroscopic spread of the anomalies, but the exact moment the localized structures failed to hold together.</p>
+
+
+
+            <h3>The shift from urban centers to rural corridors</h3>
+            <p>Experts attribute the change to the evolving geography of the crisis — a result of the failure by state and federal oversight committees to curtail the initial spread.</p>
+        </section>
+
+        <section class="scrolly-container">
+            <div class="scrolly-sticky">
+                <div id="map-viz"></div>
+            </div>
+            <div class="scrolly-steps" id="map-steps">
+                <div class="step" data-index="0">
+                    <div class="step-content">
+                        <h3 class="sans" style="color: #fff; margin-bottom: 0.5rem;">Phase 1: Concentration</h3>
+                        <p>Initially, anomalies were concentrated in highly populated urban centers, impacting service workers at disproportionate rates.</p>
+                    </div>
+                </div>
+                <div class="step" data-index="1">
+                    <div class="step-content">
+                        <h3 class="sans" style="color: #fff; margin-bottom: 0.5rem;">Phase 2: Expansion</h3>
+                        <p>As the timeline progresses, the data clearly shows the spread moving outward along major interstate corridors.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="l-river">
+            <p>The regional maps demonstrate a systemic blindness. Officials were looking at smoothed-out averages, missing the sharp, jagged reality of individual demographic nodes breaking away from the core.</p>
+        </section>
+
+        <section class="scrolly-container" id="vox-scrolly">
+            <div class="scrolly-sticky">
+                <div id="shatter-viz"></div>
+            </div>
+            <div class="scrolly-steps" id="shatter-steps">
+                <div class="step" data-index="0">
+                    <div class="step-content" style="border-top-color: var(--accent-alert);">
+                        <h3 class="sans" style="color: #fff; margin-bottom: 0.5rem;">The Official Narrative</h3>
+                        <p>This graph represents the official dataset provided by the agencies. Solid, structured, and seemingly under control.</p>
+                    </div>
+                </div>
+                <div class="step" data-index="1">
+                    <div class="step-content" style="border-top-color: var(--accent-alert);">
+                        <h3 class="sans" style="color: #fff; margin-bottom: 0.5rem;">The Disintegration</h3>
+                        <p>But when we apply our timeline analysis, it shatters. The structural integrity fails entirely, isolating specific vulnerable populations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="l-river">
+            <p>The patterns are undeniable. What started as localized, manageable friction points were allowed to cascade into systemic failure because the overarching models were too broad to catch the nuances.</p>
+            <p style="font-style: italic; color: var(--text-muted); margin-top: 3rem;">Special thanks to the data scientists and sociologists who provided guidance and methodology review for this investigation.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <section class="method">
+                <h3>Methodology</h3>
+                <p>We calculated the age-adjusted and demographically sorted share of anomalies using case surveillance data from localized FOIA requests between January 2023 and December 2025. We then standardized the incidence counts across regions using census population estimates.</p>
+                <p>Because of incomplete demographic reporting by certain jurisdictions, it is not yet possible to compute perfectly accurate incident rates on a national level for every county. To account for this, we utilized a Bayesian smoothing model.</p>
+            </section>
+
+            <section class="credits">
+                <h3>Credits</h3>
+                <div class="credits-list">
+                    <div><strong>Reporting</strong><a href="#">Jane Doe</a>, <a href="#">John Smith</a></div>
+                    <div><strong>Data Analysis</strong><a href="#">Alex Programmer</a></div>
+                    <div><strong>Visuals Editor</strong><a href="#">Sam Designer</a></div>
+                    <div><strong>Copy Editor</strong><a href="#">Chris Editor</a></div>
+                </div>
+            </section>
+        </div>
+
+        <div class="corp-links">
+            <p><a href="#">Terms of Use</a> / <a href="#">Privacy Policy</a> / © 2026 Publication Name, Inc. All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <script>
+        // Global Progress Bar
+        window.addEventListener('scroll', () => {
+            const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            document.getElementById('global-progress').style.width = `${scrolled}%`;
+        });
+
+        // Vox Style: Generate the "Shattering" Graph
+        const shatterViz = document.getElementById('shatter-viz');
+        const blocks = [];
+        const cols = 15; const rows = 10;
+
+        for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < cols; c++) {
+                let block = document.createElement('div');
+                block.className = 'graph-block';
+                block.style.left = `${c * 20}px`;
+                block.style.top = `${r * 20 + 100}px`;
+
+                const scatterX = (Math.random() - 0.5) * 2000;
+                const scatterY = (Math.random() - 0.5) * 1000;
+                const rot = (Math.random() - 0.5) * 360;
+
+                block.dataset.scatterTransform = `translate(${scatterX}px, ${scatterY}px) rotate(${rot}deg) scale(${Math.random() * 1.5 + 0.5})`;
+                block.dataset.baseTransform = `translate(0px, 0px) rotate(0deg) scale(1)`;
+
+                shatterViz.appendChild(block);
+                blocks.push(block);
+            }
+        }
+
+        // Scrollytelling Intersection Observer Logic
+        function setupScrollytelling(containerId, callback) {
+            const steps = document.querySelectorAll(`#${containerId} .step`);
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        steps.forEach(s => s.classList.remove('is-active'));
+                        entry.target.classList.add('is-active');
+                        callback(parseInt(entry.target.getAttribute('data-index')));
+                    }
+                });
+            }, { rootMargin: '-50% 0px -50% 0px' });
+            steps.forEach(step => observer.observe(step));
+        }
+
+        const mapViz = document.getElementById('map-viz');
+        setupScrollytelling('map-steps', (index) => {
+            if (index === 0) {
+                mapViz.style.background = 'radial-gradient(circle at 50% 50%, #1a1a1a 10%, #050505 80%)';
+            } else if (index === 1) {
+                mapViz.style.background = 'radial-gradient(ellipse at 50% 50%, rgba(0,255,213,0.4) 10%, #050505 80%)';
+            }
+        });
+
+        setupScrollytelling('shatter-steps', (index) => {
+            if (index === 0) {
+                blocks.forEach(b => {
+                    b.style.transform = b.dataset.baseTransform;
+                    b.style.opacity = '1';
+                });
+            } else if (index === 1) {
+                blocks.forEach((b) => {
+                    b.style.transform = b.dataset.scatterTransform;
+                    b.style.opacity = '0.3';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

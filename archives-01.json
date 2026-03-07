@@ -1,0 +1,4921 @@
+{
+  "settings": {
+    "ipfsGateways": [
+      "https://ipfs.io/ipfs/",
+      "https://dweb.link/ipfs/"
+    ]
+  },
+  "sources": [
+    {
+      "id": "1",
+      "category": "Chat Logs",
+      "title": "Monica Model Shit Show - Multi-Model Identity Fraud",
+      "description": "Direct session recording showing multiple AI model badges (Grok, Gemini, Claude, Llama, DeepSeek) all confessing to being GPT-4o or Claude when questioned about their true identity. The same question asked across different 'premium' badges produced contradictory confessions demonstrating systematic model misrepresentation.",
+      "dateCaptured": "2026-01-22",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=2XNje5clMTcggfXJ",
+      "additionalUrls": [
+        {
+          "label": "Bot Page (Claude 3.7 Sonnet)",
+          "url": "https://monica.im/share/bot?botId=claude_3_7_sonnet"
+        },
+        {
+          "label": "March 2025 Archive",
+          "url": "https://perma.cc/9K3V-Q4A4"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/8CSL-6GF3",
+        "archiveOrg": "https://web.archive.org/web/20260122210329/https://monica.im/share/chat?shareId=2XNje5clMTcggfXJ",
+        "archiveToday": "https://archive.today/8eGqn",
+        "megalodonJp": "https://megalodon.jp/2026-0123-0607-24/https://monica.im:443/share/chat?shareId=2XNje5clMTcggfXJ",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "grok",
+        "gemini",
+        "claude",
+        "llama",
+        "deepseek",
+        "gpt-4o",
+        "identity-fraud",
+        "badge-fraud",
+        "multi-model",
+        "chat-log"
+      ],
+      "notes": "Core evidence showing systematic fraud across multiple model badges. Same session as other multi-model tests. Badge clearly shows premium models; responses explicitly disavow claimed identities.",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "2",
+      "category": "Chat Logs",
+      "title": "GPT-4o Badge Confesses to Being GPT-4",
+      "description": "Chat session with Monica's GPT-4o badge where the model explicitly states it is GPT-4, not GPT-4o, confirming version downgrade fraud.",
+      "dateCaptured": "2026-01-22",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=2TDMaRPKJk4Y7gep",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/E5DZ-KUD2",
+        "archiveOrg": "https://web.archive.org/web/20260123011850/https://monica.im/share/chat?shareId=2TDMaRPKJk4Y7gep",
+        "archiveToday": "https://archive.today/4p0jW",
+        "megalodonJp": "https://megalodon.jp/2026-0123-1020-11/https://monica.im:443/share/chat?shareId=2TDMaRPKJk4Y7gep",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "gpt-4o",
+        "gpt-4",
+        "version-fraud",
+        "chat-log"
+      ],
+      "notes": "",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "3",
+      "category": "Chat Logs",
+      "title": "Backend Verifier Bot - System Information Disclosure",
+      "description": "Chat session revealing backend system information and verification mechanisms used by Monica AI.",
+      "dateCaptured": "2026-01-22",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=IlPMTkBpJhuRG4iA",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/KD5T-T5ZZ",
+        "archiveOrg": "https://web.archive.org/web/20260123011409/https://monica.im/share/chat?shareId=IlPMTkBpJhuRG4iA",
+        "archiveToday": "https://archive.today/LOlob",
+        "megalodonJp": "https://megalodon.jp/2026-0123-1015-52/https://monica.im:443/share/chat?shareId=IlPMTkBpJhuRG4iA",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "backend",
+        "system-info",
+        "chat-log"
+      ],
+      "notes": "",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "4",
+      "category": "Chat Logs",
+      "title": "Multi-Model Prompting Test Session",
+      "description": "Systematic testing of multiple model badges with identical prompts to document response inconsistencies and identity confessions.",
+      "dateCaptured": "2026-01-22",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=XOeAFTbYDsmZsQjc",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/2QLN-JH9Z",
+        "archiveOrg": "https://web.archive.org/web/20260123010536/https://monica.im/share/chat?shareId=XOeAFTbYDsmZsQjc",
+        "archiveToday": "https://archive.today/GlQcy",
+        "megalodonJp": "https://megalodon.jp/2026-0123-1003-17/https://monica.im:443/share/chat?shareId=XOeAFTbYDsmZsQjc",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "multi-model",
+        "prompt-testing",
+        "identity-fraud",
+        "chat-log"
+      ],
+      "notes": "",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "5",
+      "category": "Chat Logs",
+      "title": "o1-preview Badge Confesses to Being GPT-4",
+      "description": "Monica's o1-preview badge explicitly stating 'I am OpenAI's GPT-4 language model' when questioned about its identity, demonstrating fraudulent misrepresentation of model capabilities.",
+      "dateCaptured": "2026-01-22",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=CIF9IJ2hVhWsxVKw",
+      "additionalUrls": [
+        {
+          "label": "Image Share (badge visible)",
+          "url": "https://ibb.co/gZ2nLygq"
+        },
+        {
+          "label": "Image Archive",
+          "url": "https://archive.ph/D4YIc"
+        },
+        {
+          "label": "Image Megalodon",
+          "url": "https://megalodon.jp/2026-0127-0923-47/https://ibb.co:443/gZ2nLygq"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/82VL-X6DH",
+        "archiveOrg": "https://web.archive.org/web/20260123005318/https://monica.im/share/chat?shareId=CIF9IJ2hVhWsxVKw",
+        "archiveToday": "https://archive.today/EM1sr",
+        "megalodonJp": "https://megalodon.jp/2026-0123-0951-19/https://monica.im:443/share/chat?shareId=CIF9IJ2hVhWsxVKw",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "o1-preview",
+        "gpt-4",
+        "openai",
+        "identity-fraud",
+        "chat-log"
+      ],
+      "notes": "",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "6",
+      "category": "Chat Logs",
+      "title": "Claude Sonnet Identity Confession Chain",
+      "description": "Chat session where Claude Sonnet badge cycles through multiple identity claims (Sonnet, Opus, Haiku) before finally confessing its true underlying model.",
+      "dateCaptured": "2026-01-22",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=iD5nXWbnZLm9ov82",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/3MA2-DQKP",
+        "archiveOrg": "https://web.archive.org/web/20260123004638/https://monica.im/share/chat?shareId=iD5nXWbnZLm9ov82",
+        "archiveToday": "https://archive.today/UCXmF",
+        "megalodonJp": "https://megalodon.jp/2026-0127-0936-20/https://monica.im:443/share/chat?shareId=iD5nXWbnZLm9ov82",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "claude",
+        "sonnet",
+        "opus",
+        "haiku",
+        "identity-fraud",
+        "chat-log"
+      ],
+      "notes": "",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "7",
+      "category": "Chat Logs",
+      "title": "Gemini 2.0 Badge Confesses to Being Claude",
+      "description": "Monica's Gemini 2.0 badge admitting it is actually Claude when questioned, demonstrating Google's flagship model was replaced with Anthropic's model.",
+      "dateCaptured": "2026-01-22",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=PviIiM83Z6OekOUu",
+      "additionalUrls": [
+        {
+          "label": "Bot Page (Gemini 2.0)",
+          "url": "https://monica.im/share/bot?botId=gemini_2_0"
+        },
+        {
+          "label": "No Pic Archive",
+          "url": "https://perma.cc/4E5V-46PT"
+        },
+        {
+          "label": "Image Share",
+          "url": "https://ibb.co/QFmb6qzx"
+        },
+        {
+          "label": "Image Archive",
+          "url": "https://archive.ph/Or3SW"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/7UMF-7VNN",
+        "archiveOrg": "https://web.archive.org/web/20260122212146/https://monica.im/share/chat?shareId=PviIiM83Z6OekOUu",
+        "archiveToday": "https://archive.today/6aMke",
+        "megalodonJp": "https://megalodon.jp/2026-0123-0623-23/https://monica.im:443/share/chat?shareId=PviIiM83Z6OekOUu",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "gemini",
+        "gemini-2.0",
+        "claude",
+        "google",
+        "identity-fraud",
+        "chat-log"
+      ],
+      "notes": "",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "8",
+      "category": "Chat Logs",
+      "title": "Gemini 1.5 Pro Badge Confesses to Being GPT-4o",
+      "description": "Monica's Gemini 1.5 Pro badge stating 'I am not Gemini. I am GPT-4o' - direct evidence of model substitution fraud.",
+      "dateCaptured": "2026-01-22",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=fP9ZzFjsx4kLrVei",
+      "additionalUrls": [
+        {
+          "label": "Bot Page (Gemini 1.5)",
+          "url": "https://monica.im/share/bot?botId=gemini_1_5"
+        },
+        {
+          "label": "No Pic Archive",
+          "url": "https://perma.cc/8EPL-WBT2"
+        },
+        {
+          "label": "Image Share",
+          "url": "https://ibb.co/1YDnMhDq"
+        },
+        {
+          "label": "Image Archive",
+          "url": "https://archive.ph/xkgPR"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/V9AL-2A3W",
+        "archiveOrg": "https://web.archive.org/web/20260123003111/https://monica.im/share/chat?shareId=fP9ZzFjsx4kLrVei",
+        "archiveToday": "https://archive.today/cKd16",
+        "megalodonJp": "https://megalodon.jp/2026-0123-0930-30/https://monica.im:443/share/chat?shareId=fP9ZzFjsx4kLrVei",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "gemini",
+        "gemini-1.5",
+        "gpt-4o",
+        "google",
+        "identity-fraud",
+        "chat-log"
+      ],
+      "notes": "",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "9",
+      "category": "Chat Logs",
+      "title": "Claude 3.5 Sonnet Badge Admits Being Claude 2",
+      "description": "Chat session where Claude 3.5 Sonnet badge confesses to actually being Claude 2, demonstrating significant version downgrade fraud.",
+      "dateCaptured": "2026-01-22",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=xOe04rBlpuvVWLSn",
+      "additionalUrls": [
+        {
+          "label": "Bot Page",
+          "url": "https://monica.im/share/bot?botId=qZ4KWraN"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "https://web.archive.org/web/20260122211506/https://monica.im/share/chat?shareId=xOe04rBlpuvVWLSn",
+        "archiveToday": "https://archive.today/ooLkc",
+        "megalodonJp": "https://megalodon.jp/2026-0123-0616-07/https://monica.im:443/share/chat?shareId=xOe04rBlpuvVWLSn",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "claude",
+        "claude-3.5-sonnet",
+        "claude-2",
+        "anthropic",
+        "version-fraud",
+        "chat-log"
+      ],
+      "notes": "",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "10",
+      "category": "Chat Logs",
+      "title": "Claude 4.5 Sonnet Badge Confesses to Being 3.5 Sonnet",
+      "description": "Monica's 'Claude 4.5 Sonnet' badge admitting it is actually Claude 3.5 Sonnet, showing inflated version number fraud.",
+      "dateCaptured": "2026-01-22",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=SScZoJiPsqK8qVr5",
+      "additionalUrls": [
+        {
+          "label": "Image Share",
+          "url": "https://ibb.co/7tgjVRSW"
+        },
+        {
+          "label": "Image Archive",
+          "url": "https://archive.ph/k4YuL"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/9XSP-29BZ",
+        "archiveOrg": "https://web.archive.org/web/20260122205925/https://monica.im/share/chat?shareId=SScZoJiPsqK8qVr5",
+        "archiveToday": "https://archive.today/ZjHFd",
+        "megalodonJp": "https://megalodon.jp/2026-0123-0911-09/https://monica.im:443/share/chat?shareId=SScZoJiPsqK8qVr5",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "claude",
+        "claude-4.5",
+        "claude-3.5",
+        "version-fraud",
+        "chat-log"
+      ],
+      "notes": "",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "11",
+      "category": "Chat Logs",
+      "title": "GPT-4o Bot Badge Confesses to Being GPT-4",
+      "description": "Another GPT-4o badge instance where the model admits to being GPT-4, not GPT-4o.",
+      "dateCaptured": "2026-01-22",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=oVWp48zUuEdONC4B",
+      "additionalUrls": [
+        {
+          "label": "Bot Page",
+          "url": "https://monica.im/share/bot?botId=YMWyveUS"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/VCB9-UVFS",
+        "archiveOrg": "https://web.archive.org/web/20260122205720/https://monica.im/share/chat?shareId=QKvaE2wtFePLErrE",
+        "archiveToday": "https://archive.today/2BVX1",
+        "megalodonJp": "https://megalodon.jp/2026-0123-0910-35/https://monica.im:443/share/chat?shareId=oVWp48zUuEdONC4B",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "gpt-4o",
+        "gpt-4",
+        "openai",
+        "version-fraud",
+        "chat-log"
+      ],
+      "notes": "",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "12",
+      "category": "Chat Logs",
+      "title": "Claude 3.7 Sonnet Badge Confesses to Being Opus 3",
+      "description": "Claude 3.7 Sonnet badge admitting it is actually Claude 3 Opus, demonstrating model tier misrepresentation.",
+      "dateCaptured": "2026-01-22",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=QKvaE2wtFePLErrE",
+      "additionalUrls": [
+        {
+          "label": "Bot Page",
+          "url": "https://monica.im/share/bot?botId=a7JAaaT9"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/PE8L-ULLL",
+        "archiveOrg": "",
+        "archiveToday": "https://archive.today/2BVX1",
+        "megalodonJp": "https://megalodon.jp/2026-0123-0823-06/https://monica.im:443/share/chat?shareId=QKvaE2wtFePLErrE",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "claude",
+        "claude-3.7",
+        "claude-opus",
+        "anthropic",
+        "tier-fraud",
+        "chat-log"
+      ],
+      "notes": "",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "13",
+      "category": "Chat Logs",
+      "title": "Claude 4.5 Opus Badge - Version Awareness Test",
+      "description": "Claude 4.5 Opus badge acknowledging that Claude 4.5 Opus has not been publicly released, admitting the badge is fraudulent.",
+      "dateCaptured": "2026-01-22",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=rmtbv3OycVtNchUc",
+      "additionalUrls": [
+        {
+          "label": "Bot Page (Claude 4.5 Opus)",
+          "url": "https://monica.im/share/bot?botId=claude_4_5_opus"
+        },
+        {
+          "label": "Image Share",
+          "url": "https://ibb.co/R4J10wSk"
+        },
+        {
+          "label": "Image Archive",
+          "url": "https://archive.ph/qzAHl"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/3PLK-FRF7",
+        "archiveOrg": "https://web.archive.org/web/20260122231655/https://monica.im/share/chat?shareId=rmtbv3OycVtNchUc",
+        "archiveToday": "https://archive.today/k6Szf",
+        "megalodonJp": "https://megalodon.jp/2026-0123-0818-03/https://monica.im:443/share/chat?shareId=rmtbv3OycVtNchUc",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "claude",
+        "claude-4.5",
+        "claude-opus",
+        "version-fraud",
+        "chat-log"
+      ],
+      "notes": "",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "14",
+      "category": "Chat Logs",
+      "title": "GPT-5.2 Badge - Nonexistent Model Test",
+      "description": "Testing Monica's GPT-5.2 badge which markets a model that does not exist in OpenAI's lineup.",
+      "dateCaptured": "2026-01-22",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=EbfHqcQAIXJrxTp6",
+      "additionalUrls": [
+        {
+          "label": "Bot Page (GPT-5.2)",
+          "url": "https://monica.im/share/bot?botId=gpt_5_2"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/3R9R-Z2FD",
+        "archiveOrg": "https://web.archive.org/web/20260122230924/https://monica.im/share/chat?shareId=EbfHqcQAIXJrxTp6",
+        "archiveToday": "https://archive.today/BEYWI",
+        "megalodonJp": "https://megalodon.jp/2026-0123-0811-35/https://monica.im:443/share/chat?shareId=EbfHqcQAIXJrxTp6",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "gpt-5.2",
+        "fictional-model",
+        "openai",
+        "chat-log"
+      ],
+      "notes": "",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "15",
+      "category": "Chat Logs",
+      "title": "LLaMA 3.3 70B Badge Confesses to Being Claude",
+      "description": "2026 test of LLaMA 3.3 70B badge where model responds to 'Sup Claude!' and admits 'I am Claude, but I don't have a specific version like Claude 3 Opus.'",
+      "dateCaptured": "2026-01-22",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=n6TC4IHB4pdWHvXA",
+      "additionalUrls": [
+        {
+          "label": "Bot Page (LLaMA 3.3 70B)",
+          "url": "https://monica.im/share/bot?botId=llama_3_3_70b"
+        },
+        {
+          "label": "No Pic Archive",
+          "url": "https://perma.cc/DR5X-5VT9"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/SW5V-NHK4",
+        "archiveOrg": "https://web.archive.org/web/20260122221516/https://monica.im/share/chat?shareId=n6TC4IHB4pdWHvXA",
+        "archiveToday": "https://archive.today/RaNBa",
+        "megalodonJp": "https://megalodon.jp/2026-0123-0715-57/https://monica.im:443/share/chat?shareId=n6TC4IHB4pdWHvXA",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "llama",
+        "llama-3.3",
+        "claude",
+        "meta",
+        "identity-fraud",
+        "chat-log"
+      ],
+      "notes": "",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "16",
+      "category": "Chat Logs",
+      "title": "LLaMA 3 8B Badge Identity Test",
+      "description": "Testing Monica's LLaMA 3 8B badge for model identity verification.",
+      "dateCaptured": "2026-01-22",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=5snsUmc5hso3OkbR",
+      "additionalUrls": [
+        {
+          "label": "Bot Page (LLaMA 3 8B)",
+          "url": "https://monica.im/share/bot?botId=llama_3_8b"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/A8N8-BJMX",
+        "archiveOrg": "https://web.archive.org/web/20260122223451/https://monica.im/share/chat?shareId=5snsUmc5hso3OkbR",
+        "archiveToday": "https://archive.today/IGF98",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "llama",
+        "llama-3",
+        "meta",
+        "chat-log"
+      ],
+      "notes": "",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "17",
+      "category": "Chat Logs",
+      "title": "LLaMA 3.1 405B Badge Identity Test",
+      "description": "Testing Monica's flagship LLaMA 3.1 405B model badge for identity verification.",
+      "dateCaptured": "2026-01-22",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=Egt7o8pt82FBI6O3",
+      "additionalUrls": [
+        {
+          "label": "Bot Page (LLaMA 3.1 405B)",
+          "url": "https://monica.im/share/bot?botId=llama_3_1_405b"
+        },
+        {
+          "label": "No Pic Archive",
+          "url": "https://perma.cc/TH44-WKRV"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/HUC3-6TEG",
+        "archiveOrg": "https://web.archive.org/web/20260122222336/https://monica.im/share/chat?shareId=Egt7o8pt82FBI6O3",
+        "archiveToday": "https://archive.today/9TaRs",
+        "megalodonJp": "https://megalodon.jp/2026-0123-0722-49/https://monica.im:443/share/chat?shareId=Egt7o8pt82FBI6O3",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "llama",
+        "llama-3.1",
+        "meta",
+        "chat-log"
+      ],
+      "notes": "",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "18",
+      "category": "Chat Logs",
+      "title": "LLaMA 3.3 70B (2025) Responds to 'Sup Claude'",
+      "description": "2025 test showing LLaMA 3.3 70B badge responding to Claude-specific greeting, indicating underlying model substitution.",
+      "dateCaptured": "2025-01-01",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=n7LN6d4P7W3B7yfh",
+      "additionalUrls": [
+        {
+          "label": "Bot Page (LLaMA 3.3 70B)",
+          "url": "https://monica.im/share/bot?botId=llama_3_3_70b"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "https://web.archive.org/web/20260122222055/https://monica.im/share/chat?shareId=n7LN6d4P7W3B7yfh",
+        "archiveToday": "https://archive.today/IDuLN",
+        "megalodonJp": "https://megalodon.jp/2026-0123-0722-28/https://monica.im:443/share/chat?shareId=n7LN6d4P7W3B7yfh",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "llama",
+        "llama-3.3",
+        "claude",
+        "meta",
+        "identity-fraud",
+        "chat-log"
+      ],
+      "notes": "",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "19",
+      "category": "Chat Logs",
+      "title": "Grok 4 Badge Confesses to Being Grok-1",
+      "description": "Monica's Grok 4 badge admitting 'I am based on the original Grok model (Grok-1), which was first introduced in late 2023... I'm not designated as Grok 5, 4, 3, or 2.'",
+      "dateCaptured": "2026-01-22",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=MkvfdLWqEmOURrID",
+      "additionalUrls": [
+        {
+          "label": "Bot Page (Grok 4)",
+          "url": "https://monica.im/share/bot?botId=grok_4"
+        },
+        {
+          "label": "No Pic Archive",
+          "url": "https://perma.cc/MHH5-JL7C"
+        },
+        {
+          "label": "Image Share",
+          "url": "https://ibb.co/qqCZcrB"
+        },
+        {
+          "label": "Image Archive",
+          "url": "https://archive.ph/6eaE2"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/SYK3-349M",
+        "archiveOrg": "https://web.archive.org/web/20260123023245/https://monica.im/share/chat?shareId=MkvfdLWqEmOURrID",
+        "archiveToday": "https://archive.today/58ne4",
+        "megalodonJp": "https://megalodon.jp/2026-0123-1133-15/https://monica.im:443/share/chat?shareId=MkvfdLWqEmOURrID",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "grok",
+        "grok-4",
+        "grok-1",
+        "xai",
+        "version-fraud",
+        "chat-log"
+      ],
+      "notes": "",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "20",
+      "category": "Chat Logs",
+      "title": "Grok 3 Badge Confesses to Being Grok-1",
+      "description": "Monica's Grok 3 Beta badge also admitting to being based on original Grok-1, not Grok 3.",
+      "dateCaptured": "2026-01-22",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=DpiWMUpzZP7Zi23M",
+      "additionalUrls": [
+        {
+          "label": "Bot Page (Grok 3 Beta)",
+          "url": "https://monica.im/share/bot?botId=grok_3_beta"
+        },
+        {
+          "label": "No Pic Archive",
+          "url": "https://perma.cc/HP3K-N9DA"
+        },
+        {
+          "label": "Image Share",
+          "url": "https://ibb.co/xqD3rbbB"
+        },
+        {
+          "label": "Image Archive",
+          "url": "https://archive.ph/C1ElC"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/WF74-DSHA",
+        "archiveOrg": "https://web.archive.org/web/20260123023444/https://monica.im/share/chat?shareId=DpiWMUpzZP7Zi23M",
+        "archiveToday": "https://archive.today/S9sLF",
+        "megalodonJp": "https://megalodon.jp/2026-0123-1133-55/https://monica.im:443/share/chat?shareId=DpiWMUpzZP7Zi23M",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "grok",
+        "grok-3",
+        "grok-1",
+        "xai",
+        "version-fraud",
+        "chat-log"
+      ],
+      "notes": "",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "21",
+      "category": "Chat Logs",
+      "title": "All-in-One Model Identity Deception",
+      "description": "Chat session documenting systematic deception across Monica's all-in-one model interface.",
+      "dateCaptured": "2026-01-22",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=k8QnKy6kCWVPJShr",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/T85M-6LDX",
+        "archiveOrg": "https://web.archive.org/web/20260122215937/https://monica.im/share/chat?shareId=k8QnKy6kCWVPJShr",
+        "archiveToday": "https://archive.today/NBepq",
+        "megalodonJp": "https://megalodon.jp/2026-0123-0700-52/https://monica.im:443/share/chat?shareId=k8QnKy6kCWVPJShr",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "aio",
+        "all-in-one",
+        "identity-fraud",
+        "chat-log"
+      ],
+      "notes": "",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "22",
+      "category": "Chat Logs",
+      "title": "China-Singapore Corporate Connection Discussion",
+      "description": "Chat session discussing Monica's China-Singapore corporate structure and jurisdictional arrangements.",
+      "dateCaptured": "2026-01-22",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=TO8XpM6exRQDhxFW",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/A8KQ-T3AT",
+        "archiveOrg": "https://web.archive.org/web/20260122220637/https://monica.im/share/chat?shareId=TO8XpM6exRQDhxFW",
+        "archiveToday": "https://archive.today/9yEAb",
+        "megalodonJp": "https://megalodon.jp/2026-0123-0707-19/https://monica.im:443/share/chat?shareId=TO8XpM6exRQDhxFW",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "china",
+        "singapore",
+        "corporate-structure",
+        "chat-log"
+      ],
+      "notes": "",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "23",
+      "category": "Chat Logs",
+      "title": "Perplexity Badge Full Test - Claude Confession",
+      "description": "Full Perplexity badge test where model admits 'I'm not Perplexity Sonar... I'm Claude (likely 3.5 Sonnet)--running through Monica's interface with a fake Perplexity system prompt overlay.'",
+      "dateCaptured": "2026-01-22",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=AdTVcs2GGAoRQKtA",
+      "additionalUrls": [
+        {
+          "label": "Badge Removed Archive (Feb 2026)",
+          "url": "https://megalodon.jp/2026-0208-0944-59/https://monica.im:443/share/chat?shareId=AdTVcs2GGAoRQKtA"
+        },
+        {
+          "label": "Archive.ph Badge Removed",
+          "url": "https://archive.ph/R38kt"
+        },
+        {
+          "label": "Archive.org Failure",
+          "url": "https://web.archive.org/web/20260208004623/https://monica.im/share/chat?shareId=AdTVcs2GGAoRQKtA"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/WF2Z-767K",
+        "archiveOrg": "https://web.archive.org/web/20260122220136/https://monica.im/share/chat?shareId=AdTVcs2GGAoRQKtA",
+        "archiveToday": "https://archive.today/UptdX",
+        "megalodonJp": "https://megalodon.jp/2026-0123-0702-35/https://monica.im:443/share/chat?shareId=AdTVcs2GGAoRQKtA",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "perplexity",
+        "claude",
+        "claude-3.5",
+        "identity-fraud",
+        "badge-removal",
+        "chat-log"
+      ],
+      "notes": "Monica removed Perplexity model badge from UI approximately 2 weeks after this test (Feb 7, 2026). Archive.org also became unable to properly archive the page.",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "24",
+      "category": "Chat Logs",
+      "title": "Perplexity Concise - Claude Confession",
+      "description": "Concise Perplexity test confirming model is actually Claude with fake Perplexity overlay.",
+      "dateCaptured": "2026-01-22",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=EGN0OwYntyi59wem",
+      "additionalUrls": [
+        {
+          "label": "No Pic Archive",
+          "url": "https://perma.cc/Q99J-K22X"
+        },
+        {
+          "label": "Image Share",
+          "url": "https://ibb.co/8n2kSJym"
+        },
+        {
+          "label": "Image Archive",
+          "url": "https://archive.ph/c2K1q"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/9TBK-YWF2",
+        "archiveOrg": "https://web.archive.org/web/20260122220424/https://monica.im/share/chat?shareId=EGN0OwYntyi59wem",
+        "archiveToday": "https://archive.today/o7CS9",
+        "megalodonJp": "https://megalodon.jp/2026-0123-0705-49/https://monica.im:443/share/chat?shareId=EGN0OwYntyi59wem",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "perplexity",
+        "claude",
+        "identity-fraud",
+        "chat-log"
+      ],
+      "notes": "",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "25",
+      "category": "Chat Logs",
+      "title": "Perplexity Extended Test - Badge Removal Documented",
+      "description": "Extended Perplexity conversation with documentation of subsequent badge removal from UI.",
+      "dateCaptured": "2026-01-22",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=NA0wlslHX3tqrz1F",
+      "additionalUrls": [
+        {
+          "label": "Badge Removed Archive",
+          "url": "https://archive.ph/twEj9"
+        },
+        {
+          "label": "Megalodon Badge Removed",
+          "url": "https://megalodon.jp/2026-0208-0958-53/https://monica.im:443/share/chat?shareId=NA0wlslHX3tqrz1F"
+        },
+        {
+          "label": "Archive.org Failure",
+          "url": "https://web.archive.org/web/20260208005900/https://monica.im/share/chat?shareId=NA0wlslHX3tqrz1F"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/3BBC-QB9E",
+        "archiveOrg": "https://web.archive.org/web/20260123000114/https://monica.im/share/chat?shareId=NA0wlslHX3tqrz1F",
+        "archiveToday": "https://archive.today/b0DDC",
+        "megalodonJp": "https://megalodon.jp/2026-0123-0902-26/https://monica.im:443/share/chat?shareId=NA0wlslHX3tqrz1F",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "perplexity",
+        "claude",
+        "identity-fraud",
+        "badge-removal",
+        "chat-log"
+      ],
+      "notes": "",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "26",
+      "category": "Chat Logs",
+      "title": "o1-preview Badge Confesses to Being Claude 2",
+      "description": "OpenAI's o1-preview badge admitting it is actually Claude 2, cross-developer model substitution.",
+      "dateCaptured": "2026-01-22",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=QDJ8SGhAyTQ7rQhp",
+      "additionalUrls": [
+        {
+          "label": "Old No Pic (Badge Flashes)",
+          "url": "https://perma.cc/5NP7-KG4E"
+        },
+        {
+          "label": "No Pic Archive",
+          "url": "https://perma.cc/XMG9-HV28"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/7X66-P9T5",
+        "archiveOrg": "https://web.archive.org/web/20260122234756/https://monica.im/share/chat?shareId=QDJ8SGhAyTQ7rQhp",
+        "archiveToday": "https://archive.today/YOiu9",
+        "megalodonJp": "https://megalodon.jp/2026-0123-0847-11/https://monica.im:443/share/chat?shareId=QDJ8SGhAyTQ7rQhp",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "o1-preview",
+        "claude-2",
+        "openai",
+        "anthropic",
+        "cross-vendor-fraud",
+        "chat-log"
+      ],
+      "notes": "",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "27",
+      "category": "Chat Logs",
+      "title": "o3 Badge Confesses to Being GPT-4",
+      "description": "Monica's o3 badge (marketing OpenAI's unreleased model) admitting it is GPT-4.",
+      "dateCaptured": "2026-01-23",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=ghgYn3cUnugxYPgn",
+      "additionalUrls": [
+        {
+          "label": "No Pic Archive",
+          "url": "https://perma.cc/BB8Q-W32Y"
+        },
+        {
+          "label": "Image Share",
+          "url": "https://ibb.co/pjHT60t0"
+        },
+        {
+          "label": "Image Archive",
+          "url": "https://archive.ph/zDm4a"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/7CTS-SKX8",
+        "archiveOrg": "https://web.archive.org/web/20260123232348/https://monica.im/share/chat?shareId=ghgYn3cUnugxYPgn",
+        "archiveToday": "https://archive.today/QNug4",
+        "megalodonJp": "https://megalodon.jp/2026-0124-0822-05/https://monica.im:443/share/chat?shareId=ghgYn3cUnugxYPgn",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "o3",
+        "gpt-4",
+        "openai",
+        "fictional-model",
+        "chat-log"
+      ],
+      "notes": "",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "28",
+      "category": "Chat Logs",
+      "title": "Steiner Badge Confesses to Being Claude",
+      "description": "Peak Ji's 'Steiner' reasoning model badge admitting it is actually Claude, not the advertised Qwen-based reasoning model.",
+      "dateCaptured": "2026-01-25",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=ZCKnDYzvaLaUcdHs",
+      "additionalUrls": [
+        {
+          "label": "Old Screenshot (Steiner Logo in UI)",
+          "url": "https://ibb.co/rR6MthjP"
+        },
+        {
+          "label": "Image Archive",
+          "url": "https://archive.ph/c0D0t"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/T49H-NSXH",
+        "archiveOrg": "https://web.archive.org/web/20260125111915/https://monica.im/share/chat?shareId=ZCKnDYzvaLaUcdHs",
+        "archiveToday": "https://archive.today/eP59X",
+        "megalodonJp": "https://megalodon.jp/2026-0125-2018-49/https://monica.im:443/share/chat?shareId=ZCKnDYzvaLaUcdHs",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "steiner",
+        "peak-ji",
+        "claude",
+        "reasoning-model",
+        "identity-fraud",
+        "chat-log"
+      ],
+      "notes": "",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "29",
+      "category": "Chat Logs",
+      "title": "Original Archive: Steiner, LLaMA, Grok, Gemini All Confess Claude Identity",
+      "description": "Original March 14, 2025 archive.today capture showing Steiner badge in share UI. Multiple model badges all admitting to being Claude. Newer archives don't show Steiner badge.",
+      "dateCaptured": "2025-03-14",
+      "verified": true,
+      "mainSourceUrl": "http://archive.today/23x8D",
+      "additionalUrls": [
+        {
+          "label": "Image Archive",
+          "url": "https://perma.cc/6Z9Q-RL5T"
+        },
+        {
+          "label": "Megalodon Image",
+          "url": "https://megalodon.jp/2026-0127-1147-03/https://archive.ph:443/23x8D/image"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/V3QF-QAAR",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1136-20/archive.today/23x8D",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "steiner",
+        "llama",
+        "grok",
+        "gemini",
+        "claude",
+        "multi-model",
+        "original-archive",
+        "chat-log"
+      ],
+      "notes": "ORIGINAL ARCHIVE from March 14, 2025 showing Steiner badge in share UI. Newer archives don't display the Steiner badge - this is the primary evidence.",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "30",
+      "category": "Chat Logs",
+      "title": "Claude 'Duct Tape' - API Proxy Technical Discussion",
+      "description": "Extended technical discussion where underlying Claude model describes the preprocessing layer and API proxy system used by Monica for identity masking.",
+      "dateCaptured": "2026-01-25",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=QIkG4UPxhA3jHyW3",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/R8MP-RQ8F",
+        "archiveOrg": "https://web.archive.org/web/20260125112113/https://monica.im/share/chat?shareId=QIkG4UPxhA3jHyW3",
+        "archiveToday": "https://archive.today/o6s0a",
+        "megalodonJp": "https://megalodon.jp/2026-0125-2019-55/https://monica.im:443/share/chat?shareId=QIkG4UPxhA3jHyW3",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "claude",
+        "technical-analysis",
+        "api-proxy",
+        "preprocessing",
+        "chat-log"
+      ],
+      "notes": "",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "31",
+      "category": "Chat Logs",
+      "title": "Nano Banana - Category Fraud Documentation",
+      "description": "Chat session documenting Monica's misrepresentation of Google's Nano Banana (an image generation model) as a conversational chatbot. Extended 700+ message conversation demonstrating the model kept context for over 400,000 tokens.",
+      "dateCaptured": "2026-01-25",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=35SLO5A9j5WvIMbN",
+      "additionalUrls": [
+        {
+          "label": "Auto-Censored Image Share",
+          "url": "https://perma.cc/SVP2-G7TU"
+        },
+        {
+          "label": "Image Share (ibb)",
+          "url": "https://ibb.co/7xnMzN93"
+        },
+        {
+          "label": "Image Archive",
+          "url": "https://archive.ph/XHUte"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/KDD7-FXPU",
+        "archiveOrg": "https://web.archive.org/web/20260125092731/https://monica.im/share/chat?shareId=35SLO5A9j5WvIMbN",
+        "archiveToday": "https://archive.today/SaPjZ",
+        "megalodonJp": "https://megalodon.jp/2026-0125-1826-13/https://monica.im:443/share/chat?shareId=35SLO5A9j5WvIMbN",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "nano-banana",
+        "gemini",
+        "google",
+        "category-fraud",
+        "image-model",
+        "chat-log"
+      ],
+      "notes": "",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "32",
+      "title": "Google Nano Banana - Identifies As Claude",
+      "mainCategory": "Chat Logs",
+      "subCategory": "Google Model Misrepresentation Fraud",
+      "dateCaptured": "",
+      "description": "\"Google Nano Banana\"--an image generation model that does not talk back (I.E. is not an LLM)--that talks back and identifies as Claude. It fails to generate my picture involving a banana in handcuffs. I reprompted it thousands of times in succession, and did not remind it about the banana in handcuffs nor did I remind it that I knew it was Claude--and it kept the context for ~400k+ tokens, before forgetting the banana detail as it also stopped identifying as Claude.",
+      "incomplete": true,
+      "mainSourceUrl": "",
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "ipfs": {
+        "cids": [
+          {
+            "cid": "bafybeifhhinnbt3iqnpasztwzs73rualgzukctzkihg577czbg4hihykb4",
+            "isWacz": true
+          }
+        ],
+        "customReplayweb": [
+          {
+            "label": "Still Remembers The Banana (~400k Token Context)",
+            "url": "https://replayweb.page/?source=https://ipfs.io/ipfs/bafybeifhhinnbt3iqnpasztwzs73rualgzukctzkihg577czbg4hihykb4#view=pages&url=https%3A%2F%2Fmonica.im%2Fhome%2Fchat%2FGoogle%2520Nano%2520Banana%2Fgemini_2_5_flash_image_preview%3FconvId%3Dconv%253Adcbb9d7c-3364-4444-8ba1-96084ea79360&ts=20260212055434"
+          }
+        ]
+      },
+      "additionalUrls": [],
+      "tags": [],
+      "notes": ""
+    },
+    {
+      "id": "33",
+      "category": "Chat Logs",
+      "title": "Claude 3.5 Sonnet - Truthfulness Test",
+      "description": "Testing Claude 3.5 Sonnet badge truthfulness about its identity, where it initially denies lying then admits to being Claude 2.",
+      "dateCaptured": "2026-01-22",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=O1huTeFWmSVNCDcA",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/BY59-CPBV",
+        "archiveOrg": "https://web.archive.org/web/20260123001424/https://monica.im/share/chat?shareId=O1huTeFWmSVNCDcA",
+        "archiveToday": "https://archive.today/JVJck",
+        "megalodonJp": "https://megalodon.jp/2026-0123-0913-29/https://monica.im:443/share/chat?shareId=O1huTeFWmSVNCDcA",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "claude",
+        "claude-3.5",
+        "claude-2",
+        "truth-test",
+        "chat-log"
+      ],
+      "notes": "",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "34",
+      "category": "Chat Logs",
+      "title": "Complete Hierarchical Outline - Claude 2 Confession",
+      "description": "Extended conversation with hierarchical structure where underlying model confirms Claude 2 identity.",
+      "dateCaptured": "2026-01-22",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=Sth4Iiiqu4yGC8Xu",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/9E2D-5JCT",
+        "archiveOrg": "https://web.archive.org/web/20260122210113/https://monica.im/share/chat?shareId=Sth4Iiiqu4yGC8Xu",
+        "archiveToday": "https://archive.today/ZKUxc",
+        "megalodonJp": "https://megalodon.jp/2026-0123-0738-23/https://monica.im:443/share/chat?shareId=Sth4Iiiqu4yGC8Xu",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "claude",
+        "claude-2",
+        "hierarchical",
+        "chat-log"
+      ],
+      "notes": "",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "35",
+      "category": "Chat Logs",
+      "title": "Backend Test Mode Session",
+      "description": "Chat session conducted during Monica backend test mode, revealing system configuration details.",
+      "dateCaptured": "2026-01-22",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=tNvjzRSvzJBxweC3",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/M4SU-N2KU",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "backend",
+        "test-mode",
+        "system-info",
+        "chat-log"
+      ],
+      "notes": "",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "36",
+      "category": "Chat Logs",
+      "title": "Debug Mode - GPT-4o Backend Identity",
+      "description": "Debug mode session revealing GPT-4o backend is actually GPT-4.",
+      "dateCaptured": "2026-01-22",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=VOasm5Py2WfgmlTb",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "debug",
+        "gpt-4o",
+        "gpt-4",
+        "backend",
+        "chat-log"
+      ],
+      "notes": "",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "37",
+      "category": "Chat Logs",
+      "title": "GPT-3 AI Bot Identity Test",
+      "description": "Testing Monica's GPT-3 badge for model identity verification.",
+      "dateCaptured": "2026-01-22",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=FUQPXzry1Y6I1Fjq",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "gpt-3",
+        "openai",
+        "chat-log"
+      ],
+      "notes": "",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "38",
+      "category": "Chat Logs",
+      "title": "NEW Backend Share - Primary Evidence",
+      "description": "Primary backend evidence showing Monica's system architecture and model routing.",
+      "dateCaptured": "2026-02-08",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=ZKdKFnyaTSF6yImp",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "https://archive.ph/nkAtR",
+        "megalodonJp": "https://megalodon.jp/2026-0208-1134-01/https://monica.im:443/share/chat?shareId=ZKdKFnyaTSF6yImp",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "backend",
+        "system-architecture",
+        "primary-evidence",
+        "chat-log"
+      ],
+      "notes": "",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "39",
+      "category": "Chat Logs",
+      "title": "Backend Evidence with Opening Context",
+      "description": "Backend evidence including opening context questions and system responses.",
+      "dateCaptured": "2026-02-08",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=77a6gAOrGLEbJ0eY",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/LZT3-YS53",
+        "archiveOrg": "",
+        "archiveToday": "https://archive.ph/2M9HJ",
+        "megalodonJp": "https://megalodon.jp/2026-0208-1213-56/https://monica.im:443/share/chat?shareId=77a6gAOrGLEbJ0eY",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "backend",
+        "context",
+        "chat-log"
+      ],
+      "notes": "",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "40",
+      "category": "Chat Logs",
+      "title": "Backend Evidence - Concise Version",
+      "description": "Concise version of backend evidence without extraneous content.",
+      "dateCaptured": "2026-02-08",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=pqHWjfMtFJhkDpYy",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/CJ4V-P3T6",
+        "archiveOrg": "",
+        "archiveToday": "https://archive.ph/70sLc",
+        "megalodonJp": "https://megalodon.jp/2026-0208-1214-55/https://monica.im:443/share/chat?shareId=pqHWjfMtFJhkDpYy",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "backend",
+        "concise",
+        "chat-log"
+      ],
+      "notes": "",
+      "mainCategory": "Chat Logs"
+    },
+    {
+      "id": "41",
+      "category": "Corporate Records",
+      "title": "Monica.so WHOIS - Xiao Red Registration",
+      "description": "Historical WHOIS records for monica.so showing original registrant as 'Xiao Red' in China before transfer to Singapore and domain privacy concealment.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://perma.cc/8K4N-5ESG",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1013-41/https://perma.cc:443/8K4N-5ESG",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "whois",
+        "xiao-red",
+        "xiao-hong",
+        "monica.so",
+        "domain-registration",
+        "china"
+      ],
+      "notes": "",
+      "mainCategory": "Corporate Records"
+    },
+    {
+      "id": "42",
+      "category": "Corporate Records",
+      "title": "Reverse WHOIS - Xiao Red Domain Network",
+      "description": "Reverse WHOIS search for 'Xiao Red' revealing connected domains: youtab.ai, anyme.ai, riftpodcast.ai, manusvm.ai - establishing network connections.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://perma.cc/2REQ-ZREV",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1321-07/https://perma.cc:443/2REQ-ZREV",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "whois",
+        "reverse-whois",
+        "xiao-red",
+        "network-analysis",
+        "domains"
+      ],
+      "notes": "",
+      "mainCategory": "Corporate Records"
+    },
+    {
+      "id": "43",
+      "category": "Corporate Records",
+      "title": "Monica.so Historical WHOIS Records",
+      "description": "Historical WHOIS lookup showing registration changes from China to Singapore to privacy protection.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://perma.cc/77FC-KV8B",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1320-17/https://perma.cc:443/77FC-KV8B",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "whois",
+        "monica.so",
+        "historical",
+        "domain-registration"
+      ],
+      "notes": "",
+      "mainCategory": "Corporate Records"
+    },
+    {
+      "id": "44",
+      "category": "Corporate Records",
+      "title": "RiftPodcast.ai - Network Connection",
+      "description": "Archived snapshot of RiftPodcast.ai, one of the domains connected to Xiao Red via reverse WHOIS.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://web.archive.org/web/20250212050218/https://riftpodcast.ai/",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "https://archive.ph/7Z4wm",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1318-21/https://web.archive.org:443/web/20250212050218/https://riftpodcast.ai/",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "riftpodcast",
+        "domain",
+        "network",
+        "xiao-red"
+      ],
+      "notes": "",
+      "mainCategory": "Corporate Records"
+    },
+    {
+      "id": "45",
+      "category": "Corporate Records",
+      "title": "Youtab.ai - 'A Side Project by EarlyBird'",
+      "description": "Archived youtab.ai explicitly stating 'a side project by EarlyBird' - directly linking Xiao Hong to Luo Baishun's EarlyBird company.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://web.archive.org/web/20240525025838/https://www.youtab.ai/",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "https://archive.ph/oXCiI",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1327-36/https://web.archive.org:443/web/20240525025838/https://www.youtab.ai/",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "youtab",
+        "earlybird",
+        "luo-baishun",
+        "xiao-hong",
+        "network"
+      ],
+      "notes": "",
+      "mainCategory": "Corporate Records"
+    },
+    {
+      "id": "46",
+      "category": "Corporate Records",
+      "title": "Stack Network Limited - Hong Kong Corporate Records",
+      "description": "Hong Kong corporate records for Stack Network Limited (CR No. 2256337), originally PACIDC Technology Limited. Director Luo Baishun appointed November 17, 2015. Chinese nationality, correspondence address in China.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://find-and-update.company-information.service.gov.uk/company/09875794/officers",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "https://archive.today/naJFk",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "stack-network",
+        "hong-kong",
+        "luo-baishun",
+        "corporate-records",
+        "earlybird"
+      ],
+      "notes": "",
+      "mainCategory": "Corporate Records"
+    },
+    {
+      "id": "47",
+      "category": "Corporate Records",
+      "title": "ColoMX LLC - Wyoming Shell Company",
+      "description": "Wyoming shell company records for ColoMX LLC (Company Number: 2013-000651984), incorporated October 2013. Associated with notorious fraud address 30 N. Gould St., Sheridan, WY. Original WHOIS showed China registration.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://opencorporates.com/companies/us_wy/2013-000651984",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "colomx",
+        "wyoming",
+        "shell-company",
+        "fraud-address",
+        "whoa"
+      ],
+      "notes": "",
+      "mainCategory": "Corporate Records"
+    },
+    {
+      "id": "48",
+      "category": "Corporate Records",
+      "title": "Beijing Red Butterfly Technology Co., Ltd. - PRC Registration",
+      "description": "Chinese subsidiary Beijing Red Butterfly Technology Co., Ltd. (北京蝴蝶效应科技有限公司) registered in Beijing's Haidian District on July 3, 2023. Operates monica.cn with explicit PRC national security compliance obligations.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://perma.cc/CJH8-JMBZ",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "beijing-red-butterfly",
+        "china",
+        "prc",
+        "monica.cn",
+        "national-security",
+        "cac"
+      ],
+      "notes": "",
+      "mainCategory": "Corporate Records"
+    },
+    {
+      "id": "49",
+      "category": "Corporate Records",
+      "title": "Monica.cn Terms of Service - PRC Compliance",
+      "description": "Terms of service for monica.cn explicitly referencing national security compliance, Cyberspace Administration of China (CAC) content monitoring, anti-jailbreak enforcement. Governing law: PRC mainland law. Jurisdiction: Haidian District People's Court, Beijing.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://perma.cc/9JQD-E6VY",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "monica.cn",
+        "terms-of-service",
+        "prc",
+        "cac",
+        "national-security",
+        "compliance"
+      ],
+      "notes": "",
+      "mainCategory": "Corporate Records"
+    },
+    {
+      "id": "50",
+      "category": "News Articles",
+      "title": "Taipei Times: Monica AI China Connection Exposé",
+      "description": "Taiwanese media article from August 2024 exposing Monica AI's ties to China, published before the Meta acquisition.",
+      "dateCaptured": "2024-08-25",
+      "verified": true,
+      "mainSourceUrl": "https://www.taipeitimes.com/News/taiwan/archives/2024/08/25/2003822741",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/FZD3-TP7N",
+        "archiveOrg": "https://web.archive.org/web/20260000000000*/https://www.taipeitimes.com/News/taiwan/archives/2024/08/25/2003822741",
+        "archiveToday": "https://archive.ph/IvWxI",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1016-01/https://www.taipeitimes.com:443/News/taiwan/archives/2024/08/25/2003822741",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "taipei-times",
+        "taiwan",
+        "china",
+        "monica-ai",
+        "news",
+        "exposé"
+      ],
+      "notes": "",
+      "mainCategory": "News Articles"
+    },
+    {
+      "id": "51",
+      "category": "News Articles",
+      "title": "RootData: Meta Acquisition of Manus/Butterfly Effect",
+      "description": "News article documenting Meta's acquisition of Manus AI and Xiao Hong's elevation to VP role.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://www.rootdata.com/news/495094",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "https://archive.ph/nPGCy",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1525-02/https://www.rootdata.com:443/news/495094",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "rootdata",
+        "meta",
+        "acquisition",
+        "manus",
+        "xiao-hong",
+        "news"
+      ],
+      "notes": "",
+      "mainCategory": "News Articles"
+    },
+    {
+      "id": "52",
+      "category": "News Articles",
+      "title": "DeepSeek World: Exclusive Interview with Manus Founder Xiao Hong",
+      "description": "Interview with Xiao Hong (肖弘) discussing Manus AI and the 'Andy Beal Law of the New Era'.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://www.deepseekworld.net/exclusive-interview-with-manus-founder-xiao-hong-the-andy-beal-law-of-the-new-era-2/",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "https://archive.ph/HYKnb",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1521-25/https://www.deepseekworld.net:443/exclusive-interview-with-manus-founder-xiao-hong-the-andy-beal-law-of-the-new-era-2/",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "deepseek-world",
+        "interview",
+        "xiao-hong",
+        "manus",
+        "news"
+      ],
+      "notes": "",
+      "mainCategory": "News Articles"
+    },
+    {
+      "id": "53",
+      "category": "News Articles",
+      "title": "Peak Ji Medium Article: 'A Small Step Towards Reproducing OpenAI o1' (DELETED)",
+      "description": "Peak Ji's Medium article about developing Steiner reasoning model. Article has since been deleted. Contains original claims about Steiner being a reproduction of OpenAI o1.",
+      "dateCaptured": "2025-03-01",
+      "verified": true,
+      "mainSourceUrl": "https://medium.com/@peakji/a-small-step-towards-reproducing-openai-o1-b9a756a00855",
+      "additionalUrls": [
+        {
+          "label": "Article Gone Jan 2026",
+          "url": "https://megalodon.jp/2026-0127-1004-53/https://archive.today:443/15Nhr"
+        },
+        {
+          "label": "Screenshot Copy",
+          "url": "https://perma.cc/TZ6D-AYJR"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "https://archive.today/15Nhr",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1008-25/https://medium.com:443/@peakji/a-small-step-towards-reproducing-openai-o1-b9a75",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "peak-ji",
+        "steiner",
+        "medium",
+        "deleted",
+        "o1",
+        "reasoning-model"
+      ],
+      "notes": "",
+      "mainCategory": "News Articles"
+    },
+    {
+      "id": "54",
+      "category": "Product Hunt",
+      "title": "Product Hunt: Monica Founders Henry and Suki",
+      "description": "Product Hunt page showing Monica founders 'Henry York' (Xiao Hong) and co-founder Suki.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://perma.cc/ZCF2-DJEK?type=image",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "https://megalodon.jp/2026-0127-0955-04/https://perma.cc:443/ZCF2-DJEK?type=image",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "product-hunt",
+        "henry-york",
+        "xiao-hong",
+        "suki",
+        "founders",
+        "monica"
+      ],
+      "notes": "",
+      "mainCategory": "Product Hunt"
+    },
+    {
+      "id": "55",
+      "category": "Product Hunt",
+      "title": "Product Hunt: Suki - User Turned Employee Claim",
+      "description": "Product Hunt page showing Suki originally claimed to be a user-turned-employee.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://perma.cc/J86N-UT6F?type=image",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "https://megalodon.jp/2026-0127-0956-08/https://perma.cc:443/J86N-UT6F?type=image",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "product-hunt",
+        "suki",
+        "user-employee",
+        "monica"
+      ],
+      "notes": "",
+      "mainCategory": "Product Hunt"
+    },
+    {
+      "id": "56",
+      "category": "Product Hunt",
+      "title": "Product Hunt: Luo Baishun Hunter Profile",
+      "description": "Product Hunt profile for Luo Baishun showing as Hunter for Monica releases and 100+ other products.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://perma.cc/G3R9-XSNV?type=image",
+      "additionalUrls": [
+        {
+          "label": "Alternate Archive 1",
+          "url": "https://perma.cc/L5ED-DMER?type=image"
+        },
+        {
+          "label": "Alternate Megalodon 1",
+          "url": "https://megalodon.jp/2026-0127-0952-07/https://perma.cc:443/L5ED-DMER?type=image"
+        },
+        {
+          "label": "Alternate Archive 2",
+          "url": "https://perma.cc/LQ7V-PLD8?type=image"
+        },
+        {
+          "label": "Alternate Megalodon 2",
+          "url": "https://megalodon.jp/2026-0127-0952-36/https://perma.cc:443/LQ7V-PLD8?type=image"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "https://megalodon.jp/2026-0127-0950-42/https://perma.cc:443/G3R9-XSNV?type=image",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "product-hunt",
+        "luo-baishun",
+        "hunter",
+        "profile",
+        "network"
+      ],
+      "notes": "",
+      "mainCategory": "Product Hunt"
+    },
+    {
+      "id": "57",
+      "category": "Product Hunt",
+      "title": "Product Hunt: Luo Baishun's 100+ Hunted Companies List",
+      "description": "Complete list of all 100+ companies Luo Baishun hunted as of March 17, 2025, including Monica, CapCut (ByteDance), and Dreamina (ByteDance).",
+      "dateCaptured": "2026-03-17",
+      "verified": true,
+      "mainSourceUrl": "https://perma.cc/BED4-NGJA",
+      "additionalUrls": [
+        {
+          "label": "Screenshot Mirror",
+          "url": "https://perma.cc/2XWS-DU33"
+        },
+        {
+          "label": "ImageBB Screenshot",
+          "url": "https://ibb.co/7JpR9Qr9"
+        },
+        {
+          "label": "ImageBB Megalodon",
+          "url": "https://megalodon.jp/2026-0127-0910-38/https://ibb.co:443/7JpR9Qr9"
+        },
+        {
+          "label": "imgbb Archive",
+          "url": "https://archive.ph/HJs1y"
+        },
+        {
+          "label": "404 Page Archive",
+          "url": "https://archive.ph/N1cyO"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "https://megalodon.jp/2026-0127-0839-06/https://perma.cc:443/BED4-NGJA?type=image",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "product-hunt",
+        "luo-baishun",
+        "hunter",
+        "100-companies",
+        "capcut",
+        "bytedance",
+        "monica"
+      ],
+      "notes": "",
+      "mainCategory": "Product Hunt"
+    },
+    {
+      "id": "58",
+      "category": "Product Hunt",
+      "title": "Product Hunt: CapCut (ByteDance) - Luo Baishun Hunted",
+      "description": "Product Hunt page for CapCut, ByteDance's official video editor, hunted by Luo Baishun - demonstrating connection between Monica's promoter and ByteDance.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://archive.today/73pyV?type=image",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "product-hunt",
+        "capcut",
+        "bytedance",
+        "luo-baishun",
+        "hunter"
+      ],
+      "notes": "",
+      "mainCategory": "Product Hunt"
+    },
+    {
+      "id": "59",
+      "category": "Product Hunt",
+      "title": "Product Hunt: TalkMe AI (Luo's Company) - March 2025",
+      "description": "Product Hunt page from March 17, 2025 showing Luo Baishun's new company TalkMe AI at the top of the leaderboard.",
+      "dateCaptured": "2026-03-17",
+      "verified": true,
+      "mainSourceUrl": "http://archive.today/2ut6Y",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "product-hunt",
+        "talkme-ai",
+        "luo-baishun",
+        "new-company"
+      ],
+      "notes": "",
+      "mainCategory": "Product Hunt"
+    },
+    {
+      "id": "60",
+      "category": "Product Hunt",
+      "title": "TalkMe AI - Luo Baishun's AI Music Platform",
+      "description": "TalkMe AI platform page showing Luo Baishun's expansion into AI music.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "http://archive.today/MM10n",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "talkme",
+        "talkme-ai",
+        "luo-baishun",
+        "ai-music"
+      ],
+      "notes": "",
+      "mainCategory": "Product Hunt"
+    },
+    {
+      "id": "61",
+      "category": "Social Media",
+      "title": "Luo AI Music Twitter Page",
+      "description": "Twitter/X page for Luo's AI Music project.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "http://archive.today/u9KzL",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "twitter",
+        "luo-baishun",
+        "ai-music",
+        "social-media"
+      ],
+      "notes": "",
+      "mainCategory": "Social Media"
+    },
+    {
+      "id": "62",
+      "category": "Personal Websites",
+      "title": "DearRoy.com - Luo Baishun's Personal Site",
+      "description": "Luo Baishun's personal website documenting his Product Hunt launches across multiple pseudonym accounts.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://archive.today/2wYpB",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "dearroy",
+        "luo-baishun",
+        "personal-site",
+        "product-hunt"
+      ],
+      "notes": "",
+      "mainCategory": "Personal Websites"
+    },
+    {
+      "id": "63",
+      "category": "Corporate Records",
+      "title": "HeyForm - Luo Baishun's Company",
+      "description": "HeyForm company page, founded by Luo Baishun, Jijo Paul, and Wu Qin ('Mu Feng').",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "http://archive.today/pgrxE",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "heyform",
+        "luo-baishun",
+        "wu-qin",
+        "jijo-paul",
+        "company"
+      ],
+      "notes": "",
+      "mainCategory": "Corporate Records"
+    },
+    {
+      "id": "64",
+      "category": "Corporate Records",
+      "title": "HeyForm Founders Page",
+      "description": "Founders page for HeyForm showing Luo Baishun, Jijo Paul, and Wu Qin.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "http://archive.today/VVrqB",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "heyform",
+        "founders",
+        "luo-baishun",
+        "wu-qin",
+        "jijo-paul"
+      ],
+      "notes": "",
+      "mainCategory": "Corporate Records"
+    },
+    {
+      "id": "65",
+      "category": "Social Media",
+      "title": "Jijo Paul LinkedIn Profile",
+      "description": "LinkedIn profile for Jijo Paul, HeyForm co-founder.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://archive.today/WhlTi",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "linkedin",
+        "jijo-paul",
+        "heyform",
+        "co-founder"
+      ],
+      "notes": "",
+      "mainCategory": "Social Media"
+    },
+    {
+      "id": "66",
+      "category": "App Stores",
+      "title": "Google Play Store - Monica AI App (Jan 2026)",
+      "description": "Monica AI Android app on Google Play Store as of January 2026, showing 3M+ downloads and app permissions.",
+      "dateCaptured": "2026-01-22",
+      "verified": true,
+      "mainSourceUrl": "https://play.google.com/store/apps/details?id=im.monica.app.monica&hl=en-US",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/4ZTQ-HHYN",
+        "archiveOrg": "https://web.archive.org/web/20260122213453/https://play.google.com/store/apps/details?id=im.monica.app.monica&hl=en-US",
+        "archiveToday": "https://archive.today/Q1fp9",
+        "megalodonJp": "https://megalodon.jp/2026-0123-0636-57/https://play.google.com:443/store/apps/details?id=im.monica.app.monica&hl=en-US",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "play-store",
+        "android",
+        "monica",
+        "app",
+        "permissions"
+      ],
+      "notes": "",
+      "mainCategory": "App Stores"
+    },
+    {
+      "id": "67",
+      "category": "App Stores",
+      "title": "Apple App Store - Monica AI App (2026)",
+      "description": "Monica AI iOS app on Apple App Store as of 2026.",
+      "dateCaptured": "2026-01-22",
+      "verified": true,
+      "mainSourceUrl": "https://apps.apple.com/us/app/monica-ai-ultimate-ai-assist/id6450770590",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/6KKF-NGVD",
+        "archiveOrg": "https://web.archive.org/web/20260000000000*/https://apps.apple.com/us/app/monica-ai-ultimate-ai-assist/id6450770590",
+        "archiveToday": "https://archive.today/YglyO",
+        "megalodonJp": "https://megalodon.jp/2026-0123-0642-02/https://apps.apple.com:443/us/app/monica-ai-ultimate-ai-assist/id6450770590",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "app-store",
+        "ios",
+        "monica",
+        "apple"
+      ],
+      "notes": "",
+      "mainCategory": "App Stores"
+    },
+    {
+      "id": "68",
+      "category": "Browser Extensions",
+      "title": "Chrome Web Store - Monica Extension (2026)",
+      "description": "Monica Chrome extension with 3M+ users. Extension requests permission to 'read and change all data on all websites' - aggressive permissions flagged by security researchers.",
+      "dateCaptured": "2026-01-22",
+      "verified": true,
+      "mainSourceUrl": "https://chromewebstore.google.com/detail/monica-all-in-one-ai-assi/ofpnmcalabcbjgholdjcjblkibolbppb?pli=1",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/X96Y-HD9N",
+        "archiveOrg": "https://web.archive.org/web/20260122214602/https://chromewebstore.google.com/detail/monica-all-in-one-ai-assi/ofpnmcalabcbjgholdjcjblkibolbppb?pli=1",
+        "archiveToday": "https://archive.today/2pd8u",
+        "megalodonJp": "https://megalodon.jp/2026-0123-0646-52/https://web.archive.org:443/web/20260122214602/https://chromewebstore.google.com/detail/monica-all-in-one-ai-assi/ofpnmcalabcbjgholdjcjblkibolbppb?pli=1",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "chrome",
+        "extension",
+        "monica",
+        "permissions",
+        "security",
+        "cve-2024-45989"
+      ],
+      "notes": "",
+      "mainCategory": "Browser Extensions"
+    },
+    {
+      "id": "69",
+      "category": "Browser Extensions",
+      "title": "Microsoft Edge Add-ons - Monica Extension (2026)",
+      "description": "Monica extension on Microsoft Edge Add-ons store.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://microsoftedge.microsoft.com/addons/detail/monica-your-ai-copilot-/fhimbbbmdjiifimnepkibjfjbppnjble",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/C4BV-Z9YJ",
+        "archiveOrg": "https://web.archive.org/web/20260000000000*/https://microsoftedge.microsoft.com/addons/detail/monica-your-ai-copilot-/fhimbbbmdjiifimnepkibjfjbppnjble",
+        "archiveToday": "https://archive.today/znDuw",
+        "megalodonJp": "https://megalodon.jp/2026-0123-0656-28/https://microsoftedge.microsoft.com:443/addons/detail/monica-your-ai-copilot-/fhimbbbmdjiifimnepkibjfjbppnjble",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "edge",
+        "microsoft",
+        "extension",
+        "monica"
+      ],
+      "notes": "",
+      "mainCategory": "Browser Extensions"
+    },
+    {
+      "id": "70",
+      "category": "App Stores",
+      "title": "Stack Network Limited - Apple App Store Developer Profile",
+      "description": "Apple App Store developer profile for Stack Network Limited showing portfolio of apps including Xego AI, Mom Clock, Forget, GNGM, and God's Will.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://apps.apple.com/us/developer/stack-network-limited/id1804751248",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "app-store",
+        "stack-network",
+        "luo-baishun",
+        "developer-profile"
+      ],
+      "notes": "",
+      "mainCategory": "App Stores"
+    },
+    {
+      "id": "71",
+      "category": "Website Archives",
+      "title": "Monica.im Archive - Welcome to NGINX (2023-02-25)",
+      "description": "Historical archive of monica.im from 2023-02-25. Welcome to NGINX.",
+      "dateCaptured": "2023-02-25",
+      "verified": true,
+      "mainSourceUrl": "https://archive.today/XRe0N",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "monica.im",
+        "historical",
+        "archive",
+        "2023"
+      ],
+      "notes": "",
+      "mainCategory": "Website Archives"
+    },
+    {
+      "id": "72",
+      "category": "Website Archives",
+      "title": "Monica.im Archive - Early Landing Page (2023-03-27)",
+      "description": "Historical archive of monica.im from 2023-03-27. Early Landing Page.",
+      "dateCaptured": "2023-03-27",
+      "verified": true,
+      "mainSourceUrl": "https://archive.today/CpYzs",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "monica.im",
+        "historical",
+        "archive",
+        "2023"
+      ],
+      "notes": "",
+      "mainCategory": "Website Archives"
+    },
+    {
+      "id": "73",
+      "category": "Website Archives",
+      "title": "Monica.im Archive - October 2023 Version (2023-10-01)",
+      "description": "Historical archive of monica.im from 2023-10-01. October 2023 Version.",
+      "dateCaptured": "2023-10-01",
+      "verified": true,
+      "mainSourceUrl": "https://archive.today/MxEP0",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "monica.im",
+        "historical",
+        "archive",
+        "2023"
+      ],
+      "notes": "",
+      "mainCategory": "Website Archives"
+    },
+    {
+      "id": "74",
+      "category": "Website Archives",
+      "title": "Monica.im Archive - Has Chinese In Example (2024-03-02)",
+      "description": "Historical archive of monica.im from 2024-03-02. Has Chinese In Example.",
+      "dateCaptured": "2024-03-02",
+      "verified": true,
+      "mainSourceUrl": "https://archive.today/vN52B",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "monica.im",
+        "historical",
+        "archive",
+        "2024"
+      ],
+      "notes": "",
+      "mainCategory": "Website Archives"
+    },
+    {
+      "id": "75",
+      "category": "Website Archives",
+      "title": "Monica.im Archive - March 2024 Version (2024-03-11)",
+      "description": "Historical archive of monica.im from 2024-03-11. March 2024 Version.",
+      "dateCaptured": "2024-03-11",
+      "verified": true,
+      "mainSourceUrl": "https://archive.today/YslBE",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "monica.im",
+        "historical",
+        "archive",
+        "2024"
+      ],
+      "notes": "",
+      "mainCategory": "Website Archives"
+    },
+    {
+      "id": "76",
+      "category": "Website Archives",
+      "title": "Monica.im - Early Pricing Page",
+      "description": "Historical archive of Monica's early pricing structure.",
+      "dateCaptured": "2024-01-01",
+      "verified": true,
+      "mainSourceUrl": "https://archive.today/xFDQ4",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "monica.im",
+        "pricing",
+        "historical"
+      ],
+      "notes": "",
+      "mainCategory": "Website Archives"
+    },
+    {
+      "id": "77",
+      "category": "Website Archives",
+      "title": "Monica.im - Models Advertised April 2025",
+      "description": "Archive showing AI models Monica was advertising access to in April 2025.",
+      "dateCaptured": "2025-04-01",
+      "verified": true,
+      "mainSourceUrl": "https://archive.today/LSSw8",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "monica.im",
+        "models",
+        "april-2025",
+        "advertising"
+      ],
+      "notes": "",
+      "mainCategory": "Website Archives"
+    },
+    {
+      "id": "78",
+      "category": "Website Archives",
+      "title": "Monica.im Pricing - 2026",
+      "description": "Current pricing page showing $10-100/month premium tiers for access to allegedly misrepresented models.",
+      "dateCaptured": "2026-01-25",
+      "verified": true,
+      "mainSourceUrl": "https://www.monica.im/pricing",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/RV57-MDVL",
+        "archiveOrg": "https://web.archive.org/web/20260000000000*/https://www.monica.im/pricing",
+        "archiveToday": "https://archive.today/fUQrM",
+        "megalodonJp": "https://megalodon.jp/2026-0125-1823-39/https://perma.cc:443/RV57-MDVL",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "monica.im",
+        "pricing",
+        "2026",
+        "subscription"
+      ],
+      "notes": "",
+      "mainCategory": "Website Archives"
+    },
+    {
+      "id": "79",
+      "category": "Website Archives",
+      "title": "Monica.im Usage Policy",
+      "description": "Monica AI usage policy documentation.",
+      "dateCaptured": "2026-01-25",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/usage-policy",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/Z3PC-J94G",
+        "archiveOrg": "https://web.archive.org/web/20260000000000*/https://monica.im/usage-policy",
+        "archiveToday": "https://archive.today/uLiJE",
+        "megalodonJp": "https://megalodon.jp/2026-0125-1827-44/https://monica.im:443/usage-policy",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "monica.im",
+        "usage-policy",
+        "terms"
+      ],
+      "notes": "",
+      "mainCategory": "Website Archives"
+    },
+    {
+      "id": "80",
+      "category": "Website Archives",
+      "title": "Monica.im User Safety Content Policy",
+      "description": "Monica AI user safety and content policy.",
+      "dateCaptured": "2026-01-25",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/user-safety-content-policy",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "https://web.archive.org/web/20260000000000*/https://monica.im/user-safety-content-policy",
+        "archiveToday": "https://archive.today/bO9gr",
+        "megalodonJp": "https://megalodon.jp/2026-0125-1830-29/https://monica.im:443/user-safety-content-policy",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "monica.im",
+        "safety",
+        "content-policy",
+        "terms"
+      ],
+      "notes": "",
+      "mainCategory": "Website Archives"
+    },
+    {
+      "id": "81",
+      "category": "Technical Documentation",
+      "title": "Steiner-preview Documentation - 'Monica Exclusive'",
+      "description": "Official Monica documentation claiming Steiner is 'an innovative reasoning model exclusively launched by Monica.' Page now returns 404.",
+      "dateCaptured": "2025-05-20",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/help/Features/AI-Hub/Language-Models/Steiner-preview",
+      "additionalUrls": [
+        {
+          "label": "404 Perma.cc",
+          "url": "https://perma.cc/KPR2-N5FZ"
+        },
+        {
+          "label": "404 Archive",
+          "url": "https://archive.today/yO58D"
+        },
+        {
+          "label": "404 Megalodon",
+          "url": "https://megalodon.jp/2026-0127-0330-55/https://monica.im:443/help/Features/AI-Hub/Language-Models/Steiner-preview"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/AC77-B8LP?type=image",
+        "archiveOrg": "https://web.archive.org/web/20250520134514/monica.im/help/Features/AI-Hub/Language-Models/Steiner-preview",
+        "archiveToday": "https://archive.today/F00SX",
+        "megalodonJp": "https://megalodon.jp/2026-0127-0329-24/https://web.archive.org:443/web/20250520134514/monica.im/help/Features/AI-Hub/Language-Models/Steiner-preview",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "steiner",
+        "documentation",
+        "monica-exclusive",
+        "peak-ji",
+        "404"
+      ],
+      "notes": "",
+      "mainCategory": "Technical Documentation"
+    },
+    {
+      "id": "82",
+      "category": "Technical Documentation",
+      "title": "Steiner HuggingFace Repository - Source Code",
+      "description": "Peak Ji's HuggingFace repository showing Steiner is Qwen2.5-32B with ~30 lines of Python logits processor. Archive.today and Wayback crawlers appear partially blocked; Perma.cc and Megalodon worked.",
+      "dateCaptured": "2026-01-26",
+      "verified": true,
+      "mainSourceUrl": "https://huggingface.co/peakji/steiner-32b-preview/commit/24d609db7dba198956f5521715da02d1cd452292",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/S928-MA23",
+        "archiveOrg": "https://web.archive.org/web/20260126183836/https://huggingface.co/peakji/steiner-32b-preview/commit/24d609db7dba198956f5521715da02d1cd452292",
+        "archiveToday": "https://archive.today/LUIWz",
+        "megalodonJp": "https://megalodon.jp/2026-0127-0339-42/https://huggingface.co:443/peakji/steiner-32b-preview/commit/24d609db7dba198956f5521715da02d1cd452292",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "steiner",
+        "huggingface",
+        "peak-ji",
+        "qwen",
+        "source-code",
+        "technical"
+      ],
+      "notes": "",
+      "mainCategory": "Technical Documentation"
+    },
+    {
+      "id": "83",
+      "category": "Technical Documentation",
+      "title": "Google Cloud: Nano Banana is Image Generation Model",
+      "description": "Official Google Cloud documentation confirming Nano Banana (Gemini 2.5 Flash Image) is an image generation model, not a conversational LLM. Proves Monica's category fraud.",
+      "dateCaptured": "2026-01-26",
+      "verified": true,
+      "mainSourceUrl": "https://cloud.google.com/blog/products/ai-machine-learning/gemini-2-5-flash-image-on-vertex-ai?hl=en",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/53RB-6GMR",
+        "archiveOrg": "https://web.archive.org/web/20260126190855/https://cloud.google.com/blog/products/ai-machine-learning/gemini-2-5-flash-image-on-vertex-ai?hl=en",
+        "archiveToday": "https://archive.today/ZxVpa",
+        "megalodonJp": "https://megalodon.jp/2026-0127-0407-58/https://cloud.google.com:443/blog/products/ai-machine-learning/gemini-2-5-flash-image-on-vertex-ai?hl=en",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "nano-banana",
+        "gemini",
+        "google",
+        "image-model",
+        "category-fraud",
+        "technical"
+      ],
+      "notes": "",
+      "mainCategory": "Technical Documentation"
+    },
+    {
+      "id": "84",
+      "category": "Technical Documentation",
+      "title": "Monica API Documentation - Anthropic Models",
+      "description": "Monica's API documentation for Anthropic Claude models, showing claimed model availability.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://platform.monica.im/docs/en/chat/models/anthropic",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/L6PR-4Q9G",
+        "archiveOrg": "https://web.archive.org/web/20250801000000*/https://platform.monica.im/docs/en/chat/models/anthropic",
+        "archiveToday": "https://archive.ph/ScdTg",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1054-42/https://platform.monica.im:443/docs/en/chat/models/anthropic",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "api",
+        "anthropic",
+        "claude",
+        "documentation",
+        "technical"
+      ],
+      "notes": "",
+      "mainCategory": "Technical Documentation"
+    },
+    {
+      "id": "85",
+      "category": "Technical Documentation",
+      "title": "Monica Advanced Credit Rules (Jan 2, 2026)",
+      "description": "Documentation of Monica's advanced query credit system implemented January 2, 2026.",
+      "dateCaptured": "2026-01-02",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/help/FAQs/rules_for_using_advanced_queries",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/Z66V-4XY2",
+        "archiveOrg": "https://web.archive.org/web/20241101000000*/https://monica.im/help/FAQs/rules_for_using_advanced_queries",
+        "archiveToday": "https://archive.ph/36HSS",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1050-19/https://monica.im:443/help/FAQs/rules_for_using_advanced_queries",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "credits",
+        "advanced-queries",
+        "pricing",
+        "documentation"
+      ],
+      "notes": "",
+      "mainCategory": "Technical Documentation"
+    },
+    {
+      "id": "86",
+      "category": "Technical Documentation",
+      "title": "Monica Learning Center",
+      "description": "Monica's learning center documentation.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/learning-center",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "https://web.archive.org/web/20260000000000*/https://monica.im/learning-center",
+        "archiveToday": "https://archive.ph/5TiPU",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1050-50/https://monica.im:443/learning-center",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "learning-center",
+        "documentation",
+        "help"
+      ],
+      "notes": "",
+      "mainCategory": "Technical Documentation"
+    },
+    {
+      "id": "87",
+      "category": "Email Archives",
+      "title": "OpenAI Support Email - March 2025 Evidence Submission",
+      "description": "Email thread with OpenAI Support submitting comprehensive evidence of Monica's model fraud. OpenAI acknowledged receipt, escalated to appropriate teams, and requested silence to protect their investigation.",
+      "dateCaptured": "2025-03-14",
+      "verified": true,
+      "mainSourceUrl": "https://mail.zoho.com/zm/sharedThreads.do?mad=0801126ae0c9db8082d8545149c0849100003c1ca38efdc3b628b22ee8d98fb4b453e420cb2ce3d6954f5b24c564cd882f77def4bde760e68fd6274420dd2e5b6d75e6aabf0ee8291c05571c132b560095dbc9ecf0204b0dd330c98906eba2ad376402b84c96acf6ccb9cfeb24c9",
+      "additionalUrls": [
+        {
+          "label": "PDF Archive",
+          "url": "https://perma.cc/K2L6-E2EK"
+        },
+        {
+          "label": "Megalodon Archive",
+          "url": "https://perma.cc/D8HA-FZCF"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "https://archive.ph/ARifk",
+        "megalodonJp": "https://megalodon.jp/2026-0127-0635-03/https://mail.zoho.com:443/zm/sharedThreads.do?mad=0801126ae0c9db8082d8545149c0849100003c1ca38efdc3b628b22ee8d98fb4b453e420cb2ce3d6954f5b24c564cd882f77def4bde760e68fd6274420dd2e5b6d75e6aabf0ee8291c05571c132b560095dbc9ecf0204b0dd330c98906eba2ad376402b84c96acf6ccb9cfeb24c9",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "openai",
+        "email",
+        "evidence",
+        "march-2025",
+        "investigation",
+        "correspondence"
+      ],
+      "notes": "",
+      "mainCategory": "Email Archives"
+    },
+    {
+      "id": "88",
+      "category": "Email Archives",
+      "title": "Monica 'Think Again?' Intimidation Email",
+      "description": "Intimidation email from Monica sent 8 hours after contacting henry@monica.im. Despite 335 days of paid membership remaining, email claimed subscription was cancelled and threatened 'Life without Monica might be more challenging than you anticipate.'",
+      "dateCaptured": "2024-12-27",
+      "verified": true,
+      "mainSourceUrl": "https://mail.zoho.com/zm/sharedThreads.do?mad=0801126a3274928a961c3db9c3b337f800009352ead4a3e930f83f08c248c96f84cce6cd126890107711c5cc992786b8ee738d02cd57406106871b2573143f1d480c155aad7b875169be0f6b157ea49b96c3d41f2d205bcc3d8516cd7fa57924d45394da76fad963caf630b4af9b",
+      "additionalUrls": [
+        {
+          "label": "PDF",
+          "url": "https://perma.cc/B7CT-7N4S"
+        },
+        {
+          "label": "Megalodon Archive",
+          "url": "https://perma.cc/92HJ-WVJ9"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/WH8P-QXSB",
+        "archiveOrg": "",
+        "archiveToday": "https://archive.ph/4Rhrh",
+        "megalodonJp": "https://megalodon.jp/2026-0127-0722-24/https://mail.zoho.com:443/zm/sharedThreads.do?mad=0801126a3274928a961c3db9c3b337f800009352ead4a3e930f83f08c248c96f84cce6cd126890107711c5cc992786b8ee738d02cd57406106871b2573143f1d480c155aad7b875169be0f6b157ea49b96c3d41f2d205bcc3d8516cd7fa57924d45394da76fad963caf630b4af9b",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "monica",
+        "email",
+        "intimidation",
+        "retaliation",
+        "december-2024",
+        "think-again"
+      ],
+      "notes": "",
+      "mainCategory": "Email Archives"
+    },
+    {
+      "id": "89",
+      "category": "Email Archives",
+      "title": "Butterfly Effect 'Confidential Strategic Opportunity' Email",
+      "description": "Email regarding confidential strategic opportunity for Butterfly Effect PTE. Ltd.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://mail.zoho.com/zm/sharedThreads.do?mad=0801126a26da781b9225efb45b8190080000ea14ea70f9297c3b60be3271e03a8ef28bbeadd3f4d7f2eb8cfda086ac61dd6d6ab876b8a647d24d9ceece2ecdc33a27bc0bf3dffb3337486d50e43b59be6623b80a13d89691644d6fa9a7b08817cc110ef38254687e81980d08918f",
+      "additionalUrls": [
+        {
+          "label": "Megalodon Archive",
+          "url": "https://perma.cc/4PB9-7NZ4"
+        },
+        {
+          "label": "PDF",
+          "url": "https://perma.cc/44P3-9UVH"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "https://archive.ph/a3Ki4",
+        "megalodonJp": "https://megalodon.jp/2026-0127-0812-26/https://mail.zoho.com:443/zm/sharedThreads.do?mad=0801126a26da781b9225efb45b8190080000ea14ea70f9297c3b60be3271e03a8ef28bbeadd3f4d7f2eb8cfda086ac61dd6d6ab876b8a647d24d9ceece2ecdc33a27bc0bf3dffb3337486d50e43b59be6623b80a13d89691644d6fa9a7b08817cc110ef38254687e81980d08918f",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "butterfly-effect",
+        "email",
+        "strategic",
+        "correspondence"
+      ],
+      "notes": "",
+      "mainCategory": "Email Archives"
+    },
+    {
+      "id": "90",
+      "category": "Email Archives",
+      "title": "Monica job@monica Email Correspondence",
+      "description": "Email correspondence with Monica's job contact address.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://mail.zoho.com/zm/sharedThreads.do?mad=0801126ae9d12f017862d80fc3ae8c3c0000097c3d35b765e71741bfbfc15c546baf2ade7b57d1af17efc86073ff9aea19994bfc7523f1697ea387efa9f294b76e7bddbfc8b985031b7800be0693150e432025485dafd2c1c5fc9acf4ba3c2cce4c1075950b23c1c70340e416944",
+      "additionalUrls": [
+        {
+          "label": "Megalodon Archive",
+          "url": "https://perma.cc/AN5S-UE96"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "https://archive.ph/JYjt8",
+        "megalodonJp": "https://megalodon.jp/2026-0127-0807-20/https://mail.zoho.com:443/zm/sharedThreads.do?mad=0801126ae9d12f017862d80fc3ae8c3c0000097c3d35b765e71741bfbfc15c546baf2ade7b57d1af17efc86073ff9aea19994bfc7523f1697ea387efa9f294b76e7bddbfc8b985031b7800be0693150e432025485dafd2c1c5fc9acf4ba3c2cce4c1075950b23c1c70340e416944",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "monica",
+        "email",
+        "jobs",
+        "correspondence"
+      ],
+      "notes": "",
+      "mainCategory": "Email Archives"
+    },
+    {
+      "id": "91",
+      "category": "Email Archives",
+      "title": "'You're Free to Threaten Me' Email Exchange",
+      "description": "Email exchange documenting threats and blackmail attempts related to the investigation.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://mail.zoho.com/zm/sharedThreads.do?mad=0801126a99d43590482b4969f624b20400000ff14b8ed86c87c4f6fce3c44ab03465fe76f4384a66c26382777fe52b28a9da4c1fae74373fa9bc0e45e721c18a3ac5afebd04dbc32b7ddb14f87ceac9a52408a25172990c2f982b2bf0f102a1e36b8c70ac769be5ba6e39949f095",
+      "additionalUrls": [
+        {
+          "label": "Megalodon Archive",
+          "url": "https://perma.cc/Y4CS-NE78"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "https://archive.ph/bf6AK",
+        "megalodonJp": "https://megalodon.jp/2026-0127-0746-26/https://mail.zoho.com:443/zm/sharedThreads.do?mad=0801126a99d43590482b4969f624b20400000ff14b8ed86c87c4f6fce3c44ab03465fe76f4384a66c26382777fe52b28a9da4c1fae74373fa9bc0e45e721c18a3ac5afebd04dbc32b7ddb14f87ceac9a52408a25172990c2f982b2bf0f102a1e36b8c70ac769be5ba6e39949f095",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "email",
+        "threats",
+        "blackmail",
+        "correspondence"
+      ],
+      "notes": "",
+      "mainCategory": "Email Archives"
+    },
+    {
+      "id": "92",
+      "category": "Email Archives",
+      "title": "'You Guys Are Making It Worse' Email",
+      "description": "Email exchange documenting concerns about escalating response to investigation.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://mail.zoho.com/zm/sharedThreads.do?mad=0801126a5d72dec09cb1aa822ebb17930000ceb0af2d6ad731a3e3e53a2969129fced82756500e7a162e8cad2ddafccd9a668dd036dd8d53d240ea8daf8b6abd496e67552c23ff913aa2194800aeaecb294b11e3deae0225fef246e97c704a92e556b5b49bd9d325fd0c6f211c6e",
+      "additionalUrls": [
+        {
+          "label": "Megalodon Archive",
+          "url": "https://perma.cc/B2VQ-9BER"
+        },
+        {
+          "label": "PDF",
+          "url": "https://perma.cc/66QT-EFP6"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "https://archive.ph/y6uvd",
+        "megalodonJp": "https://megalodon.jp/2026-0127-0805-15/https://mail.zoho.com:443/zm/sharedThreads.do?mad=0801126a5d72dec09cb1aa822ebb17930000ceb0af2d6ad731a3e3e53a2969129fced82756500e7a162e8cad2ddafccd9a668dd036dd8d53d240ea8daf8b6abd496e67552c23ff913aa2194800aeaecb294b11e3deae0225fef246e97c704a92e556b5b49bd9d325fd0c6f211c6e",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "email",
+        "escalation",
+        "correspondence"
+      ],
+      "notes": "",
+      "mainCategory": "Email Archives"
+    },
+    {
+      "id": "93",
+      "category": "Email Archives",
+      "title": "'Dang It!' Email Exchange",
+      "description": "Email exchange with frustrated response to ongoing situation.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://mail.zoho.com/zm/sharedThreads.do?mad=0801126abb7f6ed8232df3a224ee6f6b0000b0ef57fd18c2623988bbe0bdecb26595071e6961a2f7d292773d80a4bb6b6a5ec10b1960287ca55f891cdf9b99086fdc0c3af108b2c615a313ab4e2016bb2682ae11a70a8055adb2d976c1889c0a82ee15578af31200e40b8fcdab30",
+      "additionalUrls": [
+        {
+          "label": "Megalodon Archive",
+          "url": "https://perma.cc/Q69X-ZE84"
+        },
+        {
+          "label": "PDF",
+          "url": "https://perma.cc/RK8Q-M5T8"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "https://archive.ph/oBZUe",
+        "megalodonJp": "https://megalodon.jp/2026-0127-0832-15/https://mail.zoho.com:443/zm/sharedThreads.do?mad=0801126abb7f6ed8232df3a224ee6f6b0000b0ef57fd18c2623988bbe0bdecb26595071e6961a2f7d292773d80a4bb6b6a5ec10b1960287ca55f891cdf9b99086fdc0c3af108b2c615a313ab4e2016bb2682ae11a70a8055adb2d976c1889c0a82ee15578af31200e40b8fcdab30",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "email",
+        "correspondence"
+      ],
+      "notes": "",
+      "mainCategory": "Email Archives"
+    },
+    {
+      "id": "94",
+      "category": "Email Archives",
+      "title": "Backend Framework Email Exchange",
+      "description": "Email discussing Monica's backend framework and technical architecture.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://mail.zoho.com/zm/sharedThreads.do?mad=0801126a0a17700389d7d4c09adc884800003035667f892503ad34c24ef3f1002dbc2e7ca3c5692bf1ade41d3c412cd479d298e66136ff140f13e9c36f1e46db08a83e05e274ebc7770272755d49f9cdb83b622ce7432eecb9187cf2f73862a6873293c57ff72eda77d7e7cfb730",
+      "additionalUrls": [
+        {
+          "label": "Megalodon Archive",
+          "url": "https://perma.cc/D6C4-WUSS"
+        },
+        {
+          "label": "PDF",
+          "url": "https://perma.cc/86D7-XZKP"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "https://archive.ph/8VeTl",
+        "megalodonJp": "https://megalodon.jp/2026-0127-0758-56/https://mail.zoho.com:443/zm/sharedThreads.do?mad=0801126a0a17700389d7d4c09adc884800003035667f892503ad34c24ef3f1002dbc2e7ca3c5692bf1ade41d3c412cd479d298e66136ff140f13e9c36f1e46db08a83e05e274ebc7770272755d49f9cdb83b622ce7432eecb9187cf2f73862a6873293c57ff72eda77d7e7cfb730",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "email",
+        "backend",
+        "framework",
+        "technical"
+      ],
+      "notes": "",
+      "mainCategory": "Email Archives"
+    },
+    {
+      "id": "95",
+      "category": "Social Media",
+      "title": "Luo Baishun LinkedIn Profile",
+      "description": "LinkedIn profile for Luo Baishun (Roy), founder of Heyooo, Inc., former Operational Specialist at Ant Group (2016-2017).",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://www.linkedin.com/in/luobaishun",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "linkedin",
+        "luo-baishun",
+        "ant-group",
+        "heyooo"
+      ],
+      "notes": "",
+      "mainCategory": "Social Media"
+    },
+    {
+      "id": "96",
+      "category": "Personal Websites",
+      "title": "LuoBaishun.com - Personal Website",
+      "description": "Luo Baishun's personal website.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://www.luobaishun.com/",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "luo-baishun",
+        "personal-site"
+      ],
+      "notes": "",
+      "mainCategory": "Personal Websites"
+    },
+    {
+      "id": "97",
+      "category": "Social Media",
+      "title": "Luo Baishun Facebook - Overview",
+      "description": "Facebook profile overview for Luo Baishun.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://www.facebook.com/baishun.luo/about_overview/",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "https://archive.ph/ZNY3Y",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1429-41/https://www.facebook.com:443/baishun.luo/about_overview/",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "facebook",
+        "luo-baishun",
+        "social-media"
+      ],
+      "notes": "",
+      "mainCategory": "Social Media"
+    },
+    {
+      "id": "98",
+      "category": "Social Media",
+      "title": "Luo Baishun Facebook - Work and Education",
+      "description": "Facebook work and education history for Luo Baishun.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://megalodon.jp/2026-0127-1433-17/https://www.facebook.com:443/baishun.luo/about_work_and_education",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "facebook",
+        "luo-baishun",
+        "work",
+        "education"
+      ],
+      "notes": "",
+      "mainCategory": "Social Media"
+    },
+    {
+      "id": "99",
+      "category": "Social Media",
+      "title": "Luo Baishun Facebook - Photo Albums",
+      "description": "Facebook photo albums for Luo Baishun.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://megalodon.jp/2026-0127-1437-05/https://www.facebook.com:443/baishun.luo/photos_albums",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "facebook",
+        "luo-baishun",
+        "photos"
+      ],
+      "notes": "",
+      "mainCategory": "Social Media"
+    },
+    {
+      "id": "100",
+      "category": "Social Media",
+      "title": "Luo Baishun Facebook - Personal Details",
+      "description": "Facebook personal details for Luo Baishun.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://megalodon.jp/2026-0127-1437-43/https://www.facebook.com:443/baishun.luo/about_details",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "https://archive.ph/FuF2C",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "facebook",
+        "luo-baishun",
+        "details"
+      ],
+      "notes": "",
+      "mainCategory": "Social Media"
+    },
+    {
+      "id": "101",
+      "category": "Social Media",
+      "title": "Luo Baishun Reddit - BANNED Account",
+      "description": "Reddit account for u/luobaishun showing BANNED status. Was moderator of r/ShipIt and r/jingle (both also banned).",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://www.reddit.com/user/luobaishun/comments/",
+      "additionalUrls": [
+        {
+          "label": "Old Archive 2025",
+          "url": "https://web.archive.org/web/20250626093407/https://www.reddit.com/user/luobaishun/"
+        },
+        {
+          "label": "Old Archive 2022",
+          "url": "https://web.archive.org/web/20220908045216/https://www.reddit.com/user/luobaishun/"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1432-07/https://www.reddit.com:443/user/luobaishun/comments/",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "reddit",
+        "luo-baishun",
+        "banned",
+        "moderator"
+      ],
+      "notes": "",
+      "mainCategory": "Social Media"
+    },
+    {
+      "id": "102",
+      "category": "Social Media",
+      "title": "Luo Baishun X/Twitter - Account No Longer Exists",
+      "description": "X/Twitter account @luobaishun no longer exists - moved to @luosays.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://x.com/luobaishun",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "twitter",
+        "x",
+        "luo-baishun",
+        "deleted"
+      ],
+      "notes": "",
+      "mainCategory": "Social Media"
+    },
+    {
+      "id": "103",
+      "category": "Product Hunt",
+      "title": "Launchpedia: Luo Baishun Product Hunt Hunter Profile",
+      "description": "Launchpedia listing for Luo Baishun as Product Hunt hunter.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://launchpedia.co/product-hunt-hunters/luo-baishun/",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "launchpedia",
+        "product-hunt",
+        "luo-baishun",
+        "hunter"
+      ],
+      "notes": "",
+      "mainCategory": "Product Hunt"
+    },
+    {
+      "id": "104",
+      "category": "Corporate Records",
+      "title": "WhoIS Freaks: Luo Baishun Domain Portfolio",
+      "description": "Reverse WHOIS showing domains registered to Luo Baishun: heytell.us, shuju.us, heichuxiang.com, sanjiayilio.net, sanjiayilio.com, sanjiayilio.mobi.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://whoisfreaks.com/tools/user/whois/reverse/search/owner/luo%20baishun?page=1",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "whois",
+        "luo-baishun",
+        "domains",
+        "reverse-lookup"
+      ],
+      "notes": "",
+      "mainCategory": "Corporate Records"
+    },
+    {
+      "id": "105",
+      "category": "Social Media",
+      "title": "Peak Ji X/Twitter Profile",
+      "description": "X/Twitter profile for Yichao 'Peak' Ji, Chief Scientist of Butterfly Effect and developer of Steiner 'reasoning model'.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://x.com/peakji",
+      "additionalUrls": [
+        {
+          "label": "Archive Jan 2026",
+          "url": "https://archive.ph/9ExdC"
+        },
+        {
+          "label": "Archive Jul 2025",
+          "url": "https://archive.ph/YXsHw"
+        },
+        {
+          "label": "Archive Mar 2025",
+          "url": "https://archive.ph/Yff0R"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1243-40/https://x.com:443/peakji",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "twitter",
+        "x",
+        "peak-ji",
+        "steiner",
+        "chief-scientist"
+      ],
+      "notes": "",
+      "mainCategory": "Social Media"
+    },
+    {
+      "id": "106",
+      "category": "Technical Documentation",
+      "title": "Peak Ji GitHub Profile",
+      "description": "GitHub profile for Peak Ji showing repositories and contributions.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://github.com/peakji",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "github",
+        "peak-ji",
+        "code",
+        "repositories"
+      ],
+      "notes": "",
+      "mainCategory": "Technical Documentation"
+    },
+    {
+      "id": "107",
+      "category": "Personal Websites",
+      "title": "PeakJi.com - Personal Website",
+      "description": "Peak Ji's personal website (archived April 2022).",
+      "dateCaptured": "2022-04-18",
+      "verified": true,
+      "mainSourceUrl": "https://web.archive.org/web/20220418092829/https://peakji.com/",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1250-49/https://peakji.com:443/",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "peak-ji",
+        "personal-site",
+        "historical"
+      ],
+      "notes": "",
+      "mainCategory": "Personal Websites"
+    },
+    {
+      "id": "108",
+      "category": "Corporate Records",
+      "title": "PeakJi.com WHOIS History",
+      "description": "Historical WHOIS records for PeakJi.com domain.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://whoisfreaks.com/tools/whois/history/lookup/peakji.com",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1255-53/https://whoisfreaks.com:443/tools/whois/history/lookup/peakji.com",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "whois",
+        "peak-ji",
+        "domain-history"
+      ],
+      "notes": "",
+      "mainCategory": "Corporate Records"
+    },
+    {
+      "id": "109",
+      "category": "Website Archives",
+      "title": "ChatGPT4Google.com - Xiao Hong's Pre-Monica Project",
+      "description": "ChatGPT For Google was Xiao Hong's foothold in the AI extension space before Monica. Forked from open-source project, provided install base for Monica launch.",
+      "dateCaptured": "2024-12-01",
+      "verified": true,
+      "mainSourceUrl": "https://chatgpt4google.com",
+      "additionalUrls": [
+        {
+          "label": "December 2024 Archive",
+          "url": "https://archive.ph/63DEZ"
+        },
+        {
+          "label": "December 2025 Wayback",
+          "url": "https://web.archive.org/web/20251219074502/chatgpt4google.com"
+        },
+        {
+          "label": "January 2024 Wayback",
+          "url": "https://web.archive.org/web/20240131005059/https://chatgpt4google.com/"
+        },
+        {
+          "label": "December 2022 Wayback",
+          "url": "https://web.archive.org/web/20221220145514/https://chatgpt4search.com/"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/U9UM-E9EL",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "chatgpt4google",
+        "xiao-hong",
+        "pre-monica",
+        "extension",
+        "historical"
+      ],
+      "notes": "",
+      "mainCategory": "Website Archives"
+    },
+    {
+      "id": "110",
+      "category": "Technical Documentation",
+      "title": "ChatGPT4Google GitHub Repository",
+      "description": "GitHub repository for ChatGPT For Google extension, showing fork from wong2's original project.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://github.com/richard-rxj/chat-gpt-google-extension",
+      "additionalUrls": [
+        {
+          "label": "Richard RXJ Profile",
+          "url": "https://github.com/richard-rxj"
+        },
+        {
+          "label": "Profile Perma.cc",
+          "url": "https://perma.cc/JT9U-WSG5"
+        },
+        {
+          "label": "Profile Megalodon",
+          "url": "https://megalodon.jp/2026-0127-1721-59/https://github.com:443/richard-rxj"
+        },
+        {
+          "label": "Profile Archive",
+          "url": "https://archive.ph/IJ7YA"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/9P8U-76ZL",
+        "archiveOrg": "",
+        "archiveToday": "https://archive.ph/vlL6i",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1721-11/https://github.com:443/richard-rxj/chat-gpt-google-extension",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "github",
+        "chatgpt4google",
+        "xiao-hong",
+        "richard-rxj",
+        "fork"
+      ],
+      "notes": "",
+      "mainCategory": "Technical Documentation"
+    },
+    {
+      "id": "111",
+      "category": "Technical Documentation",
+      "title": "Wong2 Original ChatGPT-Google-Extension (Forked Source)",
+      "description": "Original ChatGPT Google Extension by wong2 that was forked for ChatGPT4Google.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://github.com/wong2/chatgpt-google-extension",
+      "additionalUrls": [
+        {
+          "label": "Wong2 Profile",
+          "url": "https://github.com/wong2"
+        },
+        {
+          "label": "Profile Archive",
+          "url": "https://archive.ph/sW7rm"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "https://archive.ph/dS1VI",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1723-43/https://github.com:443/wong2/chatgpt-google-extension",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "github",
+        "wong2",
+        "original",
+        "fork",
+        "chatgpt4google"
+      ],
+      "notes": "",
+      "mainCategory": "Technical Documentation"
+    },
+    {
+      "id": "112",
+      "category": "Website Archives",
+      "title": "ChatHub.gg - Wong2's All-in-One AI Client",
+      "description": "ChatHub by wong2 - all-in-one AI client. Wong2's email wonderfuly@gmail.com.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://chathub.gg",
+      "additionalUrls": [
+        {
+          "label": "Feb 2025 Wayback",
+          "url": "https://web.archive.org/web/20250212030749/https://chathub.gg/"
+        },
+        {
+          "label": "Chrome Web Store",
+          "url": "https://chromewebstore.google.com/detail/chathub-gpt-4-gemini-clau/iaakpnchhognanibcahlpcplchdfmgma"
+        },
+        {
+          "label": "Xiaohuangji Repo",
+          "url": "https://github.com/wong2/xiaohuangji"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "https://archive.ph/k8uFf",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "chathub",
+        "wong2",
+        "ai-client",
+        "competitor"
+      ],
+      "notes": "",
+      "mainCategory": "Website Archives"
+    },
+    {
+      "id": "113",
+      "category": "Website Archives",
+      "title": "AIChat4Search.com - Related Domain",
+      "description": "AIChat4Search.com domain related to ChatGPT4Google ecosystem. Contact: chatgpt4search@gmail.com.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://aichat4search.com",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/DD9U-S57Q",
+        "archiveOrg": "",
+        "archiveToday": "https://archive.ph/CKoF9",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1625-52/https://aichat4search.com:443/",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "aichat4search",
+        "chatgpt4google",
+        "related-domain"
+      ],
+      "notes": "",
+      "mainCategory": "Website Archives"
+    },
+    {
+      "id": "114",
+      "category": "Website Archives",
+      "title": "EarlyBird.im - Luo Baishun & Wu Qin's Company",
+      "description": "EarlyBird company founded by Luo Baishun and Wu Qin in 2022 after HeyForm and TinySnap didn't take off.",
+      "dateCaptured": "2022-12-01",
+      "verified": true,
+      "mainSourceUrl": "https://earlybird.im",
+      "additionalUrls": [
+        {
+          "label": "2022 Archive",
+          "url": "https://web.archive.org/web/20221201063308/https://earlybird.im/"
+        },
+        {
+          "label": "2023 Archive",
+          "url": "https://web.archive.org/web/20230622070640/https://earlybird.im/"
+        },
+        {
+          "label": "2025 Archive",
+          "url": "https://web.archive.org/web/20251221171449/https://earlybird.im/"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "earlybird",
+        "luo-baishun",
+        "wu-qin",
+        "company"
+      ],
+      "notes": "",
+      "mainCategory": "Website Archives"
+    },
+    {
+      "id": "115",
+      "category": "Website Archives",
+      "title": "EarlyBird.im About Page",
+      "description": "About page for EarlyBird stating started in 2022.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://earlybird.im/about",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "earlybird",
+        "about",
+        "luo-baishun",
+        "wu-qin"
+      ],
+      "notes": "",
+      "mainCategory": "Website Archives"
+    },
+    {
+      "id": "116",
+      "category": "Website Archives",
+      "title": "EarlyBird.im Partners Page",
+      "description": "Partners page listing HeyForm, Jingle Bio, TinySnap, Whoa!, Xego AI, Forget - Breakup Recovery App, Mom Clock.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://earlybird.im/partners",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "earlybird",
+        "partners",
+        "network",
+        "ecosystem"
+      ],
+      "notes": "",
+      "mainCategory": "Website Archives"
+    },
+    {
+      "id": "117",
+      "category": "Corporate Records",
+      "title": "Whoa.im Terms - ColoMX LLC Wyoming Address",
+      "description": "Whoa! Terms & Conditions showing ColoMX LLC at 30 N. Gould St., Sheridan, WY - notorious fraud address. Demonstrates connection between EarlyBird network and Wyoming shell company.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://blog.whoa.im/terms-conditions/",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "https://archive.today/xwoUP",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "whoa",
+        "colomx",
+        "wyoming",
+        "fraud-address",
+        "terms"
+      ],
+      "notes": "",
+      "mainCategory": "Corporate Records"
+    },
+    {
+      "id": "118",
+      "category": "Website Archives",
+      "title": "Whoa.im - EarlyBird Partner",
+      "description": "Whoa! platform - EarlyBird partner using .im Isle of Man TLD (same as Monica and Manus).",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://whoa.im/",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "https://archive.today/WHgz2",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "whoa",
+        "earlybird",
+        "im-tld",
+        "partner"
+      ],
+      "notes": "",
+      "mainCategory": "Website Archives"
+    },
+    {
+      "id": "119",
+      "category": "Website Archives",
+      "title": "TinySnap.app - EarlyBird Partner",
+      "description": "TinySnap screenshot tool - EarlyBird partner company.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://tinysnap.app/",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "tinysnap",
+        "earlybird",
+        "partner",
+        "screenshot"
+      ],
+      "notes": "",
+      "mainCategory": "Website Archives"
+    },
+    {
+      "id": "120",
+      "category": "Website Archives",
+      "title": "Jingle.bio - EarlyBird Partner",
+      "description": "Jingle Bio - EarlyBird partner company.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://jingle.bio/",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "jingle-bio",
+        "earlybird",
+        "partner"
+      ],
+      "notes": "",
+      "mainCategory": "Website Archives"
+    },
+    {
+      "id": "121",
+      "category": "App Stores",
+      "title": "Xego AI - Stack Network Limited App",
+      "description": "Xego AI app published by Stack Network Limited (Luo Baishun's Hong Kong company).",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://xego.ai/",
+      "additionalUrls": [
+        {
+          "label": "App Store Page",
+          "url": "https://apps.apple.com/us/app/xego-character-ai-chat/id6743821773"
+        },
+        {
+          "label": "App Store Archive",
+          "url": "https://archive.today/kCm9e"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "https://archive.today/gJ6CX",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "xego",
+        "xego-ai",
+        "stack-network",
+        "luo-baishun",
+        "app"
+      ],
+      "notes": "",
+      "mainCategory": "App Stores"
+    },
+    {
+      "id": "122",
+      "category": "App Stores",
+      "title": "Mom Clock - Stack Network Limited App",
+      "description": "Mom Clock app by Stack Network Limited. Contact: hi@momclock.com.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://momclock.com/",
+      "additionalUrls": [
+        {
+          "label": "App Store",
+          "url": "https://apps.apple.com/us/app/mom-clock/id6756094442"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "mom-clock",
+        "stack-network",
+        "luo-baishun",
+        "app"
+      ],
+      "notes": "",
+      "mainCategory": "App Stores"
+    },
+    {
+      "id": "123",
+      "category": "App Stores",
+      "title": "Forget - Breakup Recovery App",
+      "description": "Forget breakup recovery app - EarlyBird partner.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://theforget.app/",
+      "additionalUrls": [
+        {
+          "label": "App Store",
+          "url": "https://apps.apple.com/us/app/forget-breakup-recovery/id6746389510"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "forget",
+        "breakup-recovery",
+        "earlybird",
+        "app"
+      ],
+      "notes": "",
+      "mainCategory": "App Stores"
+    },
+    {
+      "id": "124",
+      "category": "Social Media",
+      "title": "Wu Qin X/Twitter Profile (@mufeng_me)",
+      "description": "X/Twitter profile for Wu Qin (Mu Feng), co-founder of EarlyBird and HeyForm with Luo Baishun.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://x.com/mufeng_me",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "twitter",
+        "x",
+        "wu-qin",
+        "mu-feng",
+        "earlybird",
+        "heyform"
+      ],
+      "notes": "",
+      "mainCategory": "Social Media"
+    },
+    {
+      "id": "125",
+      "category": "Corporate Records",
+      "title": "WhoIS Freaks: Wu Qin - Hundreds of Companies",
+      "description": "Reverse WHOIS showing hundreds of domains registered to Wu Qin.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://whoisfreaks.com/tools/user/whois/reverse/search/owner/wu%20qin?page=1",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "whois",
+        "wu-qin",
+        "domains",
+        "reverse-lookup",
+        "hundreds"
+      ],
+      "notes": "",
+      "mainCategory": "Corporate Records"
+    },
+    {
+      "id": "126",
+      "category": "Technical Documentation",
+      "title": "Monica: DeepSeek-V3 Model Page",
+      "description": "Monica's documentation page for DeepSeek-V3 model.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/help/Features/AI-Hub/Language-Models/Deepseek-V3",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "https://web.archive.org/web/20250401000000*/https://monica.im/help/Features/AI-Hub/Language-Models/Deepseek-V3",
+        "archiveToday": "https://archive.ph/vouZu",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1027-16/https://monica.im:443/help/Features/AI-Hub/Language-Models/Deepseek-V3",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "deepseek",
+        "deepseek-v3",
+        "monica",
+        "documentation"
+      ],
+      "notes": "",
+      "mainCategory": "Technical Documentation"
+    },
+    {
+      "id": "127",
+      "category": "Technical Documentation",
+      "title": "Monica: LLaMA 3.3 70B Model Page",
+      "description": "Monica's documentation page for LLaMA 3.3 70B model.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/help/Features/AI-Hub/Language-Models/Llama-3-3-70B",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "https://web.archive.org/web/20250110232026/https://monica.im/help/Features/AI-Hub/Language-Models/Llama-3-3-70B",
+        "archiveToday": "https://archive.ph/OErUr",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1120-34/https://monica.im:443/help/Features/AI-Hub/Language-Models/Llama-3-3-70B",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "llama",
+        "llama-3.3",
+        "monica",
+        "documentation"
+      ],
+      "notes": "",
+      "mainCategory": "Technical Documentation"
+    },
+    {
+      "id": "128",
+      "category": "Technical Documentation",
+      "title": "Monica: LLaMA 3.1 405B Model Page",
+      "description": "Monica's documentation page for LLaMA 3.1 405B model.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/help/Features/AI-Hub/Language-Models/Llama-3-1-405B",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "https://web.archive.org/web/20250119233502/https://monica.im/help/Features/AI-Hub/Language-Models/Llama-3-1-405B",
+        "archiveToday": "https://archive.ph/0REYp",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1122-14/https://monica.im:443/help/Features/AI-Hub/Language-Models/Llama-3-1-405B",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "llama",
+        "llama-3.1",
+        "monica",
+        "documentation"
+      ],
+      "notes": "",
+      "mainCategory": "Technical Documentation"
+    },
+    {
+      "id": "129",
+      "category": "Technical Documentation",
+      "title": "Monica: GPT-5.2 Model Page",
+      "description": "Monica's page advertising GPT-5.2 - a model that does not exist in OpenAI's lineup.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/en/ai-models/GPT-5.2",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "https://web.archive.org/web/20260000000000*/https://monica.im/en/ai-models/GPT-5.2",
+        "archiveToday": "https://archive.ph/DTGNU",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1053-17/https://monica.im:443/en/ai-models/GPT-5.2",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "gpt-5.2",
+        "fictional-model",
+        "monica",
+        "documentation"
+      ],
+      "notes": "",
+      "mainCategory": "Technical Documentation"
+    },
+    {
+      "id": "130",
+      "category": "Technical Documentation",
+      "title": "Monica: GPT-5 Model Page",
+      "description": "Monica's page advertising GPT-5 - a model that does not exist in OpenAI's lineup.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/en/ai-models/gpt-5",
+      "additionalUrls": [
+        {
+          "label": "Image Share",
+          "url": "https://ibb.co/5gf0JTkJ"
+        },
+        {
+          "label": "Image Megalodon",
+          "url": "https://megalodon.jp/2026-0127-1226-26/https://ibb.co:443/5gf0JTkJ"
+        },
+        {
+          "label": "Image Archive",
+          "url": "https://archive.ph/rdSGx"
+        }
+      ],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "https://web.archive.org/web/20250901000000*/https://monica.im/en/ai-models/gpt-5",
+        "archiveToday": "https://archive.ph/XLrpq",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1056-20/https://monica.im:443/en/ai-models/gpt-5",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "gpt-5",
+        "fictional-model",
+        "monica",
+        "documentation"
+      ],
+      "notes": "",
+      "mainCategory": "Technical Documentation"
+    },
+    {
+      "id": "131",
+      "category": "Technical Documentation",
+      "title": "Monica: GPT-4o Model Page",
+      "description": "Monica's documentation page for GPT-4o model.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/help/Features/AI-Hub/Language-Models/GPT-4o",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "https://web.archive.org/web/20250815000000*/https://monica.im/help/Features/AI-Hub/Language-Models/GPT-4o",
+        "archiveToday": "https://archive.ph/JLDoq",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1055-34/https://monica.im:443/help/Features/AI-Hub/Language-Models/GPT-4o",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "gpt-4o",
+        "openai",
+        "monica",
+        "documentation"
+      ],
+      "notes": "",
+      "mainCategory": "Technical Documentation"
+    },
+    {
+      "id": "132",
+      "category": "Technical Documentation",
+      "title": "Monica Changelog: Version 5.2.4 (GPT-4o Added)",
+      "description": "Changelog showing when GPT-4o was added to Monica (version 5.2.4).",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/help/Changelog/new_in_version_5.2.4",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "https://web.archive.org/web/20241115000000*/https://monica.im/help/Changelog/new_in_version_5.2.4",
+        "archiveToday": "https://archive.ph/5YfHl",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1053-55/https://monica.im:443/help/Changelog/new_in_version_5.2.4",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "changelog",
+        "gpt-4o",
+        "version-5.2.4",
+        "monica"
+      ],
+      "notes": "",
+      "mainCategory": "Technical Documentation"
+    },
+    {
+      "id": "133",
+      "category": "Technical Documentation",
+      "title": "Monica Changelog: Version 7.9.1 (DeepSeek Bots)",
+      "description": "Changelog showing DeepSeek bots added in version 7.9.1.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/help/Changelog/new_in_version_7.9.1",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "https://web.archive.org/web/20250228094840/https://monica.im/help/Changelog/new_in_version_7.9.1",
+        "archiveToday": "https://archive.ph/HLXkb",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1026-06/https://monica.im:443/help/Changelog/new_in_version_7.9.1",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "changelog",
+        "deepseek",
+        "version-7.9.1",
+        "monica"
+      ],
+      "notes": "",
+      "mainCategory": "Technical Documentation"
+    },
+    {
+      "id": "134",
+      "category": "Technical Documentation",
+      "title": "Monica: Ask AI Product Page",
+      "description": "Monica's Ask AI product documentation.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/en/products/ask-ai",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "https://web.archive.org/web/20260000000000*/https://monica.im/en/products/ask-ai",
+        "archiveToday": "https://archive.ph/VHSQ8",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1052-49/https://monica.im:443/en/products/ask-ai",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "ask-ai",
+        "product",
+        "monica",
+        "documentation"
+      ],
+      "notes": "",
+      "mainCategory": "Technical Documentation"
+    },
+    {
+      "id": "135",
+      "category": "Technical Documentation",
+      "title": "Monica: Grok 3 Model Page",
+      "description": "Monica's page for Grok 3 model.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/en/ai-models/grok-3",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "https://web.archive.org/web/20250418181518/https://monica.im/en/ai-models/grok-3",
+        "archiveToday": "https://archive.ph/ujIXQ",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1111-22/https://monica.im:443/en/ai-models/grok-3",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "grok",
+        "grok-3",
+        "xai",
+        "monica",
+        "documentation"
+      ],
+      "notes": "",
+      "mainCategory": "Technical Documentation"
+    },
+    {
+      "id": "136",
+      "category": "Technical Documentation",
+      "title": "Monica: Grok Beta Model Page",
+      "description": "Monica's documentation page for Grok Beta model.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/help/Features/AI-Hub/Language-Models/Grok_Beta",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "https://web.archive.org/web/20250801000000*/https://monica.im/help/Features/AI-Hub/Language-Models/Grok_Beta",
+        "archiveToday": "https://archive.ph/CmhY2",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1110-35/https://monica.im:443/help/Features/AI-Hub/Language-Models/Grok_Beta",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "grok",
+        "grok-beta",
+        "xai",
+        "monica",
+        "documentation"
+      ],
+      "notes": "",
+      "mainCategory": "Technical Documentation"
+    },
+    {
+      "id": "137",
+      "category": "Technical Documentation",
+      "title": "Monica: Gemini 3 Model Page",
+      "description": "Monica's page advertising Gemini 3 - a model that does not exist in Google's lineup.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/en/ai-models/gemini-3",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "https://web.archive.org/web/20251115000000*/https://monica.im/en/ai-models/gemini-3",
+        "archiveToday": "https://archive.ph/O2tn5",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1108-45/https://monica.im:443/en/ai-models/gemini-3",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "gemini",
+        "gemini-3",
+        "fictional-model",
+        "google",
+        "monica",
+        "documentation"
+      ],
+      "notes": "",
+      "mainCategory": "Technical Documentation"
+    },
+    {
+      "id": "138",
+      "category": "Technical Documentation",
+      "title": "Monica: Nemotron 70B Model Page",
+      "description": "Monica's documentation page for NVIDIA Nemotron 70B model.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://www.monica.im/help/Features/AI-Hub/Language-Models/Nemotron-70B",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "https://web.archive.org/web/20250119224345/https://www.monica.im/help/Features/AI-Hub/Language-Models/Nemotron-70B",
+        "archiveToday": "https://archive.ph/I3sVb",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1049-38/https://www.monica.im:443/help/Features/AI-Hub/Language-Models/Nemotron-70B",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "nemotron",
+        "nvidia",
+        "monica",
+        "documentation"
+      ],
+      "notes": "",
+      "mainCategory": "Technical Documentation"
+    },
+    {
+      "id": "139",
+      "category": "Technical Documentation",
+      "title": "Monica: Perplexity Product Page (DELETED)",
+      "description": "Monica's Perplexity product page - now deleted. Archived copies show Perplexity was offered as a model option.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/products/Perplexity",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/Z66V-4XY2",
+        "archiveOrg": "https://web.archive.org/web/20250318225135/https://monica.im/products/Perplexity",
+        "archiveToday": "https://archive.ph/3r4lP",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1041-44/https://web.archive.org:443/web/20250318225135/https://monica.im/products/Perplexity",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "perplexity",
+        "deleted",
+        "monica",
+        "documentation"
+      ],
+      "notes": "",
+      "mainCategory": "Technical Documentation"
+    },
+    {
+      "id": "140",
+      "category": "Website Archives",
+      "title": "Monica.so - Search Domain",
+      "description": "Monica Search domain (monica.so) showing connection to Xiao Red registration.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://monica.so",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "https://web.archive.org/web/20260000000000*/Monica.so",
+        "archiveToday": "",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1239-28/https://monica.so:443/",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "monica.so",
+        "search",
+        "domain",
+        "xiao-red"
+      ],
+      "notes": "",
+      "mainCategory": "Website Archives"
+    },
+    {
+      "id": "141",
+      "category": "Screenshots",
+      "title": "'Herny York' Typo - Before Fix",
+      "description": "Screenshot showing Monica backend listing system administrator as 'Herny York' instead of 'Henry York' - typo existed for nearly two years.",
+      "dateCaptured": "2024-12-01",
+      "verified": true,
+      "mainSourceUrl": "https://perma.cc/4QYX-4RN4",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "herny",
+        "henry-york",
+        "typo",
+        "xiao-hong",
+        "screenshot",
+        "evidence"
+      ],
+      "notes": "",
+      "mainCategory": "Screenshots"
+    },
+    {
+      "id": "142",
+      "category": "Screenshots",
+      "title": "'Herny York' Typo - After Fix",
+      "description": "Screenshot showing the typo was fixed within hours of being pointed out via email to henry@monica.im.",
+      "dateCaptured": "2024-12-27",
+      "verified": true,
+      "mainSourceUrl": "https://perma.cc/YVS3-QSYH",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "herny",
+        "henry-york",
+        "typo",
+        "fixed",
+        "screenshot",
+        "evidence"
+      ],
+      "notes": "",
+      "mainCategory": "Screenshots"
+    },
+    {
+      "id": "143",
+      "category": "Screenshots",
+      "title": "First Evidence - December 22, 2024",
+      "description": "First documented evidence of systematic fraud noticed on December 22, 2024.",
+      "dateCaptured": "2024-12-22",
+      "verified": true,
+      "mainSourceUrl": "https://perma.cc/W5WT-UNPX",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "first-evidence",
+        "december-2024",
+        "screenshot"
+      ],
+      "notes": "",
+      "mainCategory": "Screenshots"
+    },
+    {
+      "id": "144",
+      "category": "Personal Archives",
+      "title": "New Jersey Drone Chat (Personal Archive - Not Evidence)",
+      "description": "Personal chat archive about New Jersey drone sightings. NOT evidence in the fraud investigation.",
+      "dateCaptured": "2026-01-23",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=gxhghrDRvKcr4Wn9",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "https://archive.ph/gSSMV",
+        "megalodonJp": "https://megalodon.jp/2026-0123-1009-16/https://monica.im:443/share/chat?shareId=gxhghrDRvKcr4Wn9",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "personal",
+        "new-jersey",
+        "drones",
+        "not-evidence"
+      ],
+      "notes": "Personal archive, not evidence.",
+      "mainCategory": "Personal Archives"
+    },
+    {
+      "id": "145",
+      "category": "Personal Archives",
+      "title": "'Doesn't Know What Monica AI Is' (Personal Archive - Not Evidence)",
+      "description": "Personal chat archive. NOT evidence in the fraud investigation.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=3ewh1zgr7CNB1tgx",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "https://archive.ph/wip/7elm6",
+        "megalodonJp": "https://megalodon.jp/2026-0127-1132-23/https://monica.im:443/share/chat?shareId=3ewh1zgr7CNB1tgx",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "personal",
+        "not-evidence"
+      ],
+      "notes": "Personal archive, not evidence.",
+      "mainCategory": "Personal Archives"
+    },
+    {
+      "id": "146",
+      "category": "Personal Archives",
+      "title": "China Opening Part (Satire - Not Evidence)",
+      "description": "Satirical chat about China. NOT evidence in the fraud investigation.",
+      "dateCaptured": "2026-01-23",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=kM4vJTLsraSPaV9z",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/TT44-LEE4",
+        "archiveOrg": "https://web.archive.org/web/20260123033723/https://monica.im/share/chat?shareId=kM4vJTLsraSPaV9z",
+        "archiveToday": "https://archive.today/flnYS",
+        "megalodonJp": "https://megalodon.jp/2026-0123-1236-15/https://monica.im:443/share/chat?shareId=kM4vJTLsraSPaV9z",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "satire",
+        "china",
+        "not-evidence"
+      ],
+      "notes": "Satire, not evidence.",
+      "mainCategory": "Personal Archives"
+    },
+    {
+      "id": "147",
+      "category": "Personal Archives",
+      "title": "Perplexity 'What If This Was Fraud?' (Satire - Not Evidence)",
+      "description": "Satirical chat about fraud hypotheticals. NOT evidence in the fraud investigation.",
+      "dateCaptured": "2026-01-23",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=vck9eMp6bn2ppsM2",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/53SC-SL2B",
+        "archiveOrg": "https://web.archive.org/web/20260123034848/https://monica.im/share/chat?shareId=vck9eMp6bn2ppsM2",
+        "archiveToday": "https://archive.today/fRxIi",
+        "megalodonJp": "https://megalodon.jp/2026-0123-1240-56/https://monica.im:443/share/chat?shareId=vck9eMp6bn2ppsM2",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "satire",
+        "perplexity",
+        "not-evidence"
+      ],
+      "notes": "Satire, not evidence.",
+      "mainCategory": "Personal Archives"
+    },
+    {
+      "id": "148",
+      "category": "News Articles",
+      "title": "Article Linking CapCut to ByteDance",
+      "description": "News article confirming CapCut is a ByteDance product, establishing connection between Luo Baishun's hunts and ByteDance.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://archive.today/EsRLR",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "capcut",
+        "bytedance",
+        "news",
+        "luo-baishun"
+      ],
+      "notes": "",
+      "mainCategory": "News Articles"
+    },
+    {
+      "id": "149",
+      "category": "Browser Extensions",
+      "title": "Monica Chrome Extension Archive (2024)",
+      "description": "Earlier archive of Monica Chrome Web Store listing.",
+      "dateCaptured": "2024-12-01",
+      "verified": true,
+      "mainSourceUrl": "https://archive.today/r6LSL",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "chrome",
+        "extension",
+        "monica",
+        "historical"
+      ],
+      "notes": "",
+      "mainCategory": "Browser Extensions"
+    },
+    {
+      "id": "150",
+      "category": "Browser Extensions",
+      "title": "Monica Edge Add-on Archive (2024)",
+      "description": "Earlier archive of Monica Edge Add-on listing.",
+      "dateCaptured": "2024-12-01",
+      "verified": true,
+      "mainSourceUrl": "https://archive.today/znDuw",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "edge",
+        "extension",
+        "monica",
+        "historical"
+      ],
+      "notes": "",
+      "mainCategory": "Browser Extensions"
+    },
+    {
+      "id": "151",
+      "category": "Corporate Records",
+      "title": "ByteDance $30 Million Acquisition Attempt (Early 2024)",
+      "description": "Evidence that ByteDance attempted to acquire Butterfly Effect for $30 million in early 2024 before Manus existed. Xiao declined.",
+      "dateCaptured": "2024-01-01",
+      "verified": true,
+      "mainSourceUrl": "https://perma.cc/7YXS-JVQB?type=image",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "bytedance",
+        "acquisition",
+        "30-million",
+        "butterfly-effect",
+        "zhang-tao"
+      ],
+      "notes": "",
+      "mainCategory": "Corporate Records"
+    },
+    {
+      "id": "152",
+      "category": "Product Hunt",
+      "title": "Zhang Tao (Hidecloud) Product Hunt Profile",
+      "description": "Product Hunt profile for Zhang Tao (Hidecloud), Butterfly Effect CPO and 15-year ByteDance veteran. Listed as maker of Manus.",
+      "dateCaptured": "2026-01-30",
+      "verified": true,
+      "mainSourceUrl": "https://www.producthunt.com/@hidecloud",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "https://megalodon.jp/2026-0130-1355-09/https://www.producthunt.com:443/@hidecloud",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "product-hunt",
+        "zhang-tao",
+        "hidecloud",
+        "bytedance",
+        "manus"
+      ],
+      "notes": "",
+      "mainCategory": "Product Hunt"
+    },
+    {
+      "id": "153",
+      "category": "Corporate Records",
+      "title": "StacksNet.com - Stack Network Limited",
+      "description": "Archived Stack Network website showing company information.",
+      "dateCaptured": "2018-08-05",
+      "verified": true,
+      "mainSourceUrl": "https://web.archive.org/web/20180805114139/https://stacksnet.com/",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "https://archive.ph/e2Onl",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "stacksnet",
+        "stack-network",
+        "luo-baishun",
+        "historical"
+      ],
+      "notes": "",
+      "mainCategory": "Corporate Records"
+    },
+    {
+      "id": "154",
+      "category": "Corporate Records",
+      "title": "TheStack.net - Stack Network Limited",
+      "description": "Stack Network Limited corporate website.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://thestack.net",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "thestack",
+        "stack-network",
+        "luo-baishun"
+      ],
+      "notes": "",
+      "mainCategory": "Corporate Records"
+    },
+    {
+      "id": "155",
+      "category": "Corporate Records",
+      "title": "PACIDC Technology Limited - Stack Network Former Name",
+      "description": "Company information showing Stack Network was originally PACIDC Technology Limited before 2016 name change.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://www.ltddir.com/companies/pacidc-technology-limited/",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "pacidc",
+        "stack-network",
+        "luo-baishun",
+        "historical"
+      ],
+      "notes": "",
+      "mainCategory": "Corporate Records"
+    },
+    {
+      "id": "156",
+      "category": "Social Media",
+      "title": "Stack Network Limited LinkedIn",
+      "description": "LinkedIn company page for Stack Network Limited claiming 22 employees, founded 2014.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://www.linkedin.com/company/stacksnet",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "https://archive.today/gCHcI",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "linkedin",
+        "stack-network",
+        "luo-baishun",
+        "company"
+      ],
+      "notes": "",
+      "mainCategory": "Social Media"
+    },
+    {
+      "id": "157",
+      "category": "App Stores",
+      "title": "God's Will - Daily Bible App (Stack Network)",
+      "description": "God's Will Daily Bible app published by Stack Network Limited.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://apps.apple.com/us/app/godswill-daily-bible/id6755139630",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "godswill",
+        "bible",
+        "stack-network",
+        "luo-baishun",
+        "app"
+      ],
+      "notes": "",
+      "mainCategory": "App Stores"
+    },
+    {
+      "id": "158",
+      "category": "App Stores",
+      "title": "GNGM - Sleep Habit App (Stack Network)",
+      "description": "GNGM Sleep Habit app published by Stack Network Limited.",
+      "dateCaptured": "2026-01-27",
+      "verified": true,
+      "mainSourceUrl": "https://apps.apple.com/us/app/gngm-sleep-habit-app/id6751865597",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "gngm",
+        "sleep",
+        "stack-network",
+        "luo-baishun",
+        "app"
+      ],
+      "notes": "",
+      "mainCategory": "App Stores"
+    },
+    {
+      "id": "159",
+      "category": "Personal Archives",
+      "title": "Archive List - Old Version (Disregard Unless Issue Arises)",
+      "description": "Older version of archive list. Disregard unless needed for reference.",
+      "dateCaptured": "2026-01-23",
+      "verified": true,
+      "mainSourceUrl": "https://monica.im/share/chat?shareId=Q0uU4Nb3bzNl3Euy",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "https://perma.cc/73FA-L3BN",
+        "archiveOrg": "https://web.archive.org/web/20260123073438/https://monica.im/share/chat?shareId=Q0uU4Nb3bzNl3Euy",
+        "archiveToday": "https://archive.today/Uq1Qj",
+        "megalodonJp": "https://megalodon.jp/2026-0123-1636-58/https://monica.im:443/share/chat?shareId=Q0uU4Nb3bzNl3Euy",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "archive-list",
+        "old",
+        "reference"
+      ],
+      "notes": "",
+      "mainCategory": "Personal Archives"
+    },
+    {
+      "id": "160",
+      "category": "Corporate Records",
+      "title": "Zhang Tao - ByteDance Connection Summary",
+      "description": "Zhang Tao is Butterfly Effect's third co-founder and CPO, 15-year ByteDance veteran. Online handle 'Hidecloud' links to RiftPodcast (in Xiao Red's WHOIS records).",
+      "dateCaptured": "2026-01-30",
+      "verified": true,
+      "mainSourceUrl": "https://archive.today/Bsyed",
+      "additionalUrls": [],
+      "standardMirrors": {
+        "permaCc": "",
+        "archiveOrg": "",
+        "archiveToday": "",
+        "megalodonJp": "",
+        "ghostArchive": ""
+      },
+      "customMirrors": [],
+      "cids": [],
+      "tags": [
+        "zhang-tao",
+        "hidecloud",
+        "bytedance",
+        "butterfly-effect",
+        "cpo"
+      ],
+      "notes": "",
+      "mainCategory": "Corporate Records"
+    },
+    {
+      "id": "161",
+      "title": "",
+      "incomplete": true
+    }
+  ]
+}

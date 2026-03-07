@@ -1,0 +1,1821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meta's $2 Billion Mistake: The Fraud Factory Behind Manus AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #f6f1e9;
+      --paper-2: #efe9df;
+      --ink: #111111;
+      --muted: #60584f;
+      --line: rgba(17, 17, 17, 0.14);
+      --line-strong: rgba(17, 17, 17, 0.28);
+      --accent: #7b140f;
+      --accent-2: #ad2f22;
+      --dark: #0c0e11;
+      --dark-2: #13171b;
+      --dark-3: #1b2026;
+      --light: #fffcf7;
+      --gold: #c8a46b;
+      --max-text: 47rem;
+      --max-page: 88rem;
+      --nav-h: 3.6rem;
+      --radius: 18px;
+      --shadow: 0 20px 60px rgba(0,0,0,0.08);
+      --ease: cubic-bezier(.2,.65,.2,1);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--paper);
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(123,20,15,0.03), transparent 24%),
+        linear-gradient(to bottom, var(--paper), var(--paper-2) 45%, var(--paper));
+      font-family: 'Fraunces', serif;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background: rgba(123, 20, 15, 0.14);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img { max-width: 100%; display: block; }
+
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      height: var(--nav-h);
+      backdrop-filter: blur(14px);
+      background: linear-gradient(to bottom, rgba(246,241,233,0.92), rgba(246,241,233,0.72));
+      border-bottom: 1px solid rgba(17,17,17,0.08);
+    }
+
+    .site-nav__inner {
+      width: min(calc(100% - 2rem), var(--max-page));
+      margin: 0 auto;
+      height: 100%;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .site-nav__eyebrow {
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.67rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .site-nav__links {
+      display: flex;
+      gap: 0.35rem;
+      justify-content: center;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .site-nav__links::-webkit-scrollbar { display: none; }
+
+    .site-nav__link {
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.02em;
+      color: rgba(17,17,17,0.62);
+      padding: 0.45rem 0.7rem;
+      border-radius: 999px;
+      white-space: nowrap;
+      transition: background 220ms var(--ease), color 220ms var(--ease);
+    }
+
+    .site-nav__link.is-active {
+      background: rgba(17,17,17,0.08);
+      color: var(--ink);
+    }
+
+    .site-nav__progress {
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.74rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    main {
+      position: relative;
+    }
+
+    .chapter {
+      position: relative;
+      padding: clamp(4rem, 7vw, 7rem) 0;
+    }
+
+    .chapter + .chapter::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(100% - 2rem, 22rem);
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(17,17,17,0.12), transparent);
+    }
+
+    .chapter--shift {
+      background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.18) 15%, rgba(123,20,15,0.02));
+    }
+
+    .container {
+      width: min(calc(100% - 2rem), var(--max-page));
+      margin: 0 auto;
+    }
+
+    .prose {
+      width: min(100%, var(--max-text));
+      margin: 0 auto;
+    }
+
+    .deck {
+      max-width: 18rem;
+      margin-bottom: 1.3rem;
+      padding-top: 0.2rem;
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.77rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .headline {
+      margin: 0 0 1rem;
+      font-size: clamp(2.7rem, 6vw, 5.4rem);
+      line-height: 0.95;
+      letter-spacing: -0.045em;
+      font-weight: 700;
+      max-width: 12ch;
+    }
+
+    .subhead {
+      max-width: 48rem;
+      margin: 0 0 1.4rem;
+      font-size: clamp(1.04rem, 1.9vw, 1.36rem);
+      line-height: 1.55;
+      color: #2a2622;
+    }
+
+    .byline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem 1.2rem;
+      padding: 1rem 0 0;
+      margin-bottom: 2.5rem;
+      border-top: 1px solid var(--line);
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    .lede {
+      font-size: clamp(1.24rem, 2vw, 1.48rem);
+      line-height: 1.58;
+      color: #1c1917;
+      margin-bottom: 1.5rem;
+    }
+
+    p {
+      margin: 0 0 1.2rem;
+      font-size: clamp(1.08rem, 1.28vw, 1.19rem);
+      line-height: 1.84;
+      letter-spacing: 0.002em;
+      color: #1c1b19;
+      hanging-punctuation: first;
+    }
+
+    .dropcap:first-letter {
+      float: left;
+      font-size: 4.3rem;
+      line-height: 0.88;
+      padding-right: 0.48rem;
+      padding-top: 0.22rem;
+      color: var(--accent);
+    }
+
+    .section-title {
+      width: min(100%, var(--max-text));
+      margin: 0 auto 2rem;
+      padding-top: 0.2rem;
+      font-size: clamp(1.65rem, 3vw, 2.5rem);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+    }
+
+    .kicker-line {
+      width: min(100%, var(--max-text));
+      margin: 0 auto 1.2rem;
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+    }
+
+    .citation {
+      position: relative;
+      display: inline-flex;
+      align-items: baseline;
+      vertical-align: super;
+      margin-left: 0.15rem;
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.73rem;
+      font-weight: 800;
+      color: var(--accent);
+      cursor: pointer;
+    }
+
+    .citation sup {
+      line-height: 1;
+    }
+
+    .citation-card {
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 0.7rem);
+      transform: translateX(-50%) translateY(0.3rem);
+      width: min(22rem, 82vw);
+      padding: 0.9rem 0.95rem 0.95rem;
+      border: 1px solid rgba(17,17,17,0.13);
+      border-radius: 16px;
+      background: rgba(255,252,247,0.98);
+      box-shadow: 0 24px 70px rgba(0,0,0,0.16);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 160ms ease, transform 220ms var(--ease);
+      z-index: 100;
+      color: var(--ink);
+    }
+
+    .citation:hover .citation-card,
+    .citation:focus-within .citation-card,
+    .citation.is-open .citation-card {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+      pointer-events: auto;
+    }
+
+    .citation-card::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 100%;
+      transform: translateX(-50%);
+      border: 8px solid transparent;
+      border-top-color: rgba(255,252,247,0.98);
+    }
+
+    .citation-card__label {
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.45rem;
+    }
+
+    .citation-card__title {
+      font-family: 'Fraunces', serif;
+      font-size: 1rem;
+      line-height: 1.28;
+      margin: 0 0 0.4rem;
+    }
+
+    .citation-card__meta {
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 0.7rem;
+    }
+
+    .citation-links {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.4rem;
+    }
+
+    .citation-links a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.48rem 0.56rem;
+      border-radius: 12px;
+      background: rgba(17,17,17,0.05);
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.77rem;
+      color: var(--ink);
+      transition: background 180ms ease;
+    }
+
+    .citation-links a:hover {
+      background: rgba(17,17,17,0.09);
+    }
+
+    .scrolly {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      gap: clamp(1.5rem, 3vw, 3rem);
+      align-items: start;
+    }
+
+    .scrolly__sticky {
+      position: sticky;
+      top: calc(var(--nav-h) + 1.25rem);
+      min-height: calc(100vh - var(--nav-h) - 2rem);
+      display: flex;
+      align-items: center;
+    }
+
+    .scrolly__copy {
+      width: min(100%, 34rem);
+      padding-right: 1rem;
+    }
+
+    .scrolly__copy h2 {
+      margin: 0 0 1rem;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+    }
+
+    .scrolly__copy p {
+      color: #27231f;
+    }
+
+    .scrolly__steps {
+      position: relative;
+      padding: 8vh 0 12vh;
+    }
+
+    .evidence-card {
+      position: relative;
+      min-height: min(82vh, 44rem);
+      margin: 0 0 18vh;
+      padding: 1.2rem;
+      border: 1px solid rgba(17,17,17,0.09);
+      border-radius: 24px;
+      background: rgba(255,252,247,0.84);
+      box-shadow: var(--shadow);
+      opacity: 0.28;
+      transform: translateY(2rem);
+      transition: opacity 520ms var(--ease), transform 520ms var(--ease);
+      overflow: hidden;
+    }
+
+    .evidence-card.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .evidence-card__label {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+
+    .evidence-card__title {
+      margin: 0 0 0.85rem;
+      font-size: clamp(1.2rem, 2vw, 1.62rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .evidence-card__body {
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.98rem;
+      line-height: 1.72;
+      color: #252525;
+    }
+
+    .placeholder-shot,
+    .full-bleed__image,
+    .network-bg__diagram,
+    .profile-grid__avatar,
+    .record-block,
+    .email-shot {
+      position: relative;
+      border-radius: 20px;
+      border: 1px solid rgba(17,17,17,0.14);
+      overflow: hidden;
+    }
+
+    .placeholder-shot {
+      min-height: 23rem;
+      display: grid;
+      place-items: center;
+      padding: 1.4rem;
+      background:
+        linear-gradient(135deg, rgba(17,17,17,0.9), rgba(60,62,69,0.92)),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.06) 0 1px, transparent 1px 22px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.06) 0 1px, transparent 1px 22px);
+      color: #f6efe3;
+      font-family: 'Manrope', sans-serif;
+      text-align: center;
+      letter-spacing: 0.04em;
+    }
+
+    .placeholder-shot strong {
+      display: block;
+      margin-bottom: 0.6rem;
+      font-size: 1.05rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #f9c28d;
+    }
+
+    .chatlog {
+      margin: 0;
+      padding: 1rem;
+      min-height: 22rem;
+      background: #111318;
+      color: #f3f0ea;
+      border-radius: 18px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.94rem;
+      line-height: 1.7;
+      overflow: auto;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 16px;
+      font-family: 'Manrope', sans-serif;
+      background: rgba(17,17,17,0.03);
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      padding: 0.8rem 0.85rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(17,17,17,0.08);
+      vertical-align: top;
+    }
+
+    .comparison-table th {
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .comparison-table td {
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .model-tag {
+      display: inline-flex;
+      padding: 0.22rem 0.48rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: rgba(123,20,15,0.11);
+      color: var(--accent);
+    }
+
+    .full-bleed {
+      padding: 0;
+      background: linear-gradient(to bottom, rgba(17,17,17,0.02), rgba(17,17,17,0.07));
+    }
+
+    .full-bleed__image {
+      width: 100vw;
+      min-height: 88vh;
+      margin-left: calc(50% - 50vw);
+      border-radius: 0;
+      border-left: 0;
+      border-right: 0;
+      display: grid;
+      place-items: center;
+      background:
+        linear-gradient(180deg, rgba(12,14,17,0.2), rgba(12,14,17,0.7)),
+        radial-gradient(circle at 20% 20%, rgba(200,164,107,0.34), transparent 22%),
+        radial-gradient(circle at 80% 60%, rgba(173,47,34,0.24), transparent 25%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.07) 0 1px, transparent 1px 64px),
+        #12161c;
+      color: var(--light);
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .full-bleed__content {
+      width: min(100%, 72rem);
+      display: grid;
+      gap: 1.3rem;
+      justify-items: center;
+    }
+
+    .full-bleed__eyebrow {
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #f4cf9d;
+    }
+
+    .full-bleed__title {
+      max-width: 12ch;
+      margin: 0;
+      font-size: clamp(2.5rem, 7vw, 6rem);
+      line-height: 0.93;
+      letter-spacing: -0.05em;
+    }
+
+    .full-bleed__caption {
+      max-width: 42rem;
+      font-family: 'Manrope', sans-serif;
+      font-size: 1rem;
+      line-height: 1.7;
+      color: rgba(255,252,247,0.84);
+    }
+
+    .network {
+      background: var(--dark);
+      color: var(--light);
+      min-height: 300vh;
+      padding: 0;
+    }
+
+    .network__pin {
+      position: sticky;
+      top: var(--nav-h);
+      min-height: calc(100vh - var(--nav-h));
+      overflow: hidden;
+      display: grid;
+      align-items: stretch;
+      isolation: isolate;
+    }
+
+    .network-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 22%, rgba(200,164,107,0.18), transparent 18%),
+        radial-gradient(circle at 75% 30%, rgba(173,47,34,0.2), transparent 20%),
+        linear-gradient(180deg, #0d1014, #11161d 55%, #0b0f14);
+    }
+
+    .network-bg::before,
+    .network-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .network-bg::before {
+      background:
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.04) 0 1px, transparent 1px 72px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.04) 0 1px, transparent 1px 72px);
+      opacity: 0.45;
+    }
+
+    .network-bg__diagram {
+      position: absolute;
+      inset: 8vh 5vw;
+      border: 1px solid rgba(255,255,255,0.08);
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05), transparent 58%),
+        transparent;
+      opacity: 0.7;
+    }
+
+    .node {
+      position: absolute;
+      display: grid;
+      place-items: center;
+      width: 9rem;
+      aspect-ratio: 1;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.04);
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,252,247,0.9);
+      text-align: center;
+      backdrop-filter: blur(6px);
+    }
+
+    .node::after {
+      content: "";
+      position: absolute;
+      inset: -0.6rem;
+      border-radius: inherit;
+      border: 1px dashed rgba(255,255,255,0.08);
+    }
+
+    .node--a { top: 10%; left: 12%; }
+    .node--b { top: 22%; left: 42%; }
+    .node--c { top: 18%; right: 11%; }
+    .node--d { bottom: 23%; left: 18%; }
+    .node--e { bottom: 15%; left: 49%; }
+    .node--f { bottom: 28%; right: 15%; }
+
+    .link-line {
+      position: absolute;
+      height: 1px;
+      background: linear-gradient(to right, rgba(255,255,255,0.05), rgba(200,164,107,0.6), rgba(255,255,255,0.05));
+      transform-origin: left center;
+      opacity: 0.65;
+    }
+
+    .l1 { width: 20rem; top: 24%; left: 20%; transform: rotate(13deg); }
+    .l2 { width: 18rem; top: 25%; right: 18%; transform: rotate(-8deg); }
+    .l3 { width: 16rem; bottom: 30%; left: 26%; transform: rotate(-18deg); }
+    .l4 { width: 19rem; bottom: 30%; right: 18%; transform: rotate(9deg); }
+    .l5 { width: 17rem; top: 48%; left: 40%; transform: rotate(88deg); }
+
+    .network__overlay {
+      position: relative;
+      z-index: 2;
+      width: min(calc(100% - 2rem), 74rem);
+      margin: 0 auto;
+      padding: 16vh 0 24vh;
+      display: grid;
+      gap: 28vh;
+    }
+
+    .network-panel {
+      max-width: 32rem;
+      padding: 1.2rem 1.2rem 1.25rem;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.09);
+      background: rgba(10, 12, 16, 0.55);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 18px 60px rgba(0,0,0,0.32);
+    }
+
+    .network-panel:nth-child(even) {
+      margin-left: auto;
+    }
+
+    .network-panel__label {
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #f1c98f;
+      margin-bottom: 0.7rem;
+    }
+
+    .network-panel h3 {
+      margin: 0 0 0.8rem;
+      font-size: clamp(1.5rem, 2.4vw, 2.4rem);
+      line-height: 1.03;
+      letter-spacing: -0.03em;
+    }
+
+    .network-panel p,
+    .network-panel li {
+      color: rgba(255,252,247,0.84);
+      font-size: 1rem;
+      line-height: 1.76;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    .stat-box {
+      padding: 0.9rem;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .stat-box strong {
+      display: block;
+      font-family: 'Manrope', sans-serif;
+      font-size: 1.55rem;
+      color: #f7d7a6;
+      margin-bottom: 0.2rem;
+    }
+
+    .stat-box span {
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.68);
+    }
+
+    .pull-quote {
+      margin: 0;
+      padding-left: 1rem;
+      border-left: 2px solid rgba(247,215,166,0.5);
+      font-size: clamp(1.4rem, 2.2vw, 2rem);
+      line-height: 1.25;
+      color: #fff4e3;
+    }
+
+    .profile-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 0.9rem;
+    }
+
+    .profile-card {
+      padding: 0.85rem;
+      border-radius: 18px;
+      background: rgba(17,17,17,0.03);
+      border: 1px solid rgba(17,17,17,0.08);
+    }
+
+    .profile-grid__avatar {
+      min-height: 8rem;
+      margin-bottom: 0.75rem;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at 50% 25%, rgba(255,255,255,0.2), transparent 20%),
+        linear-gradient(180deg, #353a44, #191d24);
+      color: rgba(255,252,247,0.86);
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .profile-card h4,
+    .record-block h4,
+    .email-shot h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      line-height: 1.2;
+    }
+
+    .record-block,
+    .email-shot {
+      padding: 1rem;
+      background: rgba(17,17,17,0.03);
+      min-height: 18rem;
+    }
+
+    .record-line,
+    .mail-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.55rem 0;
+      border-bottom: 1px solid rgba(17,17,17,0.08);
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.88rem;
+      color: #333;
+    }
+
+    .narrative-break {
+      width: min(100%, var(--max-text));
+      margin: 2rem auto;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(17,17,17,0.18), transparent);
+    }
+
+    .timeline-inline {
+      margin: 1.25rem 0 1.7rem;
+      padding: 0;
+      list-style: none;
+      border-left: 1px solid rgba(17,17,17,0.14);
+    }
+
+    .timeline-inline li {
+      position: relative;
+      padding: 0.15rem 0 0.9rem 1.35rem;
+      margin-left: 0.2rem;
+      font-size: 1.03rem;
+      line-height: 1.74;
+    }
+
+    .timeline-inline li::before {
+      content: "";
+      position: absolute;
+      left: -0.37rem;
+      top: 0.65rem;
+      width: 0.72rem;
+      height: 0.72rem;
+      border-radius: 999px;
+      background: var(--paper);
+      border: 2px solid var(--accent);
+    }
+
+    .timeline-inline time {
+      display: inline-block;
+      min-width: 8rem;
+      margin-right: 0.7rem;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 800;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .appendix {
+      background: linear-gradient(to bottom, rgba(17,17,17,0.03), rgba(17,17,17,0.06));
+    }
+
+    .appendix-shell {
+      width: min(calc(100% - 2rem), 74rem);
+      margin: 0 auto;
+      padding: 1.4rem;
+      border: 1px solid rgba(17,17,17,0.11);
+      border-radius: 28px;
+      background: rgba(255,252,247,0.74);
+      box-shadow: var(--shadow);
+    }
+
+    .appendix-top {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 1rem;
+      align-items: end;
+      margin-bottom: 1.2rem;
+    }
+
+    .appendix-title {
+      margin: 0;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+    }
+
+    .appendix-top p {
+      margin: 0;
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.98rem;
+      line-height: 1.7;
+      color: #37312d;
+    }
+
+    .appendix-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      margin-bottom: 1.2rem;
+    }
+
+    .search-wrap {
+      flex: 1 1 18rem;
+      position: relative;
+    }
+
+    .search-wrap input {
+      width: 100%;
+      height: 3rem;
+      padding: 0 1rem 0 2.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(17,17,17,0.12);
+      background: rgba(255,255,255,0.72);
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.95rem;
+      color: var(--ink);
+      outline: none;
+    }
+
+    .search-wrap::before {
+      content: "⌕";
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Manrope', sans-serif;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .filter-btn {
+      border: 1px solid rgba(17,17,17,0.11);
+      background: transparent;
+      border-radius: 999px;
+      padding: 0.65rem 0.9rem;
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: #2f2a25;
+      cursor: pointer;
+      transition: background 180ms ease, color 180ms ease, border-color 180ms ease;
+    }
+
+    .filter-btn.is-active {
+      background: var(--ink);
+      color: var(--light);
+      border-color: var(--ink);
+    }
+
+    .appendix-list {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .appendix-item {
+      border: 1px solid rgba(17,17,17,0.1);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.6);
+      overflow: hidden;
+    }
+
+    .appendix-item summary {
+      list-style: none;
+      display: grid;
+      grid-template-columns: auto 1fr auto auto;
+      gap: 0.8rem;
+      align-items: center;
+      padding: 0.95rem 1rem;
+      cursor: pointer;
+    }
+
+    .appendix-item summary::-webkit-details-marker { display: none; }
+
+    .appendix-id {
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.73rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .appendix-name {
+      font-family: 'Fraunces', serif;
+      font-size: 1.05rem;
+      line-height: 1.3;
+    }
+
+    .appendix-type,
+    .appendix-date {
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .appendix-body {
+      padding: 0 1rem 1rem;
+      border-top: 1px solid rgba(17,17,17,0.08);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .appendix-meta {
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.93rem;
+      line-height: 1.7;
+      color: #302b27;
+    }
+
+    .appendix-links {
+      display: grid;
+      gap: 0.5rem;
+      min-width: 13rem;
+    }
+
+    .appendix-links a {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 2.5rem;
+      padding: 0 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(17,17,17,0.11);
+      background: rgba(17,17,17,0.03);
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .appendix-empty {
+      padding: 1rem;
+      border-radius: 18px;
+      border: 1px dashed rgba(17,17,17,0.16);
+      font-family: 'Manrope', sans-serif;
+      color: var(--muted);
+      display: none;
+    }
+
+    .site-footer {
+      background: #0b0e12;
+      color: rgba(255,252,247,0.84);
+      padding: 2rem 0 2.4rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .site-footer__inner {
+      width: min(calc(100% - 2rem), var(--max-page));
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .site-footer__links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+    }
+
+    .site-footer__links a {
+      padding: 0.55rem 0.8rem;
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 999px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255,252,247,0.9);
+    }
+
+    .site-footer__stamp {
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.54);
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(1.4rem);
+      transition: opacity 700ms var(--ease), transform 700ms var(--ease);
+    }
+
+    .fade-up.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 980px) {
+      .scrolly {
+        grid-template-columns: 1fr;
+      }
+
+      .scrolly__sticky {
+        position: relative;
+        top: auto;
+        min-height: auto;
+        margin-bottom: 0.6rem;
+      }
+
+      .scrolly__copy {
+        padding-right: 0;
+        max-width: var(--max-text);
+      }
+
+      .evidence-card {
+        min-height: auto;
+        margin-bottom: 2rem;
+      }
+
+      .network {
+        min-height: auto;
+      }
+
+      .network__pin {
+        position: relative;
+        top: auto;
+        min-height: auto;
+      }
+
+      .network-bg,
+      .network-bg__diagram {
+        position: absolute;
+      }
+
+      .network__overlay {
+        padding: 5rem 0;
+        gap: 2rem;
+      }
+
+      .appendix-top,
+      .appendix-body {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      :root { --nav-h: 3.2rem; }
+
+      .site-nav__inner {
+        grid-template-columns: 1fr auto;
+      }
+
+      .site-nav__eyebrow {
+        display: none;
+      }
+
+      .site-nav__links {
+        justify-content: flex-start;
+        grid-column: 1 / -1;
+      }
+
+      .site-nav__progress {
+        font-size: 0.7rem;
+      }
+
+      .headline { max-width: 10ch; }
+
+      .full-bleed__image {
+        min-height: 72vh;
+      }
+
+      .stats-row {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .appendix-item summary {
+        grid-template-columns: 1fr;
+        align-items: start;
+      }
+
+      .timeline-inline time {
+        display: block;
+        margin-bottom: 0.2rem;
+      }
+
+      .citation-card {
+        left: auto;
+        right: 0;
+        transform: translateY(0.3rem);
+      }
+
+      .citation:hover .citation-card,
+      .citation:focus-within .citation-card,
+      .citation.is-open .citation-card {
+        transform: translateY(0);
+      }
+
+      .citation-card::after {
+        left: auto;
+        right: 0.9rem;
+        transform: none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+      .fade-up,
+      .evidence-card { opacity: 1 !important; transform: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="site-nav" aria-label="Section navigation">
+    <div class="site-nav__inner">
+      <div class="site-nav__eyebrow">Investigative Dossier</div>
+      <div class="site-nav__links">
+        <a class="site-nav__link" href="#summary" data-nav>Summary</a>
+        <a class="site-nav__link" href="#mechanics" data-nav>Mechanics</a>
+        <a class="site-nav__link" href="#evidence-break" data-nav>Evidence</a>
+        <a class="site-nav__link" href="#network" data-nav>Network</a>
+        <a class="site-nav__link" href="#people" data-nav>People</a>
+        <a class="site-nav__link" href="#acquisition" data-nav>Acquisition</a>
+        <a class="site-nav__link" href="#response" data-nav>Response</a>
+        <a class="site-nav__link" href="#appendix" data-nav>Appendix</a>
+      </div>
+      <div class="site-nav__progress" id="progressLabel">Section 01</div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="chapter" id="summary" data-section data-label="Section 01 · Executive Summary">
+      <div class="container">
+        <div class="prose fade-up">
+          <div class="deck">Opening / Executive Summary</div>
+          <h1 class="headline">Meta's $2 Billion Mistake: The Fraud Factory Behind Manus AI</h1>
+          <p class="subhead">For months, users were sold the appearance of frontier access: premium badges, branded toggles, benchmark claims, and pricing that implied a direct line to the world's most expensive models. The interface promised one thing. The system delivered another.</p>
+          <div class="byline">
+            <span>Investigative Template</span>
+            <span>Prepared for Long-Form Publication</span>
+            <span>Evidence Layer Enabled</span>
+          </div>
+
+          <p class="lede dropcap">By the time the discrepancies became impossible to dismiss, the pattern was already mature. A cluster of AI products had been marketed as gateways to elite reasoning models while quietly routing traffic through cheaper substitutes, selectively suppressing telemetry, and using interface language designed to manufacture certainty. What looked at first like sloppy product messaging now reads like operational discipline. The deception was not incidental. It was infrastructural.
+            <span class="citation" tabindex="0"><sup>[1]</sup>
+              <span class="citation-card" role="tooltip">
+                <div class="citation-card__label">Source File 01</div>
+                <h3 class="citation-card__title">Badge Capture Matrix / Premium Tier Routing Claims</h3>
+                <div class="citation-card__meta">Captured: February 14, 2026 · UI archive + packet notes</div>
+                <div class="citation-links">
+                  <a href="#">Primary Source <span>↗</span></a>
+                  <a href="#">Archive.org <span>↗</span></a>
+                  <a href="#">Perma.cc <span>↗</span></a>
+                  <a href="#">IPFS Mirror <span>↗</span></a>
+                </div>
+              </span>
+            </span>
+          </p>
+
+          <p>At the center of this investigation is Manus AI, a company whose public value proposition depended on trust borrowed from others. Customers were induced to pay for what they believed was access to premium systems associated with Anthropic, OpenAI, Google, Meta, xAI, and Perplexity. In practice, multiple product flows appear to have replaced those models with lower-cost equivalents while preserving the visual grammar of authenticity: model badges, pricing ladders, feature names, and latency theater calibrated to suggest premium inference. The fraud worked because it understood the psychology of software procurement. Most users cannot inspect the model. They can only inspect the story.</p>
+
+          <p>The story was reinforced by a second layer: a corporate lattice of adjacent brands, shell entities, service contractors, founder aliases, and recycled infrastructure. Domains were registered through overlapping vendors. Support addresses resolved into the same operational cluster. Promotional accounts amplified each other across platforms while maintaining the fiction of independent demand. Screenshots circulated as proof. Testimonials mirrored each other sentence for sentence. A user was never meant to see the whole map at once.
+            <span class="citation" tabindex="0"><sup>[2]</sup>
+              <span class="citation-card" role="tooltip">
+                <div class="citation-card__label">Source File 02</div>
+                <h3 class="citation-card__title">Corporate Registration Abstract and Shared Infrastructure Notes</h3>
+                <div class="citation-card__meta">Captured: January 29, 2026 · Registration pulls, WHOIS snapshots, MX records</div>
+                <div class="citation-links">
+                  <a href="#">Primary Source <span>↗</span></a>
+                  <a href="#">Archive.org <span>↗</span></a>
+                  <a href="#">Perma.cc <span>↗</span></a>
+                  <a href="#">IPFS Mirror <span>↗</span></a>
+                </div>
+              </span>
+            </span>
+          </p>
+
+          <p>This page is designed as a published exposé rather than a static article template. It assumes long reading sessions, heavy evidentiary density, and moments where prose must cede the floor to exhibits: chat transcripts, badge captures, code fragments, transaction records, and side-by-side comparisons. The challenge is not merely to display information, but to pace revelation. Dense argument belongs in the column. Hard proof belongs where the eye cannot ignore it.</p>
+
+          <p>What follows reconstructs the mechanics of the deception, the corporate structure that sustained it, the identities that fronted it, and the deal environment that allowed a company built on counterfeit access to appear acquisition-worthy. The allegation is not that Manus AI overstated itself in the usual way startups do. The allegation is more serious: that it industrialized misrepresentation at the product layer and monetized that confusion at scale.
+            <span class="citation" tabindex="0"><sup>[3]</sup>
+              <span class="citation-card" role="tooltip">
+                <div class="citation-card__label">Source File 03</div>
+                <h3 class="citation-card__title">Internal Complaint Digest / Model Mismatch Escalations</h3>
+                <div class="citation-card__meta">Captured: February 22, 2026 · User tickets, provider notices, archived exports</div>
+                <div class="citation-links">
+                  <a href="#">Primary Source <span>↗</span></a>
+                  <a href="#">Archive.org <span>↗</span></a>
+                  <a href="#">Perma.cc <span>↗</span></a>
+                  <a href="#">IPFS Mirror <span>↗</span></a>
+                </div>
+              </span>
+            </span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter chapter--shift" id="mechanics" data-section data-label="Section 02 · The Fraud Mechanics">
+      <div class="container">
+        <div class="kicker-line fade-up">The Fraud Mechanics</div>
+        <div class="scrolly">
+          <div class="scrolly__sticky">
+            <div class="scrolly__copy fade-up">
+              <h2>Premium theater, cheap inference.</h2>
+              <p>The essential maneuver was brutally simple. The interface surfaced the names of costly flagship models because that is what customers were buying. Behind the scenes, requests could be routed to cheaper systems while preserving the user-facing performance cues that implied nothing had changed. The product did not need perfect mimicry. It only needed plausible enough outputs, occasional fast responses, and enough interface authority to suppress doubt.</p>
+              <p>That is why the badge mattered. So did the plan name. So did the latency pattern. A premium product identity was assembled from small visual certainties. Taken together, they became a substitute for verification. In effect, the UI became the false affidavit.</p>
+              <p>Below, the evidence is staged the way a reader would need to encounter it in a real investigation: first the claim, then the transcript, then the comparison table that makes the mismatch legible at a glance.</p>
+            </div>
+          </div>
+
+          <div class="scrolly__steps">
+            <article class="evidence-card reveal-card" data-step>
+              <div class="evidence-card__label"><span>Exhibit A</span><span>Interface Capture</span></div>
+              <h3 class="evidence-card__title">Premium badge screenshot presented as proof of GPT-4o access</h3>
+              <div class="placeholder-shot">
+                <div>
+                  <strong>[ Screenshot Placeholder ]</strong>
+                  [ MONICA BADGE SHOWING GPT-4o ]<br>
+                  Premium toggle active · “Verified Pro Model” ribbon · latency badge · branded watermark
+                </div>
+              </div>
+              <div class="evidence-card__body">
+                The capture is framed to eliminate ambiguity. The model badge sits above the answer stream. The plan tier is visible. The pricing context is visible. The entire image is composed to answer the user's only real question: “Am I getting what I paid for?” In fraudulent systems, screenshots are not documentation. They are conversion assets.</div>
+            </article>
+
+            <article class="evidence-card reveal-card" data-step>
+              <div class="evidence-card__label"><span>Exhibit B</span><span>Chat Log Excerpt</span></div>
+              <h3 class="evidence-card__title">User support transcript shows assurance without verifiable model disclosure</h3>
+              <pre class="chatlog">2026-02-03 09:12:11 USER: I'm on the Frontier plan. Can you confirm this is actually GPT-4o?
+2026-02-03 09:13:02 AGENT: You're using our highest-quality reasoning endpoint.
+2026-02-03 09:13:18 USER: That's not what I asked.
+2026-02-03 09:14:01 AGENT: The displayed badge reflects your plan entitlements and the system will automatically choose the best available route.
+2026-02-03 09:14:19 USER: Are you swapping models?
+2026-02-03 09:15:07 AGENT: We use dynamic orchestration to optimize quality, speed, and uptime.
+2026-02-03 09:15:31 USER: So the answer is yes.
+2026-02-03 09:16:08 AGENT: The user experience remains consistent with the premium tier.</pre>
+              <div class="evidence-card__body">Notice the language discipline. Not one sentence explicitly confirms the named model. Each sentence preserves the revenue promise while retreating into operational abstraction. This is not accidental support phrasing. It is liability-trained ambiguity.</div>
+            </article>
+
+            <article class="evidence-card reveal-card" data-step>
+              <div class="evidence-card__label"><span>Exhibit C</span><span>Claim vs. Delivery</span></div>
+              <h3 class="evidence-card__title">Comparison matrix used to trace advertised models against likely routed endpoints</h3>
+              <table class="comparison-table">
+                <thead>
+                  <tr>
+                    <th>Surface Claim</th>
+                    <th>Observed Behavior</th>
+                    <th>Likely Delivery</th>
+                    <th>Signal</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="model-tag">GPT-4o</span></td>
+                    <td>Fast, terse, lower consistency on tool recall</td>
+                    <td>Mid-tier distilled model</td>
+                    <td>Missing premium reasoning markers</td>
+                  </tr>
+                  <tr>
+                    <td><span class="model-tag">Claude Opus</span></td>
+                    <td>Short context retention, abrupt policy phrasing</td>
+                    <td>Budget generalist endpoint</td>
+                    <td>Token window mismatch</td>
+                  </tr>
+                  <tr>
+                    <td><span class="model-tag">Gemini Pro</span></td>
+                    <td>Template-heavy responses, clipped citations</td>
+                    <td>Proxy-routed fallback model</td>
+                    <td>Output signature divergence</td>
+                  </tr>
+                  <tr>
+                    <td><span class="model-tag">Grok</span></td>
+                    <td>Style drift but no expected real-time markers</td>
+                    <td>Generic conversational model</td>
+                    <td>Persona-only mimicry</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="evidence-card__body">For the reader, a table is not decoration; it is compression. Dense claims become inspectable. The eye moves horizontally and the fraud becomes obvious. That is the job of design in an evidence-heavy feature: not simplification, but controlled legibility.</div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter full-bleed" id="evidence-break" data-section data-label="Section 03 · Visual Evidence Break">
+      <div class="full-bleed__image fade-up">
+        <div class="full-bleed__content">
+          <div class="full-bleed__eyebrow">Visual Evidence Break</div>
+          <h2 class="full-bleed__title">What the platform showed was not what the system ran.</h2>
+          <div class="full-bleed__caption">[ FULL-BLEED PLACEHOLDER: layered dashboard capture / routing graph / badge collage ] This is the moment where the reading column gives way to scale. A full-width media break lets the investigation breathe while preserving gravity. In a real publication, this space would hold the composite image that readers remember after everything else blurs.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter" id="network" data-section data-label="Section 04 · The Corporate Network">
+      <section class="network">
+        <div class="network__pin">
+          <div class="network-bg" aria-hidden="true">
+            <div class="network-bg__diagram">
+              <div class="node node--a">Front-end<br>Brand</div>
+              <div class="node node--b">Shared<br>Support</div>
+              <div class="node node--c">Payment<br>Processor</div>
+              <div class="node node--d">WHOIS<br>Alias</div>
+              <div class="node node--e">Cloud<br>Reseller</div>
+              <div class="node node--f">Lead<br>Entity</div>
+              <div class="link-line l1"></div>
+              <div class="link-line l2"></div>
+              <div class="link-line l3"></div>
+              <div class="link-line l4"></div>
+              <div class="link-line l5"></div>
+            </div>
+          </div>
+
+          <div class="network__overlay">
+            <article class="network-panel fade-up">
+              <div class="network-panel__label">The Corporate Network</div>
+              <h3>A business model built to prevent a clean line of sight.</h3>
+              <p>The shell structure did not merely obscure ownership. It segmented liability, reputation, billing, and provider risk into separate containers. One name sold the promise. Another handled subscriptions. A third held the domain. A fourth absorbed customer complaints. Each layer made the whole look smaller, more accidental, and less coordinated than it actually was.</p>
+              <div class="stats-row">
+                <div class="stat-box"><strong>11</strong><span>Observed entities</span></div>
+                <div class="stat-box"><strong>7</strong><span>Shared infrastructure markers</span></div>
+                <div class="stat-box"><strong>4</strong><span>Support aliases reused</span></div>
+              </div>
+            </article>
+
+            <article class="network-panel fade-up">
+              <div class="network-panel__label">Shared Infrastructure</div>
+              <blockquote class="pull-quote">The pattern was too consistent to be clerical. Domains changed. Mail exchangers did not.</blockquote>
+              <p>WHOIS privacy shields, registrar choices, support desk tooling, analytics tags, and identical deployment fingerprints all pointed to operational overlap. None of these signals alone proves common control. Together, they describe the contours of it with uncomfortable precision.</p>
+            </article>
+
+            <article class="network-panel fade-up">
+              <div class="network-panel__label">False Distance</div>
+              <p>Several personas appeared in public as if they represented competing products, independent reviewers, or third-party consultants. Yet the surrounding metadata kept collapsing that distance. Shared reply windows. Shared design systems. Shared refund language. Shared mistakes. The network behaved like a single organism trying to impersonate a marketplace.</p>
+            </article>
+
+            <article class="network-panel fade-up">
+              <div class="network-panel__label">Operational Consequence</div>
+              <p>By the time providers were alerted, the fragmented structure had already performed its primary function: slowing recognition. Enforcement moves against one node would not necessarily touch the others. Customers who demanded refunds were routed into queues managed by adjacent brands. Evidence disappeared not through deletion, but through administrative diffusion.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section class="chapter chapter--shift" id="people" data-section data-label="Section 05 · The People">
+      <div class="container">
+        <div class="kicker-line fade-up">The People</div>
+        <div class="scrolly">
+          <div class="scrolly__sticky">
+            <div class="scrolly__copy fade-up">
+              <h2>Aliases, pseudonyms, and continuity through disguise.</h2>
+              <p>The founder story was never stable because stability would have made it checkable. Public-facing identities shifted across launches, support interactions, investor materials, and domain records. Names appeared with different jurisdictions, different bios, different profile photos, and identical rhetorical habits.</p>
+              <p>In investigations like this, identity is rarely revealed through a single dramatic document. It is reconstructed through repetition. An avatar reused here. A signature block there. A WHOIS record that shares a typo with a promotional email. The reader does not need certainty all at once. The reader needs accumulation.</p>
+              <p>These cards stage that accumulation as a sequence: profile similarity, registration residue, then communication evidence. The page should feel like a dossier spreading open under light.</p>
+            </div>
+          </div>
+
+          <div class="scrolly__steps">
+            <article class="evidence-card reveal-card" data-step>
+              <div class="evidence-card__label"><span>Exhibit D</span><span>Profile Comparison</span></div>
+              <h3 class="evidence-card__title">Different names, same visual grammar, same operating claims</h3>
+              <div class="profile-grid">
+                <div class="profile-card">
+                  <div class="profile-grid__avatar">[ Avatar A ]<br>Founder Profile</div>
+                  <h4>Arlen Voss</h4>
+                  <div class="evidence-card__body">Claims direct partnerships, “frontier orchestration,” and “model brokerage at scale.”</div>
+                </div>
+                <div class="profile-card">
+                  <div class="profile-grid__avatar">[ Avatar B ]<br>Advisor Profile</div>
+                  <h4>Luca Verran</h4>
+                  <div class="evidence-card__body">Claims network access, enterprise routing, and premium inference delivery.</div>
+                </div>
+                <div class="profile-card">
+                  <div class="profile-grid__avatar">[ Avatar C ]<br>Operator Profile</div>
+                  <h4>Neil Mora</h4>
+                  <div class="evidence-card__body">Uses the same portfolio phrasing, same punctuation patterns, same product screenshots.</div>
+                </div>
+                <div class="profile-card">
+                  <div class="profile-grid__avatar">[ Avatar D ]<br>Consultant Profile</div>
+                  <h4>J. Mercer</h4>
+                  <div class="evidence-card__body">Presents as independent, but links repeatedly into the same product cluster.</div>
+                </div>
+              </div>
+            </article>
+
+            <article class="evidence-card reveal-card" data-step>
+              <div class="evidence-card__label"><span>Exhibit E</span><span>WHOIS / Records</span></div>
+              <h3 class="evidence-card__title">Domain registration residue shows administrative overlap</h3>
+              <div class="record-block">
+                <h4>Registration abstract</h4>
+                <div class="record-line"><span>Registrant Org</span><span>North Quay Labs LLC</span></div>
+                <div class="record-line"><span>Admin Email</span><span>ops@northquay-support.com</span></div>
+                <div class="record-line"><span>Registrar</span><span>Same vendor used by two adjacent brands</span></div>
+                <div class="record-line"><span>Name Server Pattern</span><span>Identical sequence across three domains</span></div>
+                <div class="record-line"><span>Historical Note</span><span>Alias spelling preserved in archived record</span></div>
+              </div>
+              <div class="evidence-card__body">Administrative residue is often where cosmetic separation breaks down. Registration history is unglamorous, which is precisely why it matters. It captures what branding cannot fully conceal.</div>
+            </article>
+
+            <article class="evidence-card reveal-card" data-step>
+              <div class="evidence-card__label"><span>Exhibit F</span><span>Email Capture</span></div>
+              <h3 class="evidence-card__title">Support correspondence ties public personas back to a common operations desk</h3>
+              <div class="email-shot">
+                <h4>[ Email Screenshot Placeholder ]</h4>
+                <div class="mail-line"><span>From</span><span>founder.office@manus-partners.ai</span></div>
+                <div class="mail-line"><span>Reply-To</span><span>ops@northquay-support.com</span></div>
+                <div class="mail-line"><span>X-Originating-IP</span><span>Shared relay cluster</span></div>
+                <div class="mail-line"><span>Subject</span><span>Re: Enterprise model access clarification</span></div>
+                <div class="mail-line"><span>Signature</span><span>“Sent on behalf of the strategy office”</span></div>
+              </div>
+              <div class="evidence-card__body">This is the kind of small technical contradiction that investigative design should elevate. Most readers will not parse mail headers naturally. A good evidence card turns them into narrative proof without diluting their seriousness.</div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter" id="acquisition" data-section data-label="Section 06 · The $2 Billion Acquisition">
+      <div class="container">
+        <div class="kicker-line fade-up">The $2 Billion Acquisition</div>
+        <h2 class="section-title fade-up">When counterfeit credibility becomes a balance-sheet problem.</h2>
+        <div class="prose fade-up">
+          <p>The acquisition narrative was, on its face, familiar. A fast-growing AI product appeared to have solved distribution, user growth, and multi-provider access all at once. It had pricing power. It had screenshots that circulated well. It had the appearance of demand from users who believed they were purchasing a single hub for the most expensive models on the market. In a sector starved for believable interfaces and eager for aggregation, that story would always travel faster than a sober technical audit.</p>
+
+          <p>But acquisitions are not priced on screenshots. They are priced on durable assets: technology, defensibility, contractual legitimacy, retention, compliance, and trust. If the investigation is correct—if a material share of revenue was generated by selling counterfeit access under the borrowed prestige of external model brands—then the acquisition multiple rests on a false substrate. Growth would not be evidence of product-market fit. It would be evidence that misrepresentation scaled. Revenue quality would be worse than uncertain; it would be contaminated.</p>
+
+          <p>That is why the number matters. A two-billion-dollar deal is not just a private embarrassment. It is a market signal. It tells employees, counterparties, and investors that the diligence threshold for AI intermediaries can be crossed through interface fluency and synthetic legitimacy. It tells future operators that distribution optics may outrun verification long enough to become cap table reality. In that sense, the damage extends beyond any one transaction. The deal would ratify a method.</p>
+
+          <p>There is also the question of dependence. Products built on unauthorized or deceptive access to premium models do not own the core asset they appear to sell. They rent the reputation of others while externalizing the technical and legal risk. The closer one looks, the thinner the underlying company can become. Remove the borrowed badges, the implied permissions, the routing opacity, and the growth story may collapse into a very ordinary reseller structure with unusually aggressive marketing. That is not a two-billion-dollar platform. That is a fragile arbitrage strategy wearing the costume of infrastructure.</p>
+
+          <p>The severity here is not rhetorical. If a buyer relied on usage metrics, conversion quality, retention curves, or enterprise claims that were materially shaped by false model representation, then the resulting valuation error is not abstract. It touches the mathematics of the deal itself. The premium was paid for trust that may never have existed. And once the trust variable is impaired, every surrounding metric becomes suspect: churn, customer satisfaction, enterprise pipeline, referral growth, even support load. None of those numbers mean what they first appeared to mean if the product at the center was lying about the thing users were actually paying for.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter chapter--shift" id="response" data-section data-label="Section 07 · The Response (Or Lack Thereof)">
+      <div class="container">
+        <div class="kicker-line fade-up">The Response (Or Lack Thereof)</div>
+        <h2 class="section-title fade-up">Warnings were sent. Enforcement did not move at the speed of the fraud.</h2>
+        <div class="prose fade-up">
+          <p>By the time notifications began to circulate, much of the visible harm had already been normalized. Users had acclimated to ambiguity. Support desks had learned to answer around direct questions. Providers had received fragments—screenshots here, complaints there, a routing anomaly somewhere else—but fragmentary evidence is exactly what a diffuse operation produces. It takes time to consolidate. Fraud uses that time as working capital.</p>
+
+          <ul class="timeline-inline">
+            <li><time>January 08</time> Initial user complaints documented repeated mismatch between advertised badges and delivered behavior.</li>
+            <li><time>January 19</time> A bundled notice package was sent to multiple model providers with captures, timing comparisons, and archived pricing pages.</li>
+            <li><time>February 02</time> Additional complaint packets added support transcripts showing refusal to directly confirm named models.</li>
+            <li><time>February 17</time> Refund demands rose while public marketing language remained substantially unchanged.</li>
+          </ul>
+
+          <p>The striking feature of the response is not merely delay; it is asymmetry. A platform can alter its badge language in minutes. Users can be re-routed in seconds. A marketing page can be archived, revised, and replaced before a complaint thread is even read. Institutional response is necessarily slower because it has to verify. The operator needs only to mutate. That asymmetry explains how apparently obvious misconduct can persist in public view without immediate interruption.</p>
+
+          <p>None of this absolves the major providers whose brands were used as atmospheric collateral. If their names supplied the implied value, then their enforcement posture also shaped the practical risk calculus of the companies trading on that implication. A market full of premium badges and vague orchestration language does not become safer through silence. It becomes more lucrative for whoever is willing to test how long ambiguity can last.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter appendix" id="appendix" data-section data-label="Section 08 · Appendix / Evidence Index">
+      <div class="appendix-shell fade-up">
+        <div class="appendix-top">
+          <div>
+            <div class="deck">Appendix / Evidence Index</div>
+            <h2 class="appendix-title">A searchable fraud browser designed like an evidentiary filing.</h2>
+          </div>
+          <p>Every item below is a placeholder source entry meant to test the real appendix behavior: filtering, search, structured metadata, and expandable mirror links. This should feel native to the article, not bolted onto it.</p>
+        </div>
+
+        <div class="appendix-controls">
+          <label class="search-wrap">
+            <input id="sourceSearch" type="search" placeholder="Search sources, domains, badges, entities, or providers" aria-label="Search appendix">
+          </label>
+          <div class="filter-group" role="group" aria-label="Filter evidence by type">
+            <button class="filter-btn is-active" data-filter="all" type="button">All</button>
+            <button class="filter-btn" data-filter="screenshot" type="button">Screenshots</button>
+            <button class="filter-btn" data-filter="chatlog" type="button">Chat Logs</button>
+            <button class="filter-btn" data-filter="corp" type="button">Corporate</button>
+            <button class="filter-btn" data-filter="email" type="button">Email</button>
+          </div>
+        </div>
+
+        <div class="appendix-list" id="appendixList">
+          <details class="appendix-item" data-type="screenshot" data-search="badge capture premium gpt-4o screenshot pricing page monica frontier plan">
+            <summary>
+              <span class="appendix-id">SRC-001</span>
+              <span class="appendix-name">Premium badge capture showing GPT-4o claim on Frontier plan</span>
+              <span class="appendix-type">Screenshot</span>
+              <span class="appendix-date">2026-02-14</span>
+            </summary>
+            <div class="appendix-body">
+              <div class="appendix-meta">Capture metadata: desktop viewport · pricing page visible · entitlement ribbon active · hash recorded at ingest. Notes: used to compare user-facing identity claims against output signatures and latency patterns.</div>
+              <div class="appendix-links">
+                <a href="#">Primary Source</a>
+                <a href="#">Archive.org</a>
+                <a href="#">Perma.cc</a>
+                <a href="#">IPFS Mirror</a>
+              </div>
+            </div>
+          </details>
+
+          <details class="appendix-item" data-type="chatlog" data-search="support transcript routing orchestration dynamic endpoint confirmation model swapping chat log">
+            <summary>
+              <span class="appendix-id">SRC-002</span>
+              <span class="appendix-name">Support transcript using “dynamic orchestration” to avoid direct model confirmation</span>
+              <span class="appendix-type">Chat Log</span>
+              <span class="appendix-date">2026-02-03</span>
+            </summary>
+            <div class="appendix-body">
+              <div class="appendix-meta">Conversation export with timestamps preserved. Key relevance: demonstrates liability-aware phrasing that maintains premium-plan confidence while declining to verify named model delivery.</div>
+              <div class="appendix-links">
+                <a href="#">Primary Source</a>
+                <a href="#">Archive.org</a>
+                <a href="#">Perma.cc</a>
+                <a href="#">IPFS Mirror</a>
+              </div>
+            </div>
+          </details>
+
+          <details class="appendix-item" data-type="corp" data-search="whois registration shell company north quay support llc nameserver overlap registrar corporate abstract">
+            <summary>
+              <span class="appendix-id">SRC-003</span>
+              <span class="appendix-name">WHOIS and registration abstract linking adjacent entities through shared administrative residue</span>
+              <span class="appendix-type">Corporate</span>
+              <span class="appendix-date">2026-01-29</span>
+            </summary>
+            <div class="appendix-body">
+              <div class="appendix-meta">Compiled from archived WHOIS pulls, registrar snapshots, MX lookups, and registration abstracts. Supports inference of common operational control across nominally separate brands.</div>
+              <div class="appendix-links">
+                <a href="#">Primary Source</a>
+                <a href="#">Archive.org</a>
+                <a href="#">Perma.cc</a>
+                <a href="#">IPFS Mirror</a>
+              </div>
+            </div>
+          </details>
+
+          <details class="appendix-item" data-type="email" data-search="email screenshot reply-to support desk shared relay strategy office headers acquisition due diligence">
+            <summary>
+              <span class="appendix-id">SRC-004</span>
+              <span class="appendix-name">Email header capture tying founder-facing address to shared operations desk</span>
+              <span class="appendix-type">Email</span>
+              <span class="appendix-date">2026-02-11</span>
+            </summary>
+            <div class="appendix-body">
+              <div class="appendix-meta">Message export with header block preserved. Key fields include reply-to mismatch, relay overlap, and signature language that mirrors support desk phrasing elsewhere in the record.</div>
+              <div class="appendix-links">
+                <a href="#">Primary Source</a>
+                <a href="#">Archive.org</a>
+                <a href="#">Perma.cc</a>
+                <a href="#">IPFS Mirror</a>
+              </div>
+            </div>
+          </details>
+
+          <details class="appendix-item" data-type="screenshot" data-search="pricing page premium plan claude opus badge claim visual archive screenshot enterprise upsell">
+            <summary>
+              <span class="appendix-id">SRC-005</span>
+              <span class="appendix-name">Archived pricing page associating enterprise tier with named premium providers</span>
+              <span class="appendix-type">Screenshot</span>
+              <span class="appendix-date">2026-01-16</span>
+            </summary>
+            <div class="appendix-body">
+              <div class="appendix-meta">Web capture of marketing copy, feature ladders, badge clusters, and enterprise claims. Supports analysis of how external provider prestige was operationalized as a sales artifact.</div>
+              <div class="appendix-links">
+                <a href="#">Primary Source</a>
+                <a href="#">Archive.org</a>
+                <a href="#">Perma.cc</a>
+                <a href="#">IPFS Mirror</a>
+              </div>
+            </div>
+          </details>
+
+          <details class="appendix-item" data-type="chatlog" data-search="user complaint output signature mismatch claude opus context window truncation log">
+            <summary>
+              <span class="appendix-id">SRC-006</span>
+              <span class="appendix-name">User complaint log documenting context-window mismatch under a Claude Opus badge</span>
+              <span class="appendix-type">Chat Log</span>
+              <span class="appendix-date">2026-02-22</span>
+            </summary>
+            <div class="appendix-body">
+              <div class="appendix-meta">Complaint packet with transcript excerpts, timing observations, and side-by-side output comparison. Useful for testing search across provider names and symptom language.</div>
+              <div class="appendix-links">
+                <a href="#">Primary Source</a>
+                <a href="#">Archive.org</a>
+                <a href="#">Perma.cc</a>
+                <a href="#">IPFS Mirror</a>
+              </div>
+            </div>
+          </details>
+        </div>
+
+        <div class="appendix-empty" id="appendixEmpty">No sources match the current search and filter. In a real evidence index, this state should be rare and explicit.</div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div class="site-footer__links">
+        <a href="#appendix">Archived Evidence</a>
+        <a href="#appendix">Decentralized Mirror</a>
+        <a href="#appendix">PGP Key</a>
+      </div>
+      <div class="site-footer__stamp">No Tracking. Decentralized. Immutable.</div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const sectionLinks = Array.from(document.querySelectorAll('[data-nav]'));
+      const sections = Array.from(document.querySelectorAll('[data-section]'));
+      const progressLabel = document.getElementById('progressLabel');
+      const revealCards = document.querySelectorAll('.reveal-card');
+      const fadeEls = document.querySelectorAll('.fade-up');
+      const citations = document.querySelectorAll('.citation');
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const appendixItems = Array.from(document.querySelectorAll('.appendix-item'));
+      const searchInput = document.getElementById('sourceSearch');
+      const appendixEmpty = document.getElementById('appendixEmpty');
+
+      const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const id = entry.target.id;
+          const label = entry.target.getAttribute('data-label') || '';
+          sectionLinks.forEach(link => {
+            link.classList.toggle('is-active', link.getAttribute('href') === `#${id}`);
+          });
+          progressLabel.textContent = label;
+        });
+      }, {
+        rootMargin: '-35% 0px -45% 0px',
+        threshold: 0.01
+      });
+
+      sections.forEach(section => sectionObserver.observe(section));
+
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('is-visible');
+        });
+      }, {
+        threshold: 0.2,
+        rootMargin: '0px 0px -8% 0px'
+      });
+
+      [...revealCards, ...fadeEls].forEach(el => revealObserver.observe(el));
+
+      citations.forEach(citation => {
+        citation.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const isOpen = citation.classList.contains('is-open');
+          citations.forEach(c => c.classList.remove('is-open'));
+          if (!isOpen) citation.classList.add('is-open');
+        });
+      });
+
+      document.addEventListener('click', () => {
+        citations.forEach(c => c.classList.remove('is-open'));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') citations.forEach(c => c.classList.remove('is-open'));
+      });
+
+      let activeFilter = 'all';
+
+      function applyAppendixFilter() {
+        const q = (searchInput.value || '').trim().toLowerCase();
+        let visibleCount = 0;
+
+        appendixItems.forEach(item => {
+          const type = item.dataset.type;
+          const haystack = item.dataset.search || '';
+          const matchesFilter = activeFilter === 'all' || type === activeFilter;
+          const matchesSearch = !q || haystack.includes(q);
+          const show = matchesFilter && matchesSearch;
+          item.style.display = show ? '' : 'none';
+          if (show) visibleCount += 1;
+        });
+
+        appendixEmpty.style.display = visibleCount ? 'none' : 'block';
+      }
+
+      filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          activeFilter = btn.dataset.filter;
+          filterButtons.forEach(b => b.classList.toggle('is-active', b === btn));
+          applyAppendixFilter();
+        });
+      });
+
+      searchInput.addEventListener('input', applyAppendixFilter);
+      applyAppendixFilter();
+    })();
+  </script>
+</body>
+</html>

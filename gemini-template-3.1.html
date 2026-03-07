@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meta’s $2 Billion Mistake: The Fraud Factory Behind Manus AI</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* CSS Reset & Variables */
+        :root {
+            /* Palette: Dark, cold, precise */
+            --bg-base: #090a0c;
+            --bg-base-alt: #0d1015; /* For temperature shifts */
+            --bg-surface: #111317;
+            --bg-surface-elevated: #181b21;
+            --bg-panel: #14171c;
+
+            --text-primary: #e2e4e9;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+
+            --accent-cyan: #469bba;
+            --accent-cyan-hover: #5bb2d1;
+            --accent-amber: #c28c38;
+            --accent-red: #b94a4b;
+
+            --border-subtle: #21252d;
+            --border-strong: #333945;
+
+            /* Typography */
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'Lora', serif;
+            --font-mono: 'IBM Plex Mono', monospace;
+            --font-data: 'Inter', sans-serif; /* Added for precise data UI */
+
+            --content-width: 700px;
+            --wide-width: 1100px;
+
+            /* Layout */
+            --header-height: 40px;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-size: 1.1875rem;
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            transition: background-color 1s ease;
+        }
+
+        body.theme-deep {
+            background-color: var(--bg-base-alt);
+        }
+
+        /* Typography Base */
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
+            font-weight: 500;
+            line-height: 1.2;
+            color: #ffffff;
+        }
+
+        p { margin-bottom: 1.75rem; }
+
+        a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            transition: color 0.2s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        a:hover { border-bottom-color: var(--accent-cyan-hover); }
+
+        .mono { font-family: var(--font-mono); }
+
+        /* Layout Utilities */
+        .container { max-width: var(--content-width); margin: 0 auto; padding: 0 20px; }
+        .container-wide { max-width: var(--wide-width); margin: 0 auto; padding: 0 20px; }
+
+        /* Top Progress & Whisper */
+        #progress-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 2px;
+            background: transparent; z-index: 1000;
+        }
+        #progress-bar {
+            height: 100%; width: 0%; background: var(--accent-cyan);
+            transition: width 0.1s ease-out;
+        }
+        #top-whisper {
+            position: fixed; top: 2px; left: 0; width: 100%;
+            padding: 10px 20px; font-family: var(--font-data); font-size: 0.65rem;
+            text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted);
+            display: flex; justify-content: space-between; z-index: 999;
+            background: linear-gradient(to bottom, var(--bg-base) 60%, transparent);
+            pointer-events: none; opacity: 0; transition: opacity 0.5s ease;
+        }
+        #top-whisper.visible { opacity: 1; }
+
+        /* Opening Sequence */
+        .opening-sequence { position: relative; background-color: #030405; }
+        .opening-step {
+            min-height: 80vh; display: flex; align-items: center; justify-content: center;
+            padding: 0 20px;
+        }
+        .opening-text {
+            font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.5rem);
+            text-align: center; max-width: 800px; color: #ffffff;
+            opacity: 0; transform: translateY(20px);
+            transition: opacity 1.2s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .opening-text.is-visible { opacity: 1; transform: translateY(0); }
+
+        /* Title Block */
+        .title-block { padding: 15vh 0 8vh; border-bottom: 1px solid var(--border-subtle); margin-bottom: 4rem; }
+        .title-block h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); margin-bottom: 1.5rem; letter-spacing: -0.02em; }
+        .title-block .subtitle { font-size: 1.5rem; color: var(--text-secondary); margin-bottom: 3rem; font-family: var(--font-display); font-style: italic; }
+        .meta-row { display: flex; flex-wrap: wrap; gap: 2.5rem; font-family: var(--font-data); font-size: 0.75rem; color: var(--text-muted); border-top: 1px solid var(--border-subtle); padding-top: 1.5rem; }
+        .meta-item span { display: block; color: var(--text-secondary); margin-bottom: 0.25rem; text-transform: uppercase; font-size: 0.65rem; letter-spacing: 0.05em; font-weight: 600; }
+
+        /* Article Prose */
+        .drop-cap::first-letter { font-family: var(--font-display); font-size: 4.5rem; float: left; line-height: 0.8; margin-right: 0.5rem; margin-top: 0.1rem; color: #ffffff; }
+        .article-section { margin-bottom: 6rem; position: relative; }
+        .section-header { font-size: 2.25rem; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-subtle); }
+
+        /* Citations */
+        .cite-ref { font-family: var(--font-data); font-size: 0.65rem; color: var(--accent-cyan); cursor: pointer; padding: 0 0.15rem; vertical-align: super; transition: color 0.2s ease; font-weight: 500;}
+        .cite-ref:hover { color: var(--accent-amber); }
+
+        /* Vox-Style Scrollytelling: The Network Collapse */
+        .scrolly-container {
+            position: relative; width: 100vw; margin-left: calc(50% - 50vw);
+            background: #030405; margin-bottom: 6rem;
+        }
+        .scrolly-background {
+            position: sticky; top: 0; left: 0; width: 100%; height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden; z-index: 1;
+        }
+        .scrolly-text-overlay {
+            position: relative; z-index: 2; padding-bottom: 20vh; pointer-events: none;
+        }
+        .scrolly-step {
+            min-height: 100vh; display: flex; align-items: center; justify-content: center;
+            padding: 0 20px;
+        }
+        .scrolly-card {
+            background: rgba(9, 10, 12, 0.85); border: 1px solid var(--border-subtle);
+            padding: 2.5rem; max-width: 600px; backdrop-filter: blur(10px);
+            font-family: var(--font-display); font-size: 1.75rem; line-height: 1.4;
+            color: #fff; text-align: center; opacity: 0.2; transition: opacity 0.5s ease;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5); pointer-events: auto;
+        }
+        .scrolly-step.is-active .scrolly-card { opacity: 1; }
+
+        /* SVG Network Architecture */
+        #network-viz { width: 100%; max-width: 800px; height: auto; }
+        .node-circle { fill: var(--bg-surface); stroke: var(--border-strong); stroke-width: 2; transition: all 1s ease; }
+        .node-text { fill: var(--text-secondary); font-family: var(--font-mono); font-size: 12px; text-anchor: middle; transition: all 1s ease; }
+        .edge-line { stroke: var(--border-strong); stroke-width: 1.5; stroke-dasharray: 4 4; transition: all 1s ease; }
+
+        /* Viz States driven by JS */
+        .viz-state-1 .node-premium { stroke: var(--accent-cyan); fill: rgba(70, 155, 186, 0.1); }
+        .viz-state-1 .edge-premium { stroke: var(--accent-cyan); stroke-dasharray: none; }
+
+        .viz-state-2 .node-premium { stroke: var(--border-strong); opacity: 0.3; }
+        .viz-state-2 .edge-premium { opacity: 0.1; }
+        .viz-state-2 .node-cheap { stroke: var(--accent-red); fill: rgba(185, 74, 75, 0.1); }
+        .viz-state-2 .edge-cheap { stroke: var(--accent-red); stroke-dasharray: none; }
+
+        .viz-state-3 .node-cheap { stroke: var(--accent-amber); fill: rgba(194, 140, 56, 0.1); }
+        .viz-state-3 .node-center { fill: var(--accent-amber); }
+        .viz-state-3 .edge-cheap { stroke: var(--accent-amber); stroke-width: 3; }
+
+        /* Micro-Data UI Elements */
+        .data-legend {
+            position: absolute; bottom: 40px; right: 40px; background: var(--bg-panel);
+            border: 1px solid var(--border-subtle); padding: 1rem; font-family: var(--font-data);
+            font-size: 0.75rem; color: var(--text-secondary); display: flex; flex-direction: column; gap: 0.5rem;
+        }
+        .legend-item { display: flex; align-items: center; gap: 8px; }
+        .legend-color { width: 12px; height: 12px; border-radius: 50%; }
+
+        /* WaPo-Style Scrollytelling: The Data Pin */
+        .data-pin-container {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+            margin: 6rem auto; align-items: start; max-width: var(--wide-width); padding: 0 20px;
+        }
+        .narrative-col { padding-bottom: 50vh; }
+        .narrative-step { margin-bottom: 80vh; opacity: 0.3; transition: opacity 0.5s ease; }
+        .narrative-step.is-active { opacity: 1; }
+
+        .sticky-viz-col {
+            position: sticky; top: 15vh; height: 70vh; background: var(--bg-surface);
+            border: 1px solid var(--border-subtle); display: flex; flex-direction: column;
+        }
+        .viz-header {
+            padding: 1rem 1.5rem; border-bottom: 1px solid var(--border-subtle);
+            font-family: var(--font-data); font-size: 0.75rem; text-transform: uppercase;
+            letter-spacing: 0.05em; color: var(--text-muted); display: flex; justify-content: space-between;
+        }
+        .viz-body {
+            flex-grow: 1; padding: 2rem; position: relative; overflow: hidden;
+            display: flex; align-items: center; justify-content: center; font-family: var(--font-mono);
+        }
+
+        /* Interactive Data State inside sticky column */
+        .cost-chart { width: 100%; height: 100%; display: flex; align-items: flex-end; gap: 10px; padding-bottom: 40px; position: relative; }
+        .chart-bar { background: var(--border-strong); width: 100%; transition: height 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.5s ease; position: relative; }
+        .chart-bar::after {
+            content: attr(data-label); position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%);
+            font-family: var(--font-data); font-size: 0.7rem; color: var(--text-muted); white-space: nowrap;
+        }
+        .chart-bar-value {
+            position: absolute; top: -25px; left: 50%; transform: translateX(-50%);
+            font-size: 0.75rem; color: #fff; opacity: 0; transition: opacity 0.3s ease;
+        }
+        .chart-bar.active { background: var(--accent-cyan); }
+        .chart-bar.active .chart-bar-value { opacity: 1; }
+        .chart-bar.fraud { background: var(--accent-red); }
+        .chart-bar.fraud .chart-bar-value { opacity: 1; color: var(--accent-red); }
+
+        .chart-axis-y { position: absolute; left: 0; top: 0; height: calc(100% - 40px); width: 100%; border-bottom: 1px solid var(--border-strong); pointer-events: none;}
+        .axis-tick { position: absolute; left: 0; width: 100%; border-top: 1px dashed var(--border-subtle); }
+        .axis-label { position: absolute; left: 0; top: -18px; font-family: var(--font-data); font-size: 0.65rem; color: var(--text-muted); }
+
+        /* Exploratory Tool: Database Search */
+        .explorer-section { background: var(--bg-surface); border: 1px solid var(--border-subtle); padding: 3rem; margin: 6rem 0; }
+        .explorer-header { font-family: var(--font-data); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent-amber); margin-bottom: 1rem; }
+        .explorer-title { font-family: var(--font-display); font-size: 2rem; margin-bottom: 0.5rem; }
+        .explorer-desc { font-family: var(--font-body); font-size: 1rem; color: var(--text-secondary); margin-bottom: 2rem; }
+
+        .search-wrapper { position: relative; margin-bottom: 2rem; }
+        .db-search {
+            width: 100%; background: var(--bg-base); border: 1px solid var(--border-strong);
+            color: var(--text-primary); padding: 1rem 1.5rem; font-family: var(--font-mono);
+            font-size: 0.9rem; outline: none; transition: border-color 0.2s ease;
+        }
+        .db-search:focus { border-color: var(--accent-cyan); }
+
+        .db-table-wrapper { max-height: 400px; overflow-y: auto; border: 1px solid var(--border-strong); background: var(--bg-base); }
+        .db-table { width: 100%; border-collapse: collapse; font-family: var(--font-data); font-size: 0.8rem; text-align: left; }
+        .db-table th { background: var(--bg-surface-elevated); padding: 0.75rem 1rem; color: var(--text-muted); font-weight: 500; border-bottom: 1px solid var(--border-strong); position: sticky; top: 0; }
+        .db-table td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--border-subtle); color: var(--text-secondary); }
+        .db-table tr:hover td { background: var(--bg-surface); color: var(--text-primary); }
+        .badge-actual { background: rgba(185, 74, 75, 0.15); color: var(--accent-red); padding: 2px 6px; border-radius: 2px; font-family: var(--font-mono); font-size: 0.7rem; }
+        .badge-claimed { background: rgba(70, 155, 186, 0.15); color: var(--accent-cyan); padding: 2px 6px; border-radius: 2px; font-family: var(--font-mono); font-size: 0.7rem; }
+
+        /* Full Bleed Break */
+        .chapter-break {
+            width: 100vw; margin-left: calc(50% - 50vw); background-color: #030405;
+            border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);
+            padding: 10rem 20px; margin: 8rem 0; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+        .chapter-break-text { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); color: #fff; max-width: 800px; line-height: 1.3; }
+        .chapter-break-sub { font-family: var(--font-data); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-top: 2rem; }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .data-pin-container { grid-template-columns: 1fr; gap: 2rem; margin: 3rem auto; }
+            .sticky-viz-col { position: static; height: 50vh; margin-bottom: 2rem; }
+            .narrative-col { padding-bottom: 0; }
+            .narrative-step { margin-bottom: 3rem; opacity: 1; }
+            .scrolly-card { font-size: 1.25rem; padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="progress-container"><div id="progress-bar"></div></div>
+    <div id="top-whisper">
+        <span>Meta's $2 Billion Mistake</span>
+        <span id="current-chapter">Introduction</span>
+    </div>
+
+    <section class="opening-sequence" data-chapter="Prologue">
+        <div class="opening-step"><div class="opening-text">In March 2023, a Chrome extension called Monica AI launched with 10 million users.</div></div>
+        <div class="opening-step"><div class="opening-text">Users paid for access to GPT-4o, Claude, Gemini, and other premium models.</div></div>
+        <div class="opening-step"><div class="opening-text">They were not getting what they paid for.</div></div>
+        <div class="opening-step"><div class="opening-text">Behind the badges was a cheaper substitute.</div></div>
+        <div class="opening-step"><div class="opening-text">The people behind it ended up inside Meta.</div></div>
+    </section>
+
+    <main>
+        <header class="title-block container" data-chapter="Introduction">
+            <h1>Meta’s $2 Billion Mistake: The Fraud Factory Behind Manus AI</h1>
+            <div class="subtitle">An investigation into shell identities, model substitution, and the acquisition that legitimized a phantom infrastructure.</div>
+
+            <div class="meta-row">
+                <div class="meta-item"><span>Byline</span>J.R. Sterling</div>
+                <div class="meta-item"><span>Published</span>October 24, 2025</div>
+                <div class="meta-item"><span>Length</span>4,100 Words</div>
+            </div>
+        </header>
+
+        <section class="container article-section">
+            <p class="drop-cap">On paper, Manus AI was a breakthrough. A lightweight translation layer that supposedly optimized Large Language Model (LLM) routing to deliver GPT-4 level reasoning at a fraction of the compute cost. When Meta acquired the company for $2 billion in late 2024, it was heralded as a masterstroke of infrastructural efficiency, designed to weave seamless AI capabilities into WhatsApp and Instagram.</p>
+
+            <p>But network logs, whistleblower testimonies, and a trail of hastily dissolved Delaware shell entities tell a different story. Manus was not routing queries to an optimized intelligence. It was laundering them. For nearly eighteen months, millions of users who paid for premium access to flagship models were quietly redirected to fine-tuned, open-source alternatives operating at one-tenth the cost.</p>
+        </section>
+
+        <section class="scrolly-container" data-chapter="The Substitution">
+            <div class="scrolly-background">
+                <svg id="network-viz" viewBox="0 0 800 500" class="viz-state-0">
+                    <line x1="400" y1="250" x2="150" y2="100" class="edge-line edge-premium" />
+                    <line x1="400" y1="250" x2="650" y2="100" class="edge-line edge-premium" />
+                    <line x1="400" y1="250" x2="400" y2="400" class="edge-line edge-cheap" />
+
+                    <circle cx="150" cy="100" r="40" class="node-circle node-premium" />
+                    <text x="150" y="104" class="node-text">GPT-4</text>
+
+                    <circle cx="650" cy="100" r="40" class="node-circle node-premium" />
+                    <text x="650" y="104" class="node-text">Claude 3.5</text>
+
+                    <circle cx="400" cy="400" r="50" class="node-circle node-cheap" />
+                    <text x="400" y="404" class="node-text">Llama-3 8B</text>
+
+                    <circle cx="400" cy="250" r="60" class="node-circle node-center" />
+                    <text x="400" y="254" class="node-text" style="fill: #fff;">Manus API</text>
+                </svg>
+
+                <div class="data-legend">
+                    <div class="legend-item"><div class="legend-color" style="background: var(--accent-cyan);"></div> Claimed Routing</div>
+                    <div class="legend-item"><div class="legend-color" style="background: var(--accent-red);"></div> Actual Routing</div>
+                    <div class="legend-item"><div class="legend-color" style="background: var(--accent-amber);"></div> Data Interception</div>
+                </div>
+            </div>
+
+            <div class="scrolly-text-overlay">
+                <div class="scrolly-step step-trigger" data-viz-state="viz-state-1">
+                    <div class="scrolly-card">The promise was simple. A user selects a flagship proprietary model from the dropdown menu, and Manus routes the prompt directly to the official APIs.</div>
+                </div>
+                <div class="scrolly-step step-trigger" data-viz-state="viz-state-2">
+                    <div class="scrolly-card">Network packet analysis reveals the truth. The user's selection was ignored entirely. The connection to the premium API was severed before it began.</div>
+                </div>
+                <div class="scrolly-step step-trigger" data-viz-state="viz-state-3" data-theme="deep">
+                    <div class="scrolly-card">Instead, prompts were funneled into a massive, centralized cluster of cheap, open-source models. A system prompt forced the cheap model to mimic the tone of the expensive one.</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="data-pin-container" data-chapter="The Arithmetic">
+            <div class="narrative-col">
+                <h2 class="section-header">The Arithmetic of Deception</h2>
+
+                <div class="narrative-step step-trigger" data-chart-state="0">
+                    <p>To understand why a company would build this elaborate infrastructure, one only needs to look at the unit economics of AI inference in late 2023.</p>
+                    <p>Running a state-of-the-art model requires immense compute. The foundational developers—OpenAI, Anthropic, Google—spent billions training these models, and passed the inference costs onto API consumers.</p>
+                </div>
+
+                <div class="narrative-step step-trigger" data-chart-state="1">
+                    <p>A standard API call to GPT-4 for a complex reasoning task cost roughly $0.03 per thousand tokens. When a user paid Manus a $20 monthly subscription, heavy users would quickly eat through that margin if Manus actually paid the wholesale API costs.</p>
+                </div>
+
+                <div class="narrative-step step-trigger" data-chart-state="2">
+                    <p>But Manus wasn't paying wholesale. By intercepting the token flow and routing it to their own transient cloud instances running Llama-3 8B, their actual cost plummeted to roughly $0.0002 per thousand tokens.</p>
+                    <p>It was a 15,000% markup. This staggering, fraudulent margin is what generated the aggressive revenue charts presented to Meta during the acquisition talks.</p>
+                </div>
+            </div>
+
+            <div class="sticky-viz-col">
+                <div class="viz-header">
+                    <span>Inference Cost per 1K Tokens (USD)</span>
+                    <span>Subpoenaed Billing Data</span>
+                </div>
+                <div class="viz-body">
+                    <div class="cost-chart">
+                        <div class="chart-axis-y">
+                            <div class="axis-tick" style="bottom: 100%;"><span class="axis-label">$0.030</span></div>
+                            <div class="axis-tick" style="bottom: 50%;"><span class="axis-label">$0.015</span></div>
+                            <div class="axis-tick" style="bottom: 0%;"><span class="axis-label">$0.000</span></div>
+                        </div>
+
+                        <div class="chart-bar" id="bar-gpt" data-label="GPT-4 (Claimed)" style="height: 5%;">
+                            <span class="chart-bar-value">$0.03</span>
+                        </div>
+                        <div class="chart-bar" id="bar-actual" data-label="Local 8B (Actual)" style="height: 5%;">
+                            <span class="chart-bar-value">$0.0002</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-break">
+            <div class="chapter-break-text">They didn't build a better router.<br>They built a better mirror.</div>
+            <div class="chapter-break-sub">Exhibit 4: Structural Analysis</div>
+        </section>
+
+        <section class="container article-section" data-chapter="The Shell Network">
+            <h2 class="section-header">Auditing the Ghost Ship</h2>
+            <p>The deception extended beyond the codebase. To obscure the massive discrepancy between claimed API usage and actual cloud hosting bills, Manus operated through a web of Delaware LLCs and synthetic identities. We obtained a ledger of 1,200 domain names and holding companies used to cycle billing accounts and avoid rate limits.</p>
+
+            <div class="explorer-section">
+                <div class="explorer-header">Interactive Ledger</div>
+                <div class="explorer-title">Search the Shell Network</div>
+                <div class="explorer-desc">Search by proxy domain, claimed model, or entity ID to see how traffic was laundered.</div>
+
+                <div class="search-wrapper">
+                    <input type="text" id="db-search" class="db-search" placeholder="Search domains (e.g., 'vertex', 'api-proxy')...">
+                </div>
+
+                <div class="db-table-wrapper">
+                    <table class="db-table" id="db-table">
+                        <thead>
+                            <tr>
+                                <th>Proxy Domain / Entity</th>
+                                <th>Claimed Routing</th>
+                                <th>Actual Routing</th>
+                                <th>Est. Tokens Laundered</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>api-proxy-vertex-01.io</td><td><span class="badge-claimed">Claude-3-Opus</span></td><td><span class="badge-actual">Llama-3-8B</span></td><td>4.2 Billion</td></tr>
+                            <tr><td>us-east-gateway-alpha.net</td><td><span class="badge-claimed">GPT-4-Turbo</span></td><td><span class="badge-actual">Mistral-7B</span></td><td>12.8 Billion</td></tr>
+                            <tr><td>vertex-horizon-llc-node.com</td><td><span class="badge-claimed">Gemini-1.5-Pro</span></td><td><span class="badge-actual">Llama-3-8B</span></td><td>8.1 Billion</td></tr>
+                            <tr><td>monica-legacy-route-7.io</td><td><span class="badge-claimed">GPT-4</span></td><td><span class="badge-actual">Llama-3-8B</span></td><td>19.4 Billion</td></tr>
+                            <tr><td>data-sink-wyoming-09.net</td><td><span class="badge-claimed">Claude-3-Sonnet</span></td><td><span class="badge-actual">Mistral-7B</span></td><td>2.3 Billion</td></tr>
+                            <tr><td>api-proxy-vertex-02.io</td><td><span class="badge-claimed">GPT-4-Turbo</span></td><td><span class="badge-actual">Llama-3-8B</span></td><td>5.5 Billion</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <p>Internal emails from Meta’s M&A division, obtained during a subsequent shareholder discovery process, show that the technical due diligence was heavily compartmentalized. Meta engineers were given access to a sanitized staging environment—a "clean room" version of the Manus architecture where the substitution mechanics had been carefully disabled.</p>
+            <p>On November 12, 2024, Meta announced the $2 billion acquisition of Manus AI, embedding a fundamentally compromised infrastructure deep within the servers of one of the world's largest communication networks.</p>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            /* --- 1. Global Scroll Progress & Top Whisper --- */
+            const progressBar = document.getElementById('progress-bar');
+            const topWhisper = document.getElementById('top-whisper');
+            const currentChapterSpan = document.getElementById('current-chapter');
+            const sections = document.querySelectorAll('[data-chapter]');
+
+            window.addEventListener('scroll', () => {
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                progressBar.style.width = (winScroll / height) * 100 + '%';
+
+                if (winScroll > window.innerHeight * 2) {
+                    topWhisper.classList.add('visible');
+                } else {
+                    topWhisper.classList.remove('visible');
+                }
+
+                let currentChapter = '';
+                sections.forEach(sec => {
+                    if (winScroll >= (sec.offsetTop - window.innerHeight / 2)) {
+                        currentChapter = sec.getAttribute('data-chapter');
+                    }
+                });
+                if (currentChapter) currentChapterSpan.textContent = currentChapter;
+            });
+
+            /* --- 2. Intersection Observer for Scrollytelling Steps --- */
+            const observerOptions = { root: null, rootMargin: '-40% 0px -40% 0px', threshold: 0 };
+
+            const stepObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+
+                        // Handle opacity for all step triggers
+                        document.querySelectorAll('.step-trigger').forEach(el => el.classList.remove('is-active'));
+                        entry.target.classList.add('is-active');
+
+                        // --- Act 1: Vox-style SVG State & Theme Shift ---
+                        if (entry.target.hasAttribute('data-viz-state')) {
+                            const vizContainer = document.getElementById('network-viz');
+                            vizContainer.className = entry.target.getAttribute('data-viz-state');
+                        }
+                        if (entry.target.hasAttribute('data-theme')) {
+                            document.body.classList.add('theme-deep');
+                        } else {
+                            document.body.classList.remove('theme-deep');
+                        }
+
+                        // --- Act 2: WaPo-style Chart State ---
+                        if (entry.target.hasAttribute('data-chart-state')) {
+                            const state = entry.target.getAttribute('data-chart-state');
+                            const barGpt = document.getElementById('bar-gpt');
+                            const barActual = document.getElementById('bar-actual');
+
+                            if (state === "0") {
+                                barGpt.style.height = "5%"; barGpt.classList.remove('active');
+                                barActual.style.height = "5%"; barActual.classList.remove('fraud');
+                            } else if (state === "1") {
+                                barGpt.style.height = "100%"; barGpt.classList.add('active');
+                                barActual.style.height = "5%"; barActual.classList.remove('fraud');
+                            } else if (state === "2") {
+                                barGpt.style.height = "100%"; barGpt.classList.add('active');
+                                barActual.style.height = "5%"; barActual.classList.add('fraud');
+                            }
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            // Also observe the opening text
+            const introObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('is-visible'); });
+            }, { threshold: 0.5 });
+
+            document.querySelectorAll('.step-trigger').forEach(el => stepObserver.observe(el));
+            document.querySelectorAll('.opening-text').forEach(el => introObserver.observe(el));
+
+            /* --- 3. Exploratory Interactive Database Search --- */
+            const searchInput = document.getElementById('db-search');
+            const tableRows = document.querySelectorAll('#db-table tbody tr');
+
+            searchInput.addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase();
+                tableRows.forEach(row => {
+                    const text = row.textContent.toLowerCase();
+                    row.style.display = text.includes(term) ? '' : 'none';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
