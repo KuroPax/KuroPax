@@ -1,0 +1,2548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dossier Builder - Master Compiler</title>
+
+  <!-- External Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://unpkg.com/turndown/dist/turndown.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================
+       MASTER SHELL STYLES (dossier-builder)
+       ========================================= */
+    :root {
+      --bg-dark: #0f172a;
+      --panel-bg: #1e293b;
+      --border: #334155;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      --success: #10b981;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-main);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Master Header */
+    .master-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: var(--panel-bg);
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .master-header h1 { font-size: 1.25rem; }
+
+    .btn {
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      margin-left: 0.5rem;
+      font-size: 13px;
+    }
+
+    .btn-primary { background: var(--accent); color: white; }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-success { background: var(--success); color: white; }
+    .btn-success:hover { background: #059669; }
+
+    /* Header Metadata UI (Step 3) */
+    .header-meta {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex: 1;
+      margin: 0 20px;
+    }
+
+    .header-meta input {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 6px 10px;
+      color: var(--text-main);
+      font-size: 12px;
+    }
+
+    .header-meta input::placeholder { color: var(--text-muted); }
+
+    #meta-title { flex: 2; }
+    #meta-subtitle { flex: 1.5; }
+    #meta-byline { flex: 1; }
+
+    /* Workspace Layout */
+    .workspace {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid var(--border);
+      min-width: 0;
+    }
+
+    .panel-header {
+      padding: 0.75rem 1rem;
+      background: rgba(0,0,0,0.2);
+      border-bottom: 1px solid var(--border);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+
+    /* =========================================
+       STEP 2: BLOCK INSERT TOOLBAR
+       ========================================= */
+    .block-toolbar {
+      display: flex;
+      gap: 8px;
+      padding: 8px 12px;
+      background: rgba(0,0,0,0.15);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .toolbar-btn {
+      padding: 6px 12px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      background: var(--panel-bg);
+      color: var(--text-main);
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .toolbar-btn:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+
+    /* =========================================
+       STEP 3: EDITOR PANEL WITH OUTLINE
+       ========================================= */
+    .editor-container {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* Document Outline Panel */
+    .outline-panel {
+      width: 20%;
+      min-width: 160px;
+      max-width: 220px;
+      background: rgba(0,0,0,0.1);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .outline-header {
+      padding: 10px 12px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(0,0,0,0.1);
+    }
+
+    .outline-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 8px;
+    }
+
+    .outline-item {
+      padding: 6px 10px;
+      margin-bottom: 4px;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .outline-item:hover {
+      background: rgba(59, 130, 246, 0.15);
+      color: var(--accent);
+    }
+
+    .outline-item::before {
+      content: '#';
+      margin-right: 4px;
+      opacity: 0.5;
+    }
+
+    .outline-empty {
+      padding: 20px 12px;
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* Markdown Editor */
+    .editor-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    #markdown-editor {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--text-main);
+      padding: 1rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      resize: none;
+      outline: none;
+      line-height: 1.6;
+    }
+
+    /* =========================================
+       LIVE PREVIEW PANE (Expose_Rough styles)
+       ========================================= */
+    #preview-pane {
+      flex: 1;
+      padding: 1.5rem;
+      overflow-y: auto;
+      background: #ffffff;
+      color: #111827;
+      font-family: 'Libre Baskerville', serif;
+      line-height: 1.7;
+    }
+
+    /* Preview Typography - from Expose_Rough (WITHOUT cursor: none) */
+    #preview-pane h1,
+    #preview-pane h2,
+    #preview-pane h3,
+    #preview-pane h4 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 800;
+      margin-top: 0;
+      color: #111827;
+    }
+
+    #preview-pane h2 {
+      font-size: 1.75rem;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+    }
+
+    #preview-pane h3 {
+      font-size: 1.3rem;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    #preview-pane p {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      color: #111827;
+    }
+
+    #preview-pane ul {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      padding-left: 20px;
+    }
+
+    #preview-pane li { margin-bottom: 0.5rem; }
+
+    #preview-pane blockquote {
+      border-left: 4px solid #111827;
+      margin: 2rem 0;
+      padding-left: 1.5rem;
+      font-style: italic;
+      color: #4b5563;
+      font-size: 1.2rem;
+      background: #f9fafb;
+      padding: 1.5rem;
+      border-radius: 0 8px 8px 0;
+    }
+
+    #preview-pane pre {
+      background: #111827;
+      color: #e5e7eb;
+      padding: 20px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      margin: 2rem 0;
+    }
+
+    #preview-pane code {
+      font-family: 'JetBrains Mono', monospace;
+      background: #f3f4f6;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+
+    #preview-pane pre code {
+      background: transparent;
+      padding: 0;
+    }
+
+    /* Preview Cards */
+    #preview-pane .card {
+      background: #ffffff;
+      padding: 50px;
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.05);
+      margin-bottom: 60px;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Preview Evidence Images */
+    #preview-pane .evidence-img-wrap {
+      display: block;
+      margin: 30px 0;
+    }
+
+    #preview-pane .evidence-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.05);
+      border: 1px solid #f3f4f6;
+    }
+
+    /* Preview Citations */
+    #preview-pane .cite-tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.75rem;
+      color: #2563eb;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 4px;
+      padding: 0 4px;
+      margin: 0 2px;
+      vertical-align: super;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    #preview-pane .cite-tag:hover {
+      background: #2563eb;
+      color: white;
+    }
+
+    /* Preview Popup (for citation hover in preview) */
+    #preview-pane .cite-popup {
+      position: fixed;
+      z-index: 200;
+      width: 340px;
+      background: #ffffff;
+      border-radius: 8px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+      padding: 16px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.2s;
+      pointer-events: none;
+    }
+
+    #preview-pane .cite-popup.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    /* =========================================
+       ARCHIVE MANAGER APP (CSS ISOLATED)
+       All styles scoped to #archive-manager-app
+       ========================================= */
+    #archive-manager-app {
+      --am-bg: #f4f4f5;
+      --am-surface: #ffffff;
+      --am-border: #e4e4e7;
+      --am-text: #18181b;
+      --am-text-muted: #52525b;
+      --am-text-light: #a1a1aa;
+      --am-primary: #09090b;
+      --am-primary-hover: #27272a;
+      --am-primary-bg: #f4f4f5;
+      --am-blue: #2563eb;
+      --am-blue-bg: #eff6ff;
+      --am-danger: #ef4444;
+      --am-danger-bg: #fef2f2;
+      --am-success: #10b981;
+      --am-success-bg: #ecfdf5;
+      --am-sans: 'Inter', system-ui, sans-serif;
+      --am-mono: 'JetBrains Mono', monospace;
+      --am-shadow: 0 1px 3px rgba(0,0,0,0.1);
+
+      flex: 1;
+      overflow: hidden;
+      background: var(--am-bg);
+      color: var(--am-text);
+      font-family: var(--am-sans);
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #archive-manager-app *,
+    #archive-manager-app *::before,
+    #archive-manager-app *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    #archive-manager-app ::-webkit-scrollbar { width: 8px; height: 8px; }
+    #archive-manager-app ::-webkit-scrollbar-thumb { background: #d4d4d8; border-radius: 4px; }
+
+    /* Archive Manager Layout */
+    #archive-manager-app .am-app {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    #archive-manager-app .am-header {
+      height: 50px;
+      background: var(--am-surface);
+      border-bottom: 1px solid var(--am-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      flex-shrink: 0;
+      z-index: 10;
+    }
+
+    #archive-manager-app .am-brand {
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: -0.5px;
+    }
+
+    #archive-manager-app .am-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    #archive-manager-app .am-main {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* Archive Manager Sidebar */
+    #archive-manager-app .am-sidebar {
+      width: 320px;
+      background: var(--am-surface);
+      border-right: 1px solid var(--am-border);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+
+    #archive-manager-app .am-sidebar-header {
+      padding: 12px;
+      border-bottom: 1px solid var(--am-border);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: #fafafa;
+    }
+
+    #archive-manager-app .am-search-inp {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid var(--am-border);
+      border-radius: 6px;
+      font-family: var(--am-sans);
+      font-size: 13px;
+      outline: none;
+    }
+
+    #archive-manager-app .am-search-inp:focus {
+      border-color: var(--am-blue);
+      box-shadow: 0 0 0 2px var(--am-blue-bg);
+    }
+
+    #archive-manager-app .am-list-scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* Source Items with Glow States */
+    #archive-manager-app .am-src-item {
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.2s;
+      background: var(--am-surface);
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      border: 1px solid var(--am-border);
+      position: relative;
+    }
+
+    #archive-manager-app .am-src-item:hover { transform: translateY(-1px); }
+    #archive-manager-app .am-src-item.active { background: #f8fafc; }
+
+    #archive-manager-app .am-src-item.incomplete {
+      border-color: rgba(239, 68, 68, 0.5);
+      box-shadow: 0 0 10px rgba(239, 68, 68, 0.2), inset 3px 0 0 var(--am-danger);
+    }
+
+    #archive-manager-app .am-src-item.complete {
+      border-color: rgba(16, 185, 129, 0.5);
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.2), inset 3px 0 0 var(--am-success);
+    }
+
+    #archive-manager-app .am-src-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    #archive-manager-app .am-src-id {
+      font-family: var(--am-mono);
+      font-size: 10px;
+      font-weight: 600;
+      background: var(--am-bg);
+      padding: 2px 5px;
+      border-radius: 4px;
+      border: 1px solid var(--am-border);
+    }
+
+    #archive-manager-app .am-src-title {
+      font-weight: 600;
+      font-size: 13px;
+      line-height: 1.3;
+      color: var(--am-text);
+    }
+
+    #archive-manager-app .am-src-meta {
+      display: flex;
+      gap: 6px;
+      font-size: 10px;
+      color: var(--am-text-muted);
+      align-items: center;
+      font-weight: 500;
+      flex-wrap: wrap;
+    }
+
+    /* =========================================
+       STEP 4: CITATION INJECTOR BUTTON
+       ========================================= */
+    #archive-manager-app .cite-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      padding: 3px 8px;
+      font-size: 10px;
+      font-weight: 600;
+      background: var(--am-blue);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      z-index: 5;
+    }
+
+    #archive-manager-app .am-src-item:hover .cite-btn {
+      opacity: 1;
+    }
+
+    #archive-manager-app .cite-btn:hover {
+      background: #1d4ed8;
+    }
+
+    /* Archive Manager Editor */
+    #archive-manager-app .am-editor {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+      background: var(--am-bg);
+    }
+
+    #archive-manager-app .am-editor-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    #archive-manager-app .am-empty-state {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--am-text-muted);
+      font-size: 14px;
+    }
+
+    #archive-manager-app .am-section {
+      background: var(--am-surface);
+      border: 1px solid var(--am-border);
+      border-radius: 8px;
+      box-shadow: var(--am-shadow);
+      overflow: hidden;
+    }
+
+    #archive-manager-app .am-sec-header {
+      padding: 12px 18px;
+      background: #fafafa;
+      border-bottom: 1px solid var(--am-border);
+      font-weight: 600;
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #archive-manager-app .am-sec-body {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    #archive-manager-app .am-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    #archive-manager-app .am-row-id { grid-template-columns: 100px 1fr 120px; }
+
+    #archive-manager-app .am-field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    #archive-manager-app .am-field.full { grid-column: 1 / -1; }
+
+    #archive-manager-app .am-field label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--am-text-muted);
+    }
+
+    #archive-manager-app .am-inp {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid var(--am-border);
+      border-radius: 6px;
+      font-family: var(--am-sans);
+      font-size: 13px;
+      outline: none;
+      transition: 0.2s;
+    }
+
+    #archive-manager-app .am-inp:focus {
+      border-color: var(--am-blue);
+      box-shadow: 0 0 0 2px var(--am-blue-bg);
+    }
+
+    #archive-manager-app .am-inp-mono { font-family: var(--am-mono); font-size: 12px; }
+
+    #archive-manager-app textarea.am-inp {
+      min-height: 80px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+
+    #archive-manager-app .am-checkbox-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--am-text);
+      padding: 8px 12px;
+      border: 1px solid var(--am-border);
+      border-radius: 6px;
+      background: var(--am-surface);
+      font-size: 13px;
+    }
+
+    #archive-manager-app .am-checkbox-wrap input {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+
+    #archive-manager-app .am-checkbox-wrap.danger {
+      background: var(--am-danger-bg);
+      color: var(--am-danger);
+      border: 1px dashed #f87171;
+      margin-top: 8px;
+    }
+
+    #archive-manager-app .am-checkbox-wrap.danger input { accent-color: var(--am-danger); }
+
+    /* Dynamic Lists */
+    #archive-manager-app .am-dyn-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    #archive-manager-app .am-dyn-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    #archive-manager-app .am-btn-icon {
+      padding: 8px;
+      background: var(--am-bg);
+      border: 1px solid var(--am-border);
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--am-text-muted);
+    }
+
+    #archive-manager-app .am-btn-icon:hover {
+      background: var(--am-danger-bg);
+      color: var(--am-danger);
+      border-color: #fca5a5;
+    }
+
+    /* Archive Manager Buttons */
+    #archive-manager-app .am-btn {
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      font-family: var(--am-sans);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.2s;
+      border: 1px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    #archive-manager-app .am-btn-primary {
+      background: var(--am-primary);
+      color: white;
+    }
+
+    #archive-manager-app .am-btn-primary:hover { background: var(--am-primary-hover); }
+
+    #archive-manager-app .am-btn-blue {
+      background: var(--am-blue);
+      color: white;
+    }
+
+    #archive-manager-app .am-btn-blue:hover { background: #1d4ed8; }
+
+    #archive-manager-app .am-btn-outline {
+      background: var(--am-surface);
+      border-color: var(--am-border);
+      color: var(--am-text);
+    }
+
+    #archive-manager-app .am-btn-outline:hover { background: var(--am-bg); }
+
+    #archive-manager-app .am-btn-sm { padding: 4px 8px; font-size: 11px; }
+
+    /* Archive Manager Modal */
+    #archive-manager-app .am-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      backdrop-filter: blur(2px);
+    }
+
+    #archive-manager-app .am-modal {
+      background: var(--am-surface);
+      padding: 20px;
+      border-radius: 12px;
+      width: 450px;
+      box-shadow: var(--am-shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    #archive-manager-app .am-modal-title {
+      font-size: 16px;
+      font-weight: 700;
+      border-bottom: 1px solid var(--am-border);
+      padding-bottom: 10px;
+    }
+
+    /* Archive Manager Toast */
+    #am-toastWrap {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      pointer-events: none;
+    }
+
+    .am-toast {
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      background: var(--am-primary);
+      color: white;
+      box-shadow: var(--am-shadow);
+    }
+
+    .am-toast.am-toast-warn { background: var(--am-danger); }
+
+    /* Archive Manager Container Panel */
+    #archive-panel { flex: 1.3; }
+  </style>
+</head>
+<body>
+
+  <!-- =========================================
+       MASTER HEADER WITH METADATA UI (Step 3)
+       ========================================= -->
+  <header class="master-header">
+    <h1>Dossier Builder v2</h1>
+
+    <!-- Header Metadata Inputs -->
+    <div class="header-meta">
+      <input type="text" id="meta-title" placeholder="Document Title">
+      <input type="text" id="meta-subtitle" placeholder="Subtitle">
+      <input type="text" id="meta-byline" placeholder="Byline / Date">
+    </div>
+
+    <div class="header-actions">
+      <button class="btn btn-primary" id="btn-import">1. Import Expose_Rough.html</button>
+      <button class="btn btn-success" id="btn-export">2. Export Compiled Dossier</button>
+    </div>
+  </header>
+
+  <!-- =========================================
+       WORKSPACE - 3 PANE LAYOUT
+       ========================================= -->
+  <div class="workspace">
+
+    <!-- LEFT PANEL: Markdown Editor with Outline -->
+    <div class="panel">
+      <div class="panel-header">Prose Editor (Markdown)</div>
+
+      <!-- STEP 2: Block Insert Toolbar -->
+      <div class="block-toolbar">
+        <button class="toolbar-btn" id="btn-add-text-card" title="Insert a new text card block">
+          ➕ Add Text Card
+        </button>
+        <button class="toolbar-btn" id="btn-add-image-card" title="Insert a new image card block">
+          🖼️ Add Image Card
+        </button>
+      </div>
+
+      <!-- STEP 3: Editor Container with Outline Panel -->
+      <div class="editor-container">
+        <!-- Document Outline Panel -->
+        <div class="outline-panel">
+          <div class="outline-header">Document Outline</div>
+          <div class="outline-list" id="outline-list">
+            <div class="outline-empty">No cards yet</div>
+          </div>
+        </div>
+
+        <!-- Editor Wrapper -->
+        <div class="editor-wrapper">
+          <textarea id="markdown-editor" placeholder="Import your HTML to see the magic..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- CENTER PANEL: Live Preview -->
+    <div class="panel">
+      <div class="panel-header">Live Preview</div>
+      <div id="preview-pane"></div>
+    </div>
+
+    <!-- RIGHT PANEL: Archive Manager (Step 1 - Deep Component Embedding) -->
+    <div class="panel" id="archive-panel">
+      <div class="panel-header">Archive Manager Database</div>
+
+      <!-- ARCHIVE MANAGER APP - CSS ISOLATED -->
+      <div id="archive-manager-app">
+        <div class="am-app">
+
+          <!-- Archive Manager Header -->
+          <header class="am-header">
+            <div class="am-brand">Archive Workspace</div>
+            <div class="am-actions">
+              <button class="am-btn am-btn-outline" id="am-btnCheckDupes" style="color: var(--am-danger); border-color: #fca5a5; font-size: 11px;">Check URL Dupes</button>
+              <button class="am-btn am-btn-outline" id="am-btnSettings" style="font-size: 11px;">Settings</button>
+              <div style="width: 1px; height: 20px; background: var(--am-border); margin: 0 2px;"></div>
+              <button class="am-btn am-btn-outline" id="am-btnImport" style="font-size: 11px;">Import</button>
+              <button class="am-btn am-btn-outline" id="am-btnExportJSON" style="font-size: 11px;">Save JSON</button>
+              <button class="am-btn am-btn-blue" id="am-btnExportHTML" style="font-size: 11px;">Generate Public HTML Viewer</button>
+            </div>
+          </header>
+
+          <!-- Archive Manager Main -->
+          <div class="am-main">
+            <!-- Sidebar -->
+            <aside class="am-sidebar">
+              <div class="am-sidebar-header">
+                <button class="am-btn am-btn-primary" id="am-btnAdd" style="width:100%; font-size: 12px;">+ Create New Source</button>
+                <div style="display:flex; gap: 6px;">
+                  <input type="text" class="am-search-inp" id="am-search" placeholder="Search Title, IDs, or Categories..." style="flex:1;">
+                  <button class="am-btn am-btn-outline" id="am-btnClearSearch" style="display:none; padding: 0 8px; font-size: 11px;">✕</button>
+                </div>
+              </div>
+              <div class="am-list-scroll" id="am-sourceList">
+                <div style="padding: 16px; text-align: center; color: var(--am-text-muted); font-size: 13px;">No sources yet. Import or create one.</div>
+              </div>
+            </aside>
+
+            <!-- Editor -->
+            <main class="am-editor" id="am-editor">
+              <div class="am-empty-state" id="am-emptyState">Select a source from the sidebar to edit.</div>
+
+              <div class="am-editor-inner" id="am-editorForm" style="display: none;">
+
+                <div style="display: flex; justify-content: flex-end; position: sticky; top: 0; z-index: 10; padding-bottom: 16px; background: var(--am-bg);">
+                  <div class="am-actions">
+                    <button class="am-btn am-btn-outline" id="am-btnDelete" style="color: var(--am-danger); border-color: var(--am-danger-bg); font-size: 11px;">Delete</button>
+                    <button class="am-btn am-btn-primary" id="am-btnSave" style="font-size: 11px;">Save Changes</button>
+                  </div>
+                </div>
+
+                <!-- Section 1: Core Information -->
+                <div class="am-section">
+                  <div class="am-sec-header">1. Core Information</div>
+                  <div class="am-sec-body">
+                    <div class="am-row am-row-id">
+                      <div class="am-field"><label>ID</label><input type="text" class="am-inp am-inp-mono" id="am-fId"></div>
+                      <div class="am-field"><label>Date Captured</label><input type="text" class="am-inp" id="am-fDate" placeholder="YYYY-MM-DD"></div>
+                    </div>
+                    <div class="am-row">
+                      <div class="am-field"><label>Main Category</label><input type="text" class="am-inp" id="am-fMainCat" list="am-mainCats"></div>
+                      <div class="am-field"><label>Subcategory</label><input type="text" class="am-inp" id="am-fSubCat" list="am-subCats"></div>
+                    </div>
+                    <div class="am-field full"><label>Title / Subject</label><input type="text" class="am-inp" id="am-fTitle"></div>
+                    <div class="am-field full"><label>Main Source URL</label><input type="url" class="am-inp am-inp-mono" id="am-fUrl"></div>
+                    <div class="am-field full"><label>Description</label><textarea class="am-inp" id="am-fDesc"></textarea></div>
+                    <div class="am-field full"><label>Evidence Image URL (For HTML Viewer)</label><input type="url" class="am-inp am-inp-mono" id="am-fImage" placeholder="https://..."></div>
+                    <label class="am-checkbox-wrap danger"><input type="checkbox" id="am-fIncomplete"> Flag as Incomplete (Requires further archiving/review)</label>
+                  </div>
+                </div>
+
+                <!-- Section 2: Immutable Records -->
+                <div class="am-section">
+                  <div class="am-sec-header">2. Immutable Records (Web3 / IPFS)</div>
+                  <div class="am-sec-body">
+                    <div class="am-field full">
+                      <label style="display:flex; justify-content:space-between;">Raw CIDs <button class="am-btn am-btn-outline am-btn-sm" id="am-btnAddCid">+ CID</button></label>
+                      <div class="am-dyn-list" id="am-listCids"></div>
+                      <div style="font-size: 10px; color: var(--am-text-light); margin-top: 4px;">Global IPFS Gateways are automatically applied to these.</div>
+                    </div>
+                    <hr style="border:0; border-top:1px solid var(--am-border);">
+                    <div class="am-field full">
+                      <label style="display:flex; justify-content:space-between;">Specific Replayweb Deep Links <button class="am-btn am-btn-outline am-btn-sm" id="am-btnAddWacz">+ Custom Link</button></label>
+                      <div class="am-dyn-list" id="am-listWacz"></div>
+                      <div style="font-size: 10px; color: var(--am-text-light); margin-top: 4px;">For deep links (e.g., `#view=pages&url=...`).</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Section 3: Standard Web Archives -->
+                <div class="am-section">
+                  <div class="am-sec-header">3. Standard Web Archives</div>
+                  <div class="am-sec-body">
+                    <div class="am-row">
+                      <div class="am-field"><label>Perma.cc</label><input type="url" class="am-inp am-inp-mono" id="am-fPerma"></div>
+                      <div class="am-field"><label>Archive.org</label><input type="url" class="am-inp am-inp-mono" id="am-fArchOrg"></div>
+                    </div>
+                    <div class="am-row">
+                      <div class="am-field"><label>Archive.today</label><input type="url" class="am-inp am-inp-mono" id="am-fArchTd"></div>
+                      <div class="am-field"><label>Megalodon.jp</label><input type="url" class="am-inp am-inp-mono" id="am-fMega"></div>
+                    </div>
+                    <div class="am-field full"><label>GhostArchive</label><input type="url" class="am-inp am-inp-mono" id="am-fGhost"></div>
+                  </div>
+                </div>
+
+                <!-- Section 4: Context & Extra Evidence -->
+                <div class="am-section">
+                  <div class="am-sec-header">4. Context & Extra Evidence</div>
+                  <div class="am-sec-body">
+                    <div class="am-field full">
+                      <label style="display:flex; justify-content:space-between;">Additional Evidence / Custom Links <button class="am-btn am-btn-outline am-btn-sm" id="am-btnAddExtra">+ Link</button></label>
+                      <div class="am-dyn-list" id="am-listExtra"></div>
+                    </div>
+                    <hr style="border:0; border-top:1px solid var(--am-border);">
+                    <div class="am-field full"><label>Tags (Comma separated)</label><input type="text" class="am-inp" id="am-fTags" placeholder="fraud, thread, missing-context"></div>
+                    <div class="am-field full"><label>Internal Notes / Dossier Sync</label><textarea class="am-inp" id="am-fNotes"></textarea></div>
+                  </div>
+                </div>
+
+                <div style="height: 60px;"></div>
+              </div>
+            </main>
+          </div>
+        </div>
+
+        <!-- Settings Modal -->
+        <div class="am-modal-overlay" id="am-modalSettings">
+          <div class="am-modal">
+            <div class="am-modal-title">Global Settings</div>
+            <div class="am-field full">
+              <label>Global IPFS Gateways (One per line)</label>
+              <textarea class="am-inp am-inp-mono" id="am-setGateways" style="height: 100px;" placeholder="https://ipfs.io/ipfs/&#10;https://dweb.link/ipfs/"></textarea>
+              <div style="font-size: 10px; color: var(--am-text-muted); margin-top: 4px; line-height: 1.4;">
+                These gateways will be automatically prefixed to all CIDs in the generated HTML Viewer.<br>Make sure to include the trailing slash (e.g. <b>/ipfs/</b>).
+              </div>
+            </div>
+            <div style="display: flex; justify-content: flex-end; gap: 6px; margin-top: 6px;">
+              <button class="am-btn am-btn-outline" onclick="document.getElementById('am-modalSettings').style.display='none'" style="font-size: 11px;">Cancel</button>
+              <button class="am-btn am-btn-primary" id="am-btnSaveSettings" style="font-size: 11px;">Save Settings</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Datalists -->
+        <datalist id="am-mainCats"></datalist>
+        <datalist id="am-subCats"></datalist>
+
+        <!-- Hidden File Input -->
+        <input type="file" id="am-fileInput" accept=".json" style="display:none">
+
+        <!-- Toast Container -->
+        <div id="am-toastWrap"></div>
+
+      </div><!-- /#archive-manager-app -->
+    </div><!-- /#archive-panel -->
+  </div><!-- /.workspace -->
+
+  <!-- =========================================
+       JAVASCRIPT - INTEGRATION LOGIC
+       ========================================= -->
+  <script>
+  // =========================================
+  // STEP 2: MARKDOWN ROUND-TRIP ENGINE
+  // Custom Turndown.js rules AND Marked.js extensions
+  // =========================================
+
+  // --- TURNDOWN CUSTOM RULES (HTML -> Markdown) ---
+  const turndownService = new TurndownService({
+    headingStyle: 'atx',
+    codeBlockStyle: 'fenced'
+  });
+
+  // Rule A: Citations - Convert <cite class="cite-tag" data-ref="N">N</cite> to `[[cite:N]]`
+  turndownService.addRule('citations', {
+    filter: function(node) {
+      return node.nodeName === 'CITE' && node.classList.contains('cite-tag');
+    },
+    replacement: function(content, node) {
+      const ref = node.getAttribute('data-ref') || content;
+      return `[[cite:${ref}]]`;
+    }
+  });
+
+  // Rule B: Evidence Images - Convert evidence-img-wrap to :::img block
+  turndownService.addRule('evidenceImages', {
+    filter: function(node) {
+      return node.nodeName === 'DIV' && node.classList.contains('evidence-img-wrap');
+    },
+    replacement: function(content, node) {
+      const img = node.querySelector('img.evidence-img');
+      if (!img) return '';
+      const src = img.getAttribute('src') || '';
+      const fallbacks = img.getAttribute('data-fallbacks') || '';
+      const alt = img.getAttribute('alt') || '';
+      return `\n\n:::img src="${src}" fallbacks="${fallbacks}" alt="${alt}"\n:::\n\n`;
+    }
+  });
+
+  // Rule C: Cards - Convert <article class="card" id="X"> to :::card X blocks
+  turndownService.addRule('articleCards', {
+    filter: function(node) {
+      return node.nodeName === 'ARTICLE' && node.classList.contains('card');
+    },
+    replacement: function(content, node) {
+      const id = node.getAttribute('id') || '';
+      // Clean up content - remove extra whitespace
+      const cleanContent = content.trim();
+      return `\n\n:::card ${id}\n\n${cleanContent}\n\n:::\n\n`;
+    }
+  });
+
+  // Default rules for other elements
+  turndownService.keep(['blockquote', 'pre', 'code']);
+
+
+  // --- MARKED.JS CUSTOM EXTENSIONS (Markdown -> HTML) ---
+
+  // Extension 1: Cite inline - Convert `[[cite:N]]` back to <cite>
+  const citeExtension = {
+    name: 'cite',
+    level: 'inline',
+    start(src) {
+      return src.match(/\[\[cite:/)?.index;
+    },
+    tokenizer(src) {
+      const rule = /^\[\[cite:([^\]]+)\]\]/;
+      const match = src.match(rule);
+      if (match) {
+        return {
+          type: 'cite',
+          raw: match[0],
+          ref: match[1].trim()
+        };
+      }
+      return undefined;
+    },
+    renderer(token) {
+      return `<cite class="cite-tag" data-ref="${token.ref}">${token.ref}</cite>`;
+    }
+  };
+
+  // Extension 2: Img block - Convert :::img blocks back to evidence-img-wrap
+  const imgBlockExtension = {
+    name: 'evidenceImg',
+    level: 'block',
+    start(src) {
+      return src.match(/:::\s*img/)?.index;
+    },
+    tokenizer(src) {
+      const rule = /^:::\s*img\s+src="([^"]*)"(?:\s+fallbacks="([^"]*)")?(?:\s+alt="([^"]*)")?\s*\n:::/;
+      const match = src.match(rule);
+      if (match) {
+        return {
+          type: 'evidenceImg',
+          raw: match[0],
+          src: match[1] || '',
+          fallbacks: match[2] || '',
+          alt: match[3] || ''
+        };
+      }
+      return undefined;
+    },
+    renderer(token) {
+      const fallbacksAttr = token.fallbacks ? ` data-fallbacks='${token.fallbacks}'` : '';
+      return `<div class="evidence-img-wrap"><img class="evidence-img" src="${token.src}"${fallbacksAttr} alt="${token.alt}"></div>`;
+    }
+  };
+
+  // Extension 3: Card block - Convert :::card X blocks back to <article>
+  const cardBlockExtension = {
+    name: 'cardBlock',
+    level: 'block',
+    start(src) {
+      return src.match(/:::\s*card/)?.index;
+    },
+    tokenizer(src) {
+      const rule = /^:::\s*card\s*([^\n]*)\n([\s\S]*?)\n:::/;
+      const match = src.match(rule);
+      if (match) {
+        return {
+          type: 'cardBlock',
+          raw: match[0],
+          id: match[1].trim(),
+          content: match[2].trim()
+        };
+      }
+      return undefined;
+    },
+    renderer(token) {
+      const idAttr = token.id ? ` id="${token.id}"` : '';
+      // Parse the inner content with marked
+      const innerHtml = marked.parse(token.content);
+      return `<article class="card"${idAttr}>\n${innerHtml}</article>`;
+    }
+  };
+
+  // Apply extensions to marked
+  marked.use({
+    extensions: [citeExtension, imgBlockExtension, cardBlockExtension]
+  });
+
+  // Configure marked options
+  marked.setOptions({
+    headerIds: false,
+    mangle: false,
+    breaks: true,
+    gfm: true
+  });
+
+
+  // =========================================
+  // STEP 1: ARCHIVE MANAGER WORKSPACE CLASS
+  // Complete embedded application with ZERO LOSS
+  // =========================================
+  class Workspace {
+    constructor() {
+      this.sources = [];
+      this.settings = { ipfsGateways: ['https://ipfs.io/ipfs/', 'https://dweb.link/ipfs/'] };
+      this.selectedId = null;
+      this.searchText = '';
+      this.duplicateMode = false;
+      this.duplicateUrls = [];
+    }
+
+    init() {
+      document.getElementById('am-btnImport').addEventListener('click', () => document.getElementById('am-fileInput').click());
+      document.getElementById('am-fileInput').addEventListener('change', e => this.importJSON(e));
+      document.getElementById('am-btnExportJSON').addEventListener('click', () => this.exportJSON());
+      document.getElementById('am-btnExportHTML').addEventListener('click', () => this.generateViewerHTML());
+
+      const searchInp = document.getElementById('am-search');
+      const clearBtn = document.getElementById('am-btnClearSearch');
+      searchInp.addEventListener('input', e => {
+        this.searchText = e.target.value.toLowerCase();
+        this.duplicateMode = false;
+        clearBtn.style.display = this.searchText ? 'block' : 'none';
+        this.renderSidebar();
+      });
+      clearBtn.addEventListener('click', () => {
+        searchInp.value = ''; this.searchText = ''; this.duplicateMode = false;
+        clearBtn.style.display = 'none'; this.renderSidebar();
+      });
+
+      document.getElementById('am-btnCheckDupes').addEventListener('click', () => this.checkDuplicates());
+      document.getElementById('am-btnAdd').addEventListener('click', () => this.createNew());
+      document.getElementById('am-btnSave').addEventListener('click', () => this.saveCurrent());
+      document.getElementById('am-btnDelete').addEventListener('click', () => this.deleteCurrent());
+
+      document.getElementById('am-btnSettings').addEventListener('click', () => this.openSettings());
+      document.getElementById('am-btnSaveSettings').addEventListener('click', () => this.saveSettings());
+
+      document.getElementById('am-btnAddCid').addEventListener('click', () => this.addCidRow('am-listCids', '', '', false));
+      document.getElementById('am-btnAddWacz').addEventListener('click', () => this.addDynRowDual('am-listWacz', 'Label', 'Replayweb URL'));
+      document.getElementById('am-btnAddExtra').addEventListener('click', () => this.addDynRowDual('am-listExtra', 'Label', 'URL'));
+
+      this.renderSidebar();
+    }
+
+    esc(str) { return String(str||'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+
+    toast(msg, type='info') {
+      const w = document.getElementById('am-toastWrap');
+      const el = document.createElement('div');
+      el.className = `am-toast am-toast-${type}`;
+      el.textContent = msg;
+      w.appendChild(el);
+      setTimeout(() => el.remove(), 4000);
+    }
+
+    openSettings() {
+      document.getElementById('am-setGateways').value = this.settings.ipfsGateways.join('\n');
+      document.getElementById('am-modalSettings').style.display = 'flex';
+    }
+
+    saveSettings() {
+      const gws = document.getElementById('am-setGateways').value.split('\n').map(s=>s.trim()).filter(Boolean);
+      this.settings.ipfsGateways = gws.length ? gws : ['https://ipfs.io/ipfs/'];
+      document.getElementById('am-modalSettings').style.display = 'none';
+      this.toast('Settings saved globally.');
+    }
+
+    updateCats() {
+      const mains = new Set(); const subs = new Set();
+      this.sources.forEach(s => {
+        if(s.mainCategory) mains.add(s.mainCategory);
+        if(s.subCategory) subs.add(s.subCategory);
+      });
+      document.getElementById('am-mainCats').innerHTML = Array.from(mains).map(x => `<option value="${this.esc(x)}">`).join('');
+      document.getElementById('am-subCats').innerHTML = Array.from(subs).map(x => `<option value="${this.esc(x)}">`).join('');
+    }
+
+    sortSources() {
+      this.sources.sort((a, b) => {
+        let numA = parseInt(a.id); let numB = parseInt(b.id);
+        let isNumA = !isNaN(numA) && String(numA) === String(a.id);
+        let isNumB = !isNaN(numB) && String(numB) === String(b.id);
+        if (isNumA && isNumB) return numA - numB;
+        if (isNumA) return -1; if (isNumB) return 1;
+        return String(a.id).localeCompare(String(b.id));
+      });
+    }
+
+    checkDuplicates() {
+      const urlCounts = {};
+      this.sources.forEach(s => {
+        const url = s.mainSourceUrl?.trim();
+        if(url) urlCounts[url] = (urlCounts[url] || 0) + 1;
+      });
+
+      this.duplicateUrls = Object.keys(urlCounts).filter(k => urlCounts[k] > 1);
+
+      if(this.duplicateUrls.length === 0) {
+        this.duplicateMode = false;
+        this.renderSidebar();
+        return this.toast("No duplicate URLs found! You are clean.", "success");
+      }
+
+      this.duplicateMode = true;
+      document.getElementById('am-search').value = '';
+      this.searchText = '';
+      document.getElementById('am-btnClearSearch').style.display = 'block';
+      this.renderSidebar();
+      this.toast(`Found ${this.duplicateUrls.length} duplicated URL(s). Filtering sidebar...`, "warn");
+    }
+
+    renderSidebar() {
+      const list = document.getElementById('am-sourceList');
+
+      const filtered = this.sources.filter(s => {
+        if (this.duplicateMode) {
+          return s.mainSourceUrl && this.duplicateUrls.includes(s.mainSourceUrl.trim());
+        }
+        if (!this.searchText) return true;
+        const str = [s.id, s.title, s.mainCategory, s.subCategory].join(' ').toLowerCase();
+        return str.includes(this.searchText);
+      });
+
+      if(!filtered.length) {
+        list.innerHTML = `<div style="padding: 16px; text-align: center; color: var(--am-text-muted); font-size: 13px;">${this.duplicateMode ? 'No duplicates!' : 'No matching records.'}</div>`;
+        return;
+      }
+
+      list.innerHTML = filtered.map(s => {
+        const stateClass = s.incomplete ? 'incomplete' : 'complete';
+        const dupeWarn = (this.duplicateMode) ? `<div style="color:var(--am-danger); font-size:9px; font-weight:bold; margin-top:3px;">DUPLICATE URL</div>` : '';
+
+        return `
+        <div class="am-src-item ${stateClass} ${s.id === this.selectedId ? 'active' : ''}" onclick="archiveApp.loadSource('${this.esc(s.id)}')">
+          <button class="cite-btn" data-id="${this.esc(s.id)}" title="Insert citation into editor">📌 Cite</button>
+          <div class="am-src-top">
+            <div class="am-src-title">${this.esc(s.title || 'Untitled')}</div>
+          </div>
+          <div class="am-src-meta" style="margin-top: 3px;">
+            <span class="am-src-id">${this.esc(s.id)}</span>
+            <span>${this.esc(s.mainCategory || 'Uncategorized')} &rsaquo; ${this.esc(s.subCategory || 'General')}</span>
+          </div>
+          ${dupeWarn}
+        </div>
+      `}).join('');
+    }
+
+    loadSource(id) {
+      this.selectedId = id;
+      this.renderSidebar();
+      const s = this.sources.find(x => x.id === id);
+      if(!s) return;
+
+      document.getElementById('am-emptyState').style.display = 'none';
+      document.getElementById('am-editorForm').style.display = 'flex';
+
+      const el = id => document.getElementById(id);
+      el('am-fId').value = s.id||'';
+      el('am-fMainCat').value = s.mainCategory||'';
+      el('am-fSubCat').value = s.subCategory||'';
+      el('am-fDate').value = s.dateCaptured||'';
+      el('am-fTitle').value = s.title||'';
+      el('am-fUrl').value = s.mainSourceUrl||'';
+      el('am-fDesc').value = s.description||'';
+      el('am-fImage').value = s.imageUrl||'';
+      el('am-fIncomplete').checked = !!s.incomplete;
+
+      const sm = s.standardMirrors||{};
+      el('am-fPerma').value = sm.permaCc||'';
+      el('am-fArchOrg').value = sm.archiveOrg||'';
+      el('am-fArchTd').value = sm.archiveToday||'';
+      el('am-fMega').value = sm.megalodonJp||'';
+      el('am-fGhost').value = sm.ghostArchive||'';
+      el('am-fTags').value = (s.tags||[]).join(', ');
+      el('am-fNotes').value = s.notes||'';
+
+      // Populate Dynamic CIDs with labels
+      document.getElementById('am-listCids').innerHTML = '';
+      (s.ipfs?.cids||[]).forEach(c => {
+         const cidStr = typeof c === 'string' ? c : c.cid;
+         const label = typeof c === 'string' ? '' : (c.label || '');
+         const isWacz = typeof c === 'string' ? false : !!c.isWacz;
+         this.addCidRow('am-listCids', label, cidStr, isWacz);
+      });
+      if(!(s.ipfs?.cids||[]).length) this.addCidRow('am-listCids', '', '', false);
+
+      document.getElementById('am-listWacz').innerHTML = '';
+      (s.ipfs?.customReplayweb||[]).forEach(x => this.addDynRowDual('am-listWacz', 'Label', 'Replayweb URL', x.label, x.url));
+      if(!(s.ipfs?.customReplayweb||[]).length) this.addDynRowDual('am-listWacz', 'Label', 'Replayweb URL');
+
+      document.getElementById('am-listExtra').innerHTML = '';
+      (s.additionalUrls||[]).forEach(x => this.addDynRowDual('am-listExtra', 'Label', 'URL', x.label, x.url));
+      if(!(s.additionalUrls||[]).length) this.addDynRowDual('am-listExtra', 'Label', 'URL');
+    }
+
+    addCidRow(container, labelStr = '', cidStr = '', isWacz = false) {
+      const div = document.createElement('div');
+      div.className = 'am-dyn-row cid-row';
+      div.innerHTML = `
+        <input type="text" class="am-inp i-lbl" placeholder="Label (e.g. PNG Proof)" value="${this.esc(labelStr)}" style="flex: 0.5;">
+        <input type="text" class="am-inp am-inp-mono i-val" placeholder="CID (bafy...)" value="${this.esc(cidStr)}" style="flex: 1;">
+        <label class="am-checkbox-wrap" style="padding: 8px; font-size: 11px;"><input type="checkbox" class="i-wacz" ${isWacz ? 'checked' : ''}> WACZ</label>
+        <button class="am-btn-icon" title="Remove row">✕</button>
+      `;
+      div.querySelector('.am-btn-icon').onclick = () => div.remove();
+      document.getElementById(container).appendChild(div);
+    }
+
+    addDynRowDual(container, p1, p2, v1='', v2='') {
+      const div = document.createElement('div');
+      div.className = 'am-dyn-row';
+      div.innerHTML = `<input type="text" class="am-inp i-lbl" style="flex: 0.5" placeholder="${p1}" value="${this.esc(v1)}"> <input type="text" class="am-inp am-inp-mono i-val" placeholder="${p2}" value="${this.esc(v2)}" style="flex:1;"> <button class="am-btn-icon" title="Remove row">✕</button>`;
+      div.querySelector('.am-btn-icon').onclick = () => div.remove();
+      document.getElementById(container).appendChild(div);
+    }
+
+    saveCurrent() {
+      if(!this.selectedId) return;
+      const el = id => document.getElementById(id).value.trim();
+
+      // Parse CID rows including labels
+      const getCids = id => Array.from(document.querySelectorAll(`#${id} .cid-row`)).map(r => ({
+        label: r.querySelector('.i-lbl').value.trim(),
+        cid: r.querySelector('.i-val').value.trim(),
+        isWacz: r.querySelector('.i-wacz').checked
+      })).filter(x => x.cid);
+
+      const getDual = id => Array.from(document.querySelectorAll(`#${id} .dyn-row:not(.cid-row)`)).map(r => ({
+        label: r.querySelector('.i-lbl').value.trim(),
+        url: r.querySelector('.i-val').value.trim()
+      })).filter(x => x.url);
+
+      const newId = el('am-fId');
+      if(!newId) return this.toast("ID is required", "warn");
+
+      // Cascading ID Shift Logic
+      if (newId !== this.selectedId) {
+        let conflict = this.sources.find(s => s.id === newId && s.id !== this.selectedId);
+        if (conflict) {
+          let numId = parseInt(newId);
+          if (!isNaN(numId) && String(numId) === newId) {
+            let shiftChain = []; let checkId = numId;
+            while (true) {
+              let c = this.sources.find(s => s.id === String(checkId) && s.id !== this.selectedId);
+              if (c) { shiftChain.push(c); checkId++; } else break;
+            }
+            for (let i = shiftChain.length - 1; i >= 0; i--) shiftChain[i].id = String(parseInt(shiftChain[i].id) + 1);
+            if(shiftChain.length > 0) this.toast(`Shifted ${shiftChain.length} existing sources to fit ID ${newId}.`);
+          } else return this.toast("ID already exists! (Can only auto-shift numeric IDs)", "warn");
+        }
+      }
+
+      const data = {
+        id: newId,
+        title: el('am-fTitle'),
+        mainCategory: el('am-fMainCat'),
+        subCategory: el('am-fSubCat'),
+        dateCaptured: el('am-fDate'),
+        description: el('am-fDesc'),
+        imageUrl: el('am-fImage'),
+        incomplete: document.getElementById('am-fIncomplete').checked,
+        mainSourceUrl: el('am-fUrl'),
+        standardMirrors: {
+          permaCc: el('am-fPerma'),
+          archiveOrg: el('am-fArchOrg'),
+          archiveToday: el('am-fArchTd'),
+          megalodonJp: el('am-fMega'),
+          ghostArchive: el('am-fGhost')
+        },
+        ipfs: {
+          cids: getCids('am-listCids'),
+          customReplayweb: getDual('am-listWacz')
+        },
+        additionalUrls: getDual('am-listExtra'),
+        tags: el('am-fTags').split(',').map(t=>t.trim()).filter(Boolean),
+        notes: el('am-fNotes')
+      };
+
+      const idx = this.sources.findIndex(s => s.id === this.selectedId);
+      if(idx > -1) this.sources[idx] = data; else this.sources.unshift(data);
+
+      this.selectedId = data.id;
+      this.updateCats(); this.sortSources();
+      if(this.duplicateMode) this.checkDuplicates(); else this.renderSidebar();
+      this.toast('Saved successfully.');
+    }
+
+    createNew() {
+      let maxNum = 0;
+      this.sources.forEach(s => {
+        let n = parseInt(s.id);
+        if(!isNaN(n) && String(n) === String(s.id) && n > maxNum) maxNum = n;
+      });
+
+      const id = String(maxNum + 1);
+      this.sources.unshift({ id, title: '', incomplete: true });
+      this.sortSources();
+      this.loadSource(id);
+      document.getElementById('am-fMainCat').focus();
+      this.toast(`Created new source with ID: ${id}`);
+    }
+
+    deleteCurrent() {
+      if(!confirm('Delete this record?')) return;
+      this.sources = this.sources.filter(s => s.id !== this.selectedId);
+      this.selectedId = null;
+      document.getElementById('am-emptyState').style.display = 'flex';
+      document.getElementById('am-editorForm').style.display = 'none';
+      this.updateCats(); this.sortSources(); this.renderSidebar(); this.toast('Deleted.');
+    }
+
+    importJSON(e) {
+      const file = e.target.files[0]; if(!file) return;
+      const r = new FileReader();
+      r.onload = ev => {
+        try {
+          const data = JSON.parse(ev.target.result);
+          let importedSources = [];
+
+          if (Array.isArray(data)) importedSources = data;
+          else if (data.sources) {
+             importedSources = data.sources;
+             if (data.settings) this.settings = { ...this.settings, ...data.settings };
+          }
+
+          // Migrate Old CID Data
+          importedSources = importedSources.map(s => {
+             if(s.category && !s.mainCategory) s.mainCategory = s.category;
+             if(s.ipfs && s.ipfs.cids && s.ipfs.cids.length > 0) {
+                s.ipfs.cids = s.ipfs.cids.map(c => {
+                   if(typeof c === 'string') return { cid: c, label: '', isWacz: false };
+                   return { cid: c.cid, label: c.label || '', isWacz: !!c.isWacz };
+                });
+             }
+             if(s.ipfs && s.ipfs.replayweb) { s.ipfs.customReplayweb = s.ipfs.replayweb; delete s.ipfs.replayweb; }
+             if(typeof s.incomplete === 'undefined') s.incomplete = true;
+             return s;
+          });
+
+          const ids = new Set(this.sources.map(s=>s.id));
+          importedSources.forEach(s => { if(!ids.has(s.id)) this.sources.push(s); });
+
+          this.updateCats(); this.sortSources(); this.renderSidebar(); this.toast('Import successful.');
+        } catch(err) { this.toast('Invalid JSON file.', 'warn'); console.error(err); }
+      };
+      r.readAsText(file); e.target.value = '';
+    }
+
+    exportJSON() {
+      this.sortSources();
+      const payload = { settings: this.settings, sources: this.sources };
+      const b = new Blob([JSON.stringify(payload, null, 2)], {type: 'application/json'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(b);
+      a.download = 'archive-workspace.json';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+
+    // GENERATE THE STANDALONE HTML VIEWER (Archive Manager's own export)
+    generateViewerHTML() {
+      if(!this.sources.length) return this.toast("No sources to export.", "warn");
+      this.sortSources();
+      const payload = { settings: this.settings, sources: this.sources };
+      const jsonString = JSON.stringify(payload).replace(/</g, '\\u003c');
+
+      const htmlTemplate = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evidence Archive Viewer</title>
+<style>
+  :root { --bg: #ffffff; --text: #000000; --border: #e5e7eb; --link: #2563eb; --muted: #4b5563; font-family: "Helvetica Neue", Inter, Arial, sans-serif; }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); margin: 0; padding: 40px 20px; line-height: 1.6; font-size: 14px; }
+  .container { max-width: 1000px; margin: 0 auto; }
+  .header { border-bottom: 2px solid var(--text); padding-bottom: 20px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: flex-end; }
+  .title-area h1 { margin: 0 0 5px 0; font-size: 28px; }
+  .title-area p { margin: 0; color: var(--muted); font-size: 14px; }
+  .controls { display: flex; gap: 10px; background: #f9fafb; padding: 15px; border: 1px solid var(--border); margin-bottom: 30px; border-radius: 6px; align-items: center; flex-wrap: wrap;}
+  .search-input { padding: 8px; border: 1px solid var(--border); width: 300px; border-radius: 4px; font-size: 14px; }
+  .btn, .select-ui { padding: 8px 12px; background: #fff; border: 1px solid var(--border); border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: 600; color: #111;}
+  .btn:hover, .select-ui:hover { background: #f3f4f6; }
+  .cat-main { margin-top: 50px; margin-bottom: 30px; }
+  .title-main { font-size: 22px; border-bottom: 2px solid var(--text); margin-bottom: 10px; padding-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px;}
+  .title-sub { font-size: 17px; color: var(--muted); margin-bottom: 20px; margin-left: 10px; border-bottom: 1px solid var(--border); padding-bottom: 5px; }
+  .card { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 24px; margin-left: 10px; padding: 24px; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.05);}
+  .card-header { display: flex; justify-content: space-between; margin-bottom: 15px; }
+  .card-id { font-family: monospace; font-size: 13px; background: #f3f4f6; padding: 2px 8px; border: 1px solid #d1d5db; border-radius: 4px; height: fit-content;}
+  .card-title { font-size: 17px; font-weight: 700; margin: 0; line-height: 1.3;}
+  .card-date { color: var(--muted); font-size: 13px; margin-top: 4px;}
+  .card-desc { background: #f9fafb; padding: 12px 16px; border-left: 4px solid #cbd5e1; border-radius: 0 4px 4px 0; margin-bottom: 20px; white-space: pre-wrap; color: #334155;}
+  .link-row { display: flex; align-items: center; margin-bottom: 10px; font-family: monospace; font-size: 13px; word-break: break-all; }
+  .url-text { color: var(--link); text-decoration: none; line-height: 1.4; padding-top: 2px;}
+  .url-text:hover { text-decoration: underline; }
+  .badge { display: inline-flex; align-items: center; gap: 6px; width: 140px; flex-shrink: 0; padding: 4px 8px; font-family: sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; margin-right: 15px; border-radius: 4px; border: 1px solid; background: #fff; color: #111;}
+  .badge img, .badge svg { width: 14px; height: 14px; object-fit: contain; }
+  .b-main { border-color: #000; }
+  .b-perma { border-color: #2563eb; color: #1e3a8a; background: #eff6ff; }
+  .b-arch { border-color: #000; color: #000; background: #f8f9fa; }
+  .b-ghost { border-color: #6366f1; color: #312e81; background: #e0e7ff; }
+  .b-mega { border-color: #ea580c; color: #7c2d12; background: #fff7ed; }
+  .b-ipfs { border-color: #0284c7; color: #0c4a6e; background: #f0f9ff; }
+  .b-wacz { border-color: #db2777; color: #831843; background: #fdf2f8; }
+  .b-extra { border-color: #9ca3af; color: #374151; background: #f3f4f6; }
+  .evidence-img-container { margin-bottom: 20px; }
+  .evidence-img { max-width: 100%; border: 1px solid var(--border); border-radius: 6px; object-fit: contain; background: #f9fafb; }
+  .view-img-hidden .evidence-img-container { display: none; }
+  .view-img-sm .evidence-img { max-height: 150px; }
+  .view-img-std .evidence-img { max-height: 400px; }
+  .view-img-lg .evidence-img { max-height: 800px; }
+  .notes { margin-top: 20px; border-top: 1px dashed var(--border); padding-top: 15px; font-family: monospace; color: var(--muted); white-space: pre-wrap; }
+  @media print {
+    body { padding: 0; background: #fff; }
+    .no-print { display: none !important; }
+    .card { page-break-inside: avoid; border: 1px solid #999; border-radius: 0; box-shadow: none; margin-left: 0;}
+    .url-text { color: #000; text-decoration: none; }
+    .badge { border-color: #000; color: #000; background: transparent !important; }
+    .card-desc { background: transparent; border-left: 2px solid #000; }
+    .evidence-img { max-height: 300px !important; }
+    .view-img-hidden .evidence-img-container { display: none !important; }
+  }
+</style>
+</head>
+<body class="view-img-std">
+<div class="container">
+  <div class="header">
+    <div class="title-area">
+      <h1>Evidence Archive Dossier</h1>
+      <p>Statically generated viewer &bull; Hierarchically Organized</p>
+    </div>
+  </div>
+  <div class="controls no-print">
+    <input type="text" id="searchInput" class="search-input" placeholder="Search archive contents...">
+    <select id="imgToggle" class="select-ui" onchange="document.body.className = 'view-img-' + this.value">
+      <option value="std">Images: Standard</option>
+      <option value="sm">Images: Small</option>
+      <option value="lg">Images: Large</option>
+      <option value="hidden">Images: Hidden</option>
+    </select>
+    <div style="margin-left: auto; display:flex; gap:10px;">
+      <button class="btn" onclick="exportCSV()">Export CSV</button>
+      <button class="btn" onclick="exportMD()">Export Markdown</button>
+      <button class="btn" onclick="exportCIDs()">Raw CIDs</button>
+      <button class="btn" onclick="window.print()">Print / PDF</button>
+    </div>
+  </div>
+  <div id="content"></div>
+</div>
+<script id="archive-data" type="application/json">${jsonString}<\\/script>
+<script>
+  const appData = JSON.parse(document.getElementById('archive-data').textContent);
+  const rawData = appData.sources || [];
+  const settings = appData.settings || { ipfsGateways: ['https://ipfs.io/ipfs/'] };
+  const icons = {
+    main: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>',
+    perma: '<img src="https://perma.cc/static/img/perma-logo-orange.svg">',
+    archToday: '<img src="https://archive.ph/apple-touch-icon.png">',
+    archOrg: "<img src=\\"data:image/svg+xml,<svg height='86' viewBox='0 0 76 86' width='76' xmlns='http://www.w3.org/2000/svg'><path d='m76 82v4h-76l.00080851-4zm-3-6v5h-70v-5zm-62.6696277-54 .8344146.4217275.4176066 6.7436084.4176065 10.9576581v10.5383496l-.4176065 13.1364492-.0694681 8.8498268-1.1825531.3523804h-4.17367003l-1.25202116-.3523804-.48627608-8.8498268-.41840503-13.0662957v-10.5375432l.41840503-11.028618.38167482-6.7798947.87034634-.3854412zm60.0004653 0 .8353798.4217275.4168913 6.7436084.4168913 10.9576581v10.5383496l-.4168913 13.1364492-.0686832 8.8498268-1.1835879.3523804h-4.1737047l-1.2522712-.3523804-.4879704-8.8498268-.4168913-13.0662957v-10.5375432l.4168913-11.028618.3833483-6.7798947.8697215-.3854412zm-42.000632 0 .8344979.4217275.4176483 6.7436084.4176482 10.9576581v10.5383496l-.4176482 13.1364492-.0686764 8.8498268-1.1834698.3523804h-4.1740866l-1.2529447-.3523804-.4863246-8.8498268-.4168497-13.0662957v-10.5375432l.4168497-11.028618.38331-6.7798947.8688361-.3854412zm23 0 .8344979.4217275.4176483 6.7436084.4176482 10.9576581v10.5383496l-.4176482 13.1364492-.0686764 8.8498268-1.1834698.3523804h-4.1740866l-1.2521462-.3523804-.4871231-8.8498268-.4168497-13.0662957v-10.5375432l.4168497-11.028618.38331-6.7798947.8696347-.3854412zm21.6697944-9v7h-70v-7zm-35.7200748-13 36.7200748 8.4088317-1.4720205 2.5911683h-70.32799254l-2.19998696-2.10140371z' fill='%23000' fill-rule='evenodd'/></svg>\\">",
+    ghost: '<img src="https://ghostarchive.org/apple-touch-icon.png">',
+    mega: '<img src="https://megalodon.jp/favicon.svg">',
+    ipfs: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>',
+    wacz: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M10 8v8l6-4-6-4z"></path></svg>',
+    extra: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>'
+  };
+  function render(query = '') {
+    const q = query.toLowerCase();
+    const container = document.getElementById('content');
+    container.innerHTML = '';
+    const grouped = {};
+    rawData.forEach(s => {
+      const text = JSON.stringify(s).toLowerCase();
+      if(q && !text.includes(q)) return;
+      const main = s.mainCategory || 'Uncategorized';
+      const sub = s.subCategory || 'General';
+      if(!grouped[main]) grouped[main] = {};
+      if(!grouped[main][sub]) grouped[main][sub] = [];
+      grouped[main][sub].push(s);
+    });
+    Object.keys(grouped).sort().forEach(main => {
+      let html = '<div class="cat-main"><h2 class="title-main">' + escape(main) + '</h2>';
+      Object.keys(grouped[main]).sort().forEach(sub => {
+        html += '<h3 class="title-sub">' + escape(sub) + '</h3>';
+        grouped[main][sub].forEach(s => {
+          let links = [];
+          const addLink = (bClass, bIcon, bText, url) => {
+            if(url) links.push('<div class="link-row"><span class="badge ' + bClass + '">' + bIcon + ' ' + escape(bText) + '</span> <a href="' + escape(url) + '" target="_blank" class="url-text">' + escape(url) + '</a></div>');
+          };
+          addLink('b-main', icons.main, 'Primary Source', s.mainSourceUrl);
+          if(s.standardMirrors) {
+            addLink('b-perma', icons.perma, 'Perma.cc', s.standardMirrors.permaCc);
+            addLink('b-arch', icons.archOrg, 'Archive.org', s.standardMirrors.archiveOrg);
+            addLink('b-arch', icons.archToday, 'Archive.today', s.standardMirrors.archiveToday);
+            addLink('b-mega', icons.mega, 'Megalodon.jp', s.standardMirrors.megalodonJp);
+            addLink('b-ghost', icons.ghost, 'GhostArchive', s.standardMirrors.ghostArchive);
+          }
+          if(s.ipfs) {
+            (s.ipfs.cids || []).forEach(cidObj => {
+               let cid = cidObj.cid;
+               let isWacz = cidObj.isWacz;
+               let lbl = cidObj.label ? ' (' + cidObj.label + ')' : '';
+               settings.ipfsGateways.forEach(gw => {
+                 let gwName = gw;
+                 try { gwName = new URL(gw).hostname; } catch(e){}
+                 addLink('b-ipfs', icons.ipfs, gwName + lbl, gw + cid);
+               });
+               if (isWacz) addLink('b-wacz', icons.wacz, 'WACZ Replay' + lbl, 'https://replayweb.page/?source=' + settings.ipfsGateways[0] + cid);
+            });
+            (s.ipfs.customReplayweb || []).forEach(m => addLink('b-wacz', icons.wacz, m.label || 'Deep Replay', m.url));
+          }
+          (s.additionalUrls || []).forEach(u => addLink('b-extra', icons.extra, u.label || 'Context Link', u.url));
+          let imgHtml = '';
+          if(s.imageUrl) {
+            imgHtml = '<div class="evidence-img-container"><a href="' + escape(s.imageUrl) + '" target="_blank"><img src="' + escape(s.imageUrl) + '" class="evidence-img" alt="Evidence image for ' + escape(s.title) + '"></a></div>';
+          }
+          html += '<div class="card"><div class="card-header"><div><h3 class="card-title">' + escape(s.title || 'Untitled Record') + '</h3>' + (s.dateCaptured ? '<div class="card-date">Captured: ' + escape(s.dateCaptured) + '</div>' : '') + '</div><span class="card-id">ID: ' + escape(s.id) + '</span></div>' + (s.description ? '<div class="card-desc">' + escape(s.description) + '</div>' : '') + imgHtml + '<div class="links-container">' + links.join('') + '</div>' + (s.tags && s.tags.length ? '<div style="margin-top:15px; font-size:12px; color:var(--muted);"><b>Tags:</b> ' + escape(s.tags.join(', ')) + '</div>' : '') + (s.notes ? '<div class="notes"><b>INTERNAL NOTES:</b>\\n' + escape(s.notes) + '</div>' : '') + '</div>';
+        });
+      });
+      html += '</div>';
+      container.innerHTML += html;
+    });
+  }
+  function escape(str) { return String(str||'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+  function download(content, filename, type) {
+    const b = new Blob([content], {type}); const u = URL.createObjectURL(b);
+    const a = document.createElement('a'); a.href = u; a.download = filename; a.click(); URL.revokeObjectURL(u);
+  }
+  function exportCSV() {
+    const rows = [['ID', 'Main Category', 'Subcategory', 'Title', 'Main URL', 'CIDs', 'Tags']];
+    rawData.forEach(s => {
+      let cids = '';
+      if(s.ipfs && s.ipfs.cids) cids = s.ipfs.cids.map(c => typeof c === 'string' ? c : c.cid).join(';');
+      rows.push([s.id, s.mainCategory||'', s.subCategory||'', s.title, s.mainSourceUrl||'', cids, (s.tags||[]).join(';')].map(v => '"' + String(v||'').replace(/"/g,'""') + '"'));
+    });
+    download(rows.map(r=>r.join(',')).join('\\n'), 'archive.csv', 'text/csv');
+  }
+  function exportMD() {
+    let md = '# Archive Dossier\\n\\n';
+    const grouped = {};
+    rawData.forEach(s => {
+      const main = s.mainCategory || 'Uncategorized'; const sub = s.subCategory || 'General';
+      if(!grouped[main]) grouped[main] = {}; if(!grouped[main][sub]) grouped[main][sub] = [];
+      grouped[main][sub].push(s);
+    });
+    Object.keys(grouped).sort().forEach(main => {
+      md += '## ' + main + '\\n\\n';
+      Object.keys(grouped[main]).sort().forEach(sub => {
+         md += '### ' + sub + '\\n| ID | Title | Main URL | Primary Mirror / CID |\\n|---|---|---|---|\\n';
+         grouped[main][sub].forEach(x => {
+           let mirror = '-';
+           if(x.ipfs && x.ipfs.cids && x.ipfs.cids.length) {
+              let cid = typeof x.ipfs.cids[0] === 'string' ? x.ipfs.cids[0] : x.ipfs.cids[0].cid;
+              mirror = 'CID: ' + cid;
+           }
+           else if (x.standardMirrors && x.standardMirrors.archiveOrg) mirror = '[Archive.org](' + x.standardMirrors.archiveOrg + ')';
+           md += '| ' + x.id + ' | ' + (x.title||'').replace(/\\|/g,'') + ' | ' + (x.mainSourceUrl ? '[Link](' + x.mainSourceUrl + ')' : '-') + ' | ' + mirror + ' |\\n';
+         });
+         md += '\\n';
+      });
+    });
+    download(md, 'dossier-tables.md', 'text/markdown');
+  }
+  function exportCIDs() {
+    const cids = new Set();
+    rawData.forEach(s => { if(s.ipfs && s.ipfs.cids) s.ipfs.cids.forEach(c => cids.add(typeof c === 'string' ? c : c.cid)); });
+    if(!cids.size) return alert("No CIDs found.");
+    download(Array.from(cids).join('\\n'), 'ipfs-cids.txt', 'text/plain');
+  }
+  document.getElementById('searchInput').addEventListener('input', e => render(e.target.value));
+  render();
+<\\/script>
+</body>
+</html>`;
+
+      const b = new Blob([htmlTemplate], {type: 'text/html'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(b);
+      a.download = 'archive-viewer.html';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+  }
+
+  // Initialize Archive Manager
+  const archiveApp = new Workspace();
+  archiveApp.init();
+
+
+  // =========================================
+  // STEP 3: IMPORT LOGIC (Header Metadata + Database Hydration)
+  // =========================================
+  const mdEditor = document.getElementById('markdown-editor');
+  const previewPane = document.getElementById('preview-pane');
+  const metaTitle = document.getElementById('meta-title');
+  const metaSubtitle = document.getElementById('meta-subtitle');
+  const metaByline = document.getElementById('meta-byline');
+  const outlineList = document.getElementById('outline-list');
+
+  // Track last cursor position for citation injection
+  let lastCursorPosition = 0;
+  mdEditor.addEventListener('click', () => {
+    lastCursorPosition = mdEditor.selectionStart;
+  });
+  mdEditor.addEventListener('keyup', () => {
+    lastCursorPosition = mdEditor.selectionStart;
+  });
+
+  // =========================================
+  // STEP 1: AUTO-SAVE SAFETY NET
+  // =========================================
+  const STORAGE_KEY = 'dossier-builder-content';
+
+  // Save on input
+  mdEditor.addEventListener('input', () => {
+    localStorage.setItem(STORAGE_KEY, mdEditor.value);
+    updateOutline();
+  });
+
+  // Load on DOMContentLoaded
+  document.addEventListener('DOMContentLoaded', () => {
+    const savedContent = localStorage.getItem(STORAGE_KEY);
+    if (savedContent) {
+      mdEditor.value = savedContent;
+      // Trigger preview update
+      mdEditor.dispatchEvent(new Event('input'));
+    }
+  });
+
+
+  // =========================================
+  // STEP 2: BLOCK INSERT TOOLBAR
+  // =========================================
+  function insertAtCursor(textarea, text) {
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const before = textarea.value.substring(0, start);
+    const after = textarea.value.substring(end);
+    textarea.value = before + text + after;
+    textarea.selectionStart = textarea.selectionEnd = start + text.length;
+    textarea.focus();
+  }
+
+  document.getElementById('btn-add-text-card').addEventListener('click', () => {
+    const cardTemplate = `\n\n:::card new-section-id\n## Section Title\n\nWrite here...\n\n:::\n\n`;
+    insertAtCursor(mdEditor, cardTemplate);
+    mdEditor.dispatchEvent(new Event('input'));
+  });
+
+  document.getElementById('btn-add-image-card').addEventListener('click', () => {
+    const imageTemplate = `\n\n:::card image-id\n:::img src="URL" fallbacks="URL1, URL2" alt="Evidence"\n:::\n:::\n\n`;
+    insertAtCursor(mdEditor, imageTemplate);
+    mdEditor.dispatchEvent(new Event('input'));
+  });
+
+
+  // =========================================
+  // STEP 3: LIVE OUTLINE PANEL (NAVIGATOR)
+  // =========================================
+  function updateOutline() {
+    const text = mdEditor.value;
+    const cardRegex = /:::\s*card\s+(\S+)/g;
+    const cardIds = [];
+    let match;
+
+    while ((match = cardRegex.exec(text)) !== null) {
+      cardIds.push(match[1]);
+    }
+
+    if (cardIds.length === 0) {
+      outlineList.innerHTML = '<div class="outline-empty">No cards yet</div>';
+      return;
+    }
+
+    outlineList.innerHTML = cardIds.map(id => `
+      <div class="outline-item" data-card-id="${id}">${id}</div>
+    `).join('');
+
+    // Add click handlers
+    outlineList.querySelectorAll('.outline-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const cardId = item.getAttribute('data-card-id');
+        const searchStr = `:::card ${cardId}`;
+        const index = mdEditor.value.indexOf(searchStr);
+        if (index !== -1) {
+          mdEditor.focus();
+          mdEditor.selectionStart = index;
+          mdEditor.selectionEnd = index;
+          // Scroll to position (approximate line calculation)
+          const lines = mdEditor.value.substring(0, index).split('\n');
+          const lineHeight = 20; // approximate
+          mdEditor.scrollTop = (lines.length - 5) * lineHeight;
+        }
+      });
+    });
+  }
+
+
+  // =========================================
+  // STEP 4: CITATION INJECTOR (THE BRIDGE)
+  // =========================================
+  // Global event listener for cite buttons in Archive Manager sidebar
+  document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('cite-btn')) {
+      e.stopPropagation(); // Prevent triggering the parent click (loadSource)
+      const sourceId = e.target.getAttribute('data-id');
+      const citationText = `[[cite:${sourceId}]]`;
+
+      // Insert at last known cursor position or end if not focused
+      const insertPos = (document.activeElement === mdEditor) ? mdEditor.selectionStart : lastCursorPosition;
+      const before = mdEditor.value.substring(0, insertPos);
+      const after = mdEditor.value.substring(insertPos);
+      mdEditor.value = before + citationText + after;
+
+      // Update cursor position
+      mdEditor.selectionStart = mdEditor.selectionEnd = insertPos + citationText.length;
+      lastCursorPosition = mdEditor.selectionStart;
+
+      // Trigger preview update
+      mdEditor.dispatchEvent(new Event('input'));
+
+      // Visual feedback
+      archiveApp.toast(`Citation [${sourceId}] inserted!`);
+    }
+  });
+
+
+  // Live preview on input (existing)
+  mdEditor.addEventListener('input', () => {
+    previewPane.innerHTML = marked.parse(mdEditor.value);
+  });
+
+  // Import button handler
+  document.getElementById('btn-import').addEventListener('click', () => {
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = '.html';
+    fileInput.onchange = (e) => {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(event.target.result, 'text/html');
+
+        // 1. Extract Header Metadata
+        const siteHeader = doc.querySelector('.site-header');
+        const siteSubtitle = doc.querySelector('.site-subtitle');
+        const siteMeta = doc.querySelector('.site-meta');
+
+        if (siteHeader) metaTitle.value = siteHeader.textContent.trim();
+        if (siteSubtitle) metaSubtitle.value = siteSubtitle.textContent.trim();
+        if (siteMeta) metaByline.value = siteMeta.textContent.trim();
+
+        // 2. Extract JSON Data and Hydrate Archive Manager
+        const jsonScript = doc.getElementById('archive-data');
+        let parsedData = { settings: { ipfsGateways: ['https://ipfs.io/ipfs/'] }, sources: [] };
+
+        if (jsonScript && jsonScript.textContent.trim()) {
+          try {
+            const content = jsonScript.textContent.trim();
+            if (content && !content.startsWith('<')) {
+              parsedData = JSON.parse(content);
+            }
+          } catch(err) {
+            console.warn('Failed to parse archive-data JSON:', err);
+          }
+        }
+
+        // Ensure proper structure
+        if (!parsedData.settings) {
+          parsedData.settings = { ipfsGateways: ['https://ipfs.io/ipfs/'] };
+        }
+        if (!parsedData.sources) {
+          parsedData.sources = [];
+        }
+
+        // Hydrate Archive Manager using CORRECT methods
+        archiveApp.sources = parsedData.sources;
+        archiveApp.settings = parsedData.settings;
+        archiveApp.updateCats();
+        archiveApp.sortSources();
+        archiveApp.renderSidebar();
+
+        // 3. Extract Articles and Convert to Markdown
+        const articles = doc.querySelectorAll('article.card');
+        let markdownContent = '';
+
+        articles.forEach(article => {
+          const id = article.getAttribute('id') || '';
+          // Use turndown to convert each article
+          const articleMarkdown = turndownService.turndown(article.outerHTML);
+          markdownContent += articleMarkdown + '\n\n';
+        });
+
+        mdEditor.value = markdownContent.trim();
+        mdEditor.dispatchEvent(new Event('input')); // Trigger preview
+      };
+      reader.readAsText(file);
+    };
+    fileInput.click();
+  });
+
+
+  // =========================================
+  // STEP 5: MASTER COMPILER (Export Pipeline)
+  // =========================================
+  document.getElementById('btn-export').addEventListener('click', () => {
+    // 1. Get Archive Manager data
+    archiveApp.sortSources();
+    const payload = {
+      settings: archiveApp.settings,
+      sources: archiveApp.sources
+    };
+    const jsonString = JSON.stringify(payload).replace(/</g, '\\u003c');
+
+    // 2. Get header metadata
+    const headerTitle = metaTitle.value || 'Untitled Dossier';
+    const headerSubtitle = metaSubtitle.value || '';
+    const headerByline = metaByline.value || '';
+
+    // 3. Parse markdown to get compiled HTML content
+    const compiledContent = marked.parse(mdEditor.value);
+
+    // 4. Generate nav from compiled content
+    // Create a temp container to parse the compiled HTML
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = compiledContent;
+    const cards = tempDiv.querySelectorAll('article.card');
+
+    let navLinks = '';
+    cards.forEach(card => {
+      const id = card.getAttribute('id');
+      const h2 = card.querySelector('h2');
+      if (id && h2) {
+        navLinks += `  <a href="#${id}" class="nav-btn">${h2.textContent.trim()}</a>\n`;
+      }
+    });
+
+    // 5. Build the complete standalone HTML
+    const exportTemplate = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${escapeHtml(headerTitle)}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-static: #ffffff;
+    --card-bg: #ffffff;
+    --text-main: #111827;
+    --text-muted: #4b5563;
+    --accent: #2563eb;
+    --shadow: 0 10px 40px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.05);
+  }
+
+  /* Base & Typography */
+  body {
+    margin: 0; padding: 0; background: var(--bg-static);
+    font-family: 'Libre Baskerville', serif; color: var(--text-main);
+    line-height: 1.7; overflow-x: hidden;
+    cursor: none;
+  }
+  h1, h2, h3, h4 { font-family: 'Inter', sans-serif; font-weight: 800; margin-top: 0; }
+
+  /* Top Header */
+  .site-header {
+    text-align: center; padding: 50px 20px 10px;
+    font-family: 'Inter', sans-serif; font-size: 28px; font-weight: 800;
+    letter-spacing: 2px; text-transform: uppercase; line-height: 1.2;
+  }
+  .site-subtitle {
+    text-align: center; font-family: 'Inter', sans-serif; font-size: 14px;
+    font-weight: 600; color: var(--text-muted); text-transform: uppercase;
+    margin-top: 10px; margin-bottom: 20px; letter-spacing: 1px;
+  }
+  .site-meta {
+    text-align: center; font-family: 'Inter', sans-serif; font-size: 13px;
+    color: var(--text-muted); margin-bottom: 40px;
+  }
+
+  /* Sticky Nav */
+  .sticky-nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--card-bg);
+    display: flex; align-items: center;
+    padding: 0; box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    border-bottom: 1px solid #e5e7eb; border-top: 1px solid #e5e7eb;
+    overflow-x: auto; white-space: nowrap;
+    scrollbar-width: none;
+  }
+  .sticky-nav::-webkit-scrollbar { display: none; }
+
+  .nav-btn {
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    text-decoration: none; color: var(--text-main); background: var(--card-bg);
+    padding: 16px 24px; border-right: 1px solid #e5e7eb;
+    transition: background 0.2s ease, color 0.2s ease; cursor: none;
+    text-transform: uppercase; letter-spacing: 0.5px; flex-shrink: 0;
+  }
+  .nav-btn:first-child { border-left: 1px solid #e5e7eb; }
+  .nav-btn:hover { background: #f9fafb; }
+  .nav-btn.active { background: var(--text-main); color: var(--card-bg); }
+
+  /* Main Content Area */
+  main { max-width: 800px; margin: 0 auto; padding: 60px 20px; }
+
+  /* Floating Cards */
+  .card {
+    background: var(--card-bg); padding: 50px; border-radius: 16px;
+    box-shadow: var(--shadow); margin-bottom: 60px;
+    position: relative; z-index: 10;
+  }
+
+  .card h2 { font-size: 1.75rem; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: -0.5px;}
+  .card h3 { font-size: 1.3rem; margin-top: 2.5rem; margin-bottom: 1rem; }
+
+  p { font-size: 1.1rem; margin-bottom: 1.5rem; }
+  ul { font-size: 1.1rem; margin-bottom: 1.5rem; padding-left: 20px; }
+  li { margin-bottom: 0.5rem; }
+
+  blockquote {
+    border-left: 4px solid var(--text-main); margin: 2rem 0; padding-left: 1.5rem;
+    font-style: italic; color: var(--text-muted); font-size: 1.2rem; background: #f9fafb; padding: 1.5rem; border-radius: 0 8px 8px 0;
+  }
+
+  /* Code blocks */
+  pre {
+    background: #111827; color: #e5e7eb; padding: 20px; border-radius: 8px;
+    overflow-x: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
+    margin: 2rem 0;
+  }
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    background: #f3f4f6; padding: 2px 6px; border-radius: 4px; font-size: 0.9em;
+  }
+  pre code { background: transparent; padding: 0; }
+
+  /* Evidence Images */
+  .evidence-img {
+    width: 100%; height: auto; display: block;
+    margin: 30px 0; border-radius: 12px;
+    box-shadow: var(--shadow); border: 1px solid #f3f4f6;
+  }
+  .evidence-img-wrap { display: block; }
+
+  /* Floating Images */
+  .floating-img {
+    width: 100%; max-width: 860px; height: auto; display: block;
+    margin: 0 auto 60px auto; border-radius: 16px;
+    box-shadow: var(--shadow); border: 1px solid #e5e7eb;
+    position: relative; z-index: 5;
+  }
+
+  /* Citations */
+  .cite-tag {
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.75rem;
+    color: var(--accent); background: #eff6ff; border: 1px solid #bfdbfe;
+    border-radius: 4px; padding: 0 4px; margin: 0 2px;
+    vertical-align: super; cursor: none; transition: 0.2s;
+  }
+  .cite-tag:hover { background: var(--accent); color: white; }
+
+  /* Popup Tooltip */
+  .cite-popup {
+    position: fixed; z-index: 200; width: 340px;
+    background: var(--card-bg); border-radius: 8px; border: 1px solid #e5e7eb;
+    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+    padding: 16px; font-family: 'Inter', sans-serif; font-size: 13px;
+    opacity: 0; transform: translateY(10px); transition: all 0.2s;
+    pointer-events: none;
+  }
+  .cite-popup.active { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .cite-popup-title { font-weight: 800; margin-bottom: 8px; line-height: 1.4; font-size: 14px;}
+  .cite-popup-desc { color: var(--text-muted); margin-bottom: 12px; line-height: 1.4; }
+  .cite-popup-link {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 6px;
+    text-decoration: none; color: var(--text-muted); word-break: break-all;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; cursor: none;
+  }
+  .cite-popup-link:hover { color: var(--accent); }
+  .badge { background: #f3f4f6; color: #111; padding: 2px 6px; border-radius: 4px; font-weight: 600; flex-shrink: 0; }
+  .badge.web3 { background: #f0fdfa; color: #0f766e; border: 1px solid #ccfbf1;}
+
+  /* The Liquid Morphing Cursor */
+  #blob-cursor {
+    position: fixed; top: 0; left: 0; width: 34px; height: 34px;
+    background: white; border-radius: 50%; pointer-events: none;
+    z-index: 9999; mix-blend-mode: difference;
+    will-change: transform, border-radius;
+    transform-origin: center;
+    transition: border-radius 0.15s ease-out;
+  }
+  #blob-cursor.is-pointer { border-radius: 0 50% 50% 50%; }
+  a, button, .cite-tag { cursor: none !important; }
+
+  @media (max-width: 768px) {
+    #blob-cursor { display: none; }
+    body { cursor: auto; }
+    a, button, .cite-tag { cursor: pointer !important; }
+    .card { padding: 30px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="blob-cursor"></div>
+
+<header class="site-header">${escapeHtml(headerTitle)}</header>
+<div class="site-subtitle">${escapeHtml(headerSubtitle)}</div>
+<div class="site-meta">${escapeHtml(headerByline)}</div>
+
+<nav class="sticky-nav" id="toc-nav">
+${navLinks}</nav>
+
+<main>
+${compiledContent}
+</main>
+
+<div class="cite-popup" id="global-cite-popup"></div>
+
+<script id="archive-data" type="application/json">${jsonString}<\\/script>
+
+<script>
+  /* =========================================
+     1. LIQUID SPRING-PHYSICS CURSOR
+     ========================================= */
+  const cursor = document.getElementById('blob-cursor');
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let cursorX = mouseX;
+  let cursorY = mouseY;
+  let velX = 0;
+  let velY = 0;
+  const TENSION = 0.15;
+  const FRICTION = 0.70;
+  let isPointer = false;
+
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  function animateCursor() {
+    const dx = mouseX - cursorX;
+    const dy = mouseY - cursorY;
+    velX += dx * TENSION;
+    velY += dy * TENSION;
+    velX *= FRICTION;
+    velY *= FRICTION;
+    cursorX += velX;
+    cursorY += velY;
+    const speed = Math.sqrt(velX * velX + velY * velY);
+    const angle = Math.atan2(velY, velX);
+    let scaleX = 1;
+    let scaleY = 1;
+    let finalAngle = angle;
+    if (isPointer) {
+      finalAngle = -Math.PI / 4;
+      scaleX = 0.8;
+      scaleY = 0.8;
+    } else {
+      const stretch = Math.min(speed * 0.04, 1.2);
+      scaleX = 1 + stretch;
+      scaleY = Math.max(0.5, 1 - (stretch * 0.4));
+    }
+    cursor.style.transform = 'translate(' + (cursorX - 17) + 'px, ' + (cursorY - 17) + 'px) rotate(' + finalAngle + 'rad) scale(' + scaleX + ', ' + scaleY + ')';
+    requestAnimationFrame(animateCursor);
+  }
+
+  if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    requestAnimationFrame(animateCursor);
+  }
+
+  document.addEventListener('mouseover', e => {
+    if (e.target.matches('a, button, .cite-tag')) {
+      isPointer = true;
+      cursor.classList.add('is-pointer');
+    }
+  });
+  document.addEventListener('mouseout', e => {
+    if (e.target.matches('a, button, .cite-tag')) {
+      isPointer = false;
+      cursor.classList.remove('is-pointer');
+    }
+  });
+
+  /* =========================================
+     2. STICKY NAV INVERSION OBSERVER
+     ========================================= */
+  const sections = document.querySelectorAll('article.card');
+  const navBtns = document.querySelectorAll('.nav-btn');
+  const navContainer = document.getElementById('toc-nav');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navBtns.forEach(btn => btn.classList.remove('active'));
+        const activeBtn = document.querySelector('.nav-btn[href="#' + entry.target.id + '"]');
+        if (activeBtn) {
+          activeBtn.classList.add('active');
+          activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+      }
+    });
+  }, { rootMargin: '-20% 0px -60% 0px' });
+
+  sections.forEach(sec => observer.observe(sec));
+
+  /* =========================================
+     3. SMART CITATION ENGINE
+     ========================================= */
+  let archiveDb = {};
+  let ipfsGateways = ['https://ipfs.io/ipfs/'];
+  try {
+    const jsonText = document.getElementById('archive-data').textContent.trim();
+    if (jsonText && jsonText.length > 0) {
+      const parsed = JSON.parse(jsonText);
+      if (parsed.sources) {
+        parsed.sources.forEach(s => { archiveDb[s.id] = s; });
+      }
+      if (parsed.settings && parsed.settings.ipfsGateways) {
+        ipfsGateways = parsed.settings.ipfsGateways;
+      }
+    }
+  } catch(e) { console.log('Archive data parse error:', e); }
+
+  const citePopup = document.getElementById('global-cite-popup');
+  let activeCite = null;
+
+  function showCitePopup(citeEl) {
+    const refId = citeEl.getAttribute('data-ref');
+    const source = archiveDb[refId];
+    if (!source) return;
+
+    let linksHtml = '';
+    const addLink = (badgeClass, badgeText, url) => {
+      if (!url || !url.trim()) return;
+      linksHtml += '<a href="' + url + '" target="_blank" class="cite-popup-link">'
+        + '<span class="badge ' + badgeClass + '">' + badgeText + '</span> '
+        + url + '</a>';
+    };
+
+    addLink('', 'Primary', source.mainSourceUrl);
+    if (source.standardMirrors) {
+      addLink('', 'Perma.cc',      source.standardMirrors.permaCc);
+      addLink('', 'Archive.org',   source.standardMirrors.archiveOrg);
+      addLink('', 'Archive.today', source.standardMirrors.archiveToday);
+      addLink('', 'Megalodon.jp',  source.standardMirrors.megalodonJp);
+      addLink('', 'GhostArchive',  source.standardMirrors.ghostArchive);
+    }
+    (source.additionalUrls || []).forEach(u => {
+      if (u.url && u.url.trim()) addLink('', u.label || 'Link', u.url);
+    });
+    if (source.ipfs) {
+      (source.ipfs.cids || []).forEach(cidObj => {
+        if (!cidObj.cid) return;
+        const cidLabel = cidObj.label ? ' (' + cidObj.label + ')' : '';
+        ipfsGateways.forEach(gw => {
+          let gwName = gw;
+          try { gwName = new URL(gw).hostname; } catch(e) {}
+          addLink('web3', gwName + cidLabel, gw + cidObj.cid);
+        });
+        if (cidObj.isWacz) {
+          addLink('web3', '&#9654; WACZ Replay' + cidLabel,
+            'https://replayweb.page/?source=' + ipfsGateways[0] + cidObj.cid);
+        }
+      });
+      (source.ipfs.customReplayweb || []).forEach(r => {
+        if (r.url && r.url.trim()) {
+          linksHtml += '<a href="' + r.url + '" target="_blank" '
+            + 'class="cite-popup-link" '
+            + 'style="font-weight:700;color:#0f766e;margin-top:4px;">'
+            + '&#9654; ' + (r.label || 'Replay Session') + '</a>';
+        }
+      });
+    }
+
+    citePopup.innerHTML =
+      '<div class="cite-popup-title">[' + refId + '] '
+        + (source.title || 'Untitled') + '</div>'
+      + (source.incomplete
+          ? '<div style="font-size:11px;color:#b45309;font-weight:700;'
+            + 'margin-bottom:6px;">&#9888; Source marked incomplete</div>'
+          : '')
+      + (source.description
+          ? '<div class="cite-popup-desc">'
+            + source.description.substring(0, 200)
+            + (source.description.length > 200 ? '...' : '')
+            + '</div>'
+          : '')
+      + (source.dateCaptured
+          ? '<div style="font-family:monospace;font-size:11px;'
+            + 'color:var(--text-muted);margin-bottom:8px;">'
+            + 'Captured: ' + source.dateCaptured + '</div>'
+          : '')
+      + (source.imageUrl
+          ? '<img src="' + source.imageUrl + '" style="width:100%;'
+            + 'border-radius:6px;margin-bottom:10px;'
+            + 'border:1px solid #e5e7eb;" alt="Evidence">'
+          : '')
+      + linksHtml
+      + (source.notes
+          ? '<div style="font-size:11px;color:var(--text-muted);'
+            + 'margin-top:8px;padding-top:8px;'
+            + 'border-top:1px dashed #e5e7eb;font-style:italic;">'
+            + source.notes + '</div>'
+          : '');
+
+    const rect = citeEl.getBoundingClientRect();
+    const popW = Math.min(320, window.innerWidth - 24);
+    let popLeft = rect.left;
+    if (popLeft + popW > window.innerWidth - 10) popLeft = window.innerWidth - popW - 10;
+    if (popLeft < 8) popLeft = 8;
+    citePopup.style.width = popW + 'px';
+    citePopup.style.left = popLeft + 'px';
+    const spaceBelow = window.innerHeight - rect.bottom;
+    const spaceAbove = rect.top;
+    if (spaceBelow < 220 && spaceAbove > spaceBelow) {
+      citePopup.style.top = (rect.top - Math.min(400, 600) - 10) + 'px';
+    } else {
+      citePopup.style.top = (rect.bottom + 10) + 'px';
+    }
+    citePopup.classList.add('active');
+    activeCite = citeEl;
+  }
+
+  function hideCitePopup() {
+    citePopup.classList.remove('active');
+    activeCite = null;
+  }
+
+  document.addEventListener('mouseover', e => {
+    if (e.target.classList.contains('cite-tag')) {
+      showCitePopup(e.target);
+    }
+  });
+
+  document.addEventListener('mouseout', e => {
+    if (e.target.classList.contains('cite-tag')) {
+      setTimeout(() => {
+        if (!citePopup.matches(':hover')) hideCitePopup();
+      }, 100);
+    }
+  });
+
+  citePopup.addEventListener('mouseleave', hideCitePopup);
+
+  /* =========================================
+     4. RESILIENT IMAGE SYSTEM
+     ========================================= */
+  function initResilientImages() {
+    document.querySelectorAll('img[data-fallbacks]').forEach(img => {
+      let sources;
+      try { sources = JSON.parse(img.dataset.fallbacks); } catch(e) { return; }
+      if (!sources.length) return;
+      let idx = 0;
+      img.onerror = function() {
+        idx++;
+        if (idx < sources.length) {
+          this.src = sources[idx];
+        } else {
+          const wrap = this.closest('.evidence-img-wrap');
+          if (wrap) wrap.style.display = 'none';
+          else this.style.display = 'none';
+        }
+      };
+      img.src = sources[0];
+    });
+  }
+  initResilientImages();
+<\\/script>
+
+</body>
+</html>`;
+
+    // Download the compiled dossier
+    const blob = new Blob([exportTemplate], {type: 'text/html'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'compiled-dossier.html';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+
+  // Helper function to escape HTML
+  function escapeHtml(str) {
+    return String(str || '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  }
+  </script>
+
+</body>
+</html>

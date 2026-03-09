@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Archive Workspace - Exposé Edition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f4f4f5; --surface: #ffffff; --border: #e4e4e7;
+      --text: #18181b; --text-muted: #52525b; --text-light: #a1a1aa;
+      --primary: #09090b; --primary-hover: #27272a; --primary-bg: #f4f4f5;
+      --blue: #2563eb; --blue-bg: #eff6ff;
+      --danger: #ef4444; --danger-bg: #fef2f2;
+      --success: #10b981; --success-bg: #ecfdf5;
+      --sans: 'Inter', system-ui, sans-serif; --mono: 'JetBrains Mono', monospace;
+      --shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow: hidden; background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 14px; }
+
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-thumb { background: #d4d4d8; border-radius: 4px; }
+
+    /* Layout */
+    .app { display: flex; flex-direction: column; height: 100vh; }
+    .header { height: 60px; background: var(--surface); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; flex-shrink: 0; z-index: 10;}
+    .brand { font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 8px; letter-spacing: -0.5px;}
+    .actions { display: flex; gap: 10px; align-items: center; }
+
+    .main { display: flex; flex: 1; overflow: hidden; }
+
+    /* Sidebar Workspace */
+    .sidebar { width: 400px; background: var(--surface); border-right: 1px solid var(--border); display: flex; flex-direction: column; flex-shrink: 0; }
+    .sidebar-header { padding: 16px; border-bottom: 1px solid var(--border); display: flex; flex-direction: column; gap: 12px; background: #fafafa; }
+    .search-inp { width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 6px; font-family: var(--sans); outline: none; }
+    .search-inp:focus { border-color: var(--blue); box-shadow: 0 0 0 2px var(--blue-bg); }
+
+    .list-scroll { flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 10px; }
+
+    /* Glow States for Complete/Incomplete */
+    .src-item { padding: 12px; border-radius: 6px; cursor: pointer; transition: 0.2s; background: var(--surface); display: flex; flex-direction: column; gap: 6px; border: 1px solid var(--border); }
+    .src-item:hover { transform: translateY(-1px); }
+    .src-item.active { background: #f8fafc; }
+
+    .src-item.incomplete { border-color: rgba(239, 68, 68, 0.5); box-shadow: 0 0 10px rgba(239, 68, 68, 0.2), inset 3px 0 0 var(--danger); }
+    .src-item.complete { border-color: rgba(16, 185, 129, 0.5); box-shadow: 0 0 10px rgba(16, 185, 129, 0.2), inset 3px 0 0 var(--success); }
+
+    .src-top { display: flex; justify-content: space-between; align-items: flex-start; }
+    .src-id { font-family: var(--mono); font-size: 11px; font-weight: 600; background: var(--bg); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--border); }
+    .src-title { font-weight: 600; font-size: 14px; line-height: 1.3; color: var(--text); }
+    .src-meta { display: flex; gap: 8px; font-size: 11px; color: var(--text-muted); align-items: center; font-weight: 500; flex-wrap: wrap;}
+
+    /* Main Editor */
+    .editor { flex: 1; overflow-y: auto; padding: 40px; background: var(--bg); }
+    .editor-inner { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 32px; }
+    .empty-state { height: 100%; display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 16px; }
+
+    .section { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow); overflow: hidden; }
+    .sec-header { padding: 16px 24px; background: #fafafa; border-bottom: 1px solid var(--border); font-weight: 600; font-size: 15px; display: flex; justify-content: space-between; align-items: center; }
+    .sec-body { padding: 24px; display: flex; flex-direction: column; gap: 20px; }
+
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .row-id { grid-template-columns: 120px 1fr 150px; }
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    .field.full { grid-column: 1 / -1; }
+
+    label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); }
+    .inp { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-family: var(--sans); font-size: 14px; outline: none; transition: 0.2s; }
+    .inp:focus { border-color: var(--blue); box-shadow: 0 0 0 2px var(--blue-bg); }
+    .inp-mono { font-family: var(--mono); font-size: 13px; }
+    textarea.inp { min-height: 100px; resize: vertical; line-height: 1.5; }
+
+    .checkbox-wrap { display: flex; align-items: center; gap: 8px; font-weight: 500; cursor: pointer; color: var(--text); padding: 8px 12px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); }
+    .checkbox-wrap input { width: 16px; height: 16px; cursor: pointer; }
+    .checkbox-wrap.danger { background: var(--danger-bg); color: var(--danger); border: 1px dashed #f87171; margin-top: 8px; }
+    .checkbox-wrap.danger input { accent-color: var(--danger); }
+
+    /* Dynamic Lists */
+    .dyn-list { display: flex; flex-direction: column; gap: 12px; }
+    .dyn-row { display: flex; gap: 12px; align-items: center; }
+    .btn-icon { padding: 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text-muted); }
+    .btn-icon:hover { background: var(--danger-bg); color: var(--danger); border-color: #fca5a5; }
+
+    /* Buttons */
+    .btn { padding: 8px 16px; font-size: 13px; font-weight: 600; font-family: var(--sans); border-radius: 6px; cursor: pointer; transition: 0.2s; border: 1px solid transparent; display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-blue { background: var(--blue); color: white; }
+    .btn-blue:hover { background: #1d4ed8; }
+    .btn-outline { background: var(--surface); border-color: var(--border); color: var(--text); }
+    .btn-outline:hover { background: var(--bg); }
+    .btn-sm { padding: 4px 10px; font-size: 12px; }
+
+    /* Modal */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 1000; backdrop-filter: blur(2px); }
+    .modal { background: var(--surface); padding: 24px; border-radius: 12px; width: 500px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 16px; }
+    .modal-title { font-size: 18px; font-weight: 700; border-bottom: 1px solid var(--border); padding-bottom: 12px; }
+
+    /* Toast */
+    #toastWrap { position: fixed; bottom: 24px; right: 24px; z-index: 1000; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
+    .toast { padding: 12px 20px; border-radius: 6px; font-size: 14px; font-weight: 500; background: var(--primary); color: white; box-shadow: var(--shadow); }
+    .toast.toast-warn { background: var(--danger); }
+  </style>
+</head>
+<body>
+
+<div class="app">
+  <header class="header">
+    <div class="brand">Archive Workspace</div>
+    <div class="actions">
+      <button class="btn btn-outline" id="btnCheckDupes" style="color: var(--danger); border-color: #fca5a5;">🔍 Check URL Dupes</button>
+      <button class="btn btn-outline" id="btnSettings">⚙️ Settings</button>
+      <div style="width: 1px; height: 24px; background: var(--border); margin: 0 4px;"></div>
+      <button class="btn btn-outline" id="btnImport">Import</button>
+      <button class="btn btn-outline" id="btnExportJSON">Save JSON</button>
+      <button class="btn btn-blue" id="btnExportHTML">Generate Public HTML Viewer</button>
+    </div>
+  </header>
+
+  <div class="main">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <button class="btn btn-primary" id="btnAdd" style="width:100%;">+ Create New Source</button>
+        <div style="display:flex; gap: 8px;">
+          <input type="text" class="search-inp" id="search" placeholder="Search Title, IDs, or Categories..." style="flex:1;">
+          <button class="btn btn-outline" id="btnClearSearch" style="display:none; padding: 0 10px;">✕</button>
+        </div>
+      </div>
+      <div class="list-scroll" id="sourceList">
+        <div style="padding: 20px; text-align: center; color: var(--text-muted);">No sources yet. Import or create one.</div>
+      </div>
+    </aside>
+
+    <main class="editor" id="editor">
+      <div class="empty-state" id="emptyState">Select a source from the sidebar to edit.</div>
+
+      <div class="editor-inner" id="editorForm" style="display: none;">
+
+        <div style="display: flex; justify-content: flex-end; position: sticky; top: 0; z-index: 10; padding-bottom: 20px; background: var(--bg);">
+          <div class="actions">
+            <button class="btn btn-outline" id="btnDelete" style="color: var(--danger); border-color: var(--danger-bg);">Delete</button>
+            <button class="btn btn-primary" id="btnSave">Save Changes</button>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="sec-header">1. Core Information</div>
+          <div class="sec-body">
+            <div class="row row-id">
+              <div class="field"><label>ID</label><input type="text" class="inp inp-mono" id="fId"></div>
+              <div class="field"><label>Date Captured</label><input type="text" class="inp" id="fDate" placeholder="YYYY-MM-DD"></div>
+            </div>
+            <div class="row">
+              <div class="field"><label>Main Category</label><input type="text" class="inp" id="fMainCat" list="mainCats"></div>
+              <div class="field"><label>Subcategory</label><input type="text" class="inp" id="fSubCat" list="subCats"></div>
+            </div>
+            <div class="field full"><label>Title / Subject</label><input type="text" class="inp" id="fTitle"></div>
+            <div class="field full"><label>Main Source URL</label><input type="url" class="inp inp-mono" id="fUrl"></div>
+            <div class="field full"><label>Description</label><textarea class="inp" id="fDesc"></textarea></div>
+            <div class="field full"><label>Evidence Image URL (For HTML Viewer)</label><input type="url" class="inp inp-mono" id="fImage" placeholder="https://..."></div>
+            <label class="checkbox-wrap danger"><input type="checkbox" id="fIncomplete"> Flag as Incomplete (Requires further archiving/review)</label>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="sec-header">2. Immutable Records (Web3 / IPFS)</div>
+          <div class="sec-body">
+            <div class="field full">
+              <label style="display:flex; justify-content:space-between;">Raw CIDs <button class="btn btn-outline btn-sm" id="btnAddCid">+ CID</button></label>
+              <div class="dyn-list" id="listCids"></div>
+              <div style="font-size: 11px; color: var(--text-light); margin-top: 4px;">Global IPFS Gateways are automatically applied to these.</div>
+            </div>
+            <hr style="border:0; border-top:1px solid var(--border);">
+            <div class="field full">
+              <label style="display:flex; justify-content:space-between;">Specific Replayweb Deep Links <button class="btn btn-outline btn-sm" id="btnAddWacz">+ Custom Link</button></label>
+              <div class="dyn-list" id="listWacz"></div>
+              <div style="font-size: 11px; color: var(--text-light); margin-top: 4px;">For deep links (e.g., `#view=pages&url=...`).</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="sec-header">3. Standard Web Archives</div>
+          <div class="sec-body">
+            <div class="row">
+              <div class="field"><label>Perma.cc</label><input type="url" class="inp inp-mono" id="fPerma"></div>
+              <div class="field"><label>Archive.org</label><input type="url" class="inp inp-mono" id="fArchOrg"></div>
+            </div>
+            <div class="row">
+              <div class="field"><label>Archive.today</label><input type="url" class="inp inp-mono" id="fArchTd"></div>
+              <div class="field"><label>Megalodon.jp</label><input type="url" class="inp inp-mono" id="fMega"></div>
+            </div>
+            <div class="field full"><label>GhostArchive</label><input type="url" class="inp inp-mono" id="fGhost"></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="sec-header">4. Context & Extra Evidence</div>
+          <div class="sec-body">
+            <div class="field full">
+              <label style="display:flex; justify-content:space-between;">Additional Evidence / Custom Links <button class="btn btn-outline btn-sm" id="btnAddExtra">+ Link</button></label>
+              <div class="dyn-list" id="listExtra"></div>
+            </div>
+            <hr style="border:0; border-top:1px solid var(--border);">
+            <div class="field full"><label>Tags (Comma separated)</label><input type="text" class="inp" id="fTags" placeholder="fraud, thread, missing-context"></div>
+            <div class="field full"><label>Internal Notes / Dossier Sync</label><textarea class="inp" id="fNotes"></textarea></div>
+          </div>
+        </div>
+
+        <div style="height: 100px;"></div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalSettings">
+  <div class="modal">
+    <div class="modal-title">Global Settings</div>
+    <div class="field full">
+      <label>Global IPFS Gateways (One per line)</label>
+      <textarea class="inp inp-mono" id="setGateways" style="height: 120px;" placeholder="https://ipfs.io/ipfs/&#10;https://dweb.link/ipfs/"></textarea>
+      <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px; line-height: 1.4;">
+        These gateways will be automatically prefixed to all CIDs in the generated HTML Viewer.<br>Make sure to include the trailing slash (e.g. <b>/ipfs/</b>).
+      </div>
+    </div>
+    <div style="display: flex; justify-content: flex-end; gap: 8px; margin-top: 8px;">
+      <button class="btn btn-outline" onclick="document.getElementById('modalSettings').style.display='none'">Cancel</button>
+      <button class="btn btn-primary" id="btnSaveSettings">Save Settings</button>
+    </div>
+  </div>
+</div>
+
+<datalist id="mainCats"></datalist>
+<datalist id="subCats"></datalist>
+<input type="file" id="fileInput" accept=".json" style="display:none">
+<div id="toastWrap"></div>
+
+<script>
+class Workspace {
+  constructor() {
+    this.sources = [];
+    this.settings = { ipfsGateways: ['https://ipfs.io/ipfs/', 'https://dweb.link/ipfs/'] };
+    this.selectedId = null;
+    this.searchText = '';
+    this.duplicateMode = false;
+    this.duplicateUrls = [];
+  }
+
+  init() {
+    document.getElementById('btnImport').addEventListener('click', () => document.getElementById('fileInput').click());
+    document.getElementById('fileInput').addEventListener('change', e => this.importJSON(e));
+    document.getElementById('btnExportJSON').addEventListener('click', () => this.exportJSON());
+    document.getElementById('btnExportHTML').addEventListener('click', () => this.generateViewerHTML());
+
+    const searchInp = document.getElementById('search');
+    const clearBtn = document.getElementById('btnClearSearch');
+    searchInp.addEventListener('input', e => {
+      this.searchText = e.target.value.toLowerCase();
+      this.duplicateMode = false;
+      clearBtn.style.display = this.searchText ? 'block' : 'none';
+      this.renderSidebar();
+    });
+    clearBtn.addEventListener('click', () => {
+      searchInp.value = ''; this.searchText = ''; this.duplicateMode = false;
+      clearBtn.style.display = 'none'; this.renderSidebar();
+    });
+
+    document.getElementById('btnCheckDupes').addEventListener('click', () => this.checkDuplicates());
+    document.getElementById('btnAdd').addEventListener('click', () => this.createNew());
+    document.getElementById('btnSave').addEventListener('click', () => this.saveCurrent());
+    document.getElementById('btnDelete').addEventListener('click', () => this.deleteCurrent());
+
+    document.getElementById('btnSettings').addEventListener('click', () => this.openSettings());
+    document.getElementById('btnSaveSettings').addEventListener('click', () => this.saveSettings());
+
+    document.getElementById('btnAddCid').addEventListener('click', () => this.addCidRow('listCids', '', '', false));
+    document.getElementById('btnAddWacz').addEventListener('click', () => this.addDynRowDual('listWacz', 'Label', 'Replayweb URL'));
+    document.getElementById('btnAddExtra').addEventListener('click', () => this.addDynRowDual('listExtra', 'Label', 'URL'));
+
+    this.renderSidebar();
+  }
+
+  esc(str) { return String(str||'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+
+  toast(msg, type='info') {
+    const w = document.getElementById('toastWrap');
+    const el = document.createElement('div'); el.className = `toast toast-${type}`; el.textContent = msg;
+    w.appendChild(el); setTimeout(() => el.remove(), 4000);
+  }
+
+  openSettings() {
+    document.getElementById('setGateways').value = this.settings.ipfsGateways.join('\n');
+    document.getElementById('modalSettings').style.display = 'flex';
+  }
+
+  saveSettings() {
+    const gws = document.getElementById('setGateways').value.split('\n').map(s=>s.trim()).filter(Boolean);
+    this.settings.ipfsGateways = gws.length ? gws : ['https://ipfs.io/ipfs/'];
+    document.getElementById('modalSettings').style.display = 'none';
+    this.toast('Settings saved globally.');
+  }
+
+  updateCats() {
+    const mains = new Set(); const subs = new Set();
+    this.sources.forEach(s => {
+      if(s.mainCategory) mains.add(s.mainCategory);
+      if(s.subCategory) subs.add(s.subCategory);
+    });
+    document.getElementById('mainCats').innerHTML = Array.from(mains).map(x => `<option value="${this.esc(x)}">`).join('');
+    document.getElementById('subCats').innerHTML = Array.from(subs).map(x => `<option value="${this.esc(x)}">`).join('');
+  }
+
+  sortSources() {
+    this.sources.sort((a, b) => {
+      let numA = parseInt(a.id); let numB = parseInt(b.id);
+      let isNumA = !isNaN(numA) && String(numA) === String(a.id);
+      let isNumB = !isNaN(numB) && String(numB) === String(b.id);
+      if (isNumA && isNumB) return numA - numB;
+      if (isNumA) return -1; if (isNumB) return 1;
+      return String(a.id).localeCompare(String(b.id));
+    });
+  }
+
+  checkDuplicates() {
+    const urlCounts = {};
+    this.sources.forEach(s => {
+      const url = s.mainSourceUrl?.trim();
+      if(url) urlCounts[url] = (urlCounts[url] || 0) + 1;
+    });
+
+    this.duplicateUrls = Object.keys(urlCounts).filter(k => urlCounts[k] > 1);
+
+    if(this.duplicateUrls.length === 0) {
+      this.duplicateMode = false;
+      this.renderSidebar();
+      return this.toast("No duplicate URLs found! You are clean.", "success");
+    }
+
+    this.duplicateMode = true;
+    document.getElementById('search').value = '';
+    this.searchText = '';
+    document.getElementById('btnClearSearch').style.display = 'block';
+    this.renderSidebar();
+    this.toast(`Found ${this.duplicateUrls.length} duplicated URL(s). Filtering sidebar...`, "warn");
+  }
+
+  renderSidebar() {
+    const list = document.getElementById('sourceList');
+
+    const filtered = this.sources.filter(s => {
+      if (this.duplicateMode) {
+        return s.mainSourceUrl && this.duplicateUrls.includes(s.mainSourceUrl.trim());
+      }
+      if (!this.searchText) return true;
+      const str = [s.id, s.title, s.mainCategory, s.subCategory].join(' ').toLowerCase();
+      return str.includes(this.searchText);
+    });
+
+    if(!filtered.length) {
+      list.innerHTML = `<div style="padding: 20px; text-align: center; color: var(--text-muted);">${this.duplicateMode ? 'No duplicates!' : 'No matching records.'}</div>`;
+      return;
+    }
+
+    list.innerHTML = filtered.map(s => {
+      // New: Incomplete vs Complete glow styles
+      const stateClass = s.incomplete ? 'incomplete' : 'complete';
+      const dupeWarn = (this.duplicateMode) ? `<div style="color:var(--danger); font-size:10px; font-weight:bold; margin-top:4px;">DUPLICATE URL</div>` : '';
+
+      return `
+      <div class="src-item ${stateClass} ${s.id === this.selectedId ? 'active' : ''}" onclick="app.loadSource('${this.esc(s.id)}')">
+        <div class="src-top">
+          <div class="src-title">${this.esc(s.title || 'Untitled')}</div>
+        </div>
+        <div class="src-meta" style="margin-top: 4px;">
+          <span class="src-id">${this.esc(s.id)}</span>
+          <span>${this.esc(s.mainCategory || 'Uncategorized')} &rsaquo; ${this.esc(s.subCategory || 'General')}</span>
+        </div>
+        ${dupeWarn}
+      </div>
+    `}).join('');
+  }
+
+  loadSource(id) {
+    this.selectedId = id;
+    this.renderSidebar();
+    const s = this.sources.find(x => x.id === id);
+    if(!s) return;
+
+    document.getElementById('emptyState').style.display = 'none';
+    document.getElementById('editorForm').style.display = 'flex';
+
+    const el = id => document.getElementById(id);
+    el('fId').value = s.id||''; el('fMainCat').value = s.mainCategory||''; el('fSubCat').value = s.subCategory||'';
+    el('fDate').value = s.dateCaptured||''; el('fTitle').value = s.title||''; el('fUrl').value = s.mainSourceUrl||'';
+    el('fDesc').value = s.description||''; el('fImage').value = s.imageUrl||''; el('fIncomplete').checked = !!s.incomplete;
+
+    const sm = s.standardMirrors||{};
+    el('fPerma').value = sm.permaCc||''; el('fArchOrg').value = sm.archiveOrg||'';
+    el('fArchTd').value = sm.archiveToday||''; el('fMega').value = sm.megalodonJp||''; el('fGhost').value = sm.ghostArchive||'';
+    el('fTags').value = (s.tags||[]).join(', '); el('fNotes').value = s.notes||'';
+
+    // Populate Dynamic CIDs with labels
+    document.getElementById('listCids').innerHTML = '';
+    (s.ipfs?.cids||[]).forEach(c => {
+       const cidStr = typeof c === 'string' ? c : c.cid;
+       const label = typeof c === 'string' ? '' : (c.label || '');
+       const isWacz = typeof c === 'string' ? false : !!c.isWacz;
+       this.addCidRow('listCids', label, cidStr, isWacz);
+    });
+    if(!(s.ipfs?.cids||[]).length) this.addCidRow('listCids', '', '', false);
+
+    document.getElementById('listWacz').innerHTML = '';
+    (s.ipfs?.customReplayweb||[]).forEach(x => this.addDynRowDual('listWacz', 'Label', 'Replayweb URL', x.label, x.url));
+    if(!(s.ipfs?.customReplayweb||[]).length) this.addDynRowDual('listWacz', 'Label', 'Replayweb URL');
+
+    document.getElementById('listExtra').innerHTML = '';
+    (s.additionalUrls||[]).forEach(x => this.addDynRowDual('listExtra', 'Label', 'URL', x.label, x.url));
+    if(!(s.additionalUrls||[]).length) this.addDynRowDual('listExtra', 'Label', 'URL');
+  }
+
+  addCidRow(container, labelStr = '', cidStr = '', isWacz = false) {
+    const div = document.createElement('div'); div.className = 'dyn-row cid-row';
+    div.innerHTML = `
+      <input type="text" class="inp i-lbl" placeholder="Label (e.g. PNG Proof)" value="${this.esc(labelStr)}" style="flex: 0.5;">
+      <input type="text" class="inp inp-mono i-val" placeholder="CID (bafy...)" value="${this.esc(cidStr)}" style="flex: 1;">
+      <label class="checkbox-wrap" style="padding: 10px;"><input type="checkbox" class="i-wacz" ${isWacz ? 'checked' : ''}> WACZ</label>
+      <button class="btn-icon" title="Remove row">✕</button>
+    `;
+    div.querySelector('.btn-icon').onclick = () => div.remove();
+    document.getElementById(container).appendChild(div);
+  }
+
+  addDynRowDual(container, p1, p2, v1='', v2='') {
+    const div = document.createElement('div'); div.className = 'dyn-row';
+    div.innerHTML = `<input type="text" class="inp i-lbl" style="flex: 0.5" placeholder="${p1}" value="${this.esc(v1)}"> <input type="text" class="inp inp-mono i-val" placeholder="${p2}" value="${this.esc(v2)}" style="flex:1;"> <button class="btn-icon" title="Remove row">✕</button>`;
+    div.querySelector('.btn-icon').onclick = () => div.remove();
+    document.getElementById(container).appendChild(div);
+  }
+
+  saveCurrent() {
+    if(!this.selectedId) return;
+    const el = id => document.getElementById(id).value.trim();
+
+    // Parse CID rows including labels
+    const getCids = id => Array.from(document.querySelectorAll(`#${id} .cid-row`)).map(r => ({
+      label: r.querySelector('.i-lbl').value.trim(),
+      cid: r.querySelector('.i-val').value.trim(),
+      isWacz: r.querySelector('.i-wacz').checked
+    })).filter(x => x.cid);
+
+    const getDual = id => Array.from(document.querySelectorAll(`#${id} .dyn-row:not(.cid-row)`)).map(r => ({
+      label: r.querySelector('.i-lbl').value.trim(),
+      url: r.querySelector('.i-val').value.trim()
+    })).filter(x => x.url);
+
+    const newId = el('fId');
+    if(!newId) return this.toast("ID is required", "warn");
+
+    // Cascading ID Shift Logic
+    if (newId !== this.selectedId) {
+      let conflict = this.sources.find(s => s.id === newId && s.id !== this.selectedId);
+      if (conflict) {
+        let numId = parseInt(newId);
+        if (!isNaN(numId) && String(numId) === newId) {
+          let shiftChain = []; let checkId = numId;
+          while (true) {
+            let c = this.sources.find(s => s.id === String(checkId) && s.id !== this.selectedId);
+            if (c) { shiftChain.push(c); checkId++; } else break;
+          }
+          for (let i = shiftChain.length - 1; i >= 0; i--) shiftChain[i].id = String(parseInt(shiftChain[i].id) + 1);
+          if(shiftChain.length > 0) this.toast(`Shifted ${shiftChain.length} existing sources to fit ID ${newId}.`);
+        } else return this.toast("ID already exists! (Can only auto-shift numeric IDs)", "warn");
+      }
+    }
+
+    const data = {
+      id: newId, title: el('fTitle'), mainCategory: el('fMainCat'), subCategory: el('fSubCat'), dateCaptured: el('fDate'),
+      description: el('fDesc'), imageUrl: el('fImage'), incomplete: document.getElementById('fIncomplete').checked,
+      mainSourceUrl: el('fUrl'),
+      standardMirrors: { permaCc: el('fPerma'), archiveOrg: el('fArchOrg'), archiveToday: el('fArchTd'), megalodonJp: el('fMega'), ghostArchive: el('fGhost') },
+      ipfs: { cids: getCids('listCids'), customReplayweb: getDual('listWacz') },
+      additionalUrls: getDual('listExtra'),
+      tags: el('fTags').split(',').map(t=>t.trim()).filter(Boolean), notes: el('fNotes')
+    };
+
+    const idx = this.sources.findIndex(s => s.id === this.selectedId);
+    if(idx > -1) this.sources[idx] = data; else this.sources.unshift(data);
+
+    this.selectedId = data.id;
+    this.updateCats(); this.sortSources();
+    if(this.duplicateMode) this.checkDuplicates(); else this.renderSidebar();
+    this.toast('Saved successfully.');
+  }
+
+  createNew() {
+    let maxNum = 0;
+    this.sources.forEach(s => {
+      let n = parseInt(s.id);
+      if(!isNaN(n) && String(n) === String(s.id) && n > maxNum) maxNum = n;
+    });
+
+    const id = String(maxNum + 1);
+    // New sources DEFAULT to incomplete = true
+    this.sources.unshift({ id, title: '', incomplete: true });
+    this.sortSources();
+    this.loadSource(id);
+    document.getElementById('fMainCat').focus();
+    this.toast(`Created new source with ID: ${id}`);
+  }
+
+  deleteCurrent() {
+    if(!confirm('Delete this record?')) return;
+    this.sources = this.sources.filter(s => s.id !== this.selectedId);
+    this.selectedId = null;
+    document.getElementById('emptyState').style.display = 'flex';
+    document.getElementById('editorForm').style.display = 'none';
+    this.updateCats(); this.sortSources(); this.renderSidebar(); this.toast('Deleted.');
+  }
+
+  importJSON(e) {
+    const file = e.target.files[0]; if(!file) return;
+    const r = new FileReader();
+    r.onload = ev => {
+      try {
+        const data = JSON.parse(ev.target.result);
+        let importedSources = [];
+
+        if (Array.isArray(data)) importedSources = data;
+        else if (data.sources) {
+           importedSources = data.sources;
+           if (data.settings) this.settings = { ...this.settings, ...data.settings };
+        }
+
+        // Migrate Old CID Data
+        importedSources = importedSources.map(s => {
+           if(s.category && !s.mainCategory) s.mainCategory = s.category;
+           if(s.ipfs && s.ipfs.cids && s.ipfs.cids.length > 0) {
+              s.ipfs.cids = s.ipfs.cids.map(c => {
+                 if(typeof c === 'string') return { cid: c, label: '', isWacz: false };
+                 return { cid: c.cid, label: c.label || '', isWacz: !!c.isWacz };
+              });
+           }
+           if(s.ipfs && s.ipfs.replayweb) { s.ipfs.customReplayweb = s.ipfs.replayweb; delete s.ipfs.replayweb; }
+           // Ensure property exists
+           if(typeof s.incomplete === 'undefined') s.incomplete = true;
+           return s;
+        });
+
+        const ids = new Set(this.sources.map(s=>s.id));
+        importedSources.forEach(s => { if(!ids.has(s.id)) this.sources.push(s); });
+
+        this.updateCats(); this.sortSources(); this.renderSidebar(); this.toast('Import successful.');
+      } catch(err) { this.toast('Invalid JSON file.', 'warn'); console.error(err); }
+    };
+    r.readAsText(file); e.target.value = '';
+  }
+
+  exportJSON() {
+    this.sortSources();
+    const payload = { settings: this.settings, sources: this.sources };
+    const b = new Blob([JSON.stringify(payload, null, 2)], {type: 'application/json'});
+    const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = 'archive-workspace.json';
+    a.click(); URL.revokeObjectURL(a.href);
+  }
+
+  // GENERATE THE STANDALONE HTML VIEWER
+  generateViewerHTML() {
+    if(!this.sources.length) return this.toast("No sources to export.", "warn");
+    this.sortSources();
+    const payload = { settings: this.settings, sources: this.sources };
+    const jsonString = JSON.stringify(payload).replace(/</g, '\\u003c');
+
+    const htmlTemplate = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evidence Archive Viewer</title>
+<style>
+  :root { --bg: #ffffff; --text: #000000; --border: #e5e7eb; --link: #2563eb; --muted: #4b5563; font-family: "Helvetica Neue", Inter, Arial, sans-serif; }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); margin: 0; padding: 40px 20px; line-height: 1.6; font-size: 14px; }
+  .container { max-width: 1000px; margin: 0 auto; }
+
+  .header { border-bottom: 2px solid var(--text); padding-bottom: 20px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: flex-end; }
+  .title-area h1 { margin: 0 0 5px 0; font-size: 28px; }
+  .title-area p { margin: 0; color: var(--muted); font-size: 14px; }
+
+  .controls { display: flex; gap: 10px; background: #f9fafb; padding: 15px; border: 1px solid var(--border); margin-bottom: 30px; border-radius: 6px; align-items: center; flex-wrap: wrap;}
+  .search-input { padding: 8px; border: 1px solid var(--border); width: 300px; border-radius: 4px; font-size: 14px; }
+  .btn, .select-ui { padding: 8px 12px; background: #fff; border: 1px solid var(--border); border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: 600; color: #111;}
+  .btn:hover, .select-ui:hover { background: #f3f4f6; }
+
+  .cat-main { margin-top: 50px; margin-bottom: 30px; }
+  .title-main { font-size: 22px; border-bottom: 2px solid var(--text); margin-bottom: 10px; padding-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px;}
+  .title-sub { font-size: 17px; color: var(--muted); margin-bottom: 20px; margin-left: 10px; border-bottom: 1px solid var(--border); padding-bottom: 5px; }
+
+  .card { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 24px; margin-left: 10px; padding: 24px; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.05);}
+  .card-header { display: flex; justify-content: space-between; margin-bottom: 15px; }
+  .card-id { font-family: monospace; font-size: 13px; background: #f3f4f6; padding: 2px 8px; border: 1px solid #d1d5db; border-radius: 4px; height: fit-content;}
+  .card-title { font-size: 17px; font-weight: 700; margin: 0; line-height: 1.3;}
+  .card-date { color: var(--muted); font-size: 13px; margin-top: 4px;}
+  .card-desc { background: #f9fafb; padding: 12px 16px; border-left: 4px solid #cbd5e1; border-radius: 0 4px 4px 0; margin-bottom: 20px; white-space: pre-wrap; color: #334155;}
+
+  /* Badges & Links */
+  .link-row { display: flex; align-items: center; margin-bottom: 10px; font-family: monospace; font-size: 13px; word-break: break-all; }
+  .url-text { color: var(--link); text-decoration: none; line-height: 1.4; padding-top: 2px;}
+  .url-text:hover { text-decoration: underline; }
+
+  .badge { display: inline-flex; align-items: center; gap: 6px; width: 140px; flex-shrink: 0; padding: 4px 8px; font-family: sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; margin-right: 15px; border-radius: 4px; border: 1px solid; background: #fff; color: #111;}
+  .badge img, .badge svg { width: 14px; height: 14px; object-fit: contain; }
+
+  /* Specific Badge Colors */
+  .b-main { border-color: #000; }
+  .b-perma { border-color: #2563eb; color: #1e3a8a; background: #eff6ff; }
+  .b-arch { border-color: #000; color: #000; background: #f8f9fa; }
+  .b-ghost { border-color: #6366f1; color: #312e81; background: #e0e7ff; }
+  .b-mega { border-color: #ea580c; color: #7c2d12; background: #fff7ed; }
+  .b-ipfs { border-color: #0284c7; color: #0c4a6e; background: #f0f9ff; }
+  .b-wacz { border-color: #db2777; color: #831843; background: #fdf2f8; }
+  .b-extra { border-color: #9ca3af; color: #374151; background: #f3f4f6; }
+
+  /* Image Styles & Toggles */
+  .evidence-img-container { margin-bottom: 20px; }
+  .evidence-img { max-width: 100%; border: 1px solid var(--border); border-radius: 6px; object-fit: contain; background: #f9fafb; }
+
+  .view-img-hidden .evidence-img-container { display: none; }
+  .view-img-sm .evidence-img { max-height: 150px; }
+  .view-img-std .evidence-img { max-height: 400px; }
+  .view-img-lg .evidence-img { max-height: 800px; }
+
+  .notes { margin-top: 20px; border-top: 1px dashed var(--border); padding-top: 15px; font-family: monospace; color: var(--muted); white-space: pre-wrap; }
+
+  @media print {
+    body { padding: 0; background: #fff; }
+    .no-print { display: none !important; }
+    .card { page-break-inside: avoid; border: 1px solid #999; border-radius: 0; box-shadow: none; margin-left: 0;}
+    .url-text { color: #000; text-decoration: none; }
+    .badge { border-color: #000; color: #000; background: transparent !important; }
+    .card-desc { background: transparent; border-left: 2px solid #000; }
+    /* Force standard image print if not hidden */
+    .evidence-img { max-height: 300px !important; }
+    .view-img-hidden .evidence-img-container { display: none !important; }
+  }
+</style>
+</head>
+<body class="view-img-std">
+<div class="container">
+  <div class="header">
+    <div class="title-area">
+      <h1>Evidence Archive Dossier</h1>
+      <p>Statically generated viewer &bull; Hierarchically Organized</p>
+    </div>
+  </div>
+
+  <div class="controls no-print">
+    <input type="text" id="searchInput" class="search-input" placeholder="Search archive contents...">
+    <select id="imgToggle" class="select-ui" onchange="document.body.className = 'view-img-' + this.value">
+      <option value="std">Images: Standard</option>
+      <option value="sm">Images: Small</option>
+      <option value="lg">Images: Large</option>
+      <option value="hidden">Images: Hidden</option>
+    </select>
+    <div style="margin-left: auto; display:flex; gap:10px;">
+      <button class="btn" onclick="exportCSV()">Export CSV</button>
+      <button class="btn" onclick="exportMD()">Export Markdown</button>
+      <button class="btn" onclick="exportCIDs()">Raw CIDs</button>
+      <button class="btn" onclick="window.print()">Print / PDF</button>
+    </div>
+  </div>
+
+  <div id="content"></div>
+</div>
+
+<script id="archive-data" type="application/json">${jsonString}<\/script>
+<script>
+  const appData = JSON.parse(document.getElementById('archive-data').textContent);
+  const rawData = appData.sources || [];
+  const settings = appData.settings || { ipfsGateways: ['https://ipfs.io/ipfs/'] };
+
+  // Hardcoded SVG/Images for badges
+  const icons = {
+    main: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>',
+    perma: '<img src="https://perma.cc/static/img/perma-logo-orange.svg">',
+    archToday: '<img src="https://archive.ph/apple-touch-icon.png">',
+    archOrg: "<img src=\\"data:image/svg+xml,<svg height='86' viewBox='0 0 76 86' width='76' xmlns='http://www.w3.org/2000/svg'><path d='m76 82v4h-76l.00080851-4zm-3-6v5h-70v-5zm-62.6696277-54 .8344146.4217275.4176066 6.7436084.4176065 10.9576581v10.5383496l-.4176065 13.1364492-.0694681 8.8498268-1.1825531.3523804h-4.17367003l-1.25202116-.3523804-.48627608-8.8498268-.41840503-13.0662957v-10.5375432l.41840503-11.028618.38167482-6.7798947.87034634-.3854412zm60.0004653 0 .8353798.4217275.4168913 6.7436084.4168913 10.9576581v10.5383496l-.4168913 13.1364492-.0686832 8.8498268-1.1835879.3523804h-4.1737047l-1.2522712-.3523804-.4879704-8.8498268-.4168913-13.0662957v-10.5375432l.4168913-11.028618.3833483-6.7798947.8697215-.3854412zm-42.000632 0 .8344979.4217275.4176483 6.7436084.4176482 10.9576581v10.5383496l-.4176482 13.1364492-.0686764 8.8498268-1.1834698.3523804h-4.1740866l-1.2529447-.3523804-.4863246-8.8498268-.4168497-13.0662957v-10.5375432l.4168497-11.028618.38331-6.7798947.8688361-.3854412zm23 0 .8344979.4217275.4176483 6.7436084.4176482 10.9576581v10.5383496l-.4176482 13.1364492-.0686764 8.8498268-1.1834698.3523804h-4.1740866l-1.2521462-.3523804-.4871231-8.8498268-.4168497-13.0662957v-10.5375432l.4168497-11.028618.38331-6.7798947.8696347-.3854412zm21.6697944-9v7h-70v-7zm-35.7200748-13 36.7200748 8.4088317-1.4720205 2.5911683h-70.32799254l-2.19998696-2.10140371z' fill='%23000' fill-rule='evenodd'/></svg>\\">",
+    ghost: '<img src="https://ghostarchive.org/apple-touch-icon.png">',
+    mega: '<img src="https://megalodon.jp/favicon.svg">',
+    ipfs: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>',
+    wacz: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M10 8v8l6-4-6-4z"></path></svg>',
+    extra: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>'
+  };
+
+  function render(query = '') {
+    const q = query.toLowerCase();
+    const container = document.getElementById('content');
+    container.innerHTML = '';
+
+    const grouped = {};
+    rawData.forEach(s => {
+      const text = JSON.stringify(s).toLowerCase();
+      if(q && !text.includes(q)) return;
+
+      const main = s.mainCategory || 'Uncategorized';
+      const sub = s.subCategory || 'General';
+      if(!grouped[main]) grouped[main] = {};
+      if(!grouped[main][sub]) grouped[main][sub] = [];
+      grouped[main][sub].push(s);
+    });
+
+    Object.keys(grouped).sort().forEach(main => {
+      let html = \`<div class="cat-main"><h2 class="title-main">\${escape(main)}</h2>\`;
+      Object.keys(grouped[main]).sort().forEach(sub => {
+        html += \`<h3 class="title-sub">\${escape(sub)}</h3>\`;
+
+        grouped[main][sub].forEach(s => {
+          let links = [];
+          const addLink = (bClass, bIcon, bText, url) => {
+            if(url) links.push(\`<div class="link-row"><span class="badge \${bClass}">\${bIcon} \${escape(bText)}</span> <a href="\${escape(url)}" target="_blank" class="url-text">\${escape(url)}</a></div>\`);
+          };
+
+          addLink('b-main', icons.main, 'Primary Source', s.mainSourceUrl);
+          if(s.standardMirrors) {
+            addLink('b-perma', icons.perma, 'Perma.cc', s.standardMirrors.permaCc);
+            addLink('b-arch', icons.archOrg, 'Archive.org', s.standardMirrors.archiveOrg);
+            addLink('b-arch', icons.archToday, 'Archive.today', s.standardMirrors.archiveToday);
+            addLink('b-mega', icons.mega, 'Megalodon.jp', s.standardMirrors.megalodonJp);
+            addLink('b-ghost', icons.ghost, 'GhostArchive', s.standardMirrors.ghostArchive);
+          }
+
+          if(s.ipfs) {
+            (s.ipfs.cids || []).forEach(cidObj => {
+               let cid = cidObj.cid;
+               let isWacz = cidObj.isWacz;
+               let lbl = cidObj.label ? \` (\${cidObj.label})\` : '';
+
+               // Automatic Gateway Expansion
+               settings.ipfsGateways.forEach(gw => {
+                 let gwName = gw;
+                 try { gwName = new URL(gw).hostname; } catch(e){}
+                 addLink('b-ipfs', icons.ipfs, gwName + lbl, gw + cid);
+               });
+
+               // WACZ Replay Gen
+               if (isWacz) addLink('b-wacz', icons.wacz, 'WACZ Replay' + lbl, 'https://replayweb.page/?source=' + settings.ipfsGateways[0] + cid);
+            });
+            // Deep Links
+            (s.ipfs.customReplayweb || []).forEach(m => addLink('b-wacz', icons.wacz, m.label || 'Deep Replay', m.url));
+          }
+
+          (s.additionalUrls || []).forEach(u => addLink('b-extra', icons.extra, u.label || 'Context Link', u.url));
+
+          let imgHtml = '';
+          if(s.imageUrl) {
+            imgHtml = \`<div class="evidence-img-container"><a href="\${escape(s.imageUrl)}" target="_blank"><img src="\${escape(s.imageUrl)}" class="evidence-img" alt="Evidence image for \${escape(s.title)}"></a></div>\`;
+          }
+
+          html += \`
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">\${escape(s.title || 'Untitled Record')}</h3>
+                  \${s.dateCaptured ? \`<div class="card-date">Captured: \${escape(s.dateCaptured)}</div>\` : ''}
+                </div>
+                <span class="card-id">ID: \${escape(s.id)}</span>
+              </div>
+              \${s.description ? \`<div class="card-desc">\${escape(s.description)}</div>\` : ''}
+
+              \${imgHtml}
+
+              <div class="links-container">\${links.join('')}</div>
+
+              \${s.tags && s.tags.length ? \`<div style="margin-top:15px; font-size:12px; color:var(--muted);"><b>Tags:</b> \${escape(s.tags.join(', '))}</div>\` : ''}
+              \${s.notes ? \`<div class="notes"><b>INTERNAL NOTES:</b>\\n\${escape(s.notes)}</div>\` : ''}
+            </div>\`;
+        });
+      });
+      html += \`</div>\`;
+      container.innerHTML += html;
+    });
+  }
+
+  function escape(str) { return String(str||'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+
+  function download(content, filename, type) {
+    const b = new Blob([content], {type}); const u = URL.createObjectURL(b);
+    const a = document.createElement('a'); a.href = u; a.download = filename; a.click(); URL.revokeObjectURL(u);
+  }
+
+  function exportCSV() {
+    const rows = [['ID', 'Main Category', 'Subcategory', 'Title', 'Main URL', 'CIDs', 'Tags']];
+    rawData.forEach(s => {
+      let cids = '';
+      if(s.ipfs && s.ipfs.cids) cids = s.ipfs.cids.map(c => typeof c === 'string' ? c : c.cid).join(';');
+      rows.push([s.id, s.mainCategory||'', s.subCategory||'', s.title, s.mainSourceUrl||'', cids, (s.tags||[]).join(';')].map(v => \`"\${String(v||'').replace(/"/g,'""')}"\`));
+    });
+    download(rows.map(r=>r.join(',')).join('\\n'), 'archive.csv', 'text/csv');
+  }
+
+  function exportMD() {
+    let md = '# Archive Dossier\\n\\n';
+    const grouped = {};
+    rawData.forEach(s => {
+      const main = s.mainCategory || 'Uncategorized'; const sub = s.subCategory || 'General';
+      if(!grouped[main]) grouped[main] = {}; if(!grouped[main][sub]) grouped[main][sub] = [];
+      grouped[main][sub].push(s);
+    });
+
+    Object.keys(grouped).sort().forEach(main => {
+      md += \`## \${main}\\n\\n\`;
+      Object.keys(grouped[main]).sort().forEach(sub => {
+         md += \`### \${sub}\\n| ID | Title | Main URL | Primary Mirror / CID |\\n|---|---|---|---|\\n\`;
+         grouped[main][sub].forEach(x => {
+           let mirror = '-';
+           if(x.ipfs && x.ipfs.cids && x.ipfs.cids.length) {
+              let cid = typeof x.ipfs.cids[0] === 'string' ? x.ipfs.cids[0] : x.ipfs.cids[0].cid;
+              mirror = \`CID: \${cid}\`;
+           }
+           else if (x.standardMirrors && x.standardMirrors.archiveOrg) mirror = \`[Archive.org](\${x.standardMirrors.archiveOrg})\`;
+           md += \`| \${x.id} | \${(x.title||'').replace(/\\|/g,'')} | \${x.mainSourceUrl ? \`[Link](\${x.mainSourceUrl})\` : '-'} | \${mirror} |\\n\`;
+         });
+         md += '\\n';
+      });
+    });
+    download(md, 'dossier-tables.md', 'text/markdown');
+  }
+
+  function exportCIDs() {
+    const cids = new Set();
+    rawData.forEach(s => { if(s.ipfs && s.ipfs.cids) s.ipfs.cids.forEach(c => cids.add(typeof c === 'string' ? c : c.cid)); });
+    if(!cids.size) return alert("No CIDs found.");
+    download(Array.from(cids).join('\\n'), 'ipfs-cids.txt', 'text/plain');
+  }
+
+  document.getElementById('searchInput').addEventListener('input', e => render(e.target.value));
+  render();
+<\/script>
+</body>
+</html>`;
+
+    const b = new Blob([htmlTemplate], {type: 'text/html'});
+    const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = 'archive-viewer.html';
+    a.click(); URL.revokeObjectURL(a.href);
+  }
+}
+
+const app = new Workspace();
+app.init();
+</script>
+</body>
+</html>
